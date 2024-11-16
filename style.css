@@ -1,14 +1,40 @@
 body {
     font-family: 'Montserrat', Roboto, Arial, sans-serif;
-    margin: 50px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #000000;
+    background-image: url('images/White-Black-Mountain-Wallpaper.jpg'); /* Itt add meg a képed elérhetőségét */
+    background-size: cover; /* A háttérkép kitölti a teljes képernyőt */
+    background-position: center center; /* A kép középre igazítása */
+    background-attachment: fixed; /* A háttérkép rögzítése, hogy ne mozogjon a görgetés során */
+    background-repeat: no-repeat; /* A háttérkép ne ismétlődjön */
+    min-height: 100vh; /* A body legalább a képernyő magasságát kitölti */
+}
+
+
+.all-content {
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f4f4f4;
-    min-height: 100vh;
+    
+    height: 100vh;
+    max-width: 100vw; /* A tartalom szélessége */
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+
 }
+
 
 header {
     text-align: center;
@@ -25,7 +51,7 @@ header img {
 header h1 {
     margin: 10px 0;
     font-size: 24px;
-    color: #333;
+    color: rgb(255, 255, 255);
 }
 
 .card-container {
@@ -38,17 +64,24 @@ header h1 {
 }
 
 .card {
-    background: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     padding: 20px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
+
+
+    background: rgba(255,255,255,0.35);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.225);
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+    background-color: #ffc800;
 }
 
 .card a {
