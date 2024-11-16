@@ -1,0 +1,188 @@
+body {
+    font-family: 'Montserrat', Roboto, Arial, sans-serif;
+    margin: 50px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+header h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.card {
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.card a:hover {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #FFC700;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background-color: #363636;
+    color: #ffffff;
+}
+
+/* For embedded iframe containers (SoundCloud, YouTube, etc.) */
+.iframe-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.iframe-container div {
+    font-size: 15px;
+    color: #cccccc;
+    padding: -10px;
+}
+
+/* YouTube specific */
+.youtube-iframe-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    margin: 20px 0;
+}
+
+.youtube-iframe-container iframe {
+    border-radius: 10px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 940px) {
+    .iframe-container,
+    .youtube-iframe-container {
+        position: relative; /* Remove the fixed positioning */
+        margin: 20px auto; /* Center the containers */
+        width: 90%; /* Ensure containers take up most of the width */
+        max-width: none; /* Remove max-width for flexibility */
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .card-container {
+        padding: 0 10px;
+    }
+
+    .iframe-container {
+        width: 90%;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card svg {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    .card-container {
+        padding: 0 5px;
+    }
+
+    .iframe-container {
+        width: 100%;
+        margin: 10px auto; /* Center the iframe container */
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .card svg {
+        height: 70px;
+    }
+}
