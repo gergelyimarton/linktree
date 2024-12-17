@@ -40,7 +40,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 50px;
-    margin-top: 150px;
+    margin-top: 180px;
 }
 
 header img {
@@ -201,21 +201,50 @@ a {
 }
 
 @media (max-width: 480px) {
+    header {
+        text-align: center;
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+    
+    header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
     header h1 {
-        font-size: 18px;
+        margin: 5px 0;
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+    }
+
+    .back-button {
+        text-align: center;
+        margin-top: auto; /* Lefelé tolja a gombot */
+        /* padding: 10px; */
+        text-decoration: none;
+        display: block;
     }
 
     .card-container {
         padding: 0 5px;
     }
 
+    .youtube-iframe-container{
+        display: none;
+    }
     .iframe-container {
-        width: 100%;
-        margin: 10px auto; /* Center the iframe container */
+        display: none;
+        /* width: 100%;
+        margin: 10px auto; Center the iframe container */
     }
 
     .card {
-        padding: 10px;
+        box-sizing: border-box;
+        margin: 10px; /* Kisebb margó */
+        padding: 15px;
     }
 
     .card svg {
