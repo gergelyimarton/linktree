@@ -1,0 +1,222 @@
+/* General Styles */
+body {
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #f4f4f4, #eaeaea);
+    color: #333;
+}
+
+
+
+::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+html {
+    scroll-behavior: smooth; /* Simább görgetés */
+}
+
+
+
+.profile-pic{
+    height: 100px;
+}
+
+.profile-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+ 
+}
+
+/* Navbar */
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    background-color: #4c6ef5;
+    margin: 0;
+    padding: 20px 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar li {
+    margin: 0 15px;
+    transform: scale(1); /* Alapértelmezett kis méret */
+    transition: 0.3s; /* Alapértelmezett kis méret */
+}
+
+.navbar li:hover {
+    transform: scale(1.2); /* Alapértelmezett kis méret */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+    
+}
+
+.navbar a:hover {
+    color: #FFC700;
+    transform: scale(1.1); /* Hover esetén 10%-kal nagyobb */
+}
+
+
+
+
+/* Hamburger menu toggle */
+.menu-toggle {
+    display: none;
+    font-size: 1.8em;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+
+/* Header */
+header {
+    background: linear-gradient(to right, #4c6ef5, #3b5bdb);
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px; /* Adjust for the navbar height */
+    text-align: center;
+}
+
+/* Sections */
+section {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+    opacity: 0; /* Kezdetben rejtve */
+    transform: translateY(20px); /* Kezdetben egy kicsit lejjebb helyezve */
+    transition: opacity 2s ease, transform 1s ease; /* Simán animálódik */
+
+}
+
+/* Visible class to reveal the section */
+section.visible {
+    opacity: 1;
+    transform: translateY(0); /* Vissza az alaphelyzetbe */
+}
+
+
+
+
+.card{
+    padding-top: 25px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background: #3b5bdb;
+    color: white;
+    padding: 10px 0;
+}
+
+li {
+    margin: 5px 0px;
+}
+
+
+
+
+/* The progress container (grey background) */
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background: #b7c5ff00;
+    ;
+    position: fixed;
+    /* top: 75px */
+    bottom: 0px;
+    z-index: 1000;
+}
+  
+  /* The progress bar (scroll indicator) */
+.progress-bar {
+    height: 10px;
+    background: #3b5bdb;
+    width: 0%;
+}
+
+
+
+
+
+/* Responsive Styles */
+@media (max-width: 800px) {
+
+    ::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
+    
+    
+    .menu-toggle {
+        /* display: block; */
+        display: none;
+        background-color: #4c6ef5;
+    }
+
+    .navbar {
+        flex-direction: column;
+        display: none;
+        text-align: center;
+    }
+
+    .navbar.active {
+        display: flex;
+        display: block;
+    }
+
+    .navbar li {
+        margin: 10px 0;
+    }
+
+
+    header {
+        margin-top: 0px;
+    }
+}
+
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #4c6ef5;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background-color: #FFC700;
+    color: #000000;
+}
+
+
+
+
