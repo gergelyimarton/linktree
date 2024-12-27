@@ -1,11 +1,14 @@
 /* General Styles */
 body {
+    height: 100%;
     font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(to right, #f4f4f4, #eaeaea);
     color: #333;
 }
+
+
 
 
 
@@ -90,7 +93,7 @@ header {
     background: linear-gradient(to right, #4c6ef5, #3b5bdb);
     color: white;
     padding: 30px 0;
-    margin-top: 50px; /* Adjust for the navbar height */
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -158,9 +161,6 @@ li {
 }
 
 
-
-
-
 /* Responsive Styles */
 @media (max-width: 800px) {
 
@@ -170,8 +170,8 @@ li {
     
     
     .menu-toggle {
-        /* display: block; */
-        display: none;
+        display: block;
+        /* display: none; */
         background-color: #4c6ef5;
     }
 
@@ -179,6 +179,14 @@ li {
         flex-direction: column;
         display: none;
         text-align: center;
+
+        transition: transform 0.3s ease;
+        transform: translateY(-100%);
+        
+    }
+
+    .navbar.visible {
+        transform: translateY(0);
     }
 
     .navbar.active {
@@ -195,6 +203,9 @@ li {
         margin-top: 0px;
     }
 }
+
+
+
 
 
 .back-button {
