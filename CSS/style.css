@@ -1,3 +1,7 @@
+
+
+/* ------------ Shared ------------ */
+
 body {
     font-family: 'Montserrat', Roboto, Arial, sans-serif;
     margin: 0;
@@ -8,7 +12,7 @@ body {
     justify-content: flex-start;
     background-color: #000000;
     /* background-image: url('images/White-Black-Mountain-Wallpaper.jpg'); Itt add meg a képed elérhetőségét */
-    background-image: url('images/Haikei Blob Scene.svg'); /* Itt add meg a képed elérhetőségét */
+    background-image: url('../images/Haikei Blob Scene.svg'); /* Itt add meg a képed elérhetőségét */
     background-size: cover; /* A háttérkép kitölti a teljes képernyőt */
     background-position: center center; /* A kép középre igazítása */
     background-attachment: fixed; /* A háttérkép rögzítése, hogy ne mozogjon a görgetés során */
@@ -123,6 +127,9 @@ a {
     border: 1px stroke rgba(0, 0, 0, 0.8);
 }
 
+
+
+
 /* For embedded iframe containers (SoundCloud, YouTube, etc.) */
 .iframe-container {
     position: fixed;
@@ -160,6 +167,21 @@ a {
 }
 
 
+
+
+
+
+
+
+
+
+/* ------------ Nitebork ------------ */
+
+
+/* ------------ Duplajezus ------------ */
+
+
+
 /* YouTube specific */
 .youtube-iframe-container {
     position: fixed;
@@ -187,6 +209,11 @@ a {
     border-radius: 10px ;
 }
 
+
+
+/* ------------ Main Page ------------ */
+
+
 .main-page-tile-image img {
     height: 100px; 
     padding: 10px; 
@@ -194,7 +221,14 @@ a {
 }
 
 
-/* Media Queries for responsiveness */
+
+
+
+
+
+/* ------------ Media Queries for responsiveness ------------ */
+
+
 @media (max-width: 940px) {
     .iframe-container,
     .youtube-iframe-container {
@@ -204,6 +238,15 @@ a {
         max-width: none; /* Remove max-width for flexibility */
     }
 }
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
     header h1 {
@@ -226,6 +269,16 @@ a {
         height: 80px;
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 630px) {
     header {

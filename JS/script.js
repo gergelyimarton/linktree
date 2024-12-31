@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             mainContent.style.opacity = '1';
         }, 50); // Kis késleltetés a sima megjelenéshez
-    }, 2000); // Legalább 2 másodpercig legyen látható a loading képernyő
+    }, 1000); // Legalább 1 másodpercig legyen látható a loading képernyő
 });
 
 

@@ -22,7 +22,7 @@
     opacity: 1; /* Teljesen látható induláskor */
     z-index: 1000;
     filter: blur(0); /* Nincs elmosás induláskor */
-    transition: opacity 1s ease, visibility 1s ease, filter 1s ease ;
+    transition: opacity 0.6s ease, visibility 0.6s ease, filter 0.6s ease ;
 }
 
 .spinner {
