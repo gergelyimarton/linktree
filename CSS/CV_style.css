@@ -24,16 +24,36 @@ html {
 
 .profile-pic{
     height: 100px;
+    width: 100px;
+    object-fit: cover;
+    
 }
 
 .profile-container{
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    gap: 20px;
-    position: relative;
- 
+    align-items: center;
+    overflow: hidden;
+    
+    background-image: url("../images/White-Black-Mountain-Wallpaper.jpg");
+    background-size: auto 100%; /* A magasság 100%, a szélesség automatikus */
+    background-position: center; /* Középre igazítás */
+    background-repeat: no-repeat; /* Ne ismétlődjön a kép */
+    background-size: cover;
+    overflow: hidden;
+
 }
+
+
+.name-container{
+    padding: 1rem; /* Hely az adatok körül */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 /* Navbar */
 .navbar {
@@ -92,9 +112,12 @@ html {
 header {
     background: linear-gradient(to right, #4c6ef5, #3b5bdb);
     color: white;
-    padding: 30px 0;
-    margin-top: 50px;
-    text-align: center;
+    /* padding: 30px 0;
+    margin-top: 50px; */
+    height: 500px;
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 5fr 2fr;
 }
 
 /* Sections */
@@ -201,6 +224,10 @@ li {
 
     header {
         margin-top: 0px;
+        grid-template-columns: 1fr;
+    }
+    .profile-container{
+        display: none;
     }
 }
 
