@@ -34,7 +34,8 @@
 
         <header>
             <div class="profile-container">
-                <h1>Hi, I'm Marton</h1>
+                <p>Hi, I'm</p>
+                <h1>Marton</h1>
             </div>
             <div class="name-container">
                 <img src="images/Profile_pics_round.png" alt="Marton Gergelyi" class="profile-pic">
@@ -73,25 +74,48 @@
             </section> -->
 
             <!-- Other Sections -->
-            <section id="about">
-                <h2>About Me</h2>
-                <p>
-                    I'm experienced in sales and computer engineering, with a strong work ethic and proven success in meeting 
-                    deadlines in diverse environments. 
-                </p>
-                <p>
-                    I am seeking 20-40 hours per week and am eager for full or part-time 
-                    roles in engineering or other computer-based positions. In addition to my skills, I am open to new 
-                    challenges and opportunities in other fields.
-                </p>
-            </section>
+            <div class="about-container">
+                <div id="about">
+                    <h2>About Me</h2>
+                    <p>
+                        I'm experienced in sales and computer engineering, with a strong work ethic and proven success in meeting 
+                        deadlines in diverse environments. 
+                    </p>
+                    <p>
+                        I am seeking 20-40 hours per week and am eager for full or part-time 
+                        roles in engineering or other computer-based positions. In addition to my skills, I am open to new 
+                        challenges and opportunities in other fields.
+                    </p>
+                </div>
+            </div>
+            
 
             <!-- Education -->
             <section id="education">
                 <h2>Education and Training</h2>
-                <p><strong>Computer Operations Engineer</strong></p>
-                <p>University of Szeged [2020 – Present]</p>
-                <p>City: Szeged | Country: Hungary | <a href="https://u-szeged.hu/" target="_blank">Website</a></p>
+                <dir class="card">
+                    <h3>Computer Operations Engineer</h3>
+                    <p><strong> University of Szeged [2020 – Present] </strong></p>
+                    <p>City: Szeged | Country: Hungary | <a href="https://u-szeged.hu/" target="_blank">Website</a></p>
+                </dir>
+                <dir class="card" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div>
+                        <h3>Cybersecurity Analyst</h3>
+                        <p><strong> IBM course [2024 – 2025] </strong></p>
+                        <p>Made by IBM | Location: Online | <a href="https://coursera.org/share/e15ce3e9a731d248a64d9c70507f9eda" target="_blank">Website</a></p>
+                    </div>
+                    <a href="images/Coursera-DZYOREK3DJIN.pdf" style="text-decoration: none;">
+                        <div class="download-button-link">
+                            <img src="images/Coursera-DZYOREK3DJIN_1.png" alt="Cybersecurity Analyst certification" class="cybersec-analyst-cert">
+                            <div class="download-button">Download here!</div>
+                        </div>
+                    </a>
+                    
+                    <!-- <object data="images/Coursera-DZYOREK3DJIN.pdf" type="application/pdf" max-width="300px" height="auto">
+                        
+                    </object> -->
+                          
+                </dir>
             </section>
 
             <!-- Work Experience -->
@@ -144,7 +168,7 @@
             </section>
 
             <!-- Language Skills -->
-            <section id="languages">
+            <!-- <section id="languages">
                 <h2>Language Skills</h2>
                 <p><strong>Mother tongue:</strong> Hungarian</p>
                 <p><strong>Other language:</strong> English</p>
@@ -155,7 +179,38 @@
                     <li>Spoken Production: B2</li>
                     <li>Spoken Interaction: B2</li>
                 </ul>
+            </section> -->
+
+            <section id="languages">
+                <h2>Language Skills</h2>
+                <p><strong>Mother tongue:</strong> Hungarian</p>
+                <p><strong>Other language:</strong> English</p>
+                <br>
+                <div class="language-skill">
+                    <p>Listening: C1</p>
+                    <div class="skill-line c1"></div>
+                </div>
+                <div class="language-skill">
+                    <p>Reading: C1</p>
+                    <div class="skill-line c1"></div>
+                </div>
+                <div class="language-skill">
+                    <p>Writing: C1</p>
+                    <div class="skill-line c1"></div>
+                </div>
+                <div class="language-skill">
+                    <p>Spoken Production: B2</p>
+                    <div class="skill-line b2"></div>
+                </div>
+                <div class="language-skill">
+                    <p>Spoken Interaction: B2</p>
+                    <div class="skill-line b2"></div>
+                </div>
             </section>
+            
+            
+            
+
 
             <!-- Driving License -->
             <section id="driving">
