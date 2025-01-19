@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     </head>
     <body>
         <!-- Navigation Bar -->
@@ -34,13 +35,13 @@
 
         <header>
             <div class="profile-container">
-                <p>Hi, I'm</p>
+                <p>hello, my name is</p>
                 <h1>Marton</h1>
             </div>
             <div class="name-container">
                 <img src="images/Profile_pics_round.png" alt="Marton Gergelyi" class="profile-pic">
-                <h1 style="margin: 10px 0px 0px 0px;">Marton Gergelyi</h1>
-                <p style="margin: 20px 0px;">IT Enthusiast | University Student</p>
+                <h1 style="margin: 10px 0px 0px 0px; text-align: center;">Marton Gergelyi</h1>
+                <p style="margin: 20px 0px; text-align: center;">IT Enthusiast | University Student</p>
                 <div style="margin: 5px;">gergelyimarci@gmail.com</a></div>
                 <div>(+36) 302460625</div>
                 <br>
@@ -58,20 +59,6 @@
         </header>
 
         <main>
-            <!-- Personal Details -->
-            <!-- <section id="personal">
-                <h2>Personal Details</h2>
-                <ul>
-                    <li><strong>Nationality:</strong> Hungarian</li>
-                    <li><strong>Date of Birth:</strong> 20/04/2000</li>
-                    <li><strong>Gender:</strong> Male</li>
-                    <li><strong>Phone:</strong> (+36) 302460625</li>
-                    <li><strong>Email:</strong> <a href="mailto:gergelyimarci@gmail.com">gergelyimarci@gmail.com</a></li>
-                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/márton-gergelyi-a6a953245" target="_blank">linkedin.com/in/márton-gergelyi</a></li>
-                    <li><strong>Address:</strong> Hajós street 6, 1213 Budapest (Hungary)</li>
-                    <li><strong>Maltese Address:</strong> Triq Luqa Briffa, Rosvic Court 97, 1160 Il-Gżira (Malta)</li>
-                </ul>
-            </section> -->
 
             <!-- Other Sections -->
             <div class="about-container">
@@ -93,12 +80,12 @@
             <!-- Education -->
             <section id="education">
                 <h2>Education and Training</h2>
-                <dir class="card">
-                    <h3>Computer Operations Engineer</h3>
+                <div class="card">
+                    <h3>Computer Operations Engineer (BSc)</h3>
                     <p><strong> University of Szeged [2020 – Present] </strong></p>
                     <p>City: Szeged | Country: Hungary | <a href="https://u-szeged.hu/" target="_blank">Website</a></p>
-                </dir>
-                <dir class="card" style="display: flex; flex-direction: row; justify-content: space-between;">
+                </div>
+                <div class="card" style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div>
                         <h3>Cybersecurity Analyst</h3>
                         <p><strong> IBM course [2024 – 2025] </strong></p>
@@ -115,7 +102,7 @@
                         
                     </object> -->
                           
-                </dir>
+                </div>
             </section>
 
             <!-- Work Experience -->
@@ -208,9 +195,57 @@
                 </div>
             </section>
             
+            <!-- Digital Skills -->
+            <section id="digital-skills">
+                <h2>Digital Skills</h2>
+                <div class="digital-skill">
+                    <div class="digital-skill">
+                        <h3>Main Language</h3>
+                        <div class="sub-skills">
+                            <p>Clojure</p>
+                            <div class="skill-line high"></div>
+                        </div>
+                    </div>
+                    <h3>Frontend</h3>
+                    <div class="sub-skills">
+                        <p>React</p>
+                        <div class="skill-line high"></div>
+                        <p>JavaScript</p>
+                        <div class="skill-line high"></div>
+                        <p>HTML</p>
+                        <div class="skill-line high"></div>
+                        <p>CSS</p>
+                        <div class="skill-line high"></div>
+                        <p>Angular</p>
+                        <div class="skill-line medium"></div>
+                        <p>TypeScript</p>
+                        <div class="skill-line low"></div>
+                    </div>
+                </div>
+                <div class="digital-skill">
+                    <h3>Backend</h3>
+                    <div class="sub-skills">
+                        <p>Node.js</p>
+                        <div class="skill-line high"></div>
+                        <p>Python</p>
+                        <div class="skill-line medium"></div>
+                    </div>
+                </div>
+                <div class="digital-skill">
+                    <h3>Microsoft Office</h3>
+                    <div class="sub-skills">
+                        <p>Word</p>
+                        <div class="skill-line high"></div>
+                        <p>Excel</p>
+                        <div class="skill-line high"></div>
+                        <p>PowerPoint</p>
+                        <div class="skill-line medium-low"></div>
+                        <p>Access</p>
+                        <div class="skill-line low"></div>
+                    </div>
+                </div>
+            </section>
             
-            
-
 
             <!-- Driving License -->
             <section id="driving">
@@ -218,16 +253,6 @@
                 <p>A1, B</p>
             </section>
 
-            <!-- Digital Skills -->
-            <section id="digital-skills">
-                <h2>Digital Skills</h2>
-                <ul>
-                    <li>Frontend: React, Angular, JavaScript, TypeScript, HTML, CSS</li>
-                    <li>Backend: Node.js, Python</li>
-                    <li>Programming Language: Clojure</li>
-                    <li>Microsoft Office: Word, Excel, PowerPoint, Access</li>
-                </ul>
-            </section>
 
             <!-- Projects -->
             <section id="projects">
@@ -236,7 +261,7 @@
                     <h3>Semblance (Music Album)</h3>
                     <p>[01/2024 – Current]</p>
                     <p>
-                        Currently composing an album in the intelligent drum and bass and ambient jungle styles, aiming to 
+                        Currently writing an album in the intelligent drum and bass and ambient jungle styles, aiming to 
                         capture the nostalgic atmosphere of old PS2 games, with soft melodies and complex drum patterns.
                     </p>
                     <br>
@@ -253,11 +278,42 @@
             <!-- Hobbies -->
             <section id="hobbies">
                 <h2>Hobbies and Interests</h2>
-                <ul>
+                <div>
+                    <h3>Music</h3>
+                    <p>Writing lyrics, composing, and mixing tracks since 2020</p>
+                </div>
+                <br>
+                <div>
+                    <h3>Sports</h3>
+                    <p>Skiing, Snowboarding, Judo</p>
+                </div>
+                <!-- <ul>
                     <li><strong>Music:</strong> Writing lyrics, composing, and mixing tracks since 2020.</li>
                     <li><strong>Sports:</strong> Skiing, Snowboarding, Judo.</li>
-                </ul>
+                </ul> -->
             </section>
+
+            <div class="about-container contact-footer">
+                <div class="contact-info">
+                    <p>Contact me here!</p>
+                    <div>
+                        <a href="mailto:gergelyimarci@gmail.com" style="margin: 10px;">
+                            <svg height="50" width="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>                        </a>
+                        <a href="https://www.linkedin.com/in/m%C3%A1rton-gergelyi-a6a953245/" style="margin: 10px;">
+                            <svg height="50" width="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="contact-details">
+                    <div>gergelyimarci@gmail.com</div>
+                    <div>(+36) 302460625</div>
+                    <a href="images/Gergelyi-Marton-Europass-CV-2025.pdf" class="cv-link" style="margin-top: 30px;">
+                        <div class="download-button CV-download" style="font-family: Pixelify Sans;">Download my CV</div>
+                    </a>
+                </div>
+            </div>
+            
 
             <a href="../index.html">
                 <button class="back-button">

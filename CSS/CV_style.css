@@ -1,83 +1,92 @@
-/* General Styles */
+@font-face {
+    font-family: 'Pixelify Sans';
+    src: url('fonts/PixelifySans-Regular.ttf') format('ttf');
+    /* font-weight: normal;
+    font-style: normal; */
+}
+
+
+
+/* ----------------------------- General Styles ----------------------------- */
 body {
     height: 100%;
-    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    font-family: 'Montserrat', 'Roboto', Pixelated, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* background: linear-gradient(to right, #f4f4f4, #eaeaea); */
-    background-color: white;
+    background-color: #f5f5f5;
     color: #333;
 }
 
-
-
-
-
 ::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+    display: none;
 }
 
 html {
-    scroll-behavior: smooth; /* Simább görgetés */
+    scroll-behavior: smooth;
 }
 
-h2{
+h2 {
+    color: #3b5bdb;
+    text-align: right;
+    padding-right: 20px;
+}
+
+a::visited{
+    text-decoration: none;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: none;
     color: #3b5bdb;
 }
 
-
-.profile-pic{
+/* ----------------------------- Profile Section ----------------------------- */
+.profile-pic {
     height: 100px;
     width: 100px;
     object-fit: cover;
-    
 }
 
-.profile-container{
+.profile-container {
     display: flex;
     flex-direction: column;
-    
     justify-content: center;
     align-items: flex-start;
     overflow: hidden;
-    
     background-image: url("../images/White-Black-Mountain-Wallpaper.jpg");
-    background-size: auto 100%; /* A magasság 100%, a szélesség automatikus */
-    background-position: center; /* Középre igazítás */
-    background-repeat: no-repeat; /* Ne ismétlődjön a kép */
     background-size: cover;
-    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
+.profile-container h1, .profile-container p {
+    position: relative;
+    top: 150px;
+    left: 80px;
+    margin: 0px 0px;
 }
 
 .profile-container h1 {
-    position: relative;
-    margin: 0px 0px 0px 0px;
-    top: 150px;
-    left: 80px;
     font-size: 50px;
+    /* font-family: Pixelify Sans; */
 }
 
 .profile-container p {
-    position: relative;
-    margin: 0px 0px 0px 0px;
-    top: 150px;
-    left: 80px;
-    font-size: 20px;
+    font-size: 30px;
+    font-family: 'Pixelify Sans', Montserrat;
 }
 
-
-.name-container{
-    padding: 1rem; /* Hely az adatok körül */
+.name-container {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
-
-/* Navbar */
+/* ----------------------------- Navbar ----------------------------- */
 .navbar {
     list-style: none;
     display: flex;
@@ -95,12 +104,12 @@ h2{
 
 .navbar li {
     margin: 0 15px;
-    transform: scale(1); /* Alapértelmezett kis méret */
-    transition: 0.3s; /* Alapértelmezett kis méret */
+    transform: scale(1);
+    transition: 0.3s;
 }
 
 .navbar li:hover {
-    transform: scale(1.2); /* Alapértelmezett kis méret */
+    transform: scale(1.2);
 }
 
 .navbar a {
@@ -108,16 +117,11 @@ h2{
     color: white;
     font-weight: bold;
     transition: color 0.3s;
-    
 }
 
 .navbar a:hover {
-    color: #FFC700;
-    transform: scale(1.1); /* Hover esetén 10%-kal nagyobb */
+    transform: scale(1.1);
 }
-
-
-
 
 /* Hamburger menu toggle */
 .menu-toggle {
@@ -128,24 +132,20 @@ h2{
     cursor: pointer;
 }
 
-
-
-/* Header */
+/* ----------------------------- Header ----------------------------- */
 header {
     background: linear-gradient(to right, #4c6ef5, #3b5bdb);
     color: white;
-    /* padding: 30px 0;
-    margin-top: 50px; */
     height: 500px;
     padding-top: 50px;
     display: grid;
     grid-template-columns: 5fr 2fr;
 }
 
-/* Sections */
+/* ----------------------------- Sections ----------------------------- */
 section {
-    border: solid;
-    margin: 100px auto;
+
+    margin: 150px auto;
     max-width: 800px;
     padding: 0px;
     /* background: white; */
@@ -160,11 +160,11 @@ section {
     border-right: none;
     border-bottom: none;
 }
+    
 
-/* Visible class to reveal the section */
 section.visible {
     opacity: 1;
-    transform: translateY(0); /* Vissza az alaphelyzetbe */
+    transform: translateY(0);
 }
 
 .about-container {
@@ -176,52 +176,43 @@ section.visible {
 
 #about {
     max-width: 600px;
-    height: auto;
-
-    padding: 100px 0px;
+    padding: 100px 0;
     text-align: center;
-
 }
 
+#about h2{
+    text-align: center;
+}
 
-.cybersec-analyst-cert{
-    height: auto;
+/* ----------------------------- Miscellaneous Elements ----------------------------- */
+.cybersec-analyst-cert {
     width: 300px;
     margin-bottom: 30px;
-    box-shadow:
-        2.8px 2.8px 0.4px -7px rgba(0, 0, 0, 0.043),
+    box-shadow: 2.8px 2.8px 0.4px -7px rgba(0, 0, 0, 0.043),
         6.8px 6.8px 1.3px -7px rgba(0, 0, 0, 0.049),
         11.8px 11.8px 3.5px -7px rgba(0, 0, 0, 0.05),
         17px 17px 10px -7px rgba(0, 0, 0, 0.05);
 }
 
-.download-button-link{
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+.download-button-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .download-button {
-   
     color: #090909;
     padding: 0.7em 1.7em;
     font-size: 15px;
-    border-radius: 0.5em;
-    background: #e8e8e8;
     cursor: pointer;
-    border: 1px solid #e8e8e8;
+    /* border: 1px solid #e8e8e8; */
     transition: all 0.3s;
-    box-shadow: 4px 4px 10px #c5c5c5, -6px -6px 12px #ffffff;
-
-    /* padding: 10px 20px;
-    color: #000000;
-    border: none;
-
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    z-index: 1000; */
+    
+    border-radius: 10px;
+    background: linear-gradient(145deg, #ffffff, #dddddd);
+    box-shadow:  5px 5px 20px #d0d0d0,
+                 -5px -5px 20px #ffffff;
 }
 
 .download-button:active {
@@ -229,65 +220,163 @@ section.visible {
     box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
 
+.CV-download{
+    background: #3b5bdb;
+    color: #ffffff;
+    /* box-shadow: none; */
+    box-shadow:  5px 5px 20px #d0d0d0,
+    -5px -5px 20px #ffffff;
+}
 
+.CV-download:active{
+    color: #ffffff;
+    box-shadow: inset 4px 4px 12px #223582, inset -4px -4px 12px #7e98ff;
+}
 
-.card{
+.card {
     padding-top: 25px;
 }
 
-
-
-
-/* #languages {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-} */
-
-
+/* ----------------------------- Skills Section ----------------------------- */
 .skill-line {
     height: 8px;
     border-radius: 4px;
     margin-left: 10px;
-    /* flex-grow: 1; */
     transition: width 0.3s ease;
 }
 
-.level-list{
+.level-list {
     display: flex;
-    justify-content: space-between;  /* Elemek közötti térköz egyenletesen */
-    align-items: center;  /* A szöveg és a vonal vertikális igazítása */
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
 }
 
 .c1 {
-    background-color: #00a005;  /* C1 szint - Zöld */
-    width: 50%;  /* Maximális szélesség */
+    background-color: #00a005;
+    width: 50%;
 }
 
 .b2 {
-    background-color: #ff9900;  /* B2 szint - Narancssárga */
-    width: 40%;  /* 75%-os szélesség */
+    background-color: #ff9900;
+    width: 40%;
 }
 
 .b1 {
-    background-color: #FFC107;  /* B1 szint - Sárga */
-    width: 30%;  /* 50%-os szélesség */
+    background-color: #ff6600;
+    width: 30%;
 }
 
 .a2 {
-    background-color: #FF5722;  /* A2 szint - Piros */
-    width: 20%;  /* 25%-os szélesség */
+    background-color: #d60e00;
+    width: 20%;
 }
 
 .a1 {
-    background-color: #9E9E9E;  /* A1 szint - Szürke */
-    width: 10%;  /* 10%-os szélesség */
+    background-color: #9E9E9E;
+    width: 10%;
 }
 
 
-/* Footer */
+/* 
+#digital-skills {
+    display: flex;
+    justify-content: center;
+} */
+
+/* h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+} */
+
+.digital-skill {
+    margin-bottom: 30px;
+}
+
+.digital-skill p {
+    font-size: 18px;
+}
+
+/* .skill-line {
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+} */
+
+.high {
+    background-color: #00a005; /* Magas szint - Zöld */
+    width: 50%;
+}
+
+.medium {
+    background-color: #ff9900; /* Közepes szint - Sárga */
+    width: 40%;
+}
+
+.medium-low {
+    background-color: #ff6600; /* Közepesen alacsony szint - Narancssárga */
+    width: 30%;
+}
+
+.low {
+    background-color: #d60e00; /* Alacsony szint - Piros */
+    width: 20%;
+}
+
+.sub-skills {
+    padding-left: 20px;
+    margin-top: 10px;
+    border-left: 2px dotted #e4e4e4;
+}
+
+.sub-skills p {
+    font-size: 16px;
+}
+
+.sub-skills .skill-line {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+
+/* ----------------------------- Footer ----------------------------- */
+
+.contact-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 100px 150px;
+    /* background-color: #f9f9f9;
+    border-top: 2px solid #ccc; */
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contact-info p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.contact-info a img {
+    height: 40px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 footer {
     text-align: center;
     background: #3b5bdb;
@@ -296,43 +385,33 @@ footer {
 }
 
 li {
-    margin: 5px 0px;
+    margin: 5px 0;
 }
 
-
-
-
-/* The progress container (grey background) */
+/* Progress Bar */
 .progress-container {
     width: 100%;
     height: 10px;
     background: #b7c5ff00;
-    ;
     position: fixed;
-    /* top: 75px */
-    bottom: 0px;
+    bottom: 0;
     z-index: 1000;
 }
-  
-  /* The progress bar (scroll indicator) */
+
 .progress-bar {
     height: 10px;
     background: #3b5bdb;
     width: 0%;
 }
 
-
-/* Responsive Styles */
+/* ----------------------------- Responsive Styles ----------------------------- */
 @media (max-width: 800px) {
-
-    ::-webkit-scrollbar { 
-        display: none;  /* Safari and Chrome */
+    ::-webkit-scrollbar {
+        display: none;
     }
-    
-    
+
     .menu-toggle {
         display: block;
-        /* display: none; */
         background-color: #4c6ef5;
     }
 
@@ -340,10 +419,8 @@ li {
         flex-direction: column;
         display: none;
         text-align: center;
-
         transition: transform 0.3s ease;
         transform: translateY(-100%);
-        
     }
 
     .navbar.visible {
@@ -352,33 +429,28 @@ li {
 
     .navbar.active {
         display: flex;
-        display: block;
     }
 
     .navbar li {
         margin: 10px 0;
     }
 
-
     header {
-        margin-top: 0px;
         grid-template-columns: 1fr;
     }
-    .profile-container{
+
+    .profile-container {
         display: none;
     }
-    
-    main{
+
+    main {
         padding: 0px 10px;
     }
-    #about{
+
+    #about {
         background-color: white;
     }
 }
-
-
-
-
 
 .back-button {
     position: fixed;
@@ -399,9 +471,3 @@ li {
     background-color: #FFC700;
     color: #000000;
 }
-
-
-
-
-
-
