@@ -113,7 +113,7 @@ a:-webkit-any-link {
 }
 
 .navbar li:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .navbar a {
@@ -189,7 +189,17 @@ section.visible {
     text-align: center;
 }
 
-/* ----------------------------- iscellaneous Elements ----------------------------- */
+.contact-links{
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.contact-links:hover {
+    transform: scale(1.2);
+
+}
+
+/* ----------------------------- Miscellaneous Elements ----------------------------- */
 .cybersec-analyst-cert {
     width: 300px;
     margin-bottom: 30px;
