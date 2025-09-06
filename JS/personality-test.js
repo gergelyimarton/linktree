@@ -100,7 +100,7 @@ function finish(){
 
   // leírás kiválasztása
   let desc = '';
-  if(Math.abs(sunPerc - moonPerc) <= 8) desc = data.descriptions.balanced;
+  if(Math.abs(sunPerc - moonPerc) <= 5) desc = data.descriptions.balanced;
   else if(sunPerc > moonPerc) desc = data.descriptions.sun;
   else desc = data.descriptions.moon;
 
