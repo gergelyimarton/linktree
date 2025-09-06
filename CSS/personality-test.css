@@ -53,9 +53,19 @@ h1{
 .scale input{
     display:none
 }
-.scale input:checked + span{
-    outline:3px solid rgba(245,158,11,0.18)
+
+.scale input:checked + span {
+    background: var(--accent);       /* kontrasztos háttér */
+    color: #071126;                  /* szöveg jól látható */
+    border-radius: 50%;              /* lekerekített sarkok */
+    outline: 3px solid var(--accent); /* fényes kiemelés */
+    box-shadow: 0 0 8px var(--accent); /* árnyék a hangsúlyhoz */
+    transform: scale(1.05);          /* kis nagyítás */
+    padding: 3px 8px;                    /* eredeti 10px + 5px extra */
+    transition: all 0.2s ease;       /* sima animáció */
 }
+
+
 .controls{
     display:flex; 
     justify-content:space-between; 

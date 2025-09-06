@@ -63,19 +63,32 @@ function renderQuestion(i){
   nextBtn.textContent = (i === questions.length-1) ? 'Befejezés' : 'Következő';
 }
 
-prevBtn.addEventListener('click', ()=>{ if(idx>0){ idx--; renderQuestion(idx);} });
+prevBtn.addEventListener('click', ()=>{ 
+  if(idx>0){ 
+    idx--; 
+    renderQuestion(idx);
+  } 
+});
+
 nextBtn.addEventListener('click', ()=>{
-  // ha nincs válasz a jelenlegi kérdésre, ne lépjen tovább
   if(!answers.hasOwnProperty(questions[idx].id)){
     alert('Kérlek válaszolj erre a kérdésre mielőtt továbbmennél.');
     return;
   }
-
-  if(idx < questions.length-1){ idx++; renderQuestion(idx); }
+  if(idx < questions.length-1){ 
+    idx++; 
+    renderQuestion(idx); 
+  }
   else { finish(); }
 });
 
-retryBtn.addEventListener('click', ()=>{ answers = {}; idx = 0; resultSection.classList.add('hidden'); renderQuestion(idx); window.scrollTo({top:0,behavior:'smooth'}); });
+retryBtn.addEventListener('click', ()=>{ 
+  answers = {}; 
+  idx = 0; 
+  resultSection.classList.add('hidden'); 
+  renderQuestion(idx); 
+  window.scrollTo({top:0,behavior:'smooth'}); 
+});
 
 function finish(){
   // összeszámoljuk a Nap és Hold pontokat
@@ -100,7 +113,7 @@ function finish(){
 
   // leírás kiválasztása
   let desc = '';
-  if(Math.abs(sunPerc - moonPerc) <= 5) desc = data.descriptions.balanced;
+  if(Math.abs(sunPerc - moonPerc) <= 2) desc = data.descriptions.balanced;
   else if(sunPerc > moonPerc) desc = data.descriptions.sun;
   else desc = data.descriptions.moon;
 
@@ -111,3 +124,10 @@ function finish(){
 
 // init
 init();
+
+// Globális ENTER listener a Következő/Befejezés gombhoz
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && answers.hasOwnProperty(questions[idx].id)){
+    nextBtn.click();
+  }
+});
