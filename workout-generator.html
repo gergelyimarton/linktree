@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Workout Plan</title>
+  <link rel="stylesheet" href="CSS/style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #333;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .day {
+      background: white;
+      border-radius: 10px;
+      padding: 15px 50px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .muscle {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    ul {
+      margin: 5px 0 15px 20px;
+    }
+    button {
+      display: block;
+      margin: 30px auto 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .back-button {
+      display: block;
+      margin: 30px auto 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: gray;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .back-button:hover{
+        background: #45a049;
+        color: white;
+    }
+  </style>
+</head>
+<body>
+    <h1>Weekly Workout Plan</h1>
+    <div id="plan"></div>
+    <button onclick="generatePlan()">Generate New Plan</button>
+
+    <a href="projects.html">
+        <button class="back-button">
+            Go back
+        </button>
+    </a>
+    <script>
+        const exercises = {
+        "Chest": [
+            "Pushups", "Pseudo pushups", "Diamond pushups", "Dips",
+            "Decline pushups", "Pike pushups", "Archer pushups"
+        ],
+        "Legs": [
+            "Weighted squats", "Bulgarian squats", "Attack steps",
+            "Step ups", "Squat hold", "Calf push"
+        ],
+        "Back": [
+            "Pull ups", "Chin ups", "Standing rows",
+            "Sitting rows", "Torso raises / deadlifts"
+        ],
+        "Abs": [
+            "Decline sit ups", "Leg raises", "Knee tucks",
+            "Cable crunches", "Mountain climb"
+        ],
+        "Arms": [
+            "Bicep curls / chin ups", "Cable pull downs (triceps)",
+            "Lateral raises", "Overhead / military presses", "Arnold presses"
+        ],
+        "Extras": [
+            "Farmer walk", "Rope climbing"
+        ]
+        };
+
+        const schedule = {
+            "Day 1": ["Chest", "Arms", "Abs"],
+            "Day 2": ["Legs", "Abs"],
+            "Day 3": ["Back", "Abs"]
+        };
+
+        function getRandomMoves(moves, count = 4) {
+            if (moves.length <= count) return [...moves];
+            const shuffled = [...moves].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function generatePlan() {
+            const planDiv = document.getElementById("plan");
+            planDiv.innerHTML = "";
+
+            for (const [day, groups] of Object.entries(schedule)) {
+                const dayDiv = document.createElement("div");
+                dayDiv.className = "day";
+                const dayTitle = document.createElement("h2");
+                dayTitle.textContent = day;
+                dayDiv.appendChild(dayTitle);
+
+                groups.forEach(muscle => {
+                    const muscleTitle = document.createElement("div");
+                    muscleTitle.className = "muscle";
+                    muscleTitle.textContent = muscle;
+                    dayDiv.appendChild(muscleTitle);
+
+                    const list = document.createElement("ul");
+                    getRandomMoves(exercises[muscle]).forEach(move => {
+                        const li = document.createElement("li");
+                        li.textContent = move;
+                        list.appendChild(li);
+                    });
+                    dayDiv.appendChild(list);
+                });
+
+                planDiv.appendChild(dayDiv);
+            }
+        }
+
+        // első betöltéskor generálás
+        generatePlan();
+    </script>
+</body>
+</html>
