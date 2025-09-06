@@ -9,7 +9,18 @@
         "Könnyen felhívom magamra a figyelmet társas helyzetekben?",
         "Gyakran osztom meg a sikereimet másokkal?",
         "Hajlamos vagyok versenyezni és bizonyítani magam?",
-        "Gyorsan reagálok váratlan helyzetekre, stressz alatt is?"
+        "Gyorsan reagálok váratlan helyzetekre, stressz alatt is?",
+        "Ha egy projekt vezetését rám bízzák, magabiztosan veszem át az irányítást?",
+        "Szeretek kreatív projekteket tervezni vagy megvalósítani?",
+        "Élvezem, ha új dolgokat hozhatok létre, akár művészeti, akár technikai téren?",
+        "Szívesen irányítok csapatokat vagy csoportokat egy közös cél érdekében?",
+        "Örömmel építek rendszereket, terveket, struktúrákat a környezetemben?",
+        "Gyakran találok innovatív megoldásokat problémákra?",
+        "Ha egy tárgyaláson kell állást foglalnom, nem félek kifejezni a véleményemet?",
+        "Ha egy projekt vezetését rám bízzák, magabiztosan veszem át az irányítást?",
+        "Szeretek spontán programokat szervezni a barátaimnak vagy kollégáimnak?",
+        "Ha egy beszélgetésben vita alakul ki, nem kerülöm el a konfrontációt.",
+        "Gyakran adok visszajelzést mások teljesítményéről, akár dicséret, akár kritika formájában?"
     ],
     "moon": [
         "Mélyen átélem mások érzéseit.",
@@ -21,11 +32,22 @@
         "Hajlamos vagyok elkerülni a konfliktusokat, ha lehet?",
         "Fontos számomra az érzelmi biztonság és a stabilitás?",
         "Gyakran álmodozom vagy képzeletben élem át a történéseket?",
-        "Értékelem a csendet és a nyugodt, elmélyült pillanatokat?"
+        "Értékelem a csendet és a nyugodt, elmélyült pillanatokat?",
+        "Érzékenyen reagálok a természet vagy mások változásaira és hangulatára?",
+        "Érdekelnek a misztikus vagy spirituális élmények, mint az álmok vagy intuíció?",
+        "Szeretek meditálni, elmélyülni és kapcsolatba lépni a belső világommal?",
+        "Gyakran keresem a jelentést és összefüggéseket az életem eseményeiben?",
+        "Fontos számomra a belső harmónia és a lelki egyensúly fenntartása?",
+        "Érzékenyen és empatikusan reagálok mások lelki állapotára?",
+        "Ha valaki megsért, először a saját érzéseimet próbálom feldolgozni, mielőtt reagálnék?",
+        "Szeretek egyedül sétálni vagy olvasni, hogy rendezzem a gondolataimat?",
+        "Ha valaki kér tanácsot, gyakran inkább hallgatok és figyelek, mint hogy azonnal megoldást javasoljak?",
+        "Ritkán kezdeményezek társas helyzeteket, ha nem érzem magam teljesen kényelmesen?",
+        "Fontos számomra, hogy a kapcsolataimban mély, tartalmas beszélgetések legyenek a felszínes csevegés helyett?"
     ],
     "descriptions": {
-        "sun": "Nap-típus: energikus, döntésképes, vezető alkat. Szeretsz kezdeményezni és a figyelem középpontjában lenni.",
-        "moon": "Hold-típus: érzékeny, empatikus, belső életre fókuszáló. Fontos számodra az érzelmi biztonság és a nyugalom.",
-        "balanced": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkalmazkodni és mindkét oldaladat használni a különböző helyzetekben."
+        "sun": "Nap-típus: energikus, döntésképes, vezető alkat. Alkotsz, építesz, vezetsz, szeretsz kezdeményezni és a figyelem középpontjában lenni.",
+        "moon": "Hold-típus: érzékeny, empatikus, spirituális és misztikus. Mélyen átéled az érzelmeket, figyelsz a belső világodra, és fontos számodra a lelki harmónia.",
+        "balanced": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkotni, vezetni, de ugyanakkor érzékenyen és spirituálisan reagálni a világra."
     }
 }
