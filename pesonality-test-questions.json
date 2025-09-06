@@ -1,0 +1,31 @@
+{
+    "sun": [
+        "Szeretek a középpontban lenni.",
+        "Könnyen lelkesítek másokat.",
+        "Nyíltan és erőteljesen kifejezem az érzéseimet.",
+        "Kitartóan küzdök a céljaimért.",
+        "Gyorsan és határozottan döntök.",
+        "Szeretek új lehetőségeket kezdeményezni és kipróbálni?",
+        "Könnyen felhívom magamra a figyelmet társas helyzetekben?",
+        "Gyakran osztom meg a sikereimet másokkal?",
+        "Hajlamos vagyok versenyezni és bizonyítani magam?",
+        "Gyorsan reagálok váratlan helyzetekre, stressz alatt is?"
+    ],
+    "moon": [
+        "Mélyen átélem mások érzéseit.",
+        "Ha túl sok az inger, visszahúzódom.",
+        "Szívesebben hallgatok és figyelek, mint hogy beszéljek.",
+        "Fontosak számomra a múlt és a hagyományok.",
+        "Inkább a belső világomból merítek inspirációt.",
+        "Szeretek elmélyülni gondolataimban és önmagamat vizsgálni?",
+        "Hajlamos vagyok elkerülni a konfliktusokat, ha lehet?",
+        "Fontos számomra az érzelmi biztonság és a stabilitás?",
+        "Gyakran álmodozom vagy képzeletben élem át a történéseket?",
+        "Értékelem a csendet és a nyugodt, elmélyült pillanatokat?"
+    ],
+    "descriptions": {
+        "sun": "Nap-típus: energikus, döntésképes, vezető alkat. Szeretsz kezdeményezni és a figyelem középpontjában lenni.",
+        "moon": "Hold-típus: érzékeny, empatikus, belső életre fókuszáló. Fontos számodra az érzelmi biztonság és a nyugalom.",
+        "balanced": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkalmazkodni és mindkét oldaladat használni a különböző helyzetekben."
+    }
+}
