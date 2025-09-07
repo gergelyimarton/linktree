@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weekly Workout Plan</title>
   <link rel="stylesheet" href="CSS/style.css">
 
@@ -10,21 +11,29 @@
       font-family: Arial, sans-serif;
       background: #f4f6f8;
       color: #333;
-      max-width: 800px;
-      margin: 40px auto;
+      margin: 0;
       padding: 20px;
-    
+      line-height: 1.5;
     }
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin: 20px 0;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    #plan {
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .day {
       background: white;
       border-radius: 10px;
-      padding: 15px 50px;
+      padding: 15px 20px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .day h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
     .muscle {
       font-weight: bold;
@@ -33,36 +42,50 @@
     ul {
       margin: 5px 0 15px 20px;
     }
-    button {
+    button, .back-button {
       display: block;
-      margin: 30px auto 0;
-      padding: 10px 20px;
-      font-size: 16px;
+      margin: 20px auto;
+      padding: 12px 20px;
+      font-size: 1rem;
       border: none;
       border-radius: 8px;
       background: #4CAF50;
       color: white;
       cursor: pointer;
       transition: 0.2s;
+      /* max-width: 300px;
+      width: 100%; */
     }
     button:hover {
       background: #45a049;
     }
     .back-button {
-      display: block;
-      margin: 30px auto 0;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
       background-color: gray;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
     }
-    .back-button:hover{
-        background: #45a049;
-        color: white;
+    .back-button:hover {
+      background: #333;
+    }
+
+    /* Mobilbarát beállítások */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .day {
+        padding: 10px 15px;
+      }
+      .day h2 {
+        font-size: 1rem;
+      }
+      .muscle {
+        font-size: 0.95rem;
+      }
+      ul li {
+        font-size: 0.9rem;
+      }
+      .back-button{
+        position: static;
+      }
     }
   </style>
 </head>
