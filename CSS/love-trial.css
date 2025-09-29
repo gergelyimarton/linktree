@@ -1,0 +1,89 @@
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ffffff; /* finom rózsaszínes háttér */
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.body-container{
+   
+    max-width: 1200px;
+}
+
+h1, h2, h3 {
+    margin-top: 1.4em;
+    color: #d63384; /* pasztell pink árnyalat */
+    font-weight: 600;
+}
+
+table {
+    border-collapse: separate; /* szebb lekerekített sarkokhoz */
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 24px;
+    background: #ffffffcc; /* halvány fehér háttér a táblának */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+th, td {
+    border: none;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+th {
+    background: #ffe3f6; /* világos pink fejlécek */
+    color: #d63384;
+    font-weight: 600;
+}
+
+tr:nth-child(even) td {
+    background: #fff0f6; /* halvány rózsaszín csíkozás */
+}
+
+select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #d63384;
+    background: #fff0f6;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: #d63384;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    margin: 6px;
+    box-shadow: 0 4px 8px rgba(214,51,132,0.3);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff77b3;
+    box-shadow: 0 6px 12px rgba(214,51,132,0.4);
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #a64d79;
+    text-align: center;
+}
