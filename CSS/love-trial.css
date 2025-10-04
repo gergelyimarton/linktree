@@ -87,3 +87,33 @@ footer {
     color: #a64d79;
     text-align: center;
 }
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 12px 20px;
+    background: #d63384; /* sötétebb pink */
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(214,51,132,0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background: #ff77b3; /* világos pink */
+    box-shadow: 0 6px 14px rgba(214,51,132,0.4);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.back-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(214,51,132,0.2);
+}
+
