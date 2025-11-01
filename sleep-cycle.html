@@ -222,7 +222,7 @@
     <div class="grid" style="margin-top:18px">
       <main>
         <section class="card">
-          <h3 style="margin:0 0 8px 0">Ciklusok (1 ciklus = 80 perc)</h3>
+          <h3 style="margin:0 0 8px 0">Ciklusok (1 ciklus ≈ 90 perc ± 20 perc)</h3>
           <div class="muted">Válassz ciklus számot és add meg mikor szeretnél lefeküdni.</div>
 
           <table aria-label="ciklusok">
@@ -230,25 +230,25 @@
               <tr><th>Ciklus</th><th>Idő (perc)</th><th>Idő (óra)</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>80</td><td>1 óra 20 perc</td></tr>
-              <tr><td>2</td><td>160</td><td>2 óra 40 perc</td></tr>
-              <tr><td>3</td><td>240</td><td>4 óra 0 perc</td></tr>
-              <tr><td>4</td><td>320</td><td>5 óra 20 perc</td></tr>
-              <tr><td>5</td><td>400</td><td>6 óra 40 perc</td></tr>
-              <tr><td>6</td><td>480</td><td>8 óra 0 perc</td></tr>
+              <tr><td>1</td><td>90</td><td>1 óra 30 perc</td></tr>
+              <tr><td>2</td><td>180</td><td>3 óra 0 perc</td></tr>
+              <tr><td>3</td><td>270</td><td>4 óra 30 perc</td></tr>
+              <tr><td>4</td><td>360</td><td>6 óra 0 perc</td></tr>
+              <tr><td>5</td><td>450</td><td>7 óra 30 perc</td></tr>
+              <tr><td>6</td><td>540</td><td>9 óra 0 perc</td></tr>
             </tbody>
           </table>
 
           <div style="margin-top:12px">
             <label class="muted">Extra tipp:</label>
-            <small class="note">Számolj az elalvási idővel (~7–12 perc), a kalkulátor hozzáadja ezt is!</small>
+            <small class="note">Számolj az elalvási idővel (~7 perc), a kalkulátor hozzáadja ezt is!</small>
           </div>
         </section>
 
         <section class="card" style="margin-top:14px">
           <h3 style="margin:0 0 8px 0">Számítási példák</h3>
           <div class="muted">Ha este 23:00-kor fekszel és 5 ciklust célzol:</div>
-          <div class="result" id="example">23:00 + 5 ciklus (6 óra 40 perc) + 15 perc elalvás = <strong>05:55</strong></div>
+          <div class="result" id="example">23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás = <strong>06:45</strong></div>
         </section>
       </main>
 
@@ -261,16 +261,16 @@
 
             <label class="muted">Ciklusok száma</label>
             <select id="cycles">
-                <option value="1">1 ciklus (1:20)</option>
-                <option value="2">2 ciklus (2:40)</option>
-                <option value="3">3 ciklus (4:00)</option>
-                <option value="4">4 ciklus (5:20)</option>
-                <option value="5">5 ciklus (6:40)</option>
-                <option value="6" selected>6 ciklus (8:00)</option>
-                <option value="7">7 ciklus (9:20)</option>
-                <option value="8">8 ciklus (10:40)</option>
-                <option value="9">9 ciklus (12:00)</option>
-                <option value="10">10 ciklus (13:20)</option>
+                <option value="1">1 ciklus (1:30)</option>
+                <option value="2">2 ciklus (3:00)</option>
+                <option value="3">3 ciklus (4:30)</option>
+                <option value="4">4 ciklus (6:00)</option>
+                <option value="5">5 ciklus (7:30)</option>
+                <option value="6" selected>6 ciklus (9:00)</option>
+                <option value="7">7 ciklus (10:30)</option>
+                <option value="8">8 ciklus (12:00)</option>
+                <option value="9">9 ciklus (13:30)</option>
+                <option value="10">10 ciklus (15:00)</option>
               </select>
               
 
@@ -330,9 +330,9 @@
       const bed = document.getElementById('bedtime').value || '23:00';
       const cycles = parseInt(document.getElementById('cycles').value,10) || 5;
       const fall = parseInt(document.getElementById('fall').value,10) || 15;
-      const minutes = cycles * 80 + fall;
+      const minutes = cycles * 90 + fall;
       const wake = addMinutesToTime(bed, minutes);
-      document.getElementById('output').innerHTML = `Ajánlott ébredés: <strong>${wake}</strong> (${cycles} ciklus = ${cycles*80} perc + ${fall} perc elalvás)`;
+      document.getElementById('output').innerHTML = `Ajánlott ébredés: <strong>${wake}</strong> (${cycles} ciklus = ${cycles*90} perc + ${fall} perc elalvás)`;
     }
 
     document.getElementById('calc').addEventListener('click', compute);
@@ -350,7 +350,7 @@
       compute();
       // set example element based on default values
       const example = document.getElementById('example');
-      example.innerHTML = `23:00 + 5 ciklus (6 óra 40 perc) + 15 perc elalvás = <strong>05:55</strong>`;
+      example.innerHTML = `23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás = <strong>06:45</strong>`;
     });
   </script>
 </body>
