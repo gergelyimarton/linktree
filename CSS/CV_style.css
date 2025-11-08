@@ -28,7 +28,7 @@ html {
 
 h2 {
     color: #0d47a1;
-    text-align: right;
+    text-align: left;
     padding-right: 20px;
     font-weight: 600;
     font-size: 2rem;
@@ -39,10 +39,10 @@ h2 {
 h2::after {
     content: '';
     position: absolute;
-    right: 20px;
+    left: 0px;
     bottom: -8px;
     width: 60px;
-    height: 3px;
+    height: 6px;
     background: linear-gradient(90deg, #1565c0 0%, #0d47a1 100%);
     border-radius: 2px;
 }
@@ -252,7 +252,7 @@ header::after {
 /* ----------------------------- Sections ----------------------------- */
 section {
     margin: 0;
-    padding: 80px 15%;
+    padding: 80px 25%;
     background: #ffffff;
     opacity: 0;
     transform: translateY(30px);
@@ -375,6 +375,7 @@ section.visible {
 
 .card {
     padding: 35px 0;
+    padding-left: 50px;
     margin-bottom: 30px;
     border-bottom: 1px solid rgba(13, 71, 161, 0.12);
     transition: all 0.3s ease;
@@ -445,6 +446,11 @@ section.visible {
 }
 
 
+
+.language-skill{
+    padding-left: 50px;
+}
+
 /* 
 #digital-skills {
     display: flex;
@@ -459,6 +465,7 @@ section.visible {
 
 .digital-skill {
     margin-bottom: 30px;
+    padding-left: 50px;
 }
 
 .digital-skill p {
