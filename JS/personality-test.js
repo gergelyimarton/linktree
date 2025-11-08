@@ -18,7 +18,7 @@ let idx = 0;
 
 async function init(){
   try{
-    const res = await fetch('../pesonality-test-questions.json');
+    const res = await fetch('../data/pesonality-test-questions.json');
     data = await res.json();
   }catch(e){
     console.error('Nem sikerült betölteni a questions.json-t.');

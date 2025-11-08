@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/loading_screen.css">
+    <link rel="stylesheet" href="../CSS/glare-effect.css">
+    <link rel="stylesheet" href="../CSS/star-border.css">
+    <link rel="stylesheet" href="../CSS/pixel-blast.css">
 </head>
 <body>
+
+    <div id="loading-screen">
+        <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="loading-percentage" id="loading-percentage">0%</div>
+    </div>
 
     <div class="all-content" id="all-content">
        
@@ -16,7 +35,7 @@
           <a href="personality-test.html" class="card">
                 <div class="main-page-tile">
                     <div class="main-page-tile-image">
-                        <img src="images/Brightness Icon.svg" alt="Test">
+                        <img src="../images/Brightness Icon.svg" alt="Test">
                     </div>
                     <div class="main-page-tile-text">
                         <h2>Personality Test</h2>
@@ -28,7 +47,7 @@
             <a href="workout-generator.html" class="card">
                 <div class="main-page-tile">
                     <div class="main-page-tile-image">
-                        <img src="images/Gym.svg" alt="Test">
+                        <img src="../images/Gym.svg" alt="Test">
                     </div>
                     <div class="main-page-tile-text">
                         <h2>Workout Generator</h2>
@@ -40,7 +59,7 @@
              <a href="love-trial.html" class="card">
                 <div class="main-page-tile">
                     <div class="main-page-tile-image">
-                        <img src="images/Heart.svg" alt="Test">
+                        <img src="../images/Heart.svg" alt="Test">
                     </div>
                     <div class="main-page-tile-text">
                         <h2>Love Trial</h2>
@@ -53,7 +72,7 @@
             <a href="sleep-cycle.html" class="card">
                 <div class="main-page-tile">
                     <div class="main-page-tile-image">
-                        <img src="images/Sleep Score Icon.svg" alt="Test">
+                        <img src="../images/Sleep Score Icon.svg" alt="Test">
                     </div>
                     <div class="main-page-tile-text">
                         <h2>Sleep-cycle Calculator</h2>
@@ -64,11 +83,14 @@
              
         </div>
     </div>
-    <a href="index.html">
+    <a href="../index.html">
         <button class="back-button">
             Go back
         </button>
     </a>
-    <script src="JS/script.js"></script>
+    <script src="../JS/loading.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/glare-effect.js"></script>
+    <script src="../JS/pixel-blast.js"></script>
 </body>
 </html>

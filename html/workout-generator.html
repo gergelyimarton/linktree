@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Workout Plan</title>
+  <link rel="stylesheet" href="../CSS/style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+      color: #1a1a1a;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(46, 213, 115, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 184, 148, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+  
+    h1 {
+      text-align: center;
+      margin: 40px 0 50px;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #2ed573 0%, #7bed9f 50%, #26de81 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 4px 20px rgba(46, 213, 115, 0.3);
+    }
+
+    #plan {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      padding: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .day {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        0 1px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(46, 213, 115, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .day::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, #2ed573 0%, #26de81 50%, #20bf6b 100%);
+      border-radius: 24px 0 0 24px;
+    }
+
+    .day:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 20px 40px rgba(46, 213, 115, 0.25),
+        0 2px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .day.generating {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .day.fade-in {
+      animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .decrypt {
+      display: inline-block;
+      animation: decrypt 0.8s ease-out forwards;
+    }
+
+    @keyframes decrypt {
+      0% {
+        opacity: 0;
+        filter: blur(8px);
+      }
+      50% {
+        opacity: 0.5;
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+  
+    .day h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .day h2::before {
+      content: '💪';
+      font-size: 1.4rem;
+    }
+  
+    .muscle {
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #2ed573 0%, #26de81 100%);
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+    }
+  
+    ul {
+      margin: 12px 0 20px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      padding-left: 28px;
+      position: relative;
+      color: #2c3e50;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #2ed573;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 50px 0 80px;
+      position: relative;
+      z-index: 1;
+    }
+  
+    .btn {
+      display: inline-block;
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #2ed573 0%, #26de81 100%);
+      color: #ffffff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(46, 213, 115, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(46, 213, 115, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      padding: 14px 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      color: #1a1a1a;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      text-decoration: none;
+      display: inline-block;
+    }
+  
+    .back-button:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateX(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+  
+    @media (max-width: 768px) {
+      body { 
+        padding: 12px;
+        padding-bottom: 100px;
+      }
+      
+      h1 {
+        margin: 20px 0 30px;
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+      }
+
+      #plan { 
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 5px;
+      }
+
+      .day { 
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .day:hover {
+        transform: translateY(-4px);
+      }
+
+      .day h2 { 
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+      }
+
+      .day h2::before {
+        font-size: 1.2rem;
+      }
+
+      .muscle { 
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        margin-top: 16px;
+      }
+
+      ul {
+        margin: 10px 0 16px 0;
+      }
+
+      ul li { 
+        font-size: 0.9rem;
+        padding-left: 24px;
+        margin-bottom: 8px;
+      }
+
+      ul li::before {
+        font-size: 1rem;
+      }
+
+      .button-container {
+        margin: 40px 0 20px;
+        gap: 15px;
+        flex-direction: column;
+        padding: 0 10px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 14px 24px;
+        font-size: 0.9rem;
+      }
+
+      .back-button { 
+        position: fixed;
+        bottom: 15px;
+        left: 15px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #plan {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .day {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 3rem);
+      }
+    }
+  </style>
+  
+</head>
+<body>
+    <h1>Weekly Workout Plan</h1>
+    <div id="plan"></div>
+
+    <div class="button-container">
+      <button onclick="generatePlan()" class="btn">Generate New Plan</button>
+      <button onclick="downloadTXT()" class="btn">Download as TXT</button>
+    </div>
+
+    <a href="projects.html">
+      <button class="back-button">Go back</button>
+    </a>
+
+
+
+    <!-- html2pdf könyvtár betöltése -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        const exercises = {
+          "Chest": ["Pushups","Pseudo pushups","Diamond pushups","Dips","Decline pushups","Pike pushups","Archer pushups"],
+          "Legs": ["Weighted squats","Bulgarian squats","Attack steps","Step ups","Squat hold","Calf push"],
+          "Back": ["Pull ups","Chin ups","Standing rows","Sitting rows","Torso raises / deadlifts"],
+          "Abs": ["Decline sit ups","Leg raises","Knee tucks","Cable crunches","Mountain climb"],
+          "Arms": ["Bicep curls / chin ups","Cable pull downs (triceps)","Lateral raises","Overhead / military presses","Arnold presses"],
+          "Extras": ["Farmer walk","Rope climbing"]
+        };
+
+        const schedule = {
+          "Day 1": ["Chest", "Arms", "Abs"],
+          "Day 2": ["Legs", "Abs"],
+          "Day 3": ["Back", "Abs"]
+        };
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+
+        function getRandomMoves(moves, count = 4) {
+          if (moves.length <= count) return [...moves];
+          const shuffled = [...moves].sort(() => 0.5 - Math.random());
+          return shuffled.slice(0, count);
+        }
+
+        function decryptText(element, finalText, duration = 600) {
+          const iterations = Math.floor(duration / 50);
+          let iteration = 0;
+
+          // Get available width for the text
+          const maxWidth = element.offsetWidth;
+          
+          const interval = setInterval(() => {
+            const displayText = finalText
+              .split('')
+              .map((char, index) => {
+                if (index < iteration) {
+                  return finalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+              })
+              .join('');
+            
+            element.textContent = displayText;
+
+            iteration += 1;
+
+            if (iteration > finalText.length) {
+              clearInterval(interval);
+              element.textContent = finalText;
+            }
+          }, 50);
+        }
+
+        function generatePlan() {
+          const planDiv = document.getElementById("plan");
+          planDiv.innerHTML = "";
+
+          const allDays = [];
+          let dayIndex = 0;
+
+          for (const [day, groups] of Object.entries(schedule)) {
+            const dayDiv = document.createElement("div");
+            dayDiv.className = "day generating";
+            
+            const dayTitle = document.createElement("h2");
+            dayTitle.textContent = day;
+            dayDiv.appendChild(dayTitle);
+
+            groups.forEach(muscle => {
+              const muscleTitle = document.createElement("div");
+              muscleTitle.className = "muscle";
+              muscleTitle.textContent = muscle;
+              dayDiv.appendChild(muscleTitle);
+
+              const list = document.createElement("ul");
+              const moves = getRandomMoves(exercises[muscle]);
+              moves.forEach(move => {
+                const li = document.createElement("li");
+                li.textContent = move;
+                li.dataset.finalText = move;
+                list.appendChild(li);
+              });
+              dayDiv.appendChild(list);
+            });
+
+            planDiv.appendChild(dayDiv);
+            allDays.push(dayDiv);
+          }
+
+          // Set fixed dimensions before animation to prevent layout shift
+          allDays.forEach(dayDiv => {
+            const height = dayDiv.offsetHeight;
+            const width = dayDiv.offsetWidth;
+            dayDiv.style.height = height + 'px';
+            dayDiv.style.width = width + 'px';
+            
+            const listItems = dayDiv.querySelectorAll('li');
+            listItems.forEach(li => {
+              const liHeight = li.offsetHeight;
+              const liWidth = li.offsetWidth;
+              li.style.height = liHeight + 'px';
+              li.style.width = liWidth + 'px';
+            });
+          });
+
+          // Animate each day card appearing
+          allDays.forEach((dayDiv, index) => {
+            setTimeout(() => {
+              dayDiv.classList.remove('generating');
+              dayDiv.classList.add('fade-in');
+
+              // Animate text decryption for exercise items
+              const listItems = dayDiv.querySelectorAll('li');
+              listItems.forEach((li, liIndex) => {
+                const finalText = li.dataset.finalText;
+                setTimeout(() => {
+                  decryptText(li, finalText, 500);
+                }, liIndex * 80);
+              });
+            }, index * 200);
+          });
+        }
+
+        function downloadTXT() {
+          let text = "WEEKLY WORKOUT PLAN\n";
+          text += "====================\n\n";
+
+          for (const [day, groups] of Object.entries(schedule)) {
+            text += `${day}\n`;
+            text += "-".repeat(day.length) + "\n";
+
+            groups.forEach(muscle => {
+              text += `  [${muscle}]\n`;
+              const moves = getRandomMoves(exercises[muscle]);
+              moves.forEach(move => {
+                text += `    • ${move}\n`;
+              });
+              text += "\n";
+            });
+            text += "\n";
+          }
+
+          const blob = new Blob([text], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "workout-plan.txt";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+
+        // Betöltéskor generálás
+        generatePlan();
+    </script>
+</body>
+</html>

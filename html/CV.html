@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Marton Gergelyi - Resume</title>
-        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="CSS/CV_style.css">
+    <title>Marton Gergelyi - Resume</title>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/CV_style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -17,16 +17,18 @@
             <div class="menu-toggle" id="menu-toggle">
                 ☰
             </div>
-            <ul class="navbar" id="navbar">
-                <!-- <li><a href="#personal">Personal</a></li> -->
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Work</a></li>
-                <li><a href="#languages">Language</a></li>
-                <li><a href="#digital-skills">Digital</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#hobbies">Hobbies</a></li>
-            </ul>
+            <div class="dock-container">
+                <ul class="navbar dock" id="navbar">
+                    <!-- <li><a href="#personal">Personal</a></li> -->
+                    <li class="dock-item" data-title="About"><a href="#about">About</a></li>
+                    <li class="dock-item" data-title="Education"><a href="#education">Education</a></li>
+                    <li class="dock-item" data-title="Work"><a href="#experience">Work</a></li>
+                    <li class="dock-item" data-title="Language"><a href="#languages">Language</a></li>
+                    <li class="dock-item" data-title="Digital"><a href="#digital-skills">Digital</a></li>
+                    <li class="dock-item" data-title="Projects"><a href="#projects">Projects</a></li>
+                    <li class="dock-item" data-title="Hobbies"><a href="#hobbies">Hobbies</a></li>
+                </ul>
+            </div>
             
             <div class="progress-container">
                 <div class="progress-bar" id="myBar"></div>
@@ -34,12 +36,12 @@
         </nav>
 
         <header>
-            <div class="profile-container">
-                <p>hello, i'm</p>
-                <h1>Marton</h1>
-            </div>
-            <div class="name-container">
-                <img src="images/Profile_pics_round.png" alt="Marton Gergelyi" class="profile-pic">
+        <div class="profile-container">
+            <p>hello, i'm</p>
+            <h1 id="ascii-text">Marton</h1>
+        </div>
+        <div class="name-container">
+            <img src="../images/Profile_pics_round.png" alt="Marton Gergelyi" class="profile-pic">
                 <h1 style="margin: 10px 0px 0px 0px; text-align: center;">Marton Gergelyi</h1>
                 <p style="margin: 20px 0px; text-align: center;">IT Enthusiast | University Student</p>
                 <div style="margin: 5px;">gergelyimarci@gmail.com</a></div>
@@ -47,10 +49,10 @@
                 <br>
                 <div style="margin-top: 30px;">
                     <a href="mailto:gergelyimarci@gmail.com" style="margin: 10px;" >
-                        <svg class="contact-links" style="filter: invert();" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>
+                        <svg class="contact-links" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>
                     </a>
                     <a href="https://www.linkedin.com/in/m%C3%A1rton-gergelyi-a6a953245/" style="margin: 10px;">
-                        <svg class="contact-links" style="filter: invert();" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
+                        <svg class="contact-links" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
                     </a>
                     
                 </div>
@@ -85,14 +87,14 @@
                     <p>City: Szeged | Country: Hungary | <a href="https://u-szeged.hu/" target="_blank">Website</a></p>
                 </div>
                 <div class="card certifications">
-                    <div>
-                        <h3>Cybersecurity Analyst</h3>
-                        <p><strong> IBM course [2024 – 2025] </strong></p>
-                        <p>Made by IBM | Location: Online | <a href="https://coursera.org/share/e15ce3e9a731d248a64d9c70507f9eda" target="_blank">Website</a></p>
-                    </div>
-                    <a href="images/Coursera-DZYOREK3DJIN.pdf" style="text-decoration: none;">
-                        <div class="download-button-link">
-                            <img src="images/Coursera-DZYOREK3DJIN_1.png" alt="Cybersecurity Analyst certification" class="cybersec-analyst-cert">
+                <div>
+                    <h3>Cybersecurity Analyst</h3>
+                    <p><strong> IBM course [2024 – 2025] </strong></p>
+                    <p>Made by IBM | Location: Online | <a href="https://coursera.org/share/e15ce3e9a731d248a64d9c70507f9eda" target="_blank">Website</a></p>
+                </div>
+                <a href="../images/Coursera-DZYOREK3DJIN.pdf" style="text-decoration: none;">
+                    <div class="download-button-link">
+                        <img src="../images/Coursera-DZYOREK3DJIN_1.png" alt="Cybersecurity Analyst certification" class="cybersec-analyst-cert">
                             <div class="download-button">Download here!</div>
                         </div>
                     </a>
@@ -297,7 +299,7 @@
             <div class="contact-details">
                 <div>gergelyimarci@gmail.com</div>
                 <div>(+36) 302460625</div>
-                <a href="images/Gergelyi-Marton-Europass-CV-2025.pdf" class="cv-link" style="margin-top: 30px;">
+                <a href="../images/Gergelyi-Marton-Europass-CV-2025.pdf" class="cv-link" style="margin-top: 30px;">
                     <div class="download-button CV-download" style="font-family: Pixelify Sans;">Download my CV</div>
                 </a>
             </div>
@@ -315,7 +317,7 @@
         <footer>
             <p>&copy; 2024 Marton Gergelyi</p>
         </footer>
-        <script src="JS/CV_logic.js"></script>
+        <script src="../JS/CV_logic.js"></script>
     </body>
 </html>
 

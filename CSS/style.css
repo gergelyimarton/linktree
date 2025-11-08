@@ -4,20 +4,36 @@
 
 body {
     font-family: 'Montserrat', Roboto, Arial, sans-serif;
+    height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: #000000;
-    /* background-image: url('images/White-Black-Mountain-Wallpaper.jpg'); Itt add meg a képed elérhetőségét */
-    background-image: url('../images/Haikei Blob Scene.svg'); /* Itt add meg a képed elérhetőségét */
-    background-size: cover; /* A háttérkép kitölti a teljes képernyőt */
-    background-position: center center; /* A kép középre igazítása */
-    background-attachment: fixed; /* A háttérkép rögzítése, hogy ne mozogjon a görgetés során */
-    background-repeat: no-repeat; /* A háttérkép ne ismétlődjön */
-    min-height: 100vh; /* A body legalább a képernyő magasságát kitölti */
+    --x: calc(var(--posX, 0) * 1px);
+    --y: calc(var(--posY, 0) * 1px);
+    --color1: rgb(211, 255, 215);
+    --color2: rgb(0, 0, 0);
+    --color3: rgb(200, 200, 200);
+    --color4: rgb(22, 0, 45);
+    --color5: rgb(250, 255, 0);
+    --color6: rgb(36, 0, 0);
+    --color7: rgb(20, 175, 125);
+    --color8: rgb(0, 10, 255);
+    --color9: rgb(200, 50, 255);
+    --color10: rgb(20, 0, 0);
+    --color11: rgb(20, 255, 155);
+    --color12: rgb(0, 30, 45);
+    background-image: 
+        linear-gradient(115deg, var(--color1), var(--color2)), 
+        radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), var(--color3), var(--color4)), 
+        radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)), var(--color5), var(--color6)), 
+        radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), var(--color7), var(--color8)), 
+        radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), var(--color9), var(--color10)), 
+        radial-gradient(100% 100% at calc(0% + var(--x)) calc(100% + var(--y)), var(--color11), var(--color12));
+    background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+    min-height: 100vh;
 }
 
 
@@ -52,6 +68,8 @@ header img {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 header h1 {
@@ -70,35 +88,56 @@ header h1 {
 }
 
 .card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
     padding: 20px;
     text-align: center;
     align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-
-    background: #ffffff59;
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.125);
+    /* Enhanced glassmorphism effect */
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Subtle inner glow for depth */
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transition: 0.3s;
-    background-color: #ffffffd7;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 12px 48px 0 rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
-.card a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #007bff;
+.card h2 {
+    color: #ffffff;
+    text-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    margin: 10px 0;
 }
 
-.card a:hover {
-    text-decoration: none;
+.card p {
+    color: #f0f0f0;
+    text-shadow: 
+        0 1px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card svg {
+    fill: #ffffff;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
 }
 
 a {
@@ -114,18 +153,20 @@ a {
     background-color: #ffffff59;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255,255,255,0.125);
-    color: #000000;
+    color: #ffffff;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
 }
 
 .back-button:hover {
     background-color: #ffffffd7;
     color: #000000;
-    border: 1px stroke rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -136,21 +177,29 @@ a {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.125);
+    
+    /* Glass effect matching cards */
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
 
     color: white;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
     z-index: 1000;
 
     width: calc(35vw - 100px);
-    max-width: 800px; /* Maximális szélesség */
-    max-height: 50%; /* Maximális magasság */
-    overflow: hidden; /* Ha a tartalom túl nagy lenne */
+    max-width: 800px;
+    max-height: 50%;
+    overflow: hidden;
     margin: 20px 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .iframe-container iframe {
@@ -188,18 +237,27 @@ a {
     position: fixed;
     top: 20px;
     left: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.125);
+    
+    /* Glass effect matching cards */
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+    
     color: white;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
     z-index: 1000;
     margin: 20px 0;
-    width: calc(35vw - 100px); /* Magasság dinamikusan igazodik */
-    max-height: 50%; /* Konténer maximális magassága */
-    overflow: hidden; /* Ha a tartalom túl nagy lenne */
+    width: calc(35vw - 100px);
+    max-height: 50%;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .youtube-iframe-container iframe {
@@ -218,7 +276,18 @@ a {
 .main-page-tile-image img {
     height: 80px; 
     padding: 10px; 
+    filter: 
+        brightness(0) 
+        invert(1) 
+        drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.main-page-tile-image img.keep-original {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    padding: 2px;
 }
 
 
@@ -353,6 +422,17 @@ a {
     .main-page-tile-image img {
         height: 70px; 
         padding: 5px; 
+        filter: 
+            brightness(0) 
+            invert(1) 
+            drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    }
+    
+    .main-page-tile-image img.keep-original {
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
         border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+        padding: 2px;
     }
 }

@@ -3,6 +3,64 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.getElementById("navbar");
     // const menuLinks = document.querySelectorAll(".menu-link");
     const menuLinks = document.querySelectorAll('.navbar a'); // Kiválasztjuk a linkeket a menüből
+    const dockItems = document.querySelectorAll('.dock-item');
+
+    // Dock magnification effect
+    const SCALE_RANGE = 1; // How many items on each side get scaled
+    const BASE_SCALE = 1;
+    const MAX_SCALE = 1.3;
+    
+    dockItems.forEach((item, index) => {
+        item.addEventListener('mouseenter', () => {
+            dockItems.forEach((otherItem, otherIndex) => {
+                const distance = Math.abs(index - otherIndex);
+                if (distance === 0) {
+                    // The hovered item
+                    otherItem.style.transform = `scale(${MAX_SCALE})`;
+                } else if (distance <= SCALE_RANGE) {
+                    // Adjacent items
+                    const scale = BASE_SCALE + (MAX_SCALE - BASE_SCALE) * (1 - distance / (SCALE_RANGE + 1));
+                    otherItem.style.transform = `scale(${scale})`;
+                } else {
+                    // Items far away
+                    otherItem.style.transform = `scale(${BASE_SCALE})`;
+                }
+            });
+        });
+    });
+
+    // Reset all items when mouse leaves the navbar
+    navbar.addEventListener('mouseleave', () => {
+        dockItems.forEach(item => {
+            item.style.transform = `scale(${BASE_SCALE})`;
+        });
+    });
+
+    // ASCII Text Animation
+    const asciiText = document.getElementById("ascii-text");
+    const finalText = "Marton";
+    const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let iteration = 0;
+
+    const animateText = () => {
+        asciiText.innerText = finalText
+            .split("")
+            .map((char, index) => {
+                if (index < iteration) {
+                    return finalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        if (iteration >= finalText.length) {
+            clearInterval(interval);
+        }
+
+        iteration += 1 / 8;
+    };
+
+    const interval = setInterval(animateText, 50);
 
 
    

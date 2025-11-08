@@ -6,8 +6,6 @@
 #loading-screen {
     display: flex;
     flex-direction: column;
-
-
     position: fixed;
     top: 0;
     left: 0;
@@ -15,14 +13,45 @@
     height: 100vh;
     background: #000;
     color: #fff;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
     opacity: 1; /* Teljesen látható induláskor */
     z-index: 1000;
     filter: blur(0); /* Nincs elmosás induláskor */
-    transition: opacity 0.6s ease, visibility 0.6s ease, filter 0.6s ease ;
+    transition: opacity 0.6s ease, visibility 0.6s ease, filter 0.6s ease;
+}
+
+#loading-screen p {
+    margin: 10px 0 5px 0;
+}
+
+/* Progress bar container */
+.progress-container {
+    width: 300px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+/* Progress bar fill */
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #FFC700, #FFD700);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 199, 0, 0.5);
+}
+
+/* Loading percentage text */
+.loading-percentage {
+    font-size: 16px;
+    margin-top: 15px;
+    color: #FFC700;
+    font-weight: bold;
 }
 
 .spinner {
