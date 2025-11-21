@@ -50,3 +50,10 @@
         --angle: 360deg;
     }
 }
+
+@media (max-width: 550px) {
+    .card::after {
+        animation: none;
+        opacity: 0.2;
+    }
+}

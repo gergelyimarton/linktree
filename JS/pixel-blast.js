@@ -156,9 +156,16 @@ class PixelBlast {
     }
 }
 
+function initPixelBlast() {
+    if (window.matchMedia('(max-width: 550px)').matches) {
+        return; // Disable pixel blast effect on phones for performance
+    }
+    new PixelBlast();
+}
+
 // Initialize when DOM is loaded
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new PixelBlast());
+    document.addEventListener('DOMContentLoaded', initPixelBlast);
 } else {
-    new PixelBlast();
+    initPixelBlast();
 }
