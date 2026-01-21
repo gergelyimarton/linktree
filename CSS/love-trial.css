@@ -425,18 +425,22 @@ footer {
     }
     
     .back-button {
-        bottom: 10px;
-        left: 10px;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 30px auto 80px;
         padding: 8px 14px;
         font-size: 0.8em;
         border-radius: 20px;
     }
-    
+
     footer {
         font-size: 0.75em;
         padding: 12px;
         margin-top: 20px;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
     }
     
     /* Stack tables better on mobile */

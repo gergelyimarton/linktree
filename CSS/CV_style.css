@@ -723,3 +723,14 @@ li {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
 }
+
+@media (max-width: 550px) {
+    .back-button {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 30px auto 80px;
+    }
+}

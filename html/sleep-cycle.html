@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Alvásciklus kalkulátor</title>
-  <!-- <link rel="stylesheet" href="CSS/style.css"> -->
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <style>
     /* === Alap színek & font === */
     :root {
@@ -202,6 +202,22 @@
     /* === Reszponzív === */
     @media (max-width: 880px) {
       .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 550px) {
+      .back-button {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 30px auto 80px;
+        text-decoration: none;
+      }
+
+      a:has(.back-button) {
+        text-decoration: none;
+      }
     }
   </style>
   

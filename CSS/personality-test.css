@@ -118,4 +118,27 @@ h1{
 
 #sunScore,#moonScore{min-width:40px; text-align:right}
 
-@media (max-width:520px){.scale{flex-direction:column}}
+.back-link {
+    display: block;
+    text-decoration: none;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+@media (max-width:520px){
+    .scale{flex-direction:column}
+
+    .back-button {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 30px auto 80px;
+    }
+}
