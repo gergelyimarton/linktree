@@ -21,28 +21,21 @@ body {
 }
 
 /* Floating hearts animation */
-body::before,
-body::after {
-    content: '💕';
+.floating-hearts {
     position: fixed;
-    font-size: 40px;
-    opacity: 0.15;
-    animation: float 20s infinite ease-in-out;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
-body::before {
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-body::after {
-    content: '💖';
-    top: 60%;
-    right: 8%;
-    animation-delay: 5s;
+.heart {
+    position: absolute;
+    opacity: 0.15;
+    animation: float 20s infinite ease-in-out;
 }
 
 @keyframes float {
@@ -51,6 +44,23 @@ body::after {
     50% { transform: translateY(-10px) rotate(-5deg); }
     75% { transform: translateY(-15px) rotate(3deg); }
 }
+
+/* Individual heart positions */
+.heart-1 { top: 5%; left: 3%; font-size: 45px; animation-delay: 0s; }
+.heart-2 { top: 15%; right: 8%; font-size: 38px; animation-delay: 2s; }
+.heart-3 { top: 25%; left: 12%; font-size: 32px; animation-delay: 4s; opacity: 0.12; }
+.heart-4 { top: 35%; right: 15%; font-size: 50px; animation-delay: 6s; }
+.heart-5 { top: 45%; left: 5%; font-size: 35px; animation-delay: 8s; opacity: 0.18; }
+.heart-6 { top: 55%; right: 3%; font-size: 42px; animation-delay: 10s; }
+.heart-7 { top: 65%; left: 18%; font-size: 30px; animation-delay: 12s; opacity: 0.1; }
+.heart-8 { top: 75%; right: 12%; font-size: 48px; animation-delay: 14s; }
+.heart-9 { top: 85%; left: 8%; font-size: 36px; animation-delay: 16s; opacity: 0.2; }
+.heart-10 { top: 10%; left: 45%; font-size: 28px; animation-delay: 1s; opacity: 0.1; }
+.heart-11 { top: 30%; right: 40%; font-size: 40px; animation-delay: 3s; }
+.heart-12 { top: 50%; left: 35%; font-size: 34px; animation-delay: 5s; opacity: 0.12; }
+.heart-13 { top: 70%; right: 30%; font-size: 44px; animation-delay: 7s; }
+.heart-14 { top: 90%; left: 25%; font-size: 38px; animation-delay: 9s; opacity: 0.18; }
+.heart-15 { top: 20%; right: 25%; font-size: 52px; animation-delay: 11s; opacity: 0.1; }
 
 .body-container {
     max-width: 1200px;
@@ -206,6 +216,54 @@ select:focus {
     border-color: #d63384;
     box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
     transform: scale(1.02);
+}
+
+/* Custom property inputs */
+.custom-name,
+.custom-score {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #ffc9e8;
+    background: #fff;
+    color: #555;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.custom-name {
+    min-width: 200px;
+}
+
+.custom-score {
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.custom-name:hover,
+.custom-score:hover {
+    border-color: #ff9dd6;
+    box-shadow: 0 2px 8px rgba(214, 51, 132, 0.15);
+}
+
+.custom-name:focus,
+.custom-score:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
+}
+
+.custom-name::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+#customPropsTotal {
+    font-weight: 700;
+    color: #d63384;
+    font-size: 1.1em;
 }
 
 .score {

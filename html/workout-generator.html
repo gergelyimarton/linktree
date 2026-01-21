@@ -16,7 +16,10 @@
 
     body {
       font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+      background: linear-gradient(135deg, #0F2027 0%, #203A43 35%, #2C5364 65%, #1a3a4a 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
       color: #1a1a1a;
       margin: 0;
       padding: 20px;
@@ -31,9 +34,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(46, 213, 115, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 184, 148, 0.15) 0%, transparent 50%);
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(46, 213, 115, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 184, 148, 0.12) 0%, transparent 60%);
+      background-attachment: fixed;
       pointer-events: none;
       z-index: 0;
     }
@@ -193,6 +197,135 @@
       font-size: 1.1rem;
     }
 
+    /* Settings Panel */
+    .settings-panel {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .setting-group {
+      margin-bottom: 25px;
+    }
+
+    .setting-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .setting-group > label {
+      display: block;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .day-selector {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .day-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      background: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .day-btn:hover {
+      border-color: #2ed573;
+      color: #2ed573;
+    }
+
+    .day-btn.recommended {
+      border-color: #7bed9f;
+      background: rgba(46, 213, 115, 0.1);
+    }
+
+    .day-btn.selected {
+      background: linear-gradient(135deg, #2ed573 0%, #26de81 100%);
+      border-color: #2ed573;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);
+      transform: scale(1.1);
+    }
+
+    #splitSelect {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid #ddd;
+      background: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #splitSelect:hover, #splitSelect:focus {
+      border-color: #2ed573;
+      outline: none;
+    }
+
+    .muscle-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #f5f5f5;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .checkbox-label:hover {
+      background: rgba(46, 213, 115, 0.15);
+    }
+
+    .checkbox-label input {
+      width: 18px;
+      height: 18px;
+      accent-color: #2ed573;
+      cursor: pointer;
+    }
+
+    .checkbox-label:has(input:checked) {
+      background: rgba(46, 213, 115, 0.2);
+      color: #1a1a1a;
+    }
+
+    .muscle-group-selector {
+      display: none;
+    }
+
+    .muscle-group-selector.visible {
+      display: block;
+    }
+
     .button-container {
       display: flex;
       justify-content: center;
@@ -206,6 +339,7 @@
     .btn {
       display: inline-block;
       padding: 16px 36px;
+      margin-bottom: 40px;
       font-size: 1rem;
       font-weight: 700;
       border: none;
@@ -356,10 +490,49 @@
 </head>
 <body>
     <h1>Weekly Workout Plan</h1>
+
+    <div class="settings-panel">
+      <div class="setting-group">
+        <label>Training Days per Week</label>
+        <div class="day-selector">
+          <button class="day-btn" data-days="1">1</button>
+          <button class="day-btn" data-days="2">2</button>
+          <button class="day-btn recommended" data-days="3">3</button>
+          <button class="day-btn recommended selected" data-days="4">4</button>
+          <button class="day-btn recommended" data-days="5">5</button>
+          <button class="day-btn" data-days="6">6</button>
+          <button class="day-btn" data-days="7">7</button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label>Workout Split</label>
+        <select id="splitSelect" onchange="onSplitChange()">
+          <option value="push-pull-legs">Push / Pull / Legs</option>
+          <option value="upper-lower">Upper / Lower</option>
+          <option value="full-body">Full Body</option>
+          <option value="bro-split">Bro Split (1 muscle/day)</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <div class="setting-group muscle-group-selector" id="muscleGroupSelector">
+        <label>Muscle Groups</label>
+        <div class="muscle-checkboxes">
+          <label class="checkbox-label"><input type="checkbox" value="Chest" checked> Chest</label>
+          <label class="checkbox-label"><input type="checkbox" value="Back" checked> Back</label>
+          <label class="checkbox-label"><input type="checkbox" value="Legs" checked> Legs</label>
+          <label class="checkbox-label"><input type="checkbox" value="Arms" checked> Arms</label>
+          <label class="checkbox-label"><input type="checkbox" value="Abs" checked> Abs</label>
+          <label class="checkbox-label"><input type="checkbox" value="Extras"> Extras</label>
+        </div>
+      </div>
+    </div>
+
     <div id="plan"></div>
 
     <div class="button-container">
-      <button onclick="generatePlan()" class="btn">Generate New Plan</button>
+      <button onclick="generatePlan()" class="btn">Generate Plan</button>
       <button onclick="downloadTXT()" class="btn">Download as TXT</button>
     </div>
 
@@ -373,20 +546,213 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script>
-        const exercises = {
-          "Chest": ["Pushups","Pseudo pushups","Diamond pushups","Dips","Decline pushups","Pike pushups","Archer pushups"],
-          "Legs": ["Weighted squats","Bulgarian squats","Attack steps","Step ups","Squat hold","Calf push"],
-          "Back": ["Pull ups","Chin ups","Standing rows","Sitting rows","Torso raises / deadlifts"],
-          "Abs": ["Decline sit ups","Leg raises","Knee tucks","Cable crunches","Mountain climb"],
-          "Arms": ["Bicep curls / chin ups","Cable pull downs (triceps)","Lateral raises","Overhead / military presses","Arnold presses"],
-          "Extras": ["Farmer walk","Rope climbing"]
+       const exercises = {
+          "Chest": [
+            "Pushups",
+            "Pseudo pushups",
+            "Diamond pushups",
+            "Dips",
+            "Decline pushups",
+            "Pike pushups",
+            "Archer pushups",
+            "Wide pushups",
+            "Explosive pushups / clap pushups",
+            "Ring pushups",
+            "Chest flys (cables or rings)",
+            "Bench press",
+            "Incline bench press"
+          ],
+
+          "Legs": [
+            "Weighted squats",
+            "Bulgarian squats",
+            "Attack steps (lunges)",
+            "Step ups",
+            "Squat hold",
+            "Calf push",
+            "Romanian deadlifts",
+            "Nordic hamstring curls",
+            "Pistol squats",
+            "Jump squats",
+            "Hip thrusts",
+            "Glute bridges",
+            "Seated calf raises"
+          ],
+
+          "Back": [
+            "Pull ups",
+            "Chin ups",
+            "Standing rows",
+            "Sitting rows",
+            "Torso raises / deadlifts",
+            "Inverted rows",
+            "Lat pull downs",
+            "Single-arm dumbbell rows",
+            "Face pulls",
+            "Back extensions",
+            "Scapular pull ups"
+          ],
+
+          "Abs": [
+            "Decline sit ups",
+            "Leg raises",
+            "Knee tucks",
+            "Cable crunches",
+            "Mountain climb",
+            "Plank",
+            "Side plank",
+            "Hanging leg raises",
+            "Russian twists",
+            "Ab wheel rollouts",
+            "Dead bugs",
+            "V-ups"
+          ],
+
+          "Arms": [
+            "Bicep curls / chin ups",
+            "Cable pull downs (triceps)",
+            "Lateral raises",
+            "Overhead / military presses",
+            "Arnold presses",
+            "Hammer curls",
+            "Concentration curls",
+            "Skull crushers",
+            "Close-grip bench press",
+            "Triceps dips",
+            "Front raises",
+            "Rear delt raises"
+          ],
+
+          "Extras": [
+            "Farmer walk",
+            "Rope climbing",
+            "Battle ropes",
+            "Sled push / pull",
+            "Loaded carries",
+            "Grip hangs",
+            "Neck flexion/extension",
+            "Jump rope",
+            "Conditioning circuits"
+          ]
         };
 
-        const schedule = {
-          "Day 1": ["Chest", "Arms", "Abs"],
-          "Day 2": ["Legs", "Abs"],
-          "Day 3": ["Back", "Abs"]
+        // State variables
+        let selectedDays = 4;
+        let currentSplit = 'push-pull-legs';
+        let currentSchedule = {};
+
+        // Split configurations
+        const splitConfigs = {
+          'push-pull-legs': {
+            1: { "Day 1": ["Chest", "Back", "Legs", "Arms", "Abs"] },
+            2: { "Day 1": ["Chest", "Arms", "Abs"], "Day 2": ["Back", "Legs", "Abs"] },
+            3: { "Day 1": ["Chest", "Arms"], "Day 2": ["Back", "Abs"], "Day 3": ["Legs", "Abs"] },
+            4: { "Day 1": ["Chest", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Back", "Arms"], "Day 4": ["Legs", "Abs"] },
+            5: { "Day 1": ["Chest", "Arms"], "Day 2": ["Legs"], "Day 3": ["Back", "Abs"], "Day 4": ["Chest", "Arms"], "Day 5": ["Legs", "Abs"] },
+            6: { "Day 1": ["Chest", "Arms"], "Day 2": ["Back", "Abs"], "Day 3": ["Legs"], "Day 4": ["Chest", "Arms"], "Day 5": ["Back", "Abs"], "Day 6": ["Legs"] },
+            7: { "Day 1": ["Chest", "Arms"], "Day 2": ["Back", "Abs"], "Day 3": ["Legs"], "Day 4": ["Chest", "Arms"], "Day 5": ["Back", "Abs"], "Day 6": ["Legs"], "Day 7": ["Arms", "Abs"] }
+          },
+          'upper-lower': {
+            1: { "Day 1": ["Chest", "Back", "Arms", "Legs", "Abs"] },
+            2: { "Day 1": ["Chest", "Back", "Arms", "Abs"], "Day 2": ["Legs", "Abs"] },
+            3: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Chest", "Back", "Arms"] },
+            4: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Chest", "Back", "Arms"], "Day 4": ["Legs", "Abs"] },
+            5: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Chest", "Back", "Arms"], "Day 4": ["Legs", "Abs"], "Day 5": ["Chest", "Back", "Arms"] },
+            6: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Chest", "Back", "Arms"], "Day 4": ["Legs", "Abs"], "Day 5": ["Chest", "Back", "Arms"], "Day 6": ["Legs", "Abs"] },
+            7: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"], "Day 3": ["Chest", "Back", "Arms"], "Day 4": ["Legs", "Abs"], "Day 5": ["Chest", "Back", "Arms"], "Day 6": ["Legs", "Abs"], "Day 7": ["Abs", "Extras"] }
+          },
+          'full-body': {
+            1: { "Day 1": ["Chest", "Back", "Legs", "Arms", "Abs"] },
+            2: { "Day 1": ["Chest", "Back", "Legs", "Arms", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Arms", "Abs"] },
+            3: { "Day 1": ["Chest", "Back", "Legs", "Arms", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Arms", "Abs"], "Day 3": ["Chest", "Back", "Legs", "Arms", "Abs"] },
+            4: { "Day 1": ["Chest", "Back", "Legs", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Abs"], "Day 3": ["Chest", "Back", "Legs", "Abs"], "Day 4": ["Arms", "Abs", "Extras"] },
+            5: { "Day 1": ["Chest", "Back", "Legs", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Abs"], "Day 3": ["Chest", "Back", "Legs", "Abs"], "Day 4": ["Chest", "Back", "Legs", "Abs"], "Day 5": ["Arms", "Abs"] },
+            6: { "Day 1": ["Chest", "Back", "Legs", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Abs"], "Day 3": ["Chest", "Back", "Legs", "Abs"], "Day 4": ["Chest", "Back", "Legs", "Abs"], "Day 5": ["Chest", "Back", "Legs", "Abs"], "Day 6": ["Arms", "Abs"] },
+            7: { "Day 1": ["Chest", "Back", "Legs", "Abs"], "Day 2": ["Chest", "Back", "Legs", "Abs"], "Day 3": ["Chest", "Back", "Legs", "Abs"], "Day 4": ["Chest", "Back", "Legs", "Abs"], "Day 5": ["Chest", "Back", "Legs", "Abs"], "Day 6": ["Chest", "Back", "Legs", "Abs"], "Day 7": ["Arms", "Abs"] }
+          },
+          'bro-split': {
+            1: { "Day 1": ["Chest", "Back", "Legs", "Arms", "Abs"] },
+            2: { "Day 1": ["Chest", "Back", "Arms"], "Day 2": ["Legs", "Abs"] },
+            3: { "Day 1": ["Chest", "Arms"], "Day 2": ["Back", "Abs"], "Day 3": ["Legs"] },
+            4: { "Day 1": ["Chest"], "Day 2": ["Back"], "Day 3": ["Legs"], "Day 4": ["Arms", "Abs"] },
+            5: { "Day 1": ["Chest"], "Day 2": ["Back"], "Day 3": ["Legs"], "Day 4": ["Arms"], "Day 5": ["Abs", "Extras"] },
+            6: { "Day 1": ["Chest"], "Day 2": ["Back"], "Day 3": ["Legs"], "Day 4": ["Arms"], "Day 5": ["Abs"], "Day 6": ["Extras"] },
+            7: { "Day 1": ["Chest"], "Day 2": ["Back"], "Day 3": ["Legs"], "Day 4": ["Arms"], "Day 5": ["Abs"], "Day 6": ["Chest", "Back"], "Day 7": ["Legs", "Arms"] }
+          }
         };
+
+        // Initialize day button handlers
+        document.querySelectorAll('.day-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedDays = parseInt(this.dataset.days);
+            generatePlan();
+          });
+        });
+
+        // Handle split change
+        function onSplitChange() {
+          const splitSelect = document.getElementById('splitSelect');
+          currentSplit = splitSelect.value;
+          const muscleSelector = document.getElementById('muscleGroupSelector');
+
+          if (currentSplit === 'custom') {
+            muscleSelector.classList.add('visible');
+          } else {
+            muscleSelector.classList.remove('visible');
+          }
+
+          generatePlan();
+        }
+
+        // Get selected muscles for custom split
+        function getSelectedMuscles() {
+          const checkboxes = document.querySelectorAll('#muscleGroupSelector input[type="checkbox"]:checked');
+          return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        // Generate custom schedule based on selected muscles and days
+        function generateCustomSchedule(days, muscles) {
+          const schedule = {};
+          if (muscles.length === 0) return schedule;
+
+          for (let i = 1; i <= days; i++) {
+            const dayMuscles = [];
+            // Distribute muscles across days
+            muscles.forEach((muscle, index) => {
+              if (index % days === (i - 1) % days || days >= muscles.length) {
+                dayMuscles.push(muscle);
+              }
+            });
+            // Ensure each day has at least one muscle
+            if (dayMuscles.length === 0) {
+              dayMuscles.push(muscles[(i - 1) % muscles.length]);
+            }
+            schedule[`Day ${i}`] = dayMuscles;
+          }
+          return schedule;
+        }
+
+        // Build current schedule based on settings
+        function buildSchedule() {
+          if (currentSplit === 'custom') {
+            const muscles = getSelectedMuscles();
+            currentSchedule = generateCustomSchedule(selectedDays, muscles);
+          } else {
+            currentSchedule = splitConfigs[currentSplit][selectedDays] || {};
+          }
+          return currentSchedule;
+        }
+
+        // Add event listeners to muscle checkboxes for live update
+        document.querySelectorAll('#muscleGroupSelector input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener('change', function() {
+            if (currentSplit === 'custom') {
+              generatePlan();
+            }
+          });
+        });
 
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
 
@@ -428,6 +794,8 @@
         function generatePlan() {
           const planDiv = document.getElementById("plan");
           planDiv.innerHTML = "";
+
+          const schedule = buildSchedule();
 
           const allDays = [];
           let dayIndex = 0;
@@ -496,6 +864,7 @@
         }
 
         function downloadTXT() {
+          const schedule = buildSchedule();
           let text = "WEEKLY WORKOUT PLAN\n";
           text += "====================\n\n";
 
