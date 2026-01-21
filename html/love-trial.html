@@ -51,6 +51,7 @@
 
         <h3>Pontozási rendszer</h3>
         <ul>
+          <li><strong>- / 0</strong> - Nincs értékelve</li>
           <li><strong>1 pont</strong> - Gyenge / Nem jellemző</li>
           <li><strong>2 pont</strong> - Átlag alatti</li>
           <li><strong>3 pont</strong> - Átlagos / Semleges</li>
@@ -84,6 +85,7 @@
 
         <h3>Scoring system</h3>
         <ul>
+          <li><strong>- / 0</strong> - Not evaluated</li>
           <li><strong>1 point</strong> - Weak / Not characteristic</li>
           <li><strong>2 points</strong> - Below average</li>
           <li><strong>3 points</strong> - Average / Neutral</li>
@@ -172,16 +174,16 @@
   <table id="customProps">
     <thead><tr><th><span class="lang-hu">Tulajdonság neve</span><span class="lang-en">Property name</span></th><th><span class="lang-hu">Pont (+/-)</span><span class="lang-en">Score (+/-)</span></th></tr></thead>
     <tbody>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
-      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><input type="number" class="custom-score" value="0" min="-5" max="5"></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
       <tr><td><strong><span class="lang-hu">Pontszám összesen</span><span class="lang-en">Total score</span></strong></td><td id="customPropsTotal">0</td></tr>
     </tbody>
   </table>
@@ -249,9 +251,11 @@
         }
       });
 
-      // 3. Custom properties event listeners
-      document.querySelectorAll('#customProps .custom-score').forEach(input => {
-        input.addEventListener('input', updateAll);
+      // 3. Custom properties selects (5 to -5)
+      document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+        sel.innerHTML = [5,4,3,2,1,0,-1,-2,-3,-4,-5].map(v => `<option value="${v}">${v}</option>`).join('');
+        sel.value = "0";
+        sel.addEventListener('change', updateAll);
       });
 
       updateAll(); // induláskor is frissít
@@ -314,8 +318,8 @@
 
   // 🔹 6. Custom properties összesítése
   let customSum = 0;
-  document.querySelectorAll('#customProps .custom-score').forEach(input => {
-    const v = parseInt(input.value, 10);
+  document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+    const v = parseInt(sel.value, 10);
     if (!isNaN(v)) customSum += v;
   });
   document.getElementById('customPropsTotal').textContent = customSum;
@@ -339,10 +343,9 @@ document.querySelectorAll('select').forEach(sel=>{
   sel.addEventListener('change', updateAll);
 });
 
-// custom score inputok változáskor frissítünk
-document.querySelectorAll('#customProps .custom-score').forEach(input => {
-  input.addEventListener('input', updateAll);
-  input.addEventListener('change', updateAll);
+// custom score selectek változáskor frissítünk
+document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+  sel.addEventListener('change', updateAll);
 });
 
 // induláskor is frissítjük
@@ -403,10 +406,10 @@ updateAll();
       const rows = document.querySelectorAll('#customProps tbody tr:not(:last-child)');
       return Array.from(rows).map(tr => {
         const nameInput = tr.querySelector('.custom-name');
-        const scoreInput = tr.querySelector('.custom-score');
+        const scoreSelect = tr.querySelector('.custom-score');
         return {
           name: nameInput ? nameInput.value : '',
-          score: scoreInput ? parseInt(scoreInput.value, 10) || 0 : 0
+          score: scoreSelect ? parseInt(scoreSelect.value, 10) || 0 : 0
         };
       });
     }
@@ -456,9 +459,9 @@ updateAll();
             data.customProps.forEach((item, i) => {
               if (rows[i]) {
                 const nameInput = rows[i].querySelector('.custom-name');
-                const scoreInput = rows[i].querySelector('.custom-score');
+                const scoreSelect = rows[i].querySelector('.custom-score');
                 if (nameInput) nameInput.value = item.name || '';
-                if (scoreInput) scoreInput.value = item.score || 0;
+                if (scoreSelect) scoreSelect.value = item.score || 0;
               }
             });
           }

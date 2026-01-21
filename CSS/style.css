@@ -86,7 +86,7 @@ header h1 {
     gap: clamp(10px, 2vw, 15px);
     max-width: 800px;
     width: 100%;
-    padding: 0px clamp(10px, 3vw, 20px) 40px;
+    /* padding: 0px clamp(10px, 3vw, 20px) 40px; */
 }
 
 .card {
@@ -406,7 +406,7 @@ a {
         min-height: 100vh;
         min-height: 100dvh;
         justify-content: flex-start;
-        padding-bottom: 20px;
+        /* padding-bottom: 20px; */
     }
 
     header {
@@ -428,7 +428,7 @@ a {
         left: auto;
         display: block;
         width: fit-content;
-        margin: 30px auto 80px;
+        /* margin: 30px auto 80px; */
         text-align: center;
         text-decoration: none;
     }
@@ -437,7 +437,7 @@ a {
         position: fixed;
         bottom: 20px;
         left: 20px;
-        margin-bottom: 15px;
+        /* margin-bottom: 15px; */
     }
 
     .youtube-iframe-container {
