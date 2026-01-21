@@ -1,54 +1,110 @@
 {
-    "sun": [
-        "Akkor érzem magam igazán energikusnak, amikor aktívan cselekszem és haladok előre.",
-        "Gyorsan kijelölöm az irányt, még akkor is, ha később módosítanom kell rajta.",
-        "Új helyzetekben ösztönösen kezdeményezek és láthatóvá válok.",
-        "Fontos számomra, hogy hatással legyek a környezetemre.",
-        "Bizonytalan helyzetekben szeretek rendet és struktúrát teremteni.",
-        "Problémák esetén elsőként a konkrét megoldást keresem.",
-        "Időnyomás alatt fókuszáltabbá és határozottabbá válok.",
-        "Egy csoportban természetesen veszem át a vezető szerepet.",
-        "Tanuláskor a kipróbálás és a tapasztalás segít a legtöbbet.",
-        "Számomra a siker kézzelfogható eredményekben mérhető.",
-        "Ha elérek egy célt, gyorsan keresem a következő kihívást.",
-        "Egy kapcsolatban fontos számomra a közös irány és haladás.",
-        "Változások idején elsősorban lehetőséget látok.",
-        "Egy vitában határozottan képviselem az álláspontomat.",
-        "Az időt inkább előrehaladó útként érzékelem.",
-        "Inspirációt gyakran külső hatásokból és példákból merítek.",
-        "Fontos számomra, hogy amit csinálok, mások számára is látható legyen.",
-        "Ha elfáradok, aktivitással és cselekvéssel lendülök tovább.",
-        "Az erőt elsősorban jelenlétként és hatásként élem meg.",
-        "Szeretem, ha én adhatok irányt vagy lendületet egy helyzetnek."
-    ],
-    
-    "moon": [
-        "Szükségem van rendszeres elvonulásra, hogy belül rendbe tegyem a dolgokat.",
-        "Akkor hozok jó döntést, ha hagyom, hogy belül megérjen.",
-        "Új helyzetekben inkább megfigyelek, mielőtt megszólalok.",
-        "Fontos számomra a belső összhang önmagammal.",
-        "Bizonytalan helyzetekben képes vagyok együtt élni az ismeretlennel.",
-        "Problémák esetén először azt keresem, mit jelent számomra a helyzet.",
-        "Időnyomás alatt inkább lelassulok, hogy megtartsam a belső egyensúlyt.",
-        "Egy csoportban támogató vagy tanácsadó szerepben érzem jól magam.",
-        "Tanuláskor a megfigyelés és az összefüggések felismerése segít a legtöbbet.",
-        "Számomra a siker belső elégedettséget jelent.",
-        "Ha elérek egy célt, fontos számomra az átélés és a lezárás.",
-        "Egy kapcsolatban az érzelmi mélységet és intimitást tartom elsődlegesnek.",
-        "Változások idején belső átalakulást élek meg.",
-        "Egy vitában igyekszem megérteni a másik fél belső motivációit.",
-        "Az időt inkább ciklikus, visszatérő mintázatként érzékelem.",
-        "Inspirációt leggyakrabban befelé figyelve találok.",
-        "Fontos számomra, hogy amit csinálok, belül igaznak érződjön.",
-        "Ha elfáradok, visszahúzódással és pihenéssel töltődöm fel.",
-        "Az erőt elsősorban érzékenységként és mélységként élem meg.",
-        "Szeretem, ha van időm feldolgozni és megérteni, ami velem történik."
-    ],
-    
+    "sun": {
+        "hu": [
+            "Akkor érzem magam igazán energikusnak, amikor aktívan cselekszem és haladok előre.",
+            "Gyorsan kijelölöm az irányt, még akkor is, ha később módosítanom kell rajta.",
+            "Új helyzetekben ösztönösen kezdeményezek és láthatóvá válok.",
+            "Fontos számomra, hogy hatással legyek a környezetemre.",
+            "Bizonytalan helyzetekben szeretek rendet és struktúrát teremteni.",
+            "Problémák esetén elsőként a konkrét megoldást keresem.",
+            "Időnyomás alatt fókuszáltabbá és határozottabbá válok.",
+            "Egy csoportban természetesen veszem át a vezető szerepet.",
+            "Tanuláskor a kipróbálás és a tapasztalás segít a legtöbbet.",
+            "Számomra a siker kézzelfogható eredményekben mérhető.",
+            "Ha elérek egy célt, gyorsan keresem a következő kihívást.",
+            "Egy kapcsolatban fontos számomra a közös irány és haladás.",
+            "Változások idején elsősorban lehetőséget látok.",
+            "Egy vitában határozottan képviselem az álláspontomat.",
+            "Az időt inkább előrehaladó útként érzékelem.",
+            "Inspirációt gyakran külső hatásokból és példákból merítek.",
+            "Fontos számomra, hogy amit csinálok, mások számára is látható legyen.",
+            "Ha elfáradok, aktivitással és cselekvéssel lendülök tovább.",
+            "Az erőt elsősorban jelenlétként és hatásként élem meg.",
+            "Szeretem, ha én adhatok irányt vagy lendületet egy helyzetnek."
+        ],
+        "en": [
+            "I feel most energized when I'm actively doing things and making progress.",
+            "I quickly set a direction, even if I need to adjust it later.",
+            "In new situations, I instinctively take initiative and become visible.",
+            "It's important to me to have an impact on my environment.",
+            "In uncertain situations, I like to create order and structure.",
+            "When facing problems, I first look for concrete solutions.",
+            "Under time pressure, I become more focused and decisive.",
+            "In a group, I naturally take on the leadership role.",
+            "When learning, trying things out and gaining experience helps me the most.",
+            "For me, success is measured in tangible results.",
+            "When I reach a goal, I quickly look for the next challenge.",
+            "In a relationship, shared direction and progress are important to me.",
+            "During times of change, I primarily see opportunity.",
+            "In a debate, I firmly represent my point of view.",
+            "I perceive time more as a forward-moving path.",
+            "I often draw inspiration from external influences and examples.",
+            "It's important to me that what I do is visible to others.",
+            "When I get tired, I regain momentum through activity and action.",
+            "I experience strength primarily as presence and impact.",
+            "I like being the one who gives direction or momentum to a situation."
+        ]
+    },
+
+    "moon": {
+        "hu": [
+            "Szükségem van rendszeres elvonulásra, hogy belül rendbe tegyem a dolgokat.",
+            "Akkor hozok jó döntést, ha hagyom, hogy belül megérjen.",
+            "Új helyzetekben inkább megfigyelek, mielőtt megszólalok.",
+            "Fontos számomra a belső összhang önmagammal.",
+            "Bizonytalan helyzetekben képes vagyok együtt élni az ismeretlennel.",
+            "Problémák esetén először azt keresem, mit jelent számomra a helyzet.",
+            "Időnyomás alatt inkább lelassulok, hogy megtartsam a belső egyensúlyt.",
+            "Egy csoportban támogató vagy tanácsadó szerepben érzem jól magam.",
+            "Tanuláskor a megfigyelés és az összefüggések felismerése segít a legtöbbet.",
+            "Számomra a siker belső elégedettséget jelent.",
+            "Ha elérek egy célt, fontos számomra az átélés és a lezárás.",
+            "Egy kapcsolatban az érzelmi mélységet és intimitást tartom elsődlegesnek.",
+            "Változások idején belső átalakulást élek meg.",
+            "Egy vitában igyekszem megérteni a másik fél belső motivációit.",
+            "Az időt inkább ciklikus, visszatérő mintázatként érzékelem.",
+            "Inspirációt leggyakrabban befelé figyelve találok.",
+            "Fontos számomra, hogy amit csinálok, belül igaznak érződjön.",
+            "Ha elfáradok, visszahúzódással és pihenéssel töltődöm fel.",
+            "Az erőt elsősorban érzékenységként és mélységként élem meg.",
+            "Szeretem, ha van időm feldolgozni és megérteni, ami velem történik."
+        ],
+        "en": [
+            "I need regular solitude to sort things out inside myself.",
+            "I make good decisions when I let them mature internally.",
+            "In new situations, I prefer to observe before speaking up.",
+            "Inner harmony with myself is important to me.",
+            "In uncertain situations, I can live with the unknown.",
+            "When facing problems, I first seek what the situation means to me.",
+            "Under time pressure, I tend to slow down to maintain inner balance.",
+            "In a group, I feel comfortable in a supportive or advisory role.",
+            "When learning, observation and recognizing connections help me the most.",
+            "For me, success means inner satisfaction.",
+            "When I reach a goal, experiencing and closure are important to me.",
+            "In a relationship, I prioritize emotional depth and intimacy.",
+            "During times of change, I experience inner transformation.",
+            "In a debate, I try to understand the other person's inner motivations.",
+            "I perceive time more as cyclical, recurring patterns.",
+            "I most often find inspiration by looking inward.",
+            "It's important to me that what I do feels true inside.",
+            "When I get tired, I recharge through withdrawal and rest.",
+            "I experience strength primarily as sensitivity and depth.",
+            "I like having time to process and understand what happens to me."
+        ]
+    },
+
     "descriptions": {
-        "sun": "Nap-típus: energikus, döntésképes, vezető alkat. Alkotsz, építesz, vezetsz, szeretsz kezdeményezni és a figyelem középpontjában lenni.",
-        "moon": "Hold-típus: érzékeny, empatikus, spirituális és misztikus. Mélyen átéled az érzelmeket, figyelsz a belső világodra, és fontos számodra a lelki harmónia.",
-        "balanced": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkotni, vezetni, de ugyanakkor érzékenyen és spirituálisan reagálni a világra."
+        "sun": {
+            "hu": "Nap-típus: energikus, döntésképes, vezető alkat. Alkotsz, építesz, vezetsz, szeretsz kezdeményezni és a figyelem középpontjában lenni.",
+            "en": "Sun type: energetic, decisive, leadership-oriented. You create, build, lead, love to take initiative and be in the spotlight."
+        },
+        "moon": {
+            "hu": "Hold-típus: érzékeny, empatikus, spirituális és misztikus. Mélyen átéled az érzelmeket, figyelsz a belső világodra, és fontos számodra a lelki harmónia.",
+            "en": "Moon type: sensitive, empathetic, spiritual and mystical. You deeply experience emotions, pay attention to your inner world, and spiritual harmony is important to you."
+        },
+        "balanced": {
+            "hu": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkotni, vezetni, de ugyanakkor érzékenyen és spirituálisan reagálni a világra.",
+            "en": "Star type: both the Sun and Moon are present in you. You can create, lead, but also respond to the world sensitively and spiritually."
+        }
     }
 }
-    

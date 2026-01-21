@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weekly Workout Plan</title>
+  <title>Heti Edzésterv</title>
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/language-switcher.css">
 
   <style>
     * {
@@ -485,15 +486,18 @@
         font-size: clamp(2.5rem, 5vw, 3rem);
       }
     }
+    :root {
+      --lang-accent: #2ed573;
+    }
   </style>
-  
+
 </head>
-<body>
-    <h1>Weekly Workout Plan</h1>
+<body class="dark-theme">
+    <h1 data-hu="Heti Edzésterv" data-en="Weekly Workout Plan">Heti Edzésterv</h1>
 
     <div class="settings-panel">
       <div class="setting-group">
-        <label>Training Days per Week</label>
+        <label data-hu="Edzésnapok hetente" data-en="Training Days per Week">Edzésnapok hetente</label>
         <div class="day-selector">
           <button class="day-btn" data-days="1">1</button>
           <button class="day-btn" data-days="2">2</button>
@@ -506,25 +510,25 @@
       </div>
 
       <div class="setting-group">
-        <label>Workout Split</label>
+        <label data-hu="Edzéselosztás" data-en="Workout Split">Edzéselosztás</label>
         <select id="splitSelect" onchange="onSplitChange()">
-          <option value="push-pull-legs">Push / Pull / Legs</option>
-          <option value="upper-lower">Upper / Lower</option>
-          <option value="full-body">Full Body</option>
-          <option value="bro-split">Bro Split (1 muscle/day)</option>
-          <option value="custom">Custom</option>
+          <option value="push-pull-legs" data-hu="Toló / Húzó / Láb" data-en="Push / Pull / Legs">Toló / Húzó / Láb</option>
+          <option value="upper-lower" data-hu="Felső / Alsó test" data-en="Upper / Lower">Felső / Alsó test</option>
+          <option value="full-body" data-hu="Teljes test" data-en="Full Body">Teljes test</option>
+          <option value="bro-split" data-hu="Bro Split (1 izom/nap)" data-en="Bro Split (1 muscle/day)">Bro Split (1 izom/nap)</option>
+          <option value="custom" data-hu="Egyéni" data-en="Custom">Egyéni</option>
         </select>
       </div>
 
       <div class="setting-group muscle-group-selector" id="muscleGroupSelector">
-        <label>Muscle Groups</label>
+        <label data-hu="Izomcsoportok" data-en="Muscle Groups">Izomcsoportok</label>
         <div class="muscle-checkboxes">
-          <label class="checkbox-label"><input type="checkbox" value="Chest" checked> Chest</label>
-          <label class="checkbox-label"><input type="checkbox" value="Back" checked> Back</label>
-          <label class="checkbox-label"><input type="checkbox" value="Legs" checked> Legs</label>
-          <label class="checkbox-label"><input type="checkbox" value="Arms" checked> Arms</label>
-          <label class="checkbox-label"><input type="checkbox" value="Abs" checked> Abs</label>
-          <label class="checkbox-label"><input type="checkbox" value="Extras"> Extras</label>
+          <label class="checkbox-label"><input type="checkbox" value="Chest" checked> <span data-hu="Mell" data-en="Chest">Mell</span></label>
+          <label class="checkbox-label"><input type="checkbox" value="Back" checked> <span data-hu="Hát" data-en="Back">Hát</span></label>
+          <label class="checkbox-label"><input type="checkbox" value="Legs" checked> <span data-hu="Láb" data-en="Legs">Láb</span></label>
+          <label class="checkbox-label"><input type="checkbox" value="Arms" checked> <span data-hu="Kar" data-en="Arms">Kar</span></label>
+          <label class="checkbox-label"><input type="checkbox" value="Abs" checked> <span data-hu="Has" data-en="Abs">Has</span></label>
+          <label class="checkbox-label"><input type="checkbox" value="Extras"> <span data-hu="Extra" data-en="Extras">Extra</span></label>
         </div>
       </div>
     </div>
@@ -532,12 +536,12 @@
     <div id="plan"></div>
 
     <div class="button-container">
-      <button onclick="generatePlan()" class="btn">Generate Plan</button>
-      <button onclick="downloadTXT()" class="btn">Download as TXT</button>
+      <button onclick="generatePlan()" class="btn" data-hu="Terv Generálása" data-en="Generate Plan">Terv Generálása</button>
+      <button onclick="downloadTXT()" class="btn" data-hu="Letöltés TXT-ként" data-en="Download as TXT">Letöltés TXT-ként</button>
     </div>
 
     <a href="projects.html">
-      <button class="back-button">Go back</button>
+      <button class="back-button" data-hu="Vissza" data-en="Go back">Vissza</button>
     </a>
 
 
@@ -545,7 +549,36 @@
     <!-- html2pdf könyvtár betöltése -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+    <script src="../JS/language-switcher.js"></script>
     <script>
+       // Translation mappings for dynamic content
+       const translations = {
+         dayPrefix: { hu: 'Nap', en: 'Day' },
+         muscles: {
+           Chest: { hu: 'Mell', en: 'Chest' },
+           Back: { hu: 'Hát', en: 'Back' },
+           Legs: { hu: 'Láb', en: 'Legs' },
+           Arms: { hu: 'Kar', en: 'Arms' },
+           Abs: { hu: 'Has', en: 'Abs' },
+           Extras: { hu: 'Extra', en: 'Extras' }
+         },
+         downloadHeader: { hu: 'HETI EDZÉSTERV', en: 'WEEKLY WORKOUT PLAN' }
+       };
+
+       function getCurrentLang() {
+         return document.documentElement.getAttribute('data-lang') || 'hu';
+       }
+
+       function translateDay(dayNum) {
+         const lang = getCurrentLang();
+         return `${translations.dayPrefix[lang]} ${dayNum}`;
+       }
+
+       function translateMuscle(muscle) {
+         const lang = getCurrentLang();
+         return translations.muscles[muscle]?.[lang] || muscle;
+       }
+
        const exercises = {
           "Chest": [
             "Pushups",
@@ -803,15 +836,17 @@
           for (const [day, groups] of Object.entries(schedule)) {
             const dayDiv = document.createElement("div");
             dayDiv.className = "day generating";
-            
+
+            // Extract day number and translate
+            const dayNum = day.replace('Day ', '');
             const dayTitle = document.createElement("h2");
-            dayTitle.textContent = day;
+            dayTitle.textContent = translateDay(dayNum);
             dayDiv.appendChild(dayTitle);
 
             groups.forEach(muscle => {
               const muscleTitle = document.createElement("div");
               muscleTitle.className = "muscle";
-              muscleTitle.textContent = muscle;
+              muscleTitle.textContent = translateMuscle(muscle);
               dayDiv.appendChild(muscleTitle);
 
               const list = document.createElement("ul");
@@ -865,15 +900,20 @@
 
         function downloadTXT() {
           const schedule = buildSchedule();
-          let text = "WEEKLY WORKOUT PLAN\n";
-          text += "====================\n\n";
+          const lang = getCurrentLang();
+          const header = translations.downloadHeader[lang];
+          let text = `${header}\n`;
+          text += "=".repeat(header.length) + "\n\n";
 
           for (const [day, groups] of Object.entries(schedule)) {
-            text += `${day}\n`;
-            text += "-".repeat(day.length) + "\n";
+            const dayNum = day.replace('Day ', '');
+            const translatedDay = translateDay(dayNum);
+            text += `${translatedDay}\n`;
+            text += "-".repeat(translatedDay.length) + "\n";
 
             groups.forEach(muscle => {
-              text += `  [${muscle}]\n`;
+              const translatedMuscle = translateMuscle(muscle);
+              text += `  [${translatedMuscle}]\n`;
               const moves = getRandomMoves(exercises[muscle]);
               moves.forEach(move => {
                 text += `    • ${move}\n`;
@@ -895,6 +935,16 @@
           URL.revokeObjectURL(url);
         }
 
+
+        // Regenerate plan when language changes
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'data-lang') {
+              generatePlan();
+            }
+          });
+        });
+        observer.observe(document.documentElement, { attributes: true });
 
         // Betöltéskor generálás
         generatePlan();
