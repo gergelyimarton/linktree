@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marton Gergelyi</title>
+  <meta name="description" content="Music producer, rapper, developer. Nitebork | Duplajézus">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="CSS/lidar-core.css">
+  <link rel="stylesheet" href="CSS/lidar-loader.css">
+  <link rel="stylesheet" href="CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../images/Profile_pics_round.png" as="image">
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADER
+       ============================================================ -->
+  <div class="ld-loader" id="lidar-loader">
+    <canvas class="ld-loader__canvas"></canvas>
+
+    <div class="ld-loader__scanline"></div>
+
+    <div class="ld-loader__info">
+      <div class="ld-loader__status">INITIALIZING...</div>
+      <div class="ld-loader__progress">
+        <div class="ld-loader__progress-bar">
+          <div class="ld-loader__progress-fill"></div>
+        </div>
+        <span class="ld-loader__progress-text">0%</span>
+      </div>
+    </div>
+
+    <div class="ld-loader__coords">
+      <span class="ld-loader__coord">lat: 47.4979</span>
+      <span class="ld-loader__coord">lon: 19.0402</span>
+    </div>
+
+    <div class="ld-loader__system">
+      <div class="ld-loader__system-line">sys.lidar.v1</div>
+      <div class="ld-loader__system-line">node: primary</div>
+    </div>
+
+    <!-- CSS fallback (hidden by default, shown when JS adds --fallback) -->
+    <div class="ld-loader__fallback-shape" style="display: none;">
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-center"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       BACKGROUND
+       ============================================================ -->
+  <div class="ld-grid-bg"></div>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content" id="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="ld-hero">
+      <canvas class="ld-hero__canvas" id="hero-canvas"></canvas>
+
+      <!-- Coordinate labels (clinical aesthetic) -->
+      <span class="ld-hero__coords ld-hero__coords--tl">x:000 y:000</span>
+      <span class="ld-hero__coords ld-hero__coords--tr">scan:active</span>
+      <span class="ld-hero__coords ld-hero__coords--bl">depth:0.00m</span>
+      <span class="ld-hero__coords ld-hero__coords--br">res:1920x1080</span>
+
+      <div class="ld-hero__content">
+        <!-- Avatar with scan ring -->
+        <div class="ld-hero__avatar">
+          <img
+            src="../images/Profile_pics_round.png"
+            alt="Marton Gergelyi"
+            class="ld-hero__avatar-img"
+          >
+          <div class="ld-hero__avatar-ring"></div>
+        </div>
+
+        <h1 class="ld-hero__title">Marton Gergelyi</h1>
+
+        <p class="ld-hero__subtitle">
+          <span data-hu="Zenei producer / Rapper / Fejlesztő" data-en="Music Producer / Rapper / Developer">
+            Zenei producer / Rapper / Fejlesztő
+          </span>
+        </p>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="ld-scroll-indicator">
+        <span class="ld-scroll-indicator__text" data-hu="Görgess" data-en="Scroll">Görgess</span>
+        <div class="ld-scroll-indicator__arrow">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS SECTION -->
+    <section class="ld-section">
+      <div class="ld-container">
+
+        <!-- Section header -->
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Identitások" data-en="Identities">Identitások</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <!-- Link cards -->
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- Nitebork -->
+          <a href="html/nitebork.html" class="ld-link-card" data-id="001:NTB">
+            <div class="ld-link-card__icon">
+              <img src="../images/LOGO.png" alt="" style="width: 32px; height: 32px; object-fit: contain;">
+            </div>
+            <div class="ld-link-card__content">
+              <div class="ld-link-card__title">Nitebork</div>
+              <div class="ld-link-card__desc" data-hu="Producer & DJ" data-en="Producer & DJ">Producer & DJ</div>
+            </div>
+            <span class="ld-link-card__arrow">→</span>
+          </a>
+
+          <!-- Duplajézus -->
+          <a href="html/duplajezus.html" class="ld-link-card" data-id="002:DPJ">
+            <div class="ld-link-card__icon">
+              <img src="../images/Dupla Logo White.png" alt="" style="width: 32px; height: 32px; object-fit: contain;">
+            </div>
+            <div class="ld-link-card__content">
+              <div class="ld-link-card__title">Duplajézus</div>
+              <div class="ld-link-card__desc" data-hu="Magyar rapper" data-en="Hungarian Rapper">Magyar rapper</div>
+            </div>
+            <span class="ld-link-card__arrow">→</span>
+          </a>
+
+          <!-- Projects -->
+          <a href="html/projects.html" class="ld-link-card" data-id="003:PRJ">
+            <div class="ld-link-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="ld-link-card__content">
+              <div class="ld-link-card__title" data-hu="Projektek" data-en="Projects">Projektek</div>
+              <div class="ld-link-card__desc" data-hu="Fejlesztések és kísérletek" data-en="Development & experiments">Fejlesztések és kísérletek</div>
+            </div>
+            <span class="ld-link-card__arrow">→</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">
+        <span data-hu="Budapest, Magyarország" data-en="Budapest, Hungary">Budapest, Magyarország</span>
+        · <span id="current-year">2024</span>
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="JS/lidar-loader.js"></script>
+  <script src="JS/lidar-effects.js"></script>
+
+  <!-- Language switcher (shared with legacy) -->
+  <script src="../shared/JS/language-switcher.js"></script>
+
+  <!-- Update year -->
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

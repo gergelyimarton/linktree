@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duplajézus</title>
+  <meta name="description" content="Duplajézus — Hungarian rapper. Oldschool boom bap, storytelling.">
+  <link rel="icon" href="../../images/favicon_duplajezus.ico" type="image/x-icon">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="../CSS/lidar-core.css">
+  <link rel="stylesheet" href="../CSS/lidar-loader.css">
+  <link rel="stylesheet" href="../CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADER
+       ============================================================ -->
+  <div class="ld-loader" id="lidar-loader" data-loader-text="DUPLAJÉZUS">
+    <canvas class="ld-loader__canvas"></canvas>
+
+    <div class="ld-loader__scanline"></div>
+
+    <div class="ld-loader__info">
+      <div class="ld-loader__status">INITIALIZING...</div>
+      <div class="ld-loader__progress">
+        <div class="ld-loader__progress-bar">
+          <div class="ld-loader__progress-fill"></div>
+        </div>
+        <span class="ld-loader__progress-text">0%</span>
+      </div>
+    </div>
+
+    <div class="ld-loader__coords">
+      <span class="ld-loader__coord">bars: loaded</span>
+      <span class="ld-loader__coord">flow: active</span>
+    </div>
+
+    <div class="ld-loader__system">
+      <div class="ld-loader__system-line">artist.duplajezus</div>
+      <div class="ld-loader__system-line">genre: hiphop</div>
+    </div>
+
+    <div class="ld-loader__fallback-shape" style="display: none;">
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-center"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       BACKGROUND
+       ============================================================ -->
+  <div class="ld-grid-bg"></div>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ld-nav">
+    <a href="../index.html" class="ld-back">
+      <span class="ld-back__arrow">←</span>
+      <span data-hu="Vissza" data-en="Back">Vissza</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content" id="main-content">
+
+    <!-- PROFILE SECTION -->
+    <section class="ld-profile">
+      <div class="ld-profile__avatar" data-reveal>
+        <img src="../../images/Dupla Logo White.png" alt="Duplajézus">
+      </div>
+
+      <h1 class="ld-profile__name" data-reveal>Duplajézus</h1>
+
+      <p class="ld-profile__role" data-reveal>
+        <span data-hu="Magyar Rapper" data-en="Hungarian Rapper">Magyar Rapper</span>
+      </p>
+
+      <!-- Social links -->
+      <div class="ld-social-grid" data-reveal>
+        <a href="https://www.instagram.com/duplajezus" target="_blank" rel="noopener" class="ld-social-link ld-social-link--instagram" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://soundcloud.com/duplajezus" target="_blank" rel="noopener" class="ld-social-link ld-social-link--soundcloud" title="SoundCloud">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 17.939h-1v-8.068c.308-.231.639-.429 1-.566v8.634zm3 0h1v-9.224c-.229.265-.443.548-.621.857l-.379-.184v8.551zm-2 0h1v-8.848c-.508-.079-.623-.05-1-.01v8.858zm-4 0h1v-7.02c-.312.458-.555.971-.692 1.535l-.308-.182v5.667zm-3-5.25c-.606.547-1 1.354-1 2.268 0 .914.394 1.721 1 2.268v-4.536zm18.879-.671c-.204-2.837-2.404-5.079-5.117-5.079-1.022 0-1.964.328-2.762.877v10.123h9.089c1.607 0 2.911-1.393 2.911-3.106 0-2.233-2.168-3.772-4.121-2.815zm-16.879-.027c-.302-.024-.526-.03-1 .122v5.689h1v-5.811z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@duplajezus362" target="_blank" rel="noopener" class="ld-social-link ld-social-link--youtube" title="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- SOUNDCLOUD EMBED -->
+    <section class="ld-section">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Legújabb szám" data-en="Latest Track">Legújabb szám</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <div class="ld-embed" data-reveal>
+          <div class="ld-embed__header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: var(--ld-scan);">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <span>soundcloud.stream</span>
+          </div>
+          <div class="ld-embed__content">
+            <iframe
+              width="100%"
+              height="166"
+              scrolling="no"
+              frameborder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1938768200&color=%2300ff88&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
+            ></iframe>
+          </div>
+        </div>
+
+        <p class="text-mono text-dim" style="text-align: center; margin-top: var(--space-md);" data-reveal>
+          <span data-hu="Nyomd meg a lejátszás gombot" data-en="Press play to listen">Nyomd meg a lejátszás gombot</span>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- YOUTUBE EMBED -->
+    <section class="ld-section">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Videó" data-en="Video">Videó</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <div class="ld-embed" data-reveal style="max-width: 800px;">
+          <div class="ld-embed__header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: var(--ld-data-red, #ff3355);">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <span>youtube.stream</span>
+          </div>
+          <div class="ld-embed__content" style="aspect-ratio: 16/9;">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/oDZeB3fStUU?si=6XXk5aiaX-T3nB0s"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">duplajézus · <span id="current-year">2024</span></p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="../JS/lidar-loader.js"></script>
+  <script src="../JS/lidar-effects.js"></script>
+  <script src="../../shared/JS/language-switcher.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

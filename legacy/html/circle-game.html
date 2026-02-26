@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-hu="Circle Game" data-en="Circle Game">Circle Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/circle-game.css">
+    <link rel="stylesheet" href="../CSS/language-switcher.css">
+    <style>
+        .language-switcher {
+            --lang-accent: var(--accent);
+        }
+        .language-switcher.dark-theme button.active {
+            color: var(--bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-border"></div>
+
+    <div class="container">
+        <header>
+            <div class="hand-icon">👌</div>
+            <h1>Circle Game</h1>
+            <p class="subtitle" data-hu="A klasszikus játék hivatalos szabálykönyve és taktikai útmutatója" data-en="The official rulebook and tactical guide for the classic game">A klasszikus játék hivatalos szabálykönyve és taktikai útmutatója</p>
+        </header>
+
+        <main>
+            <!-- SZABÁLYOK -->
+            <div class="section-header">
+                <h2 class="section-title" data-hu="Szabályok" data-en="Rules">Szabályok</h2>
+            </div>
+
+            <div class="rule-card">
+                <h3><span class="emoji">✋</span> <span data-hu="A kör formázása" data-en="Forming the circle">A kör formázása</span></h3>
+                <ul>
+                    <li data-hu="A hüvelyk- és mutatóujj teljesen össze kell érjen" data-en="The thumb and index finger must touch completely">A hüvelyk- és mutatóujj teljesen össze kell érjen</li>
+                    <li data-hu="A többi ujj kifelé kell álljon" data-en="The other fingers must point outward">A többi ujj kifelé kell álljon</li>
+                    <li data-hu="A kört a test adott része alatt kell elhelyezni (lásd pontozás)" data-en="The circle must be placed below a specific body part (see scoring)">A kört a test adott része alatt kell elhelyezni (lásd pontozás)</li>
+                </ul>
+            </div>
+
+            <div class="rule-card">
+                <h3><span class="emoji">🎯</span> <span data-hu="Pontozás" data-en="Scoring">Pontozás</span></h3>
+                <table class="points-table">
+                    <thead>
+                        <tr>
+                            <th data-hu="Pozíció" data-en="Position">Pozíció</th>
+                            <th data-hu="Pont" data-en="Points">Pont</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-hu="Váll alatt" data-en="Below shoulder">Váll alatt</td>
+                            <td class="points">1</td>
+                        </tr>
+                        <tr>
+                            <td data-hu="Derék alatt" data-en="Below waist">Derék alatt</td>
+                            <td class="points">2</td>
+                        </tr>
+                        <tr>
+                            <td data-hu="Térd alatt" data-en="Below knee">Térd alatt</td>
+                            <td class="points">3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="important-box">
+                    <strong data-hu="Fontos:" data-en="Important:">Fontos:</strong> <span data-hu="Mindkét játékos esetében az adott testrész alatt kell lennie a körnek, különben nem ér pontot. Extra elismerést érdemel, ha köntörfalazás nélkül kiteszi a támadó a karikát és abba belenéznek." data-en="The circle must be below the body part for both players, otherwise no points. Extra credit if the attacker places the circle without any deception and someone looks into it.">Mindkét játékos esetében az adott testrész alatt kell lennie a körnek, különben nem ér pontot. Extra elismerést érdemel, ha köntörfalazás nélkül kiteszi a támadó a karikát és abba belenéznek.</span>
+                </div>
+            </div>
+
+            <div class="rule-card">
+                <h3><span class="emoji">🚫</span> <span data-hu="Tiltott módszerek" data-en="Forbidden methods">Tiltott módszerek</span></h3>
+                <ul class="forbidden-list">
+                    <li data-hu="Nem ér telefonról, nyomtatott képről, árnyékról vagy bármilyen vetületről mutatni a kört" data-en="Cannot show the circle from a phone, printed image, shadow, or any projection">Nem ér telefonról, nyomtatott képről, árnyékról vagy bármilyen vetületről mutatni a kört</li>
+                    <li data-hu="Nem érvényes, ha valaki már valahova néz, és közvetlenül a szeme elé tesszük a kört" data-en="Not valid if someone is already looking somewhere and we put the circle directly in front of their eyes">Nem érvényes, ha valaki már valahova néz, és közvetlenül a szeme elé tesszük a kört</li>
+                </ul>
+                <ul class="allowed-list" style="margin-top: 1rem;">
+                    <li data-hu="Viszont elrejtve, majd a takarást elmozdítva szabályos" data-en="However, hiding it and then removing the cover is valid">Viszont elrejtve, majd a takarást elmozdítva szabályos</li>
+                </ul>
+            </div>
+
+            <div class="rule-card">
+                <h3><span class="emoji">🛡️</span> <span data-hu="Semlegesítés" data-en="Neutralization">Semlegesítés</span></h3>
+                <p data-hu="A védekező játékos is szerezhet pontot:" data-en="The defending player can also score points:">A védekező játékos is szerezhet pontot:</p>
+                <div class="defense-points">
+                    <div class="defense-point">
+                        <span class="points-value">3</span>
+                        <span class="points-desc" data-hu="Belenézés nélkül beledugja az ujját a körbe" data-en="Pokes finger through circle without looking">Belenézés nélkül beledugja az ujját a körbe</span>
+                    </div>
+                    <div class="defense-point">
+                        <span class="points-value">1</span>
+                        <span class="points-desc" data-hu="Belenéz, majd ezután szúrja ki" data-en="Looks, then pokes it">Belenéz, majd ezután szúrja ki</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TECHNIKÁK -->
+            <div class="section-header">
+                <h2 class="section-title" data-hu="Technikák" data-en="Techniques">Technikák</h2>
+            </div>
+
+            <p class="quote" data-hu="A játékban a lényeg, hogy ügyesen mutasd a kört, miközben az ellenfél természetesen belenéz, vagy ne tudja kiszúrni időben." data-en="The essence of the game is to cleverly show the circle while the opponent naturally looks at it, or cannot poke it in time.">A játékban a lényeg, hogy ügyesen mutasd a kört, miközben az ellenfél természetesen belenéz, vagy ne tudja kiszúrni időben.</p>
+
+            <h3 style="color: var(--accent-light); margin: 2rem 0 1.5rem; font-size: 1.1rem;" data-hu="Alapvető trükkök" data-en="Basic tricks">Alapvető trükkök</h3>
+
+            <div class="trick-card">
+                <span class="trick-number">1</span>
+                <h4 data-hu="Leesett valami csapda" data-en="Dropped something trap">Leesett valami csapda</h4>
+                <p data-hu="Hirtelen úgy teszel, mintha elejtettél volna valamit, és mutatsz lefelé. A másik ösztönösen odanézhet, és ha közben a kört mutatod a térded alatt, 3 pont jár neked!" data-en="Suddenly act as if you dropped something and point down. The other person may instinctively look, and if you're showing the circle below your knee, you get 3 points!">Hirtelen úgy teszel, mintha elejtettél volna valamit, és mutatsz lefelé. A másik ösztönösen odanézhet, és ha közben a kört mutatod a térded alatt, 3 pont jár neked!</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">2</span>
+                <h4 data-hu="Mi van a cipődön?" data-en="What's on your shoe?">Mi van a cipődön?</h4>
+                <p data-hu="Mintha valami érdekes lenne a cipődön vagy nadrágodon, majd rámutatsz a kört formáló kezedre. Az emberek sokszor reflexből néznek, és ha jól időzíted, nagy esélyed van a pontszerzésre." data-en="Act like there's something interesting on your shoe or pants, then point to your hand forming the circle. People often look reflexively, and if timed right, you have a great chance of scoring.">Mintha valami érdekes lenne a cipődön vagy nadrágodon, majd rámutatsz a kört formáló kezedre. Az emberek sokszor reflexből néznek, és ha jól időzíted, nagy esélyed van a pontszerzésre.</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">3</span>
+                <h4 data-hu="Titkos kézfogás" data-en="Secret handshake">Titkos kézfogás</h4>
+                <p data-hu="Ha egy baráti társaságban vagytok, egy kézfogásból is lehet trükköt csinálni. Amikor kezet fogsz valakivel, a másik kezedben a combod mellett formázod a kört. Ha a másik odapillant, pontot szerzel!" data-en="In a group of friends, you can make a trick from a handshake. When shaking hands, form the circle with your other hand by your thigh. If they glance over, you score!">Ha egy baráti társaságban vagytok, egy kézfogásból is lehet trükköt csinálni. Amikor kezet fogsz valakivel, a másik kezedben a combod mellett formázod a kört. Ha a másik odapillant, pontot szerzel!</p>
+            </div>
+
+            <h3 style="color: var(--accent-light); margin: 2.5rem 0 1.5rem; font-size: 1.1rem;" data-hu="Haladó taktikák" data-en="Advanced tactics">Haladó taktikák</h3>
+
+            <div class="trick-card">
+                <span class="trick-number">4</span>
+                <h4 data-hu="Mozgás közbeni csapda" data-en="Motion trap">Mozgás közbeni csapda</h4>
+                <p data-hu="Például, ha egy labdát dobálsz vagy egy tárgyat adsz át, a másik kezedben (a tested mellett) formázhatod a kört. Az emberek figyelme gyakran a mozgó tárgyra koncentrál, így észrevétlenül ráveheted őket, hogy belenézzenek." data-en="For example, if tossing a ball or passing an object, form the circle with your other hand by your body. People's attention often focuses on the moving object, so you can get them to look without noticing.">Például, ha egy labdát dobálsz vagy egy tárgyat adsz át, a másik kezedben (a tested mellett) formázhatod a kört. Az emberek figyelme gyakran a mozgó tárgyra koncentrál, így észrevétlenül ráveheted őket, hogy belenézzenek.</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">5</span>
+                <h4 data-hu="Zsebből előhúzott trükk" data-en="Pocket reveal trick">Zsebből előhúzott trükk</h4>
+                <p data-hu="Zsebedben vagy kabátod alatt formázod a kört, majd egy váratlan pillanatban előhúzod és megmutatod. Ha az ellenfél rápillant, mielőtt reagálna, tied a pont!" data-en="Form the circle in your pocket or under your jacket, then reveal it at an unexpected moment. If your opponent glances before reacting, you score!">Zsebedben vagy kabátod alatt formázod a kört, majd egy váratlan pillanatban előhúzod és megmutatod. Ha az ellenfél rápillant, mielőtt reagálna, tied a pont!</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">6</span>
+                <h4 data-hu="Csapatmunka" data-en="Teamwork">Csapatmunka</h4>
+                <p data-hu="Ha többen játszotok, egy társad elvonhatja az áldozat figyelmét, miközben te a megfelelő helyen mutatod a kört. Például valaki megkérdezi: Mit gondolsz erről? – és közben te mutatod a kört a lábad mellett." data-en="If playing with multiple people, a teammate can distract the target while you show the circle in the right position. For example, someone asks: What do you think about this? – while you show the circle by your leg.">Ha többen játszotok, egy társad elvonhatja az áldozat figyelmét, miközben te a megfelelő helyen mutatod a kört. Például valaki megkérdezi: Mit gondolsz erről? – és közben te mutatod a kört a lábad mellett.</p>
+            </div>
+
+            <h3 style="color: var(--accent-light); margin: 2.5rem 0 1.5rem; font-size: 1.1rem;" data-hu="Speciális stratégiák" data-en="Special strategies">Speciális stratégiák</h3>
+
+            <div class="trick-card">
+                <span class="trick-number">7</span>
+                <h4 data-hu="Kényszerített nézés" data-en="Forced look">Kényszerített nézés</h4>
+                <p data-hu="Ha az áldozat túlságosan óvatos, megkérheted valamire, például: Megnéznéd, hogy van-e valami a nadrágomra ragadva? Amint odanéz, már be is húztad a pontot!" data-en="If the target is too cautious, ask them something like: Can you check if there's something stuck on my pants? As soon as they look, you've scored!">Ha az áldozat túlságosan óvatos, megkérheted valamire, például: Megnéznéd, hogy van-e valami a nadrágomra ragadva? Amint odanéz, már be is húztad a pontot!</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">8</span>
+                <h4 data-hu="Váratlan előhúzás" data-en="Unexpected reveal">Váratlan előhúzás</h4>
+                <p data-hu="Például, ha kabátot vagy pulóvert veszel le, az alkarod mögé rejtett kézzel már készen állhatsz a körre. A mozgás eltereli a figyelmet, és mire az ellenfél észbe kap, már nézi is a csapdát." data-en="For example, when taking off a jacket or sweater, your hand hidden behind your forearm can already have the circle ready. The motion distracts attention, and before the opponent realizes, they're already looking at the trap.">Például, ha kabátot vagy pulóvert veszel le, az alkarod mögé rejtett kézzel már készen állhatsz a körre. A mozgás eltereli a figyelmet, és mire az ellenfél észbe kap, már nézi is a csapdát.</p>
+            </div>
+
+            <div class="trick-card">
+                <span class="trick-number">9</span>
+                <h4 data-hu="Fáradás kihasználása" data-en="Exploiting fatigue">Fáradás kihasználása</h4>
+                <p data-hu="Egy hosszabb játék alatt az emberek egyre kevésbé lesznek figyelmesek. Ha valaki egy idő után lazábban figyel, akkor egy egyszerűbb trükkel is ráveheted, hogy odanézzen." data-en="During a longer game, people become less attentive. If someone starts paying less attention after a while, even a simpler trick can get them to look.">Egy hosszabb játék alatt az emberek egyre kevésbé lesznek figyelmesek. Ha valaki egy idő után lazábban figyel, akkor egy egyszerűbb trükkel is ráveheted, hogy odanézzen.</p>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>👌 Circle Game Official Rules 👌</p>
+        </footer>
+
+        <a href="javascript:history.back()" class="back-link">
+            <button class="back-button" data-hu="← Vissza" data-en="← Back">← Vissza</button>
+        </a>
+    </div>
+
+    <script src="../JS/language-switcher.js"></script>
+</body>
+</html>

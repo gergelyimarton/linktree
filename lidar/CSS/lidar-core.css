@@ -1,0 +1,488 @@
+/**
+ * LIDAR DESIGN SYSTEM — Core Tokens & Base Styles
+ * Direction: Clinical Observatory with Human Edge
+ *
+ * A (40%): Ultra-minimal data lab — sterile, coordinate-labeled
+ * B (30%): Experimental AI portal — exposed systems, processing states
+ * C (30%): Hacker manifesto — monospace, CRT, defiant undertone
+ */
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  /* === VOID === */
+  --ld-void: #030305;
+  --ld-surface: #08080c;
+  --ld-panel: #0c0c12;
+  --ld-panel-hover: #101018;
+  --ld-panel-active: #14141c;
+
+  /* === SCAN === */
+  --ld-scan: #00ff88;
+  --ld-scan-dim: rgba(0, 255, 136, 0.12);
+  --ld-scan-glow: rgba(0, 255, 136, 0.08);
+  --ld-scan-bright: #40ffaa;
+
+  /* === DATA === */
+  --ld-data-cyan: #00ccff;
+  --ld-data-orange: #ff6b35;
+  --ld-data-red: #ff3355;
+
+  /* === TEXT === */
+  --ld-text: #c8c8d0;
+  --ld-text-dim: #505060;
+  --ld-text-bright: #ffffff;
+  --ld-text-scan: var(--ld-scan);
+
+  /* === STRUCTURE === */
+  --ld-border: rgba(0, 255, 136, 0.1);
+  --ld-border-hover: rgba(0, 255, 136, 0.3);
+  --ld-border-active: var(--ld-scan);
+  --ld-grid: rgba(0, 255, 136, 0.03);
+  --ld-grid-line: rgba(0, 255, 136, 0.06);
+
+  /* === FONTS === */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* === SCALE === */
+  --text-2xs: 0.625rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-display: clamp(2.5rem, 8vw, 4.5rem);
+
+  /* === TRACKING === */
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.05em;
+  --tracking-mono: 0.1em;
+
+  /* === SPACING === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* === LAYOUT === */
+  --container-max: 1120px;
+  --container-padding: clamp(16px, 5vw, 48px);
+  --card-padding: 24px;
+  --card-gap: 16px;
+  --card-radius: 2px;
+
+  /* === MOTION === */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.4, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* === EFFECTS === */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px var(--ld-scan-glow);
+  --crt-scanlines: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--ld-text);
+  background-color: var(--ld-void);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ld-text-bright);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--text-display);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+p {
+  max-width: 65ch;
+}
+
+a {
+  color: var(--ld-data-cyan);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--ld-scan);
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+}
+
+.text-scan {
+  color: var(--ld-scan);
+}
+
+.text-dim {
+  color: var(--ld-text-dim);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+}
+
+/* ============================================================
+   DOT GRID BACKGROUND
+   ============================================================ */
+
+.ld-grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--ld-void);
+  background-image: radial-gradient(
+    circle at center,
+    var(--ld-grid) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* Optional: structural lines */
+.ld-grid-bg--lines {
+  background-image:
+    radial-gradient(circle at center, var(--ld-grid) 1px, transparent 1px),
+    linear-gradient(to right, var(--ld-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ld-grid-line) 1px, transparent 1px);
+  background-size: 24px 24px, 96px 96px, 96px 96px;
+}
+
+/* CRT scanlines overlay */
+.ld-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--crt-scanlines);
+  opacity: 0.4;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.ld-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.ld-section {
+  padding: var(--space-4xl) 0;
+}
+
+.ld-grid {
+  display: grid;
+  gap: var(--card-gap);
+}
+
+.ld-grid--cards {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.ld-card {
+  position: relative;
+  background: var(--ld-panel);
+  border: 1px solid var(--ld-border);
+  border-top-color: var(--ld-scan-dim);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.ld-card:hover {
+  border-color: var(--ld-border-hover);
+  border-top-color: var(--ld-scan);
+  background: var(--ld-panel-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Coordinate label (from Direction A) */
+.ld-card::before {
+  content: attr(data-id);
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-mono);
+  color: var(--ld-text-dim);
+  opacity: 0.5;
+  text-transform: uppercase;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.ld-card:hover::before {
+  opacity: 1;
+  color: var(--ld-scan);
+}
+
+/* Card variants */
+.ld-card--interactive {
+  cursor: pointer;
+}
+
+.ld-card--active {
+  border-color: var(--ld-scan);
+  border-top-color: var(--ld-scan);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.ld-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ld-text);
+
+  background: transparent;
+  border: 1px solid var(--ld-border);
+  border-radius: var(--card-radius);
+  padding: var(--space-md) var(--space-lg);
+
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.ld-btn:hover {
+  border-color: var(--ld-scan);
+  color: var(--ld-scan);
+  box-shadow: var(--shadow-glow);
+}
+
+.ld-btn:active {
+  background: var(--ld-scan-dim);
+}
+
+.ld-btn--primary {
+  background: var(--ld-scan);
+  border-color: var(--ld-scan);
+  color: var(--ld-void);
+}
+
+.ld-btn--primary:hover {
+  background: var(--ld-scan-bright);
+  border-color: var(--ld-scan-bright);
+  color: var(--ld-void);
+}
+
+/* ============================================================
+   LINKS (underline animation)
+   ============================================================ */
+
+.ld-link {
+  position: relative;
+  color: var(--ld-text);
+  text-decoration: none;
+}
+
+.ld-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--ld-scan);
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+.ld-link:hover {
+  color: var(--ld-scan);
+}
+
+.ld-link:hover::after {
+  width: 100%;
+}
+
+/* ============================================================
+   LABELS & TAGS
+   ============================================================ */
+
+.ld-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--ld-text-dim);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--ld-border);
+  border-radius: var(--card-radius);
+}
+
+.ld-label--scan {
+  color: var(--ld-scan);
+  border-color: var(--ld-scan-dim);
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+.ld-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ld-fade-in {
+  animation: ldFadeIn var(--duration-slow) var(--ease-out) forwards;
+}
+
+@keyframes ldFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered children */
+.ld-stagger > * {
+  opacity: 0;
+  animation: ldFadeIn var(--duration-slow) var(--ease-out) forwards;
+}
+
+.ld-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.ld-stagger > *:nth-child(2) { animation-delay: 80ms; }
+.ld-stagger > *:nth-child(3) { animation-delay: 160ms; }
+.ld-stagger > *:nth-child(4) { animation-delay: 240ms; }
+.ld-stagger > *:nth-child(5) { animation-delay: 320ms; }
+.ld-stagger > *:nth-child(6) { animation-delay: 400ms; }
+.ld-stagger > *:nth-child(7) { animation-delay: 480ms; }
+.ld-stagger > *:nth-child(8) { animation-delay: 560ms; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --card-padding: 20px;
+    --space-4xl: 64px;
+  }
+
+  .ld-card::before {
+    display: none; /* Hide coordinates on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --card-padding: 16px;
+    --space-4xl: 48px;
+  }
+
+  .ld-grid--cards {
+    grid-template-columns: 1fr;
+  }
+}

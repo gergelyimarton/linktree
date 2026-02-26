@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <meta name="description" content="Personal projects — experiments, tools, and creative work.">
+  <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="../CSS/lidar-core.css">
+  <link rel="stylesheet" href="../CSS/lidar-loader.css">
+  <link rel="stylesheet" href="../CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADER
+       ============================================================ -->
+  <div class="ld-loader" id="lidar-loader" data-loader-text="PROJECTS">
+    <canvas class="ld-loader__canvas"></canvas>
+
+    <div class="ld-loader__scanline"></div>
+
+    <div class="ld-loader__info">
+      <div class="ld-loader__status">LOADING PROJECTS...</div>
+      <div class="ld-loader__progress">
+        <div class="ld-loader__progress-bar">
+          <div class="ld-loader__progress-fill"></div>
+        </div>
+        <span class="ld-loader__progress-text">0%</span>
+      </div>
+    </div>
+
+    <div class="ld-loader__coords">
+      <span class="ld-loader__coord">projects: 8</span>
+      <span class="ld-loader__coord">status: active</span>
+    </div>
+
+    <div class="ld-loader__system">
+      <div class="ld-loader__system-line">sys.projects.v1</div>
+      <div class="ld-loader__system-line">index: loading</div>
+    </div>
+
+    <div class="ld-loader__fallback-shape" style="display: none;">
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-ring"></div>
+      <div class="ld-loader__fallback-center"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       BACKGROUND
+       ============================================================ -->
+  <div class="ld-grid-bg ld-grid-bg--lines"></div>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ld-nav">
+    <a href="../index.html" class="ld-back">
+      <span class="ld-back__arrow">←</span>
+      <span data-hu="Vissza" data-en="Back">Vissza</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content" id="main-content">
+
+    <!-- HEADER -->
+    <section class="ld-section" style="padding-top: var(--space-4xl);">
+      <div class="ld-container">
+        <h1 class="ld-hero__title" style="text-align: center; margin-bottom: var(--space-sm);" data-reveal>
+          <span data-hu="Projektek" data-en="Projects">Projektek</span>
+        </h1>
+        <p class="text-mono text-dim" style="text-align: center;" data-reveal>
+          <span data-hu="Kísérletek és fejlesztések" data-en="Experiments and development">Kísérletek és fejlesztések</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECTS GRID -->
+    <section class="ld-section" style="padding-top: var(--space-xl);">
+      <div class="ld-container">
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- Personality Test -->
+          <a href="../../legacy/html/personality-test.html" class="ld-project-card" data-id="PRJ:001">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Brightness Icon.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Interactive</span>
+              <h3 class="ld-project-card__title" data-hu="Személyiség Teszt" data-en="Personality Test">Személyiség Teszt</h3>
+              <p class="ld-project-card__desc" data-hu="Hold vagy Nap alapú ember vagy?" data-en="Are you Moon or Sun based?">Hold vagy Nap alapú ember vagy?</p>
+            </div>
+          </a>
+
+          <!-- Workout Generator -->
+          <a href="../../legacy/html/workout-generator.html" class="ld-project-card" data-id="PRJ:002">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Gym.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Tool</span>
+              <h3 class="ld-project-card__title" data-hu="Edzésterv Generátor" data-en="Workout Generator">Edzésterv Generátor</h3>
+              <p class="ld-project-card__desc" data-hu="Edzzünk együtt!" data-en="Let's train together!">Edzzünk együtt!</p>
+            </div>
+          </a>
+
+          <!-- Love Trial -->
+          <a href="../../legacy/html/love-trial.html" class="ld-project-card" data-id="PRJ:003">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Heart.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Interactive</span>
+              <h3 class="ld-project-card__title">Love Trial</h3>
+              <p class="ld-project-card__desc" data-hu="Értékeld a randidat!" data-en="Rate your date!">Értékeld a randidat!</p>
+            </div>
+          </a>
+
+          <!-- Sleep Cycle -->
+          <a href="../../legacy/html/sleep-cycle.html" class="ld-project-card" data-id="PRJ:004">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Sleep Score Icon.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Tool</span>
+              <h3 class="ld-project-card__title" data-hu="Alvásciklus Kalkulátor" data-en="Sleep-cycle Calculator">Alvásciklus Kalkulátor</h3>
+              <p class="ld-project-card__desc" data-hu="Aludj jól!" data-en="Sleep well!">Aludj jól!</p>
+            </div>
+          </a>
+
+          <!-- Project Salvation -->
+          <a href="https://github.com/gergelyimarton/Project-Salvation" target="_blank" rel="noopener" class="ld-project-card" data-id="PRJ:005">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Book Icon.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Writing</span>
+              <h3 class="ld-project-card__title">Project Salvation</h3>
+              <p class="ld-project-card__desc" data-hu="Egy cyberpunk történet." data-en="A cyberpunk story.">Egy cyberpunk történet.</p>
+            </div>
+          </a>
+
+          <!-- I Know a Spot -->
+          <a href="https://i-know-a-spot.netlify.app/auth" target="_blank" rel="noopener" class="ld-project-card" data-id="PRJ:006">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Eco Icon.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">App</span>
+              <h3 class="ld-project-card__title">I Know a Spot</h3>
+              <p class="ld-project-card__desc" data-hu="Tudsz egy jó spot-ot?" data-en="Do you know a nice spot?">Tudsz egy jó spot-ot?</p>
+            </div>
+          </a>
+
+          <!-- Codex Brates Maximus -->
+          <a href="../../legacy/html/codex-brates-maximus.html" class="ld-project-card" data-id="PRJ:007">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Paper.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Reference</span>
+              <h3 class="ld-project-card__title">Codex Brates Maximus</h3>
+              <p class="ld-project-card__desc" data-hu="A Bro Kódex" data-en="The Bro Codex">A Bro Kódex</p>
+            </div>
+          </a>
+
+          <!-- Circle Game -->
+          <a href="../../legacy/html/circle-game.html" class="ld-project-card" data-id="PRJ:008">
+            <div class="ld-project-card__preview">
+              <img src="../../images/Hand.svg" alt="" style="padding: 32px; object-fit: contain; background: var(--ld-surface); transform: rotate(180deg);">
+            </div>
+            <div class="ld-project-card__body">
+              <span class="ld-project-card__tag">Game</span>
+              <h3 class="ld-project-card__title" data-hu="Karikás játék" data-en="Circle Game">Karikás játék</h3>
+              <p class="ld-project-card__desc" data-hu="Belenéztél!" data-en="You looked!">Belenéztél!</p>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">projects.index · <span id="current-year">2024</span></p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="../JS/lidar-loader.js"></script>
+  <script src="../JS/lidar-effects.js"></script>
+  <script src="../../shared/JS/language-switcher.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

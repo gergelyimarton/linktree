@@ -1,0 +1,390 @@
+:root {
+    --bg: #080a0f;
+    --paper: #e8eef5;
+    --accent: #4a9eff;
+    --accent-light: #7fb8ff;
+    --secondary: #6b7c93;
+    --dark-card: #0d1117;
+    --card-border: #1f2937;
+    --text-dark: #1a1f2a;
+    --text-light: #c5d0e0;
+    --success: #4ade80;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+/* Top border */
+.top-border {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hand-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    filter: grayscale(0.3);
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+/* Section headers */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2rem;
+}
+
+.section-header::before,
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Rule cards */
+.rule-card {
+    background: var(--dark-card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.rule-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(74, 158, 255, 0.1);
+}
+
+.rule-card h3 {
+    color: var(--paper);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rule-card h3 .emoji {
+    font-size: 1.5rem;
+}
+
+.rule-card p {
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.rule-card ul {
+    margin-top: 1rem;
+    padding-left: 0;
+}
+
+.rule-card li {
+    list-style: none;
+    padding-left: 1.75rem;
+    position: relative;
+    margin-bottom: 0.6rem;
+}
+
+.rule-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--accent);
+}
+
+/* Points table */
+.points-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.points-table th,
+.points-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.points-table th {
+    color: var(--accent-light);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.points-table td {
+    color: var(--text-light);
+}
+
+.points-table .points {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+/* Important box */
+.important-box {
+    background: rgba(74, 158, 255, 0.08);
+    border: 1px solid rgba(74, 158, 255, 0.3);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+}
+
+.important-box strong {
+    color: var(--accent);
+}
+
+/* Trick cards */
+.trick-card {
+    background: linear-gradient(135deg, var(--dark-card), #0a0d12);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.trick-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent-light));
+    border-radius: 4px 0 0 4px;
+}
+
+.trick-number {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.15;
+    line-height: 1;
+}
+
+.trick-card h4 {
+    color: var(--paper);
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.trick-card p {
+    color: var(--text-light);
+    opacity: 0.85;
+    font-size: 0.95rem;
+}
+
+/* Quote */
+.quote {
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    font-style: italic;
+    color: var(--accent-light);
+    font-size: 1.1rem;
+}
+
+.quote::before {
+    content: '"';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: var(--accent);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* Defense section */
+.defense-card {
+    background: linear-gradient(135deg, #0d1117, #0f1419);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.defense-card h4 {
+    color: var(--paper);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.defense-points {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.defense-point {
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.defense-point .points-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.defense-point .points-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+/* Forbidden list */
+.forbidden-list li::before {
+    content: "✗";
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.allowed-list li::before {
+    content: "✓";
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* Back button */
+.back-link {
+    text-decoration: none;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    padding: 12px 24px;
+    background: rgba(8, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 25px rgba(74, 158, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 2rem 1rem;
+    }
+
+    .rule-card, .trick-card, .defense-card {
+        padding: 1.5rem;
+    }
+
+    .trick-number {
+        display: none;
+    }
+
+    .defense-points {
+        flex-direction: column;
+    }
+
+    .back-button {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 30px auto 20px;
+    }
+}

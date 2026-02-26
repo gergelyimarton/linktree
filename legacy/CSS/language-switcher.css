@@ -1,0 +1,88 @@
+/* Language Switcher Styles */
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.language-switcher button {
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    color: #666;
+    font-family: inherit;
+}
+
+.language-switcher button:hover {
+    color: #333;
+}
+
+.language-switcher button.active {
+    background: var(--lang-accent, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide inactive language content */
+[data-lang="hu"] .lang-en,
+[data-lang="en"] .lang-hu {
+    display: none !important;
+}
+
+/* Dark theme variant for pages with dark backgrounds */
+.language-switcher.dark-theme {
+    background: rgba(30, 30, 40, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.language-switcher.dark-theme button {
+    color: #aaa;
+}
+
+.language-switcher.dark-theme button:hover {
+    color: #fff;
+}
+
+.language-switcher.dark-theme button.active {
+    background: var(--lang-accent, #6fa7b8);
+    color: #041018;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .language-switcher {
+        top: 15px;
+        right: 15px;
+        padding: 3px;
+    }
+
+    .language-switcher button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+
+    .language-switcher button {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}

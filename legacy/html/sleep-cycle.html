@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alvásciklus kalkulátor</title>
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../CSS/language-switcher.css">
+  <style>
+    .language-switcher { --lang-accent: #6fa7b8; }
+    /* === Alap színek & font === */
+    :root {
+      --bg:       #0b1020;        /* deep navy */
+      --card:     #0f1a2b;        /* darker card */
+      --accent:   #6fa7b8;        /* muted teal */
+      --soft:     #bfa7f0;        /* soft lavender */
+      --moon:     #ffea8a;        /* moon yellow */
+      --muted:    #cfe7ee;        /* cloud white */
+      --glass:    rgba(255,255,255,0.04);
+      --radius:   14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                   "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+  
+    /* === Reset & alap === */
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #061020);
+      color: var(--muted);
+    }
+  
+    /* === Központi wrapper === */
+    .wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 28px;
+      background: linear-gradient(180deg, var(--card), rgba(10,16,26,0.8));
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(2,6,12,0.7);
+    }
+  
+    /* === Fejléc === */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--soft));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #041018;
+      box-shadow: 0 6px 18px rgba(15,25,40,0.6);
+    }
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+    p.lead {
+      margin: 6px 0 18px;
+      color: rgba(207,231,238,0.9);
+    }
+  
+    /* === Layout grid === */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 18px;
+    }
+  
+    /* === Kártyák & táblázat === */
+    .card {
+      background: var(--glass);
+      padding: 18px;
+      border-radius: var(--radius);
+      backdrop-filter: blur(6px);
+    }
+    table {
+      width: 100%;
+      margin-top: 6px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    th {
+      color: var(--soft);
+      font-weight: 600;
+    }
+    .muted {
+      color: rgba(207,231,238,0.75);
+      font-size: 13px;
+    }
+  
+    /* === Űrlap elemek === */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    input[type="time"],
+    select,
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: transparent;
+      color: var(--muted);
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #041018;
+      background: linear-gradient(90deg, var(--accent), var(--soft));
+    }
+    .result {
+      margin-top: 12px;
+      padding: 12px;
+      font-weight: 600;
+      border-radius: 10px;
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.01));
+    }
+  
+    /* === Színes paletta === */
+    .palette {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .sw {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      box-shadow: inset 0 -4px rgba(0,0,0,0.14);
+    }
+  
+    /* === Lábjegyzet & apró megjegyzés === */
+    footer {
+      margin-top: 18px;
+      color: rgba(207,231,238,0.6);
+      font-size: 13px;
+    }
+
+    .back-button{
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        color: #041018;
+        background: linear-gradient(90deg, var(--accent), var(--soft));
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        padding: 14px 28px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(111, 167, 184, 0.3);
+    }
+
+    .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(111, 167, 184, 0.4);
+    }
+
+    small.note {
+      display: block;
+      margin-top: 8px;
+      color: rgba(207,231,238,0.55);
+    }
+  
+    /* === Dekoratív hold === */
+    .moon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--moon), #ffd967);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #041018;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(255,230,138,0.08);
+    }
+  
+    /* === Reszponzív === */
+    @media (max-width: 880px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 550px) {
+      .back-button {
+        position: relative;
+        bottom: 25px;
+        left: auto;
+        display: block;
+        width: fit-content;
+        margin: 40px auto 60px;
+        padding: 15px 30px;
+        text-decoration: none;
+      }
+
+      a:has(.back-button) {
+        text-decoration: none;
+        display: block;
+        margin-top: 20px;
+      }
+    }
+  </style>
+  
+</head>
+<body class="dark-theme">
+  <div class="wrap">
+    <header>
+      <!-- <div class="logo">Zzz</div> -->
+      <div>
+        <h1><span class="lang-hu">Alvásciklus kalkulátor</span><span class="lang-en">Sleep Cycle Calculator</span></h1>
+        <p class="lead"><span class="lang-hu">Ha egy teljes ciklusokat szeretnél megtenni, számold ki, mikor érdemes felkelni.</span><span class="lang-en">If you want to complete full cycles, calculate when you should wake up.</span></p>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div class="moon">☾</div>
+      </div>
+    </header>
+
+    <div class="grid" style="margin-top:18px">
+      <main>
+        <section class="card">
+          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Ciklusok (1 ciklus ≈ 90 perc ± 20 perc)</span><span class="lang-en">Cycles (1 cycle ≈ 90 min ± 20 min)</span></h3>
+          <div class="muted"><span class="lang-hu">Válassz ciklus számot és add meg mikor szeretnél lefeküdni.</span><span class="lang-en">Choose the number of cycles and enter when you want to go to bed.</span></div>
+
+          <table aria-label="ciklusok">
+            <thead>
+              <tr><th><span class="lang-hu">Ciklus</span><span class="lang-en">Cycle</span></th><th><span class="lang-hu">Idő (perc)</span><span class="lang-en">Time (min)</span></th><th><span class="lang-hu">Idő (óra)</span><span class="lang-en">Time (hours)</span></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>90</td><td><span class="lang-hu">1 óra 30 perc</span><span class="lang-en">1h 30m</span></td></tr>
+              <tr><td>2</td><td>180</td><td><span class="lang-hu">3 óra 0 perc</span><span class="lang-en">3h 0m</span></td></tr>
+              <tr><td>3</td><td>270</td><td><span class="lang-hu">4 óra 30 perc</span><span class="lang-en">4h 30m</span></td></tr>
+              <tr><td>4</td><td>360</td><td><span class="lang-hu">6 óra 0 perc</span><span class="lang-en">6h 0m</span></td></tr>
+              <tr><td>5</td><td>450</td><td><span class="lang-hu">7 óra 30 perc</span><span class="lang-en">7h 30m</span></td></tr>
+              <tr><td>6</td><td>540</td><td><span class="lang-hu">9 óra 0 perc</span><span class="lang-en">9h 0m</span></td></tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:12px">
+            <label class="muted"><span class="lang-hu">Extra tipp:</span><span class="lang-en">Extra tip:</span></label>
+            <small class="note"><span class="lang-hu">Számolj az elalvási idővel (~7 perc), a kalkulátor hozzáadja ezt is!</span><span class="lang-en">Account for falling asleep time (~7 min), the calculator adds this too!</span></small>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Számítási példák</span><span class="lang-en">Calculation examples</span></h3>
+          <div class="muted"><span class="lang-hu">Ha este 23:00-kor fekszel és 5 ciklust célzol:</span><span class="lang-en">If you go to bed at 23:00 and aim for 5 cycles:</span></div>
+          <div class="result" id="example"><span class="lang-hu">23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás = <strong>06:45</strong></span><span class="lang-en">23:00 + 5 cycles (7h 30m) + 15 min falling asleep = <strong>06:45</strong></span></div>
+        </section>
+      </main>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Kalkulátor</span><span class="lang-en">Calculator</span></h3>
+          <div class="controls">
+            <label class="muted"><span class="lang-hu">Lefekvés ideje</span><span class="lang-en">Bedtime</span></label>
+            <input type="time" id="bedtime" value="22:00">
+
+            <label class="muted"><span class="lang-hu">Ciklusok száma</span><span class="lang-en">Number of cycles</span></label>
+            <select id="cycles">
+                <option value="1" data-hu="1 ciklus (1:30)" data-en="1 cycle (1:30)">1 ciklus (1:30)</option>
+                <option value="2" data-hu="2 ciklus (3:00)" data-en="2 cycles (3:00)">2 ciklus (3:00)</option>
+                <option value="3" data-hu="3 ciklus (4:30)" data-en="3 cycles (4:30)">3 ciklus (4:30)</option>
+                <option value="4" data-hu="4 ciklus (6:00)" data-en="4 cycles (6:00)">4 ciklus (6:00)</option>
+                <option value="5" data-hu="5 ciklus (7:30)" data-en="5 cycles (7:30)">5 ciklus (7:30)</option>
+                <option value="6" selected data-hu="6 ciklus (9:00)" data-en="6 cycles (9:00)">6 ciklus (9:00)</option>
+                <option value="7" data-hu="7 ciklus (10:30)" data-en="7 cycles (10:30)">7 ciklus (10:30)</option>
+                <option value="8" data-hu="8 ciklus (12:00)" data-en="8 cycles (12:00)">8 ciklus (12:00)</option>
+                <option value="9" data-hu="9 ciklus (13:30)" data-en="9 cycles (13:30)">9 ciklus (13:30)</option>
+                <option value="10" data-hu="10 ciklus (15:00)" data-en="10 cycles (15:00)">10 ciklus (15:00)</option>
+              </select>
+
+
+            <label class="muted"><span class="lang-hu">Elalvási idő (perc)</span><span class="lang-en">Fall asleep time (min)</span></label>
+            <input type="number" id="fall" min="3" max="30" value="10">
+
+            <button class="btn" id="calc"><span class="lang-hu">Számolás</span><span class="lang-en">Calculate</span></button>
+
+            <div class="result" id="output">—</div>
+          </div>
+
+          <!-- <div style="margin-top:12px">
+            <label class="muted">Színpaletta</label>
+            <div class="palette">
+              <div class="sw" style="background:var(--bg)"></div>
+              <div class="sw" style="background:var(--card)"></div>
+              <div class="sw" style="background:var(--accent)"></div>
+              <div class="sw" style="background:var(--soft)"></div>
+              <div class="sw" style="background:var(--moon)"></div>
+            </div>
+            <small class="note">Deep navy / muted teal / soft lavender / moon yellow / cloud white</small>
+          </div> -->
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin:0 0 8px 0"><span class="lang-hu">Gyors funkciók</span><span class="lang-en">Quick functions</span></h4>
+          <small class="note"><span class="lang-hu">Most azonnal aludni megyek!</span><span class="lang-en">I'm going to sleep right now!</span></small>
+          <br>
+          <button class="btn" id="wakeNow"><span class="lang-hu">Számolás</span><span class="lang-en">Calculate</span></button>
+
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div><span class="lang-hu">Egyszerű segédlet — a számítások tájékoztató jellegűek.</span><span class="lang-en">Simple tool — calculations are for informational purposes.</span></div>
+    </footer>
+  </div>
+
+  <a href="javascript:history.back()">
+    <button class="back-button" data-hu="Vissza" data-en="Go back">
+        Vissza
+    </button>
+  </a>
+  <script>
+    function addMinutesToTime(timeStr, minutes){
+      // timeStr: HH:MM
+      const [h,m] = timeStr.split(":").map(Number);
+      const total = h*60 + m + minutes;
+      const wrapped = ((total % (24*60)) + (24*60)) % (24*60);
+      const rh = String(Math.floor(wrapped/60)).padStart(2,'0');
+      const rm = String(wrapped%60).padStart(2,'0');
+      return rh+':'+rm;
+    }
+
+    function compute(){
+      const bed = document.getElementById('bedtime').value || '23:00';
+      const cycles = parseInt(document.getElementById('cycles').value,10) || 5;
+      const fall = parseInt(document.getElementById('fall').value,10) || 15;
+      const minutes = cycles * 90 + fall;
+      const wake = addMinutesToTime(bed, minutes);
+      const lang = document.documentElement.getAttribute('data-lang') || 'hu';
+      const text = lang === 'en'
+        ? `Recommended wake time: <strong>${wake}</strong> (${cycles} cycle${cycles>1?'s':''} = ${cycles*90} min + ${fall} min falling asleep)`
+        : `Ajánlott ébredés: <strong>${wake}</strong> (${cycles} ciklus = ${cycles*90} perc + ${fall} perc elalvás)`;
+      document.getElementById('output').innerHTML = text;
+    }
+
+    document.getElementById('calc').addEventListener('click', compute);
+
+    document.getElementById('wakeNow').addEventListener('click', ()=>{
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      document.getElementById('bedtime').value = hh+':'+mm;
+      compute();
+    });
+
+    // fill example on load
+    document.addEventListener('DOMContentLoaded', ()=>{
+      compute();
+      updateSelectOptions();
+    });
+
+    // Update select option texts based on language
+    function updateSelectOptions() {
+      const lang = document.documentElement.getAttribute('data-lang') || 'hu';
+      document.querySelectorAll('#cycles option').forEach(opt => {
+        const text = opt.getAttribute(`data-${lang}`);
+        if (text) opt.textContent = text;
+      });
+    }
+
+    // Watch for language changes to update select options and recompute
+    const langObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-lang') {
+          updateSelectOptions();
+          compute();
+        }
+      });
+    });
+    langObserver.observe(document.documentElement, { attributes: true });
+  </script>
+  <script src="../JS/language-switcher.js"></script>
+</body>
+</html>

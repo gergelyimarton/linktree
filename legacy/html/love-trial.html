@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Love Trial</title>
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../CSS/love-trial.css">
+  <link rel="stylesheet" href="../CSS/language-switcher.css">
+  <style>
+    .language-switcher { --lang-accent: #d63384; }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts">
+    <span class="heart heart-1">❤️</span>
+    <span class="heart heart-2">💖</span>
+    <span class="heart heart-3">💕</span>
+    <span class="heart heart-4">💗</span>
+    <span class="heart heart-5">💘</span>
+    <span class="heart heart-6">💝</span>
+    <span class="heart heart-7">💞</span>
+    <span class="heart heart-8">💓</span>
+    <span class="heart heart-9">🩷</span>
+  </div>
+  <div class="body-container">
+  <h1>Love Trial</h1>
+
+  <details class="info-dropdown">
+    <summary>
+      <span class="info-icon">ℹ️</span>
+      <span class="info-title">
+        <span class="lang-hu">Mi ez az oldal és hogyan használd?</span>
+        <span class="lang-en">What is this page and how to use it?</span>
+      </span>
+      <span class="arrow"></span>
+    </summary>
+    <div class="info-content">
+      <div class="lang-hu">
+        <h3>Mi ez az oldal?</h3>
+        <p>A Love Trial egy személyes értékelő eszköz, amely segít felmérni egy potenciális partner kompatibilitását veled. Az oldal különböző aspektusokat vizsgál több randevú során, hogy átfogó képet kapj a kapcsolat lehetőségeiről.</p>
+
+        <h3>Hogyan használd?</h3>
+        <ol>
+          <li>Minden randevú után töltsd ki az adott oszlopot a <strong>Fő aspektusok</strong> táblázatban</li>
+          <li>Az 5. randevú után add meg a <strong>Fontos aspektusok</strong> összesített pontjait</li>
+          <li>Értékeld az <strong>Egyéb tulajdonságokat</strong> - ezek a "Sokszínűség" pontszámba számítanak</li>
+          <li>Adj hozzá <strong>Egyéni tulajdonságokat</strong> ha van valami egyedi szempont (+/- pontok)</li>
+          <li>Nézd meg az <strong>Összegzést</strong> a végső illeszkedési arányért</li>
+        </ol>
+
+        <h3>Pontozási rendszer</h3>
+        <ul>
+          <li><strong>- / 0</strong> - Nincs értékelve</li>
+          <li><strong>1 pont</strong> - Gyenge / Nem jellemző</li>
+          <li><strong>2 pont</strong> - Átlag alatti</li>
+          <li><strong>3 pont</strong> - Átlagos / Semleges</li>
+          <li><strong>4 pont</strong> - Jó / Átlag feletti</li>
+          <li><strong>5 pont</strong> - Kiváló / Nagyon jellemző</li>
+        </ul>
+
+        <h3>Szekciók magyarázata</h3>
+        <ul>
+          <li><strong>Fő aspektusok</strong> - A legfontosabb személyiségjegyek, minden randevún külön értékelve (1-5. randi)</li>
+          <li><strong>Fontos aspektusok</strong> - További lényeges szempontok, egy összesített pontszámmal az 5. randi után</li>
+          <li><strong>Egyéb tulajdonságok</strong> - Kiegészítő jellemzők, amelyek a "Sokszínűség" értékébe számítanak bele</li>
+          <li><strong>Egyéni tulajdonságok</strong> - Saját szempontok hozzáadása -5 és +5 közötti pontokkal</li>
+        </ul>
+
+        <h3>Eredmény értelmezése</h3>
+        <p>A végső illeszkedési arány az elért pontok és a maximálisan elérhető pontok hányadosa. Minél magasabb a százalék, annál jobb a kompatibilitás. Az <strong>Értelmezés</strong> táblázat segít kategorizálni az eredményt.</p>
+      </div>
+      <div class="lang-en">
+        <h3>What is this page?</h3>
+        <p>Love Trial is a personal evaluation tool that helps you objectively assess a potential partner's compatibility with you. The page examines various aspects across multiple dates to give you a comprehensive picture of the relationship's possibilities.</p>
+
+        <h3>How to use it?</h3>
+        <ol>
+          <li>After each date, fill in the corresponding column in the <strong>Main Aspects</strong> table</li>
+          <li>After the 5th date, enter the <strong>Important Aspects</strong> combined scores</li>
+          <li>Rate the <strong>Other Properties</strong> - these count toward the "Diversity" score</li>
+          <li>Add <strong>Custom Properties</strong> if you have any unique criteria (+/- points)</li>
+          <li>Check the <strong>Summary</strong> for your final compatibility ratio</li>
+        </ol>
+
+        <h3>Scoring system</h3>
+        <ul>
+          <li><strong>- / 0</strong> - Not evaluated</li>
+          <li><strong>1 point</strong> - Weak / Not characteristic</li>
+          <li><strong>2 points</strong> - Below average</li>
+          <li><strong>3 points</strong> - Average / Neutral</li>
+          <li><strong>4 points</strong> - Good / Above average</li>
+          <li><strong>5 points</strong> - Excellent / Very characteristic</li>
+        </ul>
+
+        <h3>Sections explained</h3>
+        <ul>
+          <li><strong>Main Aspects</strong> - The most important personality traits, rated separately on each date (1-5)</li>
+          <li><strong>Important Aspects</strong> - Additional key factors, with a combined score after the 5th date</li>
+          <li><strong>Other Properties</strong> - Supplementary characteristics that count toward the "Diversity" value</li>
+          <li><strong>Custom Properties</strong> - Add your own criteria with points between -5 and +5</li>
+        </ul>
+
+        <h3>Understanding the results</h3>
+        <p>The final compatibility ratio is the achieved points divided by the maximum possible points. The higher the percentage, the better the compatibility. The <strong>Interpretation</strong> table helps categorize your result.</p>
+      </div>
+    </div>
+  </details>
+
+  <h2 data-emoji="💎"><span class="lang-hu">Fő aspektusok</span><span class="lang-en">Main Aspects</span></h2>
+  <table id="mainAspects">
+    <thead>
+      <tr>
+        <th><span class="lang-hu">Fő aspektus</span><span class="lang-en">Main Aspect</span></th>
+        <th><span class="lang-hu">1. randi</span><span class="lang-en">Date 1</span></th>
+        <th><span class="lang-hu">2. randi</span><span class="lang-en">Date 2</span></th>
+        <th><span class="lang-hu">3. randi</span><span class="lang-en">Date 3</span></th>
+        <th><span class="lang-hu">4. randi</span><span class="lang-en">Date 4</span></th>
+        <th><span class="lang-hu">5. randi</span><span class="lang-en">Date 5</span></th>
+        <th><span class="lang-hu">Pontszám</span><span class="lang-en">Score</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="lang-hu">🌿 Spontaneitás</span><span class="lang-en">🌿 Spontaneity</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">🧠 Intelligencia / Kreativitás</span><span class="lang-en">🧠 Intelligence / Creativity</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">🤝 Együttműködés</span><span class="lang-en">🤝 Cooperation</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">🧘‍♀️ Komfortzóna rugalmassága</span><span class="lang-en">🧘‍♀️ Comfort zone flexibility</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">🔥 Kitartás / Stresszkezelés</span><span class="lang-en">🔥 Perseverance / Stress management</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">💡 Önreflexió</span><span class="lang-en">💡 Self-reflection</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">💬 Érzelmi intelligencia / Spiritualitás</span><span class="lang-en">💬 Emotional intelligence / Spirituality</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+      <tr><td><span class="lang-hu">😊 Hangulatom</span><span class="lang-en">😊 My mood</span></td><td data-label="1."><select></select></td><td data-label="2."><select></select></td><td data-label="3."><select></select></td><td data-label="4."><select></select></td><td data-label="5."><select></select></td><td class="score">0</td></tr>
+    </tbody>
+  </table>
+
+  <h2 data-emoji="⭐"><span class="lang-hu">Fontos aspektusok</span><span class="lang-en">Important Aspects</span></h2>
+  <table id="importantAspects">
+    <thead>
+      <tr><th><span class="lang-hu">Aspektus</span><span class="lang-en">Aspect</span></th><th><span class="lang-hu">Összesített pont az 5. randi után</span><span class="lang-en">Combined score after 5th date</span></th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="lang-hu">🎭 Humor</span><span class="lang-en">🎭 Humor</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🧲 Fizikai vonzalom</span><span class="lang-en">🧲 Physical attraction</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🧩 Kapcsolódási könnyedség</span><span class="lang-en">🧩 Ease of connection</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">👕 Öltözködés</span><span class="lang-en">👕 Style / Clothing</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🎧 Zenei ízlés</span><span class="lang-en">🎧 Musical taste</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🧼 Higiénia</span><span class="lang-en">🧼 Hygiene</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🫦 Szexualitás</span><span class="lang-en">🫦 Sexuality</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">🌈 Sokszínűség (Egyéb tulajdonságok)</span><span class="lang-en">🌈 Diversity (Other properties)</span></td><td id="diversityTotal">0</td></tr>
+    </tbody>
+  </table>
+
+  <h2 data-emoji="🌟"><span class="lang-hu">Egyéb tulajdonságok</span><span class="lang-en">Other Properties</span></h2>
+  <table id="otherProps">
+    <thead><tr><th><span class="lang-hu">Tulajdonság</span><span class="lang-en">Property</span></th><th><span class="lang-hu">Pont</span><span class="lang-en">Score</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="lang-hu">Ambíciózusság / Szenvedélyesség</span><span class="lang-en">Ambition / Passion</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Autentikusság</span><span class="lang-en">Authenticity</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Bátorság</span><span class="lang-en">Courage</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Bölcsesség</span><span class="lang-en">Wisdom</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Család-központúság</span><span class="lang-en">Family-oriented</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Energikusság</span><span class="lang-en">Energy</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Kalandvágyás / Kihíváskedvelés</span><span class="lang-en">Adventure-seeking</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Kedvesség / Szelídség</span><span class="lang-en">Kindness / Gentleness</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Nyugodtság</span><span class="lang-en">Calmness</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Önállóság</span><span class="lang-en">Independence</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Őszinteség / Hűségesség</span><span class="lang-en">Honesty / Loyalty</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Szerénység</span><span class="lang-en">Modesty</span></td><td><select></select></td></tr>
+      <tr><td><span class="lang-hu">Udvariasság</span><span class="lang-en">Courtesy</span></td><td><select></select></td></tr>
+      <tr><td><strong><span class="lang-hu">Tulajdonságok összesített pontszáma</span><span class="lang-en">Total properties score</span></strong></td><td id="otherPropsTotal">0</td></tr>
+    </tbody>
+  </table>
+
+  <h2 data-emoji="✨"><span class="lang-hu">Egyéni tulajdonságok</span><span class="lang-en">Custom Properties</span></h2>
+  <table id="customProps">
+    <thead><tr><th><span class="lang-hu">Tulajdonság neve</span><span class="lang-en">Property name</span></th><th><span class="lang-hu">Pont (+/-)</span><span class="lang-en">Score (+/-)</span></th></tr></thead>
+    <tbody>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><input type="text" class="custom-name" data-placeholder-hu="Tulajdonság neve..." data-placeholder-en="Property name..." placeholder="Tulajdonság neve..."></td><td><select class="custom-score"></select></td></tr>
+      <tr><td><strong><span class="lang-hu">Pontszám összesen</span><span class="lang-en">Total score</span></strong></td><td id="customPropsTotal">0</td></tr>
+    </tbody>
+  </table>
+
+  <h2 data-emoji="📊"><span class="lang-hu">Összegzés</span><span class="lang-en">Summary</span></h2>
+  <table id="summary">
+    <tbody>
+      <tr><td><span class="lang-hu">Értékelt mezők száma</span><span class="lang-en">Fields evaluated</span></td><td id="filledCount">0 db</td></tr>
+      <tr><td><span class="lang-hu">Elérhető max pontszám</span><span class="lang-en">Maximum possible score</span></td><td id="maxScore">0 pont</td></tr>
+      <tr><td><span class="lang-hu">Elért pontszám</span><span class="lang-en">Achieved score</span></td><td id="achievedScore">0 pont</td></tr>
+      <tr><td><span class="lang-hu">Illeszkedési arány</span><span class="lang-en">Compatibility ratio</span></td><td id="fitRatio">0,00%</td></tr>
+    </tbody>
+  </table>
+
+  <h2 data-emoji="📖"><span class="lang-hu">Értelmezés</span><span class="lang-en">Interpretation</span></h2>
+  <table>
+    <tbody>
+      <tr><td>90–100%</td><td>🟩  <span class="lang-hu">Kivételes illeszkedés</span><span class="lang-en">Exceptional compatibility</span></td></tr>
+      <tr><td>70–89%</td><td>🟦  <span class="lang-hu">Erős kompatibilitás</span><span class="lang-en">Strong compatibility</span></td></tr>
+      <tr><td>40–69%</td><td>🟨  <span class="lang-hu">Részleges kompatibilitás</span><span class="lang-en">Partial compatibility</span></td></tr>
+      <tr><td>20–39%</td><td>🟧  <span class="lang-hu">Figyelmeztető zóna</span><span class="lang-en">Warning zone</span></td></tr>
+      <tr><td>0–19%</td><td>🟥  <span class="lang-hu">Alacsony illeszkedés</span><span class="lang-en">Low compatibility</span></td></tr>
+    </tbody>
+  </table>
+
+  <button class="btn" onclick="downloadJSON()"><span class="lang-hu">Eredmény letöltése (JSON)</span><span class="lang-en">Download results (JSON)</span></button>
+  <input type="file" id="jsonUpload" accept="application/json" class="btn" />
+
+  <a href="javascript:history.back()">
+    <button class="back-button" data-hu="Vissza" data-en="Go back">Vissza</button>
+  </a>
+
+  <footer>
+    <span class="lang-hu">Ez egy statikus HTML oldal. Az adatok lenyíló listákból választhatók. A letöltött JSON tartalmazza az aktuális állapotot, amit később vissza lehet tölteni.</span>
+    <span class="lang-en">This is a static HTML page. Data can be selected from dropdown lists. The downloaded JSON contains the current state, which can be loaded later.</span>
+  </footer>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Feltöltjük az összes selectet 1–5 opciókkal (+ üres)
+      document.querySelectorAll('select').forEach(sel => {
+        sel.innerHTML = '<option value="">-</option>' +
+          Array.from({length:5}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+
+        sel.addEventListener('change', updateAll);
+      });
+
+      // 2. MainAspects utolsó oszlop létrehozása (ha még nincs span)
+      document.querySelectorAll('#mainAspects tbody tr').forEach(tr=>{
+        const lastTd = tr.querySelector('td.score');
+        if(!lastTd) {
+          const tds = tr.querySelectorAll('td');
+          tds[tds.length-1].innerHTML = '<span class="score">0</span>';
+        }
+      });
+
+      // 3. Custom properties selects (5 to -5)
+      document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+        sel.innerHTML = [5,4,3,2,1,0,-1,-2,-3,-4,-5].map(v => `<option value="${v}">${v}</option>`).join('');
+        sel.value = "0";
+        sel.addEventListener('change', updateAll);
+      });
+
+      updateAll(); // induláskor is frissít
+    });
+    
+
+
+
+
+
+
+
+
+
+
+
+    function updateAll() {
+  // 🔹 1. Frissítjük mainAspects pontszám oszlopait
+  document.querySelectorAll('#mainAspects tbody tr').forEach(tr=>{
+    const selects = Array.from(tr.querySelectorAll('select')).slice(0,5);
+    const scoreSpan = tr.querySelector('.score') || tr.querySelector('td:last-child');
+    const sum = selects.reduce((acc, s) => acc + Number(s.value || 0), 0);
+    if(scoreSpan) scoreSpan.textContent = sum;
+  });
+
+  // 🔹 2. Összesített értékek csak mainAspects + importantAspects
+  let totalSum = 0;
+  let filled = 0;
+
+  document.querySelectorAll('#mainAspects select, #importantAspects select').forEach(sel => {
+    const v = parseInt(sel.value,10);
+    if(!isNaN(v)){
+      totalSum += v;
+      filled++;
+    }
+  });
+
+  // 🔹 3. Összesített pont az "Egyéb tulajdonságok" táblázatból
+  let otherSum = 0;
+  document.querySelectorAll('#otherProps tbody tr:not(:last-child) select').forEach(sel=>{
+    const v = parseInt(sel.value,10);
+    if(!isNaN(v)) otherSum += v;
+  });
+  document.getElementById('otherPropsTotal').textContent = otherSum;
+
+  // 🔹 4. DiversityScore az otherPropsTotal alapján
+  const totalForDiversity = parseInt(document.getElementById('otherPropsTotal').textContent,10) || 0;
+  let diversityScore = 0;
+  if(totalForDiversity <= 10) diversityScore = 0;
+  else if(totalForDiversity <= 20) diversityScore = 1;
+  else if(totalForDiversity <= 30) diversityScore = 2;
+  else if(totalForDiversity <= 40) diversityScore = 3;
+  else if(totalForDiversity <= 50) diversityScore = 4;
+  else if(totalForDiversity > 60) diversityScore = 5;
+
+  document.getElementById('diversityTotal').textContent = diversityScore;
+
+  // 🔹 5. Hozzáadjuk a diversityScore-t a totalSum-hoz
+  totalSum += diversityScore;
+
+  // 🔹 6. Custom properties összesítése
+  let customSum = 0;
+  document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+    const v = parseInt(sel.value, 10);
+    if (!isNaN(v)) customSum += v;
+  });
+  document.getElementById('customPropsTotal').textContent = customSum;
+
+  // 🔹 7. Hozzáadjuk a custom pontokat a totalSum-hoz
+  totalSum += customSum;
+
+  // Ha van kitöltött mező, hozzáadjuk a diversityScore-t is
+  const totalFilled = filled > 0 ? filled + 1 : 0; // +1 a diversityScore-ért, de csak ha van kitöltött mező
+  const maxScore = filled > 0 ? filled * 5 + 5 : 0; // +5 a diversityScore max, de csak ha van kitöltött mező
+  const fitRatio = maxScore > 0 ? ((totalSum / maxScore) * 100).toFixed(2) : '0.00';
+
+  document.getElementById('filledCount').textContent = totalFilled + ' db';
+  document.getElementById('maxScore').textContent = maxScore + ' pont';
+  document.getElementById('achievedScore').textContent = totalSum + ' pont';
+  document.getElementById('fitRatio').textContent = fitRatio + '%';
+}
+
+// minden select változáskor frissítünk
+document.querySelectorAll('select').forEach(sel=>{
+  sel.addEventListener('change', updateAll);
+});
+
+// custom score selectek változáskor frissítünk
+document.querySelectorAll('#customProps .custom-score').forEach(sel => {
+  sel.addEventListener('change', updateAll);
+});
+
+// induláskor is frissítjük
+updateAll();
+
+
+
+
+
+
+
+
+
+
+    document.querySelectorAll('#otherProps select').forEach(sel => {
+      sel.innerHTML = '<option value="">-</option>' + 
+                    Array.from({length:5}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+      sel.addEventListener('change', updateOtherPropsTotal);
+    });
+
+    function updateOtherPropsTotal() {
+      let sum = 0;
+      document.querySelectorAll('#otherProps tbody tr:not(:last-child) select').forEach(sel => {
+      const v = parseInt(sel.value,10);
+      if(!isNaN(v)) sum += v;
+      });
+      document.getElementById('otherPropsTotal').textContent = sum;
+    }
+
+    // induláskor is frissítjük
+    updateOtherPropsTotal();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 🔹 JSON letöltés és feltöltés
+    function tableToArray(tableId){
+      const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+      return Array.from(rows).map(r=> Array.from(r.querySelectorAll('td')).map(td=>{
+        const sel = td.querySelector('select');
+        return sel ? sel.value : td.innerText.trim();
+      }));
+    }
+    
+    function getCustomProps() {
+      const rows = document.querySelectorAll('#customProps tbody tr:not(:last-child)');
+      return Array.from(rows).map(tr => {
+        const nameInput = tr.querySelector('.custom-name');
+        const scoreSelect = tr.querySelector('.custom-score');
+        return {
+          name: nameInput ? nameInput.value : '',
+          score: scoreSelect ? parseInt(scoreSelect.value, 10) || 0 : 0
+        };
+      });
+    }
+
+    function downloadJSON(){
+      const data = {
+        mainAspects: tableToArray('mainAspects'),
+        importantAspects: tableToArray('importantAspects'),
+        otherProps: tableToArray('otherProps'),
+        customProps: getCustomProps()
+      };
+      const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href=url; a.download='love-trial.json'; a.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    document.getElementById('jsonUpload').addEventListener('change', function(){
+      const file = this.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try{
+          const data = JSON.parse(e.target.result);
+          function fillTable(tableId, arr){
+            const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+            arr.forEach((row,i)=>{
+              if(rows[i]){
+                const cells = rows[i].querySelectorAll('td');
+                row.forEach((val,j)=>{
+                  if(cells[j]){
+                    const sel = cells[j].querySelector('select');
+                    if(sel){ sel.value = val; } else { cells[j].innerText = val; }
+                  }
+                });
+              }
+            });
+          }
+          fillTable('mainAspects', data.mainAspects||[]);
+          fillTable('importantAspects', data.importantAspects||[]);
+          fillTable('otherProps', data.otherProps||[]);
+
+          // Load custom properties
+          if (data.customProps && Array.isArray(data.customProps)) {
+            const rows = document.querySelectorAll('#customProps tbody tr:not(:last-child)');
+            data.customProps.forEach((item, i) => {
+              if (rows[i]) {
+                const nameInput = rows[i].querySelector('.custom-name');
+                const scoreSelect = rows[i].querySelector('.custom-score');
+                if (nameInput) nameInput.value = item.name || '';
+                if (scoreSelect) scoreSelect.value = item.score || 0;
+              }
+            });
+          }
+
+          updateAll(); // frissítjük a számításokat a betöltött adatokkal
+        }catch(err){
+          const lang = document.documentElement.getAttribute('data-lang') || 'hu';
+          alert(lang === 'en' ? 'Invalid JSON file.' : 'Hibás JSON fájl.');
+        }
+      };
+      reader.readAsText(file);
+    });
+  </script>
+  <script src="../JS/language-switcher.js"></script>
+  <script>
+    // Update placeholders when language changes
+    function updatePlaceholders() {
+      const lang = document.documentElement.getAttribute('data-lang') || 'hu';
+      document.querySelectorAll('[data-placeholder-hu][data-placeholder-en]').forEach(input => {
+        input.placeholder = input.getAttribute(`data-placeholder-${lang}`);
+      });
+    }
+    // Initial update
+    updatePlaceholders();
+    // Watch for language changes
+    const placeholderObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-lang') {
+          updatePlaceholders();
+        }
+      });
+    });
+    placeholderObserver.observe(document.documentElement, { attributes: true });
+  </script>
+</div>
+</body>
+
+</html>
