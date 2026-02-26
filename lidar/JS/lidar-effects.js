@@ -33,7 +33,8 @@
     // Hero scanner
     scanner: {
       enabled: true,
-      speed: 0.000175,  // 50% slower
+      speed1: 0.00012,  // Scanner 1 speed (20% slower)
+      speed2: 0.00016,  // Scanner 2 speed (slightly faster)
       width: 100
     }
   };
@@ -61,59 +62,9 @@
     revealElements.forEach(el => observer.observe(el));
   }
 
-  // Add CSS for reveal states
+  // Reveal styles are now in lidar-components.css
   function injectRevealStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-      [data-reveal] {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-
-      [data-reveal].revealed {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      [data-reveal="fade"] {
-        transform: none;
-      }
-
-      [data-reveal="slide-left"] {
-        transform: translateX(-20px);
-      }
-
-      [data-reveal="slide-left"].revealed {
-        transform: translateX(0);
-      }
-
-      [data-reveal="slide-right"] {
-        transform: translateX(20px);
-      }
-
-      [data-reveal="slide-right"].revealed {
-        transform: translateX(0);
-      }
-
-      /* Stagger children */
-      [data-reveal-stagger] > * {
-        opacity: 0;
-        transform: translateY(15px);
-        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-      }
-
-      [data-reveal-stagger].revealed > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(8) { transition-delay: 560ms; opacity: 1; transform: translateY(0); }
-      [data-reveal-stagger].revealed > *:nth-child(n+9) { transition-delay: 640ms; opacity: 1; transform: translateY(0); }
-    `;
-    document.head.appendChild(style);
+    // Styles moved to CSS file - no longer needed
   }
 
   // ============================================================
@@ -121,16 +72,7 @@
   // ============================================================
 
   function initPageTransitions() {
-    // Add exit animation class to body
-    const style = document.createElement('style');
-    style.textContent = `
-      body.page-exit {
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity ${CONFIG.exitDuration}ms ease-in, transform ${CONFIG.exitDuration}ms ease-in;
-      }
-    `;
-    document.head.appendChild(style);
+    // Exit animation styles in CSS
 
     // Intercept link clicks
     document.addEventListener('click', (e) => {
@@ -171,18 +113,11 @@
     if (!CONFIG.particles.enabled) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Find or create canvas
+    // Find or create canvas (styles in CSS)
     particleCanvas = document.querySelector('.ld-ambient-canvas');
     if (!particleCanvas) {
       particleCanvas = document.createElement('canvas');
       particleCanvas.className = 'ld-ambient-canvas';
-      particleCanvas.style.cssText = `
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.6;
-      `;
       document.body.insertBefore(particleCanvas, document.body.firstChild);
     }
 
@@ -216,6 +151,10 @@
     function animate() {
       particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
 
+      // Check theme for particle color
+      const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+      const particleColor = isLightTheme ? '10, 10, 10' : '0, 255, 136';
+
       particles.forEach(p => {
         // Update position
         p.x += p.vx;
@@ -233,7 +172,7 @@
 
         particleCtx.beginPath();
         particleCtx.arc(x, y, p.size, 0, Math.PI * 2);
-        particleCtx.fillStyle = `rgba(0, 255, 136, ${p.opacity})`;
+        particleCtx.fillStyle = `rgba(${particleColor}, ${p.opacity})`;
         particleCtx.fill();
       });
 
@@ -253,53 +192,64 @@
   }
 
   // ============================================================
-  // HERO SCANNER LINE
+  // SCANNER LINES (Hero only, dual scanners from opposite directions)
   // ============================================================
 
-  function initHeroScanner() {
+  function initScanner() {
     if (!CONFIG.scanner.enabled) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const hero = document.querySelector('.ld-hero');
-    if (!hero) return;
+    if (!hero) return; // Only on index page with hero
 
-    // Create scanner element
-    const scanner = document.createElement('div');
-    scanner.className = 'ld-hero__scanner';
-    scanner.style.cssText = `
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--ld-scan, #00ff88), transparent);
-      box-shadow: 0 0 20px var(--ld-scan, #00ff88), 0 0 40px rgba(0, 255, 136, 0.3);
-      opacity: 0.5;
-      pointer-events: none;
-      z-index: 0;
-    `;
-    hero.appendChild(scanner);
+    // Check if scanners already exist
+    if (hero.querySelector('.ld-hero__scanner')) return;
 
-    let position = 0;
-    let direction = 1;
-    const heroHeight = hero.offsetHeight;
+    let heroHeight = hero.offsetHeight;
 
-    function animate() {
-      position += CONFIG.scanner.speed * direction * 16 * heroHeight;
+    // Scanner 1: starts from top, moves down
+    const scanner1 = document.createElement('div');
+    scanner1.className = 'ld-hero__scanner';
+    hero.appendChild(scanner1);
 
-      if (position > heroHeight) {
-        direction = -1;
-        position = heroHeight;
-      }
-      if (position < 0) {
-        direction = 1;
-        position = 0;
-      }
+    // Scanner 2: starts from bottom, moves up
+    const scanner2 = document.createElement('div');
+    scanner2.className = 'ld-hero__scanner';
+    hero.appendChild(scanner2);
 
-      scanner.style.top = position + 'px';
+    let pos1 = 0;
+    let dir1 = 1;
+    let pos2 = heroHeight;
+    let dir2 = -1;
+    let lastTime = performance.now();
+
+    function animate(currentTime) {
+      // Calculate delta time for smooth animation
+      const deltaTime = currentTime - lastTime;
+      lastTime = currentTime;
+
+      // Recalculate hero height in case of resize
+      heroHeight = hero.offsetHeight;
+
+      // Scanner 1 - slower
+      const speed1 = CONFIG.scanner.speed1 * deltaTime * heroHeight;
+      pos1 += speed1 * dir1;
+      if (pos1 > heroHeight) { dir1 = -1; pos1 = heroHeight; }
+      if (pos1 < 0) { dir1 = 1; pos1 = 0; }
+      scanner1.style.top = pos1 + 'px';
+
+      // Scanner 2 - faster
+      const speed2 = CONFIG.scanner.speed2 * deltaTime * heroHeight;
+      pos2 += speed2 * dir2;
+      if (pos2 > heroHeight) { dir2 = -1; pos2 = heroHeight; }
+      if (pos2 < 0) { dir2 = 1; pos2 = 0; }
+      scanner2.style.top = pos2 + 'px';
+
       requestAnimationFrame(animate);
     }
 
-    animate();
+    // Start animation
+    requestAnimationFrame(animate);
   }
 
   // ============================================================
@@ -367,15 +317,20 @@
   // INITIALIZATION
   // ============================================================
 
+  let initialized = false;
+
   function init() {
     // Wait for lidarReady event (from loader) or DOMContentLoaded
     const start = () => {
+      if (initialized) return;
+      initialized = true;
+
       injectRevealStyles();
       initScrollReveal();
       initPageTransitions();
       initCoordinateLabels();
       initAmbientParticles();
-      initHeroScanner();
+      initScanner();
       initTypingEffect();
       initLanguageIntegration();
     };

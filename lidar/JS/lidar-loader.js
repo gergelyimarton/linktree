@@ -49,11 +49,30 @@
     maxFPS: 60,
     reducedMotionFPS: 30,
 
-    // Colors (CSS variable fallbacks)
+    // Colors - these are overridden by getThemeColors()
     colorScan: [0, 1, 0.53],    // #00ff88 in RGB 0-1
     colorDim: [0, 0.3, 0.2],    // Dimmed scan color
     colorVoid: [0.012, 0.012, 0.02] // #030305
   };
+
+  // Get theme-appropriate colors
+  function getThemeColors() {
+    const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+
+    if (isLightTheme) {
+      return {
+        colorScan: [0.04, 0.04, 0.04],    // #0a0a0a - black
+        colorDim: [0.3, 0.3, 0.3],         // gray
+        colorVoid: [0.96, 0.96, 0.97]      // #f5f5f7 - light background
+      };
+    }
+
+    return {
+      colorScan: CONFIG.colorScan,
+      colorDim: CONFIG.colorDim,
+      colorVoid: CONFIG.colorVoid
+    };
+  }
 
   // ============================================================
   // STATE
@@ -565,9 +584,12 @@
     setupAttribute('a_size', sizeBuffer, 1);
     setupAttribute('a_seed', seedBuffer, 1);
 
+    // Get theme-appropriate colors
+    const themeColors = getThemeColors();
+
     // Initial uniform values
-    setUniform('u_colorScan', '3f', ...CONFIG.colorScan);
-    setUniform('u_colorDim', '3f', ...CONFIG.colorDim);
+    setUniform('u_colorScan', '3f', ...themeColors.colorScan);
+    setUniform('u_colorDim', '3f', ...themeColors.colorDim);
     setUniform('u_pointSize', '1f', CONFIG.pointSize * window.devicePixelRatio);
     setUniform('u_scanWidth', '1f', CONFIG.scanWidth);
 
@@ -576,7 +598,7 @@
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     // Set clear color
-    gl.clearColor(...CONFIG.colorVoid, 1.0);
+    gl.clearColor(...themeColors.colorVoid, 1.0);
 
     return true;
   }
@@ -859,6 +881,15 @@
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
+  function isMobile() {
+    return window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches;
+  }
+
+  function isIndexPage() {
+    const loader = document.querySelector('.ld-loader');
+    return loader && !loader.dataset.loaderText;
+  }
+
   // ============================================================
   // INITIALIZATION
   // ============================================================
@@ -872,8 +903,8 @@
       return;
     }
 
-    // Check capabilities
-    if (!canUseWebGL() || prefersReducedMotion()) {
+    // Skip WebGL on index page or mobile - use CSS fallback
+    if (isIndexPage() || isMobile() || !canUseWebGL() || prefersReducedMotion()) {
       initFallback();
       return;
     }

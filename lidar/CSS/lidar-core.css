@@ -101,6 +101,48 @@
 }
 
 /* ============================================================
+   LIGHT THEME
+   ============================================================ */
+
+[data-theme="light"] {
+  /* === VOID → LIGHT === */
+  --ld-void: #f5f5f7;
+  --ld-surface: #ffffff;
+  --ld-panel: #fafafa;
+  --ld-panel-hover: #f0f0f2;
+  --ld-panel-active: #e8e8ec;
+
+  /* === SCAN → BLACK === */
+  --ld-scan: #0a0a0a;
+  --ld-scan-dim: rgba(10, 10, 10, 0.12);
+  --ld-scan-glow: rgba(10, 10, 10, 0.08);
+  --ld-scan-bright: #000000;
+
+  /* === DATA === */
+  --ld-data-cyan: #0088cc;
+  --ld-data-orange: #cc4400;
+  --ld-data-red: #cc0022;
+
+  /* === TEXT === */
+  --ld-text: #2a2a30;
+  --ld-text-dim: #707080;
+  --ld-text-bright: #000000;
+  --ld-text-scan: var(--ld-scan);
+
+  /* === STRUCTURE === */
+  --ld-border: rgba(10, 10, 10, 0.15);
+  --ld-border-hover: rgba(10, 10, 10, 0.3);
+  --ld-border-active: var(--ld-scan);
+  --ld-grid: rgba(10, 10, 10, 0.04);
+  --ld-grid-line: rgba(10, 10, 10, 0.08);
+
+  /* === EFFECTS === */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 30px rgba(0, 0, 0, 0.05);
+  --crt-scanlines: none;
+}
+
+/* ============================================================
    RESET & BASE
    ============================================================ */
 

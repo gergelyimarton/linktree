@@ -221,9 +221,9 @@
           return;
         }
 
-        // Auto-detect based on capability
-        const version = canUseLidar() ? 'lidar' : 'legacy';
-        status.textContent = `Detected: ${version}`;
+        // Always use LiDAR version (fallback handled internally)
+        const version = 'lidar';
+        status.textContent = `Loading: ${version}`;
 
         setTimeout(() => {
           window.location.replace(CONFIG.paths[version]);

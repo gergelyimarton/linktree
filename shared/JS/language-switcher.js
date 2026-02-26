@@ -56,6 +56,17 @@
            document.querySelector('[class^="ld-"]') !== null;
   }
 
+  // Get or create the shared switcher container
+  function getOrCreateContainer() {
+    let container = document.querySelector('.ld-switcher-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'ld-switcher-container';
+      document.body.appendChild(container);
+    }
+    return container;
+  }
+
   // Create LiDAR-styled switcher
   function createLidarSwitcher() {
     const switcher = document.createElement('div');
@@ -66,15 +77,21 @@
     `;
 
     // Inject styles if not already present
-    if (!document.querySelector('#ld-lang-switcher-styles')) {
+    if (!document.querySelector('#ld-switcher-styles')) {
       const style = document.createElement('style');
-      style.id = 'ld-lang-switcher-styles';
+      style.id = 'ld-switcher-styles';
       style.textContent = `
-        .ld-lang-switcher {
+        .ld-switcher-container {
           position: fixed;
           bottom: 24px;
           right: 24px;
           z-index: 100;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .ld-lang-switcher {
           display: flex;
           gap: 4px;
           padding: 4px;
@@ -108,7 +125,7 @@
         }
 
         @media (max-width: 480px) {
-          .ld-lang-switcher {
+          .ld-switcher-container {
             bottom: 16px;
             right: 16px;
           }
@@ -157,7 +174,14 @@
     }
 
     const switcher = isLidarMode() ? createLidarSwitcher() : createLegacySwitcher();
-    document.body.appendChild(switcher);
+
+    // For LiDAR mode, use the shared container
+    if (isLidarMode()) {
+      const container = getOrCreateContainer();
+      container.appendChild(switcher);
+    } else {
+      document.body.appendChild(switcher);
+    }
 
     // Add click handlers
     switcher.querySelectorAll('button').forEach(btn => {
