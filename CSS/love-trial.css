@@ -428,6 +428,135 @@ select:focus {
     transform: translateY(-1px) scale(1);
 }
 
+/* File actions container */
+.file-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 30px 0;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(214, 51, 132, 0.12);
+}
+
+.section-label {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Download section */
+.download-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.download-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#fileNameInput {
+    padding: 12px 16px;
+    border-radius: 25px 0 0 25px;
+    border: 2px solid #ffc9e8;
+    border-right: none;
+    background: #fff;
+    color: #555;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
+    width: 180px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#fileNameInput:hover {
+    border-color: #ff9dd6;
+}
+
+#fileNameInput:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
+}
+
+#fileNameInput::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+.file-extension {
+    padding: 12px 14px;
+    background: #fff0f6;
+    border: 2px solid #ffc9e8;
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    color: #d63384;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
+}
+
+.download-controls .btn {
+    margin: 0;
+    margin-left: 10px;
+}
+
+/* Upload section */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px dashed #ffc9e8;
+}
+
+.upload-section .btn {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .file-actions {
+        padding: 20px 16px;
+        margin: 20px 0;
+    }
+
+    .download-controls {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    #fileNameInput {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 25px;
+        border-right: 2px solid #ffc9e8;
+        text-align: center;
+    }
+
+    .file-extension {
+        display: none;
+    }
+
+    .download-controls .btn {
+        margin-left: 0;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .upload-section .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
 footer {
     margin-top: 50px;
     margin-bottom: 30px;

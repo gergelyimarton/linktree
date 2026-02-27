@@ -209,12 +209,23 @@
     </tbody>
   </table>
 
-  <button class="btn" onclick="downloadJSON()"><span class="lang-hu">Eredmény letöltése (JSON)</span><span class="lang-en">Download results (JSON)</span></button>
-  <input type="file" id="jsonUpload" accept="application/json" class="btn" />
+  <div class="file-actions">
+    <div class="download-section">
+      <p class="section-label"><span class="lang-hu">Mentés új fájlként:</span><span class="lang-en">Save as new file:</span></p>
+      <div class="download-controls">
+        <input type="text" id="fileNameInput" placeholder="Fájlnév..." data-placeholder-hu="Fájlnév..." data-placeholder-en="Filename..." value="love-trial">
+        <span class="file-extension">.json</span>
+        <button class="btn" onclick="downloadJSON()"><span class="lang-hu">Letöltés</span><span class="lang-en">Download</span></button>
+      </div>
+    </div>
 
-  <a href="projects.html">
-    <button class="back-button" data-hu="Vissza" data-en="Go back">Vissza</button>
-  </a>
+    <div class="upload-section">
+      <p class="section-label"><span class="lang-hu">Korábbi mentés betöltése:</span><span class="lang-en">Load previous save:</span></p>
+      <input type="file" id="jsonUpload" accept="application/json" class="btn" />
+    </div>
+  </div>
+
+  <button class="back-button" data-hu="Vissza" data-en="Go back" onclick="history.back()">Vissza</button>
 
   <footer>
     <span class="lang-hu">Ez egy statikus HTML oldal. Az adatok lenyíló listákból választhatók. A letöltött JSON tartalmazza az aktuális állapotot, amit később vissza lehet tölteni.</span>
@@ -415,6 +426,11 @@ updateAll();
     }
 
     function downloadJSON(){
+      const fileNameInput = document.getElementById('fileNameInput');
+      let fileName = fileNameInput.value.trim() || 'love-trial';
+      // Remove .json if user added it, we'll add it ourselves
+      fileName = fileName.replace(/\.json$/i, '');
+
       const data = {
         mainAspects: tableToArray('mainAspects'),
         importantAspects: tableToArray('importantAspects'),
@@ -424,7 +440,7 @@ updateAll();
       const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href=url; a.download='love-trial.json'; a.click();
+      a.href=url; a.download=fileName + '.json'; a.click();
       URL.revokeObjectURL(url);
     }
     
