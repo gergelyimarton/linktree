@@ -112,6 +112,7 @@
   function initAmbientParticles() {
     if (!CONFIG.particles.enabled) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 550px)').matches) return;
 
     // Find or create canvas (styles in CSS)
     particleCanvas = document.querySelector('.ld-ambient-canvas');
