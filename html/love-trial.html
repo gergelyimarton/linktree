@@ -40,6 +40,8 @@
         <h3>Mi ez az oldal?</h3>
         <p>A Love Trial egy személyes értékelő eszköz, amely segít felmérni egy potenciális partner kompatibilitását veled. Az oldal különböző aspektusokat vizsgál több randevú során, hogy átfogó képet kapj a kapcsolat lehetőségeiről.</p>
 
+        <p class="interp-disclaimer">⚠️ Ez az oldal egy szubjektív, analitikus érzelmi napló – nem szabálykönyv. Az eredmények nem tükrözik a valóságot, nem helyettesítik az emberi érzelmeket és a közvetlen kommunikációt, és semmiképpen sem szabad, hogy meghatározzák a döntéseidet. Egy szám soha nem mondhatja meg, kit szeress.</p>
+
         <h3>Hogyan használd?</h3>
         <ol>
           <li>Minden randevú után töltsd ki az adott oszlopot a <strong>Fő aspektusok</strong> táblázatban</li>
@@ -73,6 +75,8 @@
       <div class="lang-en">
         <h3>What is this page?</h3>
         <p>Love Trial is a personal evaluation tool that helps you objectively assess a potential partner's compatibility with you. The page examines various aspects across multiple dates to give you a comprehensive picture of the relationship's possibilities.</p>
+
+        <p class="interp-disclaimer">⚠️ This page is a subjective, analytical emotional journal – not a rulebook. The results do not reflect reality, do not replace human feelings or direct communication, and should never determine your decisions. No number can tell you who to love.</p>
 
         <h3>How to use it?</h3>
         <ol>
@@ -199,15 +203,58 @@
   </table>
 
   <h2 data-emoji="📖"><span class="lang-hu">Értelmezés</span><span class="lang-en">Interpretation</span></h2>
-  <table>
+  <table id="interpTable">
     <tbody>
-      <tr><td>90–100%</td><td>🟩  <span class="lang-hu">Kivételes illeszkedés</span><span class="lang-en">Exceptional compatibility</span></td></tr>
-      <tr><td>70–89%</td><td>🟦  <span class="lang-hu">Erős kompatibilitás</span><span class="lang-en">Strong compatibility</span></td></tr>
-      <tr><td>40–69%</td><td>🟨  <span class="lang-hu">Részleges kompatibilitás</span><span class="lang-en">Partial compatibility</span></td></tr>
-      <tr><td>20–39%</td><td>🟧  <span class="lang-hu">Figyelmeztető zóna</span><span class="lang-en">Warning zone</span></td></tr>
-      <tr><td>0–19%</td><td>🟥  <span class="lang-hu">Alacsony illeszkedés</span><span class="lang-en">Low compatibility</span></td></tr>
+      <tr class="interp-row"
+          data-preview-hu="Valami igazán ritkát találtál. Az ilyen szintű illeszkedés nem a véletlenről szól – ez az értékek, az energia és az élet iránya szintjén is egyező ember."
+          data-preview-en="You've found something genuinely rare. This level of compatibility isn't about luck – it's someone who aligns with you on values, energy, and direction in life."
+          data-full-hu="Valami igazán ritkát találtál. Az ilyen szintű illeszkedés nem a véletlenről szól – ez az értékek, az energia és az élet iránya szintjén is egyező ember. Természetesen a kapcsolatok mindig munkát igényelnek, és a számok nem helyettesítik az érzelmeket – de ha ez az arány kijön, az azt jelenti, hogy amit láttál és értékeltél, az rendkívül ígéretes alapot mutat. Tartsd meg. Ápold."
+          data-full-en="You've found something genuinely rare. This level of compatibility isn't about luck – it's someone who aligns with you on values, energy, and direction in life. Of course, relationships always require work, and numbers don't replace feelings – but if this ratio comes up, it means what you've seen and valued shows an exceptionally promising foundation. Keep it. Nurture it.">
+        <td>90–100%</td><td>🟩 <span class="lang-hu">Kivételes illeszkedés</span><span class="lang-en">Exceptional compatibility</span> <span class="interp-hint">▾</span></td>
+      </tr>
+      <tr class="interp-detail"><td colspan="2"><span class="interp-detail__text"></span></td></tr>
+
+      <tr class="interp-row"
+          data-preview-hu="Erős alap, valódi potenciállal. A lényegi területeken egyezés van – a kisebb különbségek pedig általában azok, amelyek érdekesebbé teszik a másikat."
+          data-preview-en="A strong foundation with real potential. The core areas align – and the smaller differences are often what makes each other more interesting."
+          data-full-hu="Erős alap, valódi potenciállal. A lényegi területeken egyezés van – a kisebb különbségek pedig általában azok, amelyek érdekesebbé teszik a másikat. Ez a tartomány azt jelzi, hogy a kompatibilitás nem véletlenszerű és nem erőltetett – hanem ott van, ahol keresed. A kapcsolat elmélyítéséhez érdemes odafigyelni a fennmaradó különbségekre, és nyíltan kommunikálni róluk. Az alap megvan – hogy mit kezdesz vele, az a te kezedben van."
+          data-full-en="A strong foundation with real potential. The core areas align – and the smaller differences are often what makes each other more interesting. This range indicates that compatibility isn't random or forced – it's there where you're looking for it. To deepen the relationship, it's worth paying attention to the remaining differences and communicating openly about them. The foundation is there – what you do with it is in your hands.">
+        <td>70–89%</td><td>🟦 <span class="lang-hu">Erős kompatibilitás</span><span class="lang-en">Strong compatibility</span> <span class="interp-hint">▾</span></td>
+      </tr>
+      <tr class="interp-detail"><td colspan="2"><span class="interp-detail__text"></span></td></tr>
+
+      <tr class="interp-row"
+          data-preview-hu="Vannak erős területek, de jelentős különbségek is. A kapcsolat működhet – de tudatosságot és szándékot igényel mindkét féltől."
+          data-preview-en="There are strong areas, but also significant differences. The relationship can work – but it requires awareness and intention from both sides."
+          data-full-hu="Vannak erős területek, de jelentős különbségek is. A kapcsolat működhet – de tudatosságot és szándékot igényel mindkét féltől. Ez a tartomány nem ítélet, és nem kizáró ok: sok mély és tartós kapcsolat indul innen. De érdemes azonosítani, hol a legnagyobb az eltérés, és megkérdezni: ezek a különbségek feszültségforrások, vagy gazdagítják a kapcsolatot? A válasz sokat elárul arról, merre érdemes menni."
+          data-full-en="There are strong areas, but also significant differences. The relationship can work – but it requires awareness and intention from both sides. This range isn't a judgment, and it's not a dealbreaker: many deep and lasting relationships start from here. But it's worth identifying where the biggest gaps are, and asking: do these differences create tension, or do they enrich the relationship? The answer reveals a lot about which direction is worth going.">
+        <td>40–69%</td><td>🟨 <span class="lang-hu">Részleges kompatibilitás</span><span class="lang-en">Partial compatibility</span> <span class="interp-hint">▾</span></td>
+      </tr>
+      <tr class="interp-detail"><td colspan="2"><span class="interp-detail__text"></span></td></tr>
+
+      <tr class="interp-row"
+          data-preview-hu="Több fontos területen komoly különbségek mutatkoznak. Nem kizáró ok, de érdemes alaposan megvizsgálni, hogy a látott eltérések hosszú távon kezelhetők-e."
+          data-preview-en="Significant differences appear in several important areas. Not a dealbreaker, but worth carefully examining whether the observed gaps are manageable long-term."
+          data-full-hu="Több fontos területen komoly különbségek mutatkoznak. Nem kizáró ok, de érdemes alaposan megvizsgálni, hogy a látott eltérések hosszú távon kezelhetők-e. A figyelmeztető zóna azt jelzi, hogy a kapcsolatnak rendszeres súrlódási pontjai lesznek – és ezek ritkán oldódnak meg maguktól. Kérdezd meg magadtól: mi tart mégis vonzódásban? Ha a válasz csak az érzelem és a remény, az is fontos információ."
+          data-full-en="Significant differences appear in several important areas. Not a dealbreaker, but worth carefully examining whether the observed gaps are manageable long-term. The warning zone indicates that the relationship will have regular friction points – and these rarely resolve on their own. Ask yourself: what keeps you drawn in? If the answer is only emotion and hope, that's important information too.">
+        <td>20–39%</td><td>🟧 <span class="lang-hu">Figyelmeztető zóna</span><span class="lang-en">Warning zone</span> <span class="interp-hint">▾</span></td>
+      </tr>
+      <tr class="interp-detail"><td colspan="2"><span class="interp-detail__text"></span></td></tr>
+
+      <tr class="interp-row"
+          data-preview-hu="Az értékelés alapján az alapvető területek nagy részén komoly eltérés mutatkozik. Érdemes megkérdezni magadtól: mi tart mégis mellette?"
+          data-preview-en="The evaluation shows serious differences in most key areas. It's worth asking yourself: what keeps you drawn to them?"
+          data-full-hu="Az értékelés alapján az alapvető területek nagy részén komoly eltérés mutatkozik. Érdemes megkérdezni magadtól: mi tart mégis mellette? Ez a tartomány nem azt mondja, hogy a másik ember rossz – csak azt, hogy az értékelt dimenziók mentén nem volt jelentős egyezés. A valódi kérdés: mennyire tudod ezeket a különbségeket hosszú távon elfogadni – nem eltűrni, hanem valóban együtt élni velük. Ha a válasz bizonytalan, az önmagában is fontos jelzés."
+          data-full-en="The evaluation shows serious differences in most key areas. It's worth asking yourself: what keeps you drawn to them? This range doesn't say the other person is bad – only that along the evaluated dimensions, there wasn't significant alignment. The real question is: how much can you genuinely accept these differences long-term – not just tolerate them, but truly live with them. If the answer is uncertain, that itself is an important signal.">
+        <td>0–19%</td><td>🟥 <span class="lang-hu">Alacsony illeszkedés</span><span class="lang-en">Low compatibility</span> <span class="interp-hint">▾</span></td>
+      </tr>
+      <tr class="interp-detail"><td colspan="2"><span class="interp-detail__text"></span></td></tr>
     </tbody>
   </table>
+
+  <div id="interp-tooltip" class="interp-tooltip">
+    <p class="interp-tooltip__text"></p>
+  </div>
 
   <div class="file-actions">
     <div class="download-section">
@@ -225,7 +272,7 @@
     </div>
   </div>
 
-  <button class="back-button" data-hu="Vissza" data-en="Go back" onclick="history.back()">Vissza</button>
+  <button class="back-button" data-hu="Vissza" data-en="Go back" onclick="location.href='../lidar/html/projects.html'">Vissza</button>
 
   <footer>
     <span class="lang-hu">Ez egy statikus HTML oldal. Az adatok lenyíló listákból választhatók. A letöltött JSON tartalmazza az aktuális állapotot, amit később vissza lehet tölteni.</span>
@@ -320,7 +367,7 @@
   else if(totalForDiversity <= 30) diversityScore = 2;
   else if(totalForDiversity <= 40) diversityScore = 3;
   else if(totalForDiversity <= 50) diversityScore = 4;
-  else if(totalForDiversity > 60) diversityScore = 5;
+  else diversityScore = 5;
 
   document.getElementById('diversityTotal').textContent = diversityScore;
 
@@ -371,23 +418,6 @@ updateAll();
 
 
 
-    document.querySelectorAll('#otherProps select').forEach(sel => {
-      sel.innerHTML = '<option value="">-</option>' + 
-                    Array.from({length:5}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
-      sel.addEventListener('change', updateOtherPropsTotal);
-    });
-
-    function updateOtherPropsTotal() {
-      let sum = 0;
-      document.querySelectorAll('#otherProps tbody tr:not(:last-child) select').forEach(sel => {
-      const v = parseInt(sel.value,10);
-      if(!isNaN(v)) sum += v;
-      });
-      document.getElementById('otherPropsTotal').textContent = sum;
-    }
-
-    // induláskor is frissítjük
-    updateOtherPropsTotal();
 
 
 
@@ -511,6 +541,60 @@ updateAll();
       });
     });
     placeholderObserver.observe(document.documentElement, { attributes: true });
+  </script>
+
+  <script>
+    (function () {
+      const tooltip = document.getElementById('interp-tooltip');
+      const tooltipText = tooltip.querySelector('.interp-tooltip__text');
+
+      function getLang() {
+        return document.documentElement.getAttribute('data-lang') || 'hu';
+      }
+
+      document.querySelectorAll('.interp-row').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          const preview = row.getAttribute(`data-preview-${getLang()}`);
+          tooltipText.textContent = preview + '…';
+          tooltip.classList.add('interp-tooltip--visible');
+        });
+
+        row.addEventListener('mousemove', (e) => {
+          let x = e.clientX + 18;
+          let y = e.clientY + 18;
+          if (x + 280 > window.innerWidth)  x = e.clientX - 280;
+          if (y + 120 > window.innerHeight) y = e.clientY - 120;
+          tooltip.style.left = x + 'px';
+          tooltip.style.top  = y + 'px';
+        });
+
+        row.addEventListener('mouseleave', () => {
+          tooltip.classList.remove('interp-tooltip--visible');
+        });
+
+        row.addEventListener('click', () => {
+          tooltip.classList.remove('interp-tooltip--visible');
+          const detail = row.nextElementSibling;
+          if (!detail || !detail.classList.contains('interp-detail')) return;
+          const isOpen = detail.classList.contains('interp-detail--open');
+          if (!isOpen) {
+            detail.querySelector('.interp-detail__text').textContent =
+              row.getAttribute(`data-full-${getLang()}`);
+          }
+          detail.classList.toggle('interp-detail--open');
+          row.classList.toggle('interp-row--open');
+        });
+      });
+
+      // Nyelv váltásakor frissíti a nyitott detaileket
+      new MutationObserver(() => {
+        document.querySelectorAll('.interp-detail--open').forEach(detail => {
+          const row = detail.previousElementSibling;
+          detail.querySelector('.interp-detail__text').textContent =
+            row.getAttribute(`data-full-${getLang()}`);
+        });
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+    })();
   </script>
 </div>
 </body>

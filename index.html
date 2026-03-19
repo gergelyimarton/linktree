@@ -10,13 +10,7 @@
   <!--
     ROOT DISPATCHER
     ================
-    This page detects WebGL capability and routes to the appropriate version:
-    - /lidar/  → New LiDAR design (requires WebGL)
-    - /legacy/ → Original design (fallback)
-
-    To force a specific version:
-    - Add ?version=lidar to URL for LiDAR
-    - Add ?version=legacy to URL for Legacy
+    Routes to the LiDAR design.
   -->
 
   <style>
@@ -96,9 +90,8 @@
 
     <noscript>
       <div class="dispatcher__fallback">
-        <p style="margin-bottom: 16px; color: #505060;">JavaScript disabled. Choose version:</p>
-        <a href="legacy/index.html">Classic</a>
-        <a href="lidar/index.html">LiDAR</a>
+        <p style="margin-bottom: 16px; color: #505060;">JavaScript required.</p>
+        <a href="lidar/index.html">Open site</a>
       </div>
     </noscript>
   </div>
@@ -121,8 +114,7 @@
 
         // URL paths
         paths: {
-          lidar: 'lidar/index.html',
-          legacy: 'legacy/index.html'
+          lidar: 'lidar/index.html'
         }
       };
 
@@ -179,7 +171,7 @@
         const params = new URLSearchParams(window.location.search);
         const version = params.get('version');
 
-        if (version === 'lidar' || version === 'legacy') {
+        if (version === 'lidar') {
           return version;
         }
 

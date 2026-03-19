@@ -1,110 +1,505 @@
 {
-    "sun": {
-        "hu": [
-            "Akkor érzem magam igazán energikusnak, amikor aktívan cselekszem és haladok előre.",
-            "Gyorsan kijelölöm az irányt, még akkor is, ha később módosítanom kell rajta.",
-            "Új helyzetekben ösztönösen kezdeményezek és láthatóvá válok.",
-            "Fontos számomra, hogy hatással legyek a környezetemre.",
-            "Bizonytalan helyzetekben szeretek rendet és struktúrát teremteni.",
-            "Problémák esetén elsőként a konkrét megoldást keresem.",
-            "Időnyomás alatt fókuszáltabbá és határozottabbá válok.",
-            "Egy csoportban természetesen veszem át a vezető szerepet.",
-            "Tanuláskor a kipróbálás és a tapasztalás segít a legtöbbet.",
-            "Számomra a siker kézzelfogható eredményekben mérhető.",
-            "Ha elérek egy célt, gyorsan keresem a következő kihívást.",
-            "Egy kapcsolatban fontos számomra a közös irány és haladás.",
-            "Változások idején elsősorban lehetőséget látok.",
-            "Egy vitában határozottan képviselem az álláspontomat.",
-            "Az időt inkább előrehaladó útként érzékelem.",
-            "Inspirációt gyakran külső hatásokból és példákból merítek.",
-            "Fontos számomra, hogy amit csinálok, mások számára is látható legyen.",
-            "Ha elfáradok, aktivitással és cselekvéssel lendülök tovább.",
-            "Az erőt elsősorban jelenlétként és hatásként élem meg.",
-            "Szeretem, ha én adhatok irányt vagy lendületet egy helyzetnek."
-        ],
-        "en": [
-            "I feel most energized when I'm actively doing things and making progress.",
-            "I quickly set a direction, even if I need to adjust it later.",
-            "In new situations, I instinctively take initiative and become visible.",
-            "It's important to me to have an impact on my environment.",
-            "In uncertain situations, I like to create order and structure.",
-            "When facing problems, I first look for concrete solutions.",
-            "Under time pressure, I become more focused and decisive.",
-            "In a group, I naturally take on the leadership role.",
-            "When learning, trying things out and gaining experience helps me the most.",
-            "For me, success is measured in tangible results.",
-            "When I reach a goal, I quickly look for the next challenge.",
-            "In a relationship, shared direction and progress are important to me.",
-            "During times of change, I primarily see opportunity.",
-            "In a debate, I firmly represent my point of view.",
-            "I perceive time more as a forward-moving path.",
-            "I often draw inspiration from external influences and examples.",
-            "It's important to me that what I do is visible to others.",
-            "When I get tired, I regain momentum through activity and action.",
-            "I experience strength primarily as presence and impact.",
-            "I like being the one who gives direction or momentum to a situation."
-        ]
-    },
+  "dimensions": {
 
-    "moon": {
-        "hu": [
-            "Szükségem van rendszeres elvonulásra, hogy belül rendbe tegyem a dolgokat.",
-            "Akkor hozok jó döntést, ha hagyom, hogy belül megérjen.",
-            "Új helyzetekben inkább megfigyelek, mielőtt megszólalok.",
-            "Fontos számomra a belső összhang önmagammal.",
-            "Bizonytalan helyzetekben képes vagyok együtt élni az ismeretlennel.",
-            "Problémák esetén először azt keresem, mit jelent számomra a helyzet.",
-            "Időnyomás alatt inkább lelassulok, hogy megtartsam a belső egyensúlyt.",
-            "Egy csoportban támogató vagy tanácsadó szerepben érzem jól magam.",
-            "Tanuláskor a megfigyelés és az összefüggések felismerése segít a legtöbbet.",
-            "Számomra a siker belső elégedettséget jelent.",
-            "Ha elérek egy célt, fontos számomra az átélés és a lezárás.",
-            "Egy kapcsolatban az érzelmi mélységet és intimitást tartom elsődlegesnek.",
-            "Változások idején belső átalakulást élek meg.",
-            "Egy vitában igyekszem megérteni a másik fél belső motivációit.",
-            "Az időt inkább ciklikus, visszatérő mintázatként érzékelem.",
-            "Inspirációt leggyakrabban befelé figyelve találok.",
-            "Fontos számomra, hogy amit csinálok, belül igaznak érződjön.",
-            "Ha elfáradok, visszahúzódással és pihenéssel töltődöm fel.",
-            "Az erőt elsősorban érzékenységként és mélységként élem meg.",
-            "Szeretem, ha van időm feldolgozni és megérteni, ami velem történik."
-        ],
-        "en": [
-            "I need regular solitude to sort things out inside myself.",
-            "I make good decisions when I let them mature internally.",
-            "In new situations, I prefer to observe before speaking up.",
-            "Inner harmony with myself is important to me.",
-            "In uncertain situations, I can live with the unknown.",
-            "When facing problems, I first seek what the situation means to me.",
-            "Under time pressure, I tend to slow down to maintain inner balance.",
-            "In a group, I feel comfortable in a supportive or advisory role.",
-            "When learning, observation and recognizing connections help me the most.",
-            "For me, success means inner satisfaction.",
-            "When I reach a goal, experiencing and closure are important to me.",
-            "In a relationship, I prioritize emotional depth and intimacy.",
-            "During times of change, I experience inner transformation.",
-            "In a debate, I try to understand the other person's inner motivations.",
-            "I perceive time more as cyclical, recurring patterns.",
-            "I most often find inspiration by looking inward.",
-            "It's important to me that what I do feels true inside.",
-            "When I get tired, I recharge through withdrawal and rest.",
-            "I experience strength primarily as sensitivity and depth.",
-            "I like having time to process and understand what happens to me."
-        ]
-    },
-
-    "descriptions": {
-        "sun": {
+    "ei": {
+      "label": { "hu": "Nap – Hold", "en": "Sun – Moon" },
+      "poles": {
+        "a": {
+          "id": "sun",
+          "label": { "hu": "Nap", "en": "Sun" },
+          "hu": [
+            "Tétlenség esetén hamar elveszítem a motivációmat – cselekvés közben töltődöm fel igazán.",
+            "Inkább gyorsan döntök és menet közben korrigálok, mint hogy sokáig mérlegeljek.",
+            "Új helyzetekben ösztönösen cselekszem – megteszem az első lépést, még ha a kimenetel nem biztos.",
+            "Akkor érzem értelmesnek a munkámat, ha látható változást hoz a körülöttem lévő világban.",
+            "Bizonytalan helyzetekben az első gondolatom, hogy tervet készítsek és elkezdjek dolgozni.",
+            "Problémák esetén elsőként a konkrét megoldást keresem, nem azt, hogy mit jelent számomra a helyzet.",
+            "Határidő közeledtével nem megbénulok, hanem felpörgök – a nyomás élesíti a gondolkodásomat.",
+            "Egy csoportban inkább irányt szabok, mint háttérből támogatom a többieket.",
+            "Inkább rögtön beleugrok és kísérletezem, mint hogy előbb alaposan áttanulmányozzam az elméletet.",
+            "Ha nem lett kézzelfogható eredmény, nem érzem sikernek – a jó folyamat önmagában kevés.",
+            "Elért célok után hamar üressé válok – a következő kihívás az, ami mozgásban tart.",
+            "Egy kapcsolatban a közös irány és a közösen épített dolgok legalább annyira fontosak, mint az érzelmi közelség.",
+            "Változásokra azzal reagálok, hogy megnézem, mit lehet belőlük kihozni – nem az érzések feldolgozásával kezdem.",
+            "Vitában inkább kitartok az álláspontom mellett, mint hogy félúton engedjek a hangulat kedvéért.",
+            "Inkább arra fókuszálok, hova tartok, mint arra, min mentem keresztül.",
+            "Ötleteim és motivációm jellemzően külső impulzusokból fakadnak: emberekből, helyzetekből, kihívásokból.",
+            "Motivál, ha a munkám eredménye mások számára is látható és érzékelhető.",
+            "Ha elfáradok, aktivitással és cselekvéssel lendülök tovább – a pihenés ritkán segít.",
+            "Az erőmet abban élem meg, amikor meghatározom egy helyzet vagy csoport irányát.",
+            "Szívesen veszem át a kezdeményezést, ha egy helyzet még irány nélkül van."
+          ],
+          "en": [
+            "When idle, I quickly lose momentum — action is what recharges me, not rest.",
+            "I'd rather make a call and course-correct than sit on a decision for too long.",
+            "When something new comes up, I move first and figure it out as I go.",
+            "I need to see the dent my work makes — otherwise it doesn't feel worth it.",
+            "When things are unclear, I reach for structure: a plan, a first step, something to act on.",
+            "When something goes wrong, I want to fix it — not sit with what it means.",
+            "Deadlines don't stress me out — they sharpen me.",
+            "In a group, I'm more drawn to setting the course than to quietly backing others up.",
+            "I'd rather jump in and figure it out than spend too long studying it first.",
+            "Results matter more to me than the process — if nothing concrete came out of it, it doesn't feel like a win.",
+            "After reaching a goal, I quickly feel empty — the next challenge is what keeps me going.",
+            "I bond through doing and building together — shared direction matters as much as emotional closeness.",
+            "When things change, my first move is finding the opportunity, not processing how I feel about it.",
+            "In arguments, I hold my line — I'd rather be clear than keep the peace.",
+            "I focus more on where I'm going than on what I've been through.",
+            "I get my best energy from what's around me — other people, new situations, things to tackle.",
+            "It matters to me that others can see and feel what I've built.",
+            "When I'm drained, getting moving again works better than stopping.",
+            "I feel most like myself when I'm the one steering things.",
+            "When no one's taken charge yet, I naturally step in."
+          ],
+          "description": {
             "hu": "Nap-típus: energikus, döntésképes, vezető alkat. Alkotsz, építesz, vezetsz, szeretsz kezdeményezni és a figyelem középpontjában lenni.",
             "en": "Sun type: energetic, decisive, leadership-oriented. You create, build, lead, love to take initiative and be in the spotlight."
+          }
         },
-        "moon": {
+        "b": {
+          "id": "moon",
+          "label": { "hu": "Hold", "en": "Moon" },
+          "hu": [
+            "Szükségem van rendszeres elvonulásra – nélküle szétszórtnak érzem magam, még ha kívülről nem is látszik.",
+            "Ha siettetnek egy döntésben, általában megbánom – jó döntést csak akkor hozok, ha időt adok rá.",
+            "Új helyzetekben inkább megfigyelem a dinamikát, mielőtt bekapcsolódnék.",
+            "Ha belülről nem érzem igaznak, amit teszek, az kizökkent – még akkor is, ha kívülről jó döntésnek tűnik.",
+            "Bizonytalan helyzetekben nem siettetem a megoldást – bízom benne, hogy a dolgok a maguk idejében kitisztulnak.",
+            "Problémák esetén először azt keresem, mit jelent számomra a helyzet, nem a konkrét megoldást.",
+            "Sürgetés hatására jellemzően visszahúzódom, nem felpörgök – az egyensúlyom fontosabb a sebességnél.",
+            "Egy csoportban inkább háttérből erősítem a többieket, mint hogy én határozzam meg az irányt.",
+            "Szükségem van arra, hogy megértsem az összefüggéseket, mielőtt belevágnék – a cselekvés előtt a megértés jön.",
+            "Egy projekt akkor sikeres számomra, ha belül igaznak és teljesnek érződik – a külső visszajelzés másodlagos.",
+            "Elért célok után időt adok magamnak az átélésre és lezárásra – nem ugrok azonnal a következőre.",
+            "Egy kapcsolatban fontosabb számomra, hogy mi zajlik a másikban, mint hogy merre tartunk együtt.",
+            "Változásokra azzal reagálok, hogy megvizsgálom, mit jelent ez belülről számomra – mielőtt bármit tennék.",
+            "Vitában inkább megértem, honnan jön a másik, mint hogy végigvegyem az érveimet.",
+            "A megtett út és az abból szerzett tapasztalat fontosabb számomra, mint az, hova tartok.",
+            "Legjobb ötleteim általában csendben jönnek – akkor, amikor nem csinálok aktívan semmit.",
+            "Olyat nehezen csinálok hosszú távon, ami belülről nem érződik igaznak – még ha logikusan indokolt is.",
+            "Ha elfáradok, egyedüllétre és csendre van szükségem – a társaság vagy az aktivitás ilyenkor inkább meríti az energiámat.",
+            "Az erőmet abban élem meg, amikor mélyen megértek valamit, amit mások csak felszínesen érintenek.",
+            "Feldolgozatlan élmények hosszan foglalkoztatnak – addig nem tudok továbblépni, amíg belül le nem zártam őket."
+          ],
+          "en": [
+            "I need time alone to process — without it, I start to feel scattered even if nothing shows.",
+            "My best decisions come when I give them time — rushing almost always costs me.",
+            "When I'm somewhere new, I read the room before I engage.",
+            "Acting against my inner sense of what's right is draining, even when the decision looks sensible on paper.",
+            "When things are unclear, I sit with it — I trust the answer will come without forcing it.",
+            "When something goes wrong, I want to understand what it means before I fix it.",
+            "Pressure makes me pull back, not push harder — staying grounded matters more than being fast.",
+            "In a group, I'd rather quietly strengthen others than be the one setting the course.",
+            "I need to understand the 'why' and how things connect before I'm ready to act.",
+            "I know a project is done when it feels right inside — praise or criticism from outside doesn't change that.",
+            "When I reach something, I stay with it for a while before moving on.",
+            "I connect through depth, not direction — what's happening inside the other person matters more than where we're going together.",
+            "When things change, I turn inward first — I need to understand what it means before I can move.",
+            "In arguments, I'm more curious about why the other person thinks what they think than about winning.",
+            "The path I've walked matters more to me than where I'm headed next.",
+            "My clearest thinking happens in stillness — not when I'm busy.",
+            "I can't commit to something that doesn't feel right inside for long, even if it makes sense on paper.",
+            "When I'm drained, I need quiet and space — company or activity makes it worse.",
+            "I feel most like myself when I see what others miss — the depth beneath the surface.",
+            "Things stay with me until I've made sense of them — I can't just move on without closing the loop inside."
+          ],
+          "description": {
             "hu": "Hold-típus: érzékeny, empatikus, spirituális és misztikus. Mélyen átéled az érzelmeket, figyelsz a belső világodra, és fontos számodra a lelki harmónia.",
             "en": "Moon type: sensitive, empathetic, spiritual and mystical. You deeply experience emotions, pay attention to your inner world, and spiritual harmony is important to you."
+          }
         },
         "balanced": {
+          "description": {
             "hu": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkotni, vezetni, de ugyanakkor érzékenyen és spirituálisan reagálni a világra.",
             "en": "Star type: both the Sun and Moon are present in you. You can create, lead, but also respond to the world sensitively and spiritually."
+          }
         }
+      }
+    },
+
+    "tf": {
+      "label": { "hu": "Tűz – Víz", "en": "Fire – Water" },
+      "poles": {
+        "a": {
+          "id": "fire",
+          "label": { "hu": "Tűz", "en": "Fire" },
+          "hu": [
+            "Döntésnél az objektív logika fontosabb számomra, mint az, hogy mindenki jól érzi-e magát tőle.",
+            "Az igazságos és a kedves döntés nem mindig esik egybe – ha választani kell, az igazságosat hozom.",
+            "Ha valaki érvelése gyenge, jelzem – még akkor is, ha személyesen szimpatikus.",
+            "Kritikát szívesebben adok pontosan és őszintén, mint tapintatosan, de homályosan.",
+            "Egy vita megnyerése számomra azt jelenti, hogy a legjobb érv győzött – nem azt, hogy mindenki elégedett.",
+            "Egy csoportdöntésnél az objektívan legjobb megoldást keresem, nem azt, ami mindenkinek megfelel.",
+            "Az érzelmek fontos jelzések, de döntési alapként megbízhatatlanok.",
+            "Ha tévedtem, szeretném pontosan tudni, hol és miért – nem vigasztalásra van szükségem.",
+            "Az elvek konzisztenciája fontosabb számomra, mint a pillanatnyi harmónia.",
+            "Ha választanom kell az igazság és a kényelem között, az igazságot választom.",
+            "Egy kapcsolatban is fontosabb számomra, hogy egyenesen megmondjam, amit gondolok.",
+            "Szívesebben kapok egyenes kritikát, mint diplomáciai köntösbe csomagolt visszajelzést.",
+            "Ha logikailag korrekt a döntés, a hangulati ellenállás nem elég indok az újragondoláshoz.",
+            "Eredmény nélküli érzelmi folyamat nehezen indokolható számomra.",
+            "Ha szabály és méltányosság ütközik, a szabály alkalmazása mellé állok – a kivételek kiszámíthatatlanságot teremtenek."
+          ],
+          "en": [
+            "When making decisions, objective logic matters more to me than whether everyone feels good about it.",
+            "The fair decision and the kind decision don't always align — when I have to choose, I choose the fair one.",
+            "If someone's reasoning is weak, I'll say so — even if I like them personally.",
+            "I'd rather give criticism precisely and honestly than tactfully but vaguely.",
+            "Winning an argument means the best reasoning won — not that everyone is satisfied.",
+            "In a group decision, I look for the objectively best solution, not the one that works for everyone.",
+            "Emotions are useful signals, but unreliable as a basis for decisions.",
+            "When I'm wrong, I want to know exactly where and why — I don't need consolation.",
+            "Consistency of principles matters more to me than momentary harmony.",
+            "If I have to choose between truth and comfort, I choose truth.",
+            "Even in close relationships, I'd rather say what I think directly.",
+            "I'd rather receive direct criticism than feedback wrapped in diplomacy.",
+            "If a decision is logically sound, emotional resistance isn't enough reason to reconsider it.",
+            "An emotional process without results is hard for me to justify.",
+            "When rules and fairness conflict, I side with the rule — exceptions create unpredictability."
+          ],
+          "description": {
+            "hu": "Tűz-típus: logikus, elvközpontú, őszinte. Döntéseid objektív elveken alapulnak, és az igazságot a kényelem elé helyezed.",
+            "en": "Fire type: logical, principle-driven, direct. Your decisions are based on objective reasoning, and you place truth above comfort."
+          }
+        },
+        "b": {
+          "id": "water",
+          "label": { "hu": "Víz", "en": "Water" },
+          "hu": [
+            "Döntésnél az számít, hogy mindenki jól érzi-e magát – az objektív logika önmagában kevés.",
+            "A kedves döntés és az igazságos döntés ritkán ugyanaz – előbbit választom.",
+            "Ha valaki érvelése gyenge, de fontos neki, inkább tapintatosan közelítem meg.",
+            "Kritikát szívesebben adok úgy, hogy a másik befogadóképes maradjon – kapcsolat az első, pontosság a második.",
+            "Egy vita 'megnyerése' semmit sem jelent, ha valaki megsérült közben.",
+            "Egy csoportdöntésnél az a legjobb megoldás, amivel mindenki igazán azonosulni tud.",
+            "Az érzelmek olyan információt hordoznak, amit a logika nem lát – komolyan veszem őket.",
+            "Ha tévedtem, inkább a kapcsolat helyreállítása az első lépés, nem az elemzés.",
+            "A pillanatnyi harmónia fenntartása néha fontosabb, mint egy elv következetes képviselete.",
+            "Ha választanom kell az igazság és a kényelem között, mérlegelem, kinek mi a fontosabb éppen.",
+            "Egy kapcsolatban óvatosan adagolom az igazságot – a bizalom megőrzése előbb jön.",
+            "Szívesebben kapok visszajelzést, ami figyel arra, hogyan esik – nem csak arra, hogy pontos-e.",
+            "Ha valaki érzelmi ellenállást mutat egy döntéssel szemben, az fontos jel számomra – újragondolom.",
+            "Egy folyamat értékes lehet akkor is, ha nem hozott kézzelfogható eredményt.",
+            "Ha szabály és méltányosság ütközik, a kivételt keresem – a merevség embereket sért."
+          ],
+          "en": [
+            "What matters in a decision is how everyone feels about it — objective logic alone isn't enough.",
+            "The kind decision and the fair decision are rarely the same — I choose the kind one.",
+            "If someone's reasoning is weak but it matters to them, I handle it gently.",
+            "I'd rather give criticism in a way that keeps the other person receptive — connection first, precision second.",
+            "'Winning' an argument means nothing if someone got hurt in the process.",
+            "In a group decision, the best solution is the one everyone can genuinely get behind.",
+            "Emotions carry information that logic doesn't see — I take them seriously.",
+            "When I'm wrong, restoring the connection comes before analyzing what happened.",
+            "Maintaining momentary harmony is sometimes more important than consistently standing by a principle.",
+            "If I have to choose between truth and comfort, I consider what matters more to whom right now.",
+            "In close relationships, I dose out honesty carefully to preserve the trust.",
+            "I'd rather receive feedback that considers how it lands — not just whether it's accurate.",
+            "If someone shows emotional resistance to a decision, that's a meaningful signal to me — I reconsider.",
+            "A process can be valuable even if it didn't produce tangible results.",
+            "When rules and fairness conflict, I look for the exception — rigidity hurts people."
+          ],
+          "description": {
+            "hu": "Víz-típus: empatikus, értékközpontú, kapcsolatérzékeny. Döntéseidnél a kapcsolati hatás és az érzelmi igazság legalább annyit nyom, mint a logika.",
+            "en": "Water type: empathetic, values-driven, relationally aware. In your decisions, relational impact and emotional truth weigh at least as much as logic."
+          }
+        },
+        "balanced": {
+          "description": {
+            "hu": "Mérleg típus: ösztönösen mérsz logikával és értékkel egyszerre. Képes vagy elvszerűen dönteni, és közben figyelni arra, hogyan hat ez az emberekre.",
+            "en": "Scales type: you instinctively weigh both logic and values. You can decide on principle while staying attuned to how it affects people."
+          }
+        }
+      }
+    },
+
+    "jp": {
+      "label": { "hu": "Kő – Szél", "en": "Stone – Wind" },
+      "poles": {
+        "a": {
+          "id": "stone",
+          "label": { "hu": "Kő", "en": "Stone" },
+          "hu": [
+            "Szívesebben tudok előre mindent, mint hogy menet közben dőljön el.",
+            "Nyitott végű helyzetek tartósan kényelmetlenül érintenek – lezárást keresek.",
+            "Ha el kell térnem a tervtől, az energiámba kerül – még akkor is, ha a változás jobb irányt jelent.",
+            "Egy döntés lezárása megkönnyebbülést jelent, nem bezártságot.",
+            "Impulzív terveket nehéz befogadnom – előbb átgondolom, mielőtt lelkesedem.",
+            "Szeretem tudni, mi következik – a meglepetések általában nem töltenek fel.",
+            "Egy projekt legjobb része számomra, amikor minden a helyére kerül és lezárul.",
+            "Általában időben fejezem be a dolgokat – nem hagyom az utolsó pillanatra.",
+            "Ha valami rendszertelen, az előbb-utóbb rendrakásra késztet.",
+            "Szívesebben követek egy jó rendszert, mint hogy minden alkalommal improvizáljak.",
+            "Azt szeretem, ha a feladatok körülhatároltak – a nyitott mandátumok bizonytalanságot keltenek.",
+            "Az utolsó pillanatban való döntés számomra stresszforrás, nem adrenalin.",
+            "Egy kapcsolatban is fontosnak tartom, hogy legyenek közös keretek és megállapodások.",
+            "Ha valamit nem tudok lezárni, az ott motoszkál a fejemben, amíg meg nem oldódik.",
+            "Listáim és naptáram nélkül könnyen elveszítem a fonalat – ezek nem opcionálisak számomra."
+          ],
+          "en": [
+            "I'd rather know everything in advance than have things decided along the way.",
+            "Open-ended situations make me persistently uncomfortable — I look for closure.",
+            "Deviating from a plan costs me energy — even if it leads somewhere better.",
+            "Closing a decision feels like relief, not constraint.",
+            "Spontaneous plans are hard for me to embrace — I think them through before getting excited.",
+            "I like knowing what comes next — surprises generally don't energize me.",
+            "The best part of a project for me is when everything falls into place and closes.",
+            "I generally finish things on time — I don't leave them to the last moment.",
+            "If something is disorderly, sooner or later I'm compelled to sort it out.",
+            "I'd rather follow a good system than improvise each time.",
+            "I prefer tasks with clear boundaries — open mandates create uncertainty.",
+            "Last-minute decisions are a source of stress for me, not adrenaline.",
+            "In a relationship too, I value having shared frameworks and agreements.",
+            "If I can't close something, it lingers in my mind until it's resolved.",
+            "Without my lists and calendar, I quickly lose track — these aren't optional for me."
+          ],
+          "description": {
+            "hu": "Kő-típus: strukturált, rendszerező, lezárásra törekvő. Terveid vannak, betartod őket, és a kiszámíthatóság biztonságot ad.",
+            "en": "Stone type: structured, organized, closure-seeking. You have plans, you stick to them, and predictability gives you a sense of safety."
+          }
+        },
+        "b": {
+          "id": "wind",
+          "label": { "hu": "Szél", "en": "Wind" },
+          "hu": [
+            "A legjobb dolgok sokszor menet közben dőlnek el – a merev tervek korlátozzák a lehetőségeket.",
+            "Nyitott végű helyzetek inkább izgatnak, mint nyugtalanítanak – minden még formálható.",
+            "Ha jobb irány adódik, könnyen leteszem az eredeti tervet – a rugalmasság erő, nem gyengeség.",
+            "Egy döntés korai lezárása néha bezártságnak érződik – szívesebben tartom nyitva, amíg lehet.",
+            "Impulzív tervek élénkítenek – az improvizáció izgalmasabb, mint az előre kiszabott útvonal.",
+            "A meglepetések általában nem zavarnak – a váratlan sokszor jobb, mint a tervezett.",
+            "Egy projekt legjobb része számomra, amikor még minden nyitott és formálható.",
+            "Határidőket a legtöbbször az utolsó pillanatban tartom – addigra pontosabb képem van, mi szükséges.",
+            "Rendszer helyett az adott helyzet logikájára hagyatkozom – az rugalmasabb.",
+            "Szívesebben improvizálok, mint hogy egy korábban megalkotott keretet kövessek.",
+            "Nyitott mandátumok mozgásteret jelentenek számomra, nem bizonytalanságot.",
+            "Az utolsó pillanatban felgyorsuló döntés számomra adrenalin – ekkor vagyok a legjobb formámban.",
+            "Egy kapcsolatban a közös keretek helyett a közös áramlás a fontos – merre visz az élet.",
+            "Lezáratlan dolgokat könnyebben hagyok pihenni – majd kialakul, ami kell.",
+            "Listákat és naptárakat ritkán használok – fejben tartom, ami valóban számít."
+          ],
+          "en": [
+            "The best things often emerge along the way — rigid plans limit possibilities.",
+            "Open-ended situations excite me more than they unsettle me — everything is still shapeable.",
+            "If a better direction comes up, I easily drop the original plan — flexibility is a strength, not a flaw.",
+            "Closing a decision early can feel like premature constraint — I prefer to keep it open as long as possible.",
+            "Spontaneous plans energize me — improvising is more exciting than a pre-planned route.",
+            "Surprises generally don't bother me — the unexpected is often better than the planned.",
+            "The best part of a project for me is when everything is still open and shapeable.",
+            "I often meet deadlines at the last moment — by then I have a clearer picture of what's needed.",
+            "Rather than a system, I rely on the logic of the situation — it's more adaptable.",
+            "I'd rather improvise than follow a framework I built earlier.",
+            "Open mandates mean room to move for me, not uncertainty.",
+            "Last-minute decisions give me adrenaline — that's when I'm at my best.",
+            "In a relationship, shared flow matters more than shared frameworks — wherever life leads.",
+            "I can leave unresolved things to rest more easily — what's needed will emerge.",
+            "I rarely use lists and calendars — I keep what truly matters in my head."
+          ],
+          "description": {
+            "hu": "Szél-típus: rugalmas, spontán, nyitott végű. Jól boldogulsz a bizonytalanságban, és a lehetőségeket nyitva hagyod, amíg csak lehet.",
+            "en": "Wind type: flexible, spontaneous, open-ended. You handle uncertainty well and keep options open for as long as possible."
+          }
+        },
+        "balanced": {
+          "description": {
+            "hu": "Rugalmas szervező: képes vagy struktúrát és nyitottságot egyaránt alkalmazni. Tervezel, ha kell – és áramolsz, ha úgy jobb.",
+            "en": "Adaptive organizer: you can apply both structure and openness. You plan when needed — and flow when that's better."
+          }
+        }
+      }
+    },
+
+    "sn": {
+      "label": { "hu": "Föld – Égbolt", "en": "Earth – Sky" },
+      "poles": {
+        "a": {
+          "id": "root",
+          "label": { "hu": "Föld", "en": "Earth" },
+          "hu": [
+            "Jobban megbízom abban, amit látok, hallok vagy megérintek, mint abban, amit csak elképzelek.",
+            "Egy probléma megértéséhez konkrét példákra van szükségem – elvont magyarázatok kevésbé segítenek.",
+            "A jelen helyzet kezelése fontosabb számomra, mint jövőbeli lehetőségek szövögetése.",
+            "Egy új ötlet csak akkor válik érdekessé, ha megmutatható, hogyan működik a valóságban.",
+            "Részletekre jól emlékszem – nevek, számok, konkrét tények megmaradnak.",
+            "Inkább azt fejlesztem tovább, ami már működik, mint hogy teljesen újat találjak ki.",
+            "Elméleti vitáknál hamar elveszítem az érdeklődésemet, ha nincs gyakorlati következménye.",
+            "Ha valamit meg akarok tanulni, kipróbálom – nem elég olvasni róla.",
+            "A dolgok értékét a funkcionalitásukban mérem, nem az elméletükben.",
+            "Lépésről lépésre haladok – az áttekintés helyett a következő konkrét teendő érdekel.",
+            "Megbízom a tapasztalatban és a bevált módszerekben, nem a spekulációban.",
+            "Ha valami nem mérhető, nehéz meggyőzni arról, hogy valóban létezik vagy számít.",
+            "A jövőre vonatkozó tervek helyett az határozza meg a napom, mi van előttem most.",
+            "Szívesebben olvasok konkrét tényeket és eseteket, mint elvont gondolatokat.",
+            "Ha valamit nem tudok megmutatni vagy leírni, nehezen tudom átadni másnak."
+          ],
+          "en": [
+            "I trust what I can see, hear, or touch more than what I can only imagine.",
+            "To understand a problem, I need concrete examples — abstract explanations are less helpful.",
+            "Handling the present situation matters more to me than weaving future possibilities.",
+            "A new idea only becomes interesting when I can see how it works in reality.",
+            "I remember details well — names, numbers, specific facts stick with me.",
+            "I prefer improving what already works rather than inventing something entirely new.",
+            "In theoretical debates, I quickly lose interest if there's no practical consequence.",
+            "If I want to learn something, I try it — reading about it isn't enough.",
+            "I measure the value of things by their functionality, not their theory.",
+            "I move step by step — I'm interested in the next concrete task, not the overview.",
+            "I trust experience and proven methods, not speculation.",
+            "If something can't be measured, it's hard to convince me it truly exists or matters.",
+            "My day is shaped by what's in front of me now, not by plans for the future.",
+            "I'd rather read about concrete facts and cases than abstract ideas.",
+            "If I can't show or describe something concretely, it's hard to convey it to others."
+          ],
+          "description": {
+            "hu": "Föld-típus: konkrét, tapasztalatalapú, jelen fókuszú. A valóság kézzel fogható rétegében mozgsz a legjobban – megbízol abban, amit látsz és kipróbálsz.",
+            "en": "Earth type: concrete, experience-based, present-focused. You navigate best in the tangible layer of reality — you trust what you see and try."
+          }
+        },
+        "b": {
+          "id": "sky",
+          "label": { "hu": "Égbolt", "en": "Sky" },
+          "hu": [
+            "Sokszor nem tudom, honnan tudom – csak érzem, mi a helyes irány.",
+            "Elvont magyarázatok hamarabb megragadnak, mint konkrét példák – az összefüggés az, ami számít.",
+            "Jobban izgat, mi válhat egy helyzetből, mint maga a jelenlegi állapot – a lehetőségek vonzanak.",
+            "Egy ötlet attól lesz érdekes, hogy milyen mintába illeszkedik – nem attól, hogy hogyan működik ma.",
+            "Konkrét részleteket hamar elfelejtek – az összképre, az érzésre és az összefüggésekre emlékszem.",
+            "Jobban izgat egy teljesen új megközelítés, mint a meglévő tovább csiszolása.",
+            "Elméleti vitáknál otthon érzem magam – a 'mi lenne ha' kérdések tartják ébren az érdeklődésemet.",
+            "Tanuláskor az összefüggés megértése a fontos – a kipróbálás inkább utána jön.",
+            "Egy eszköz vagy módszer értékét az adja, amit lehetővé tesz – nem az, amit ma tud.",
+            "Szívesen ugrok több lépést előre gondolatban – az egész képet akarom látni, mielőtt elkezdem.",
+            "Az intuíció számomra legalább annyira megbízható, mint a tapasztalat.",
+            "Ami nem mérhető, az is létezhet – sokszor éppen az a legfontosabb.",
+            "A jövő lehetőségei erősebben motiválnak, mint a jelenlegi helyzet kezelése.",
+            "Szívesebben olvasok elvont gondolatokat és modelleket, mint konkrét tényeket és eseteket.",
+            "Sokszor szavak nélkül is megérzem, mi zajlik egy helyzetben vagy emberben."
+          ],
+          "en": [
+            "I often don't know how I know — I just feel which direction is right.",
+            "Abstract explanations click faster for me than concrete examples — the connection is what matters.",
+            "What could emerge from a situation interests me more than the situation itself — the world of possibilities.",
+            "An idea becomes interesting because of what pattern it fits into — not because of how it works today.",
+            "I quickly forget concrete details — I remember the big picture, the feeling, the connections.",
+            "A completely new approach excites me more than refining what already works.",
+            "I'm at home in theoretical debates — 'what if' questions are what keep me engaged.",
+            "When learning, understanding the connection is what matters — trying it out comes after.",
+            "The value of a tool or method lies in what it makes possible — not in what it does today.",
+            "I like jumping ahead in my mind — I want to see the whole picture before I begin.",
+            "Intuition is at least as reliable to me as experience.",
+            "What can't be measured can still exist — often that's precisely what matters most.",
+            "Future possibilities motivate me more strongly than managing the current situation.",
+            "I'd rather read abstract ideas and models than concrete facts and cases.",
+            "I often sense what's happening in a situation or person without needing words."
+          ],
+          "description": {
+            "hu": "Égbolt-típus: intuitív, mintafelismerő, jövőorientált. A látható mögötti összefüggéseket érzékeled – szimbólumokban, lehetőségekben és elvont struktúrákban gondolkodsz.",
+            "en": "Sky type: intuitive, pattern-seeking, future-oriented. You sense the connections behind what's visible — you think in symbols, possibilities, and abstract structures."
+          }
+        },
+        "balanced": {
+          "description": {
+            "hu": "Hegy típus: a konkrét és az elvont egyaránt tájékoztat. Képes vagy a részletekben és az összefüggésekben is eligazodni.",
+            "en": "Mountain type: both the concrete and the abstract inform you. You can navigate both in details and in patterns."
+          }
+        }
+      }
+    },
+
+    "pp": {
+      "label": { "hu": "Nyíl – Pajzs", "en": "Arrow – Shield" },
+      "poles": {
+        "a": {
+          "id": "arrow",
+          "label": { "hu": "Nyíl", "en": "Arrow" },
+          "hu": [
+            "Inkább arra fókuszálok, mit akarok elérni, mint arra, mit kell elkerülni.",
+            "Kockázatvállalás számomra alapvetően lehetőség – ha nagy a potenciális nyereség, érdemes megpróbálni.",
+            "Egy döntésnél elsősorban azt mérlegelem, mit nyerhetek – nem azt, mit veszíthetek.",
+            "Ha egy terv nem hozta a várt eredményt, hamar áttérek a következőre – nem az elveszítettre fókuszálok.",
+            "Ambiciózus célok motiválnak – a biztonságos, de unalmas út könnyen stagnálásnak tűnik.",
+            "Szívesebben teszek meg mindent egy jó lehetőségért, mint hogy megvárjam a tökéletes pillanatot.",
+            "Siker után energikusabb és bátorabb vagyok a következő lépésben – a sikerélmény hajt előre.",
+            "Inkább vállalok kudarcot egy merész lépés miatt, mint hogy sajnáljam, hogy nem próbáltam.",
+            "Optimistán értékelem a helyzeteket – a pozitív kimenetelt tartom alapértelmezettnek.",
+            "Változtatni akkor kezdek, amikor jobbat látok – nem akkor, amikor a jelenlegi már elviselhetetlenné válik.",
+            "A növekedés és fejlődés gondolata erősebben motivál, mint a stabilitás megőrzése.",
+            "Ha valami nem ment, azt elemzem, hogyan csináljam jobban – nem azt, hogyan kerüljem el legközelebb.",
+            "A legérdekesebb lehetőségek mindig egy kis kockázattal járnak – ezt elfogadom.",
+            "Karrierben és életben inkább a maximumot keresem, mint a biztonságot.",
+            "Egy kapcsolatban azt keresem, mit hozhatunk ki egymásból – nem azt, mit kell mindenáron megőrizni."
+          ],
+          "en": [
+            "I'm more focused on pursuing what I want than on avoiding what could go wrong.",
+            "Risk-taking is fundamentally an opportunity to me — if the potential gain is big, it's worth trying.",
+            "When making a decision, I primarily weigh what I can gain — not what I could lose.",
+            "If a plan didn't deliver, I quickly move on — I don't dwell on what was lost.",
+            "Ambitious goals motivate me — the safe but boring route easily feels like stagnation.",
+            "I'd rather go all in on a good opportunity than wait for the perfect moment.",
+            "After a success, I feel more energized and bolder for the next step — the feeling of success drives me forward.",
+            "I'd rather risk failure from a bold move than regret not having tried.",
+            "I evaluate situations optimistically — I treat the positive outcome as the default.",
+            "I initiate change when I see something better — not when the current situation becomes unbearable.",
+            "The idea of growth and development motivates me more than preserving stability.",
+            "When something fails, I analyze how to do it better next time — not how to avoid it.",
+            "The most interesting opportunities always carry a bit of risk — I accept that.",
+            "In career and life, I look for the maximum, not the safe option.",
+            "In a relationship, I look for what we can bring out in each other — not what needs to be preserved at all costs."
+          ],
+          "description": {
+            "hu": "Nyíl-típus: lehetőségkereső, kockázatvállaló, növekedésorientált. Előre nézel, a nyereményre fókuszálsz, és a merész lépésektől sem riadsz vissza.",
+            "en": "Arrow type: opportunity-seeking, risk-tolerant, growth-oriented. You look forward, focus on the gain, and aren't deterred by bold moves."
+          }
+        },
+        "b": {
+          "id": "anchor",
+          "label": { "hu": "Pajzs", "en": "Shield" },
+          "hu": [
+            "Inkább arra figyelek, mit veszíthetek, mint arra, mit nyerhetek – a veszteség elkerülése az első.",
+            "Kockázatvállalás számomra alapvetően fenyegetés – ha nagy a potenciális veszteség, nem éri meg.",
+            "Egy döntésnél elsősorban azt mérlegelem, mit veszíthetek – csak utána azt, mit nyerhetek.",
+            "Ha egy terv nem hozta a várt eredményt, fontos megértenem, mi ment rosszul – hogy legközelebb elkerüljem.",
+            "A biztonságos és stabil út motivál – az ambiciózus célok mögött könnyen meglátom a kockázatot.",
+            "Inkább megvárom a megfelelő pillanatot, mint hogy idő előtt belevágok valamibe.",
+            "Ha veszítek, óvatosabb leszek a következő lépésben – a kudarc visszafog.",
+            "Inkább visszafogom magam, mint hogy kockáztassam, amit már elértem.",
+            "Óvatosan értékelem a helyzeteket – a negatív kimenetelt is komolyan számításba veszem.",
+            "Változtatni akkor kezdek, amikor a jelenlegi helyzet már tarthatatlan – addig inkább stabilizálok.",
+            "A stabilitás megőrzése erősebben motivál, mint a növekedés és fejlődés lehetősége.",
+            "Ha valami nem ment, azt elemzem, hogyan kerüljem el legközelebb – nem csak azt, hogyan csináljam jobban.",
+            "A kockázatos lehetőségeknél először a veszteségeket mérlegelem, csak utána a nyereséget.",
+            "Karrierben és életben inkább a biztonságot és a fenntarthatóságot keresem, mint a maximumot.",
+            "Egy kapcsolatban fontosabb számomra, amit meg kell óvni, mint az, amit még kihozhatnánk egymásból."
+          ],
+          "en": [
+            "I pay more attention to what I could lose than to what I could gain — avoiding loss comes first.",
+            "Risk-taking is fundamentally a threat to me — if the potential loss is big, it's not worth it.",
+            "When making a decision, I primarily weigh what I could lose — only then what I could gain.",
+            "If a plan didn't deliver, it's important to understand what went wrong — so I can avoid it next time.",
+            "A safe and stable path motivates me — behind ambitious goals, I easily see the risk.",
+            "I'd rather wait for the right moment than jump into something prematurely.",
+            "When I lose, I become more cautious in the next step — failure holds me back.",
+            "I'd rather hold back than risk what I've already achieved.",
+            "I evaluate situations carefully — I seriously account for negative outcomes too.",
+            "I initiate change when the current situation becomes untenable — until then, I prefer to stabilize.",
+            "Preserving stability motivates me more than the possibility of growth and development.",
+            "When something fails, I analyze how to avoid it next time — not just how to do it better.",
+            "For risky opportunities, I weigh the losses first, the gains second.",
+            "In career and life, I look for safety and sustainability over the maximum.",
+            "In a relationship, what needs to be protected matters more to me than what we could still bring out in each other."
+          ],
+          "description": {
+            "hu": "Pajzs-típus: veszteségkerülő, óvatos, stabilitásorientált. Előbb látod a kockázatot, mint a lehetőséget, és tudatosan véded, amit már felépítettél.",
+            "en": "Shield type: loss-averse, cautious, stability-oriented. You see the risk before the opportunity, and consciously protect what you've already built."
+          }
+        },
+        "balanced": {
+          "description": {
+            "hu": "Iránytű típus: mérlegeled a lehetséges nyereséget és veszteséget egyaránt. Sem nem menekülsz a kockázattól, sem nem rohansz bele vakon.",
+            "en": "Compass type: you weigh both potential gains and losses. You neither flee from risk nor rush into it blindly."
+          }
+        }
+      }
     }
+
+  }
 }

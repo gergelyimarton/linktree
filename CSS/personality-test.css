@@ -1,144 +1,333 @@
-:root{
-  --bg:#0f1724; --card:#0b1220; --accent:#f59e0b; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
-}
-*{
-    box-sizing:border-box
-}
-
-body{
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-    background: linear-gradient(180deg,var(--bg), #061023); 
-    color:#e6eef8; 
-    margin:0; 
-    padding:24px;
+:root {
+  --bg:     #0f1724;
+  --card:   #0b1220;
+  --accent: #f59e0b;
+  --muted:  #94a3b8;
+  --glass:  rgba(255,255,255,0.03);
 }
 
+* { box-sizing: border-box; }
 
-.container{
-    max-width:760px;
-    margin:0 auto
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--bg), #061023);
+  color: #e6eef8;
+  margin: 0;
+  padding: 24px;
 }
 
-h1{
-    margin:0 0 8px
+.container {
+  max-width: 760px;
+  margin: 0 auto;
 }
 
-.intro{
-    color:var(--muted); 
-    margin:0 0 18px
+h1 { margin: 0 0 8px; }
+
+.intro {
+  color: var(--muted);
+  margin: 0 0 24px;
 }
-.question-card{
-    background:var(--card); 
-    padding:18px; 
-    border-radius:12px; 
-    margin-bottom:14px; 
-    box-shadow:0 6px 18px rgba(2,6,23,0.6)
+
+/* ── Dimenzió választó ────────────────────────────────────────────────────── */
+
+.selector-label {
+  color: var(--muted);
+  margin: 0 0 12px;
+  font-size: 14px;
 }
-.q-title{
-    margin:0 0 12px; 
-    font-size:18px
+
+.dim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
 }
-.scale{
-    display:flex; 
-    gap:10px
+
+.dim-btn {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.18s, background 0.18s;
+  color: #e6eef8;
 }
-.scale label{
-    flex:1; 
-    background:var(--glass); 
-    padding:10px; 
-    text-align:center; 
-    border-radius:8px; 
-    cursor:pointer
+
+.dim-btn:hover {
+  border-color: var(--accent);
+  background: rgba(245,158,11,0.05);
 }
-.scale input{
-    display:none
+
+.dim-btn--all {
+  grid-column: 1 / -1;
+  border-color: rgba(245,158,11,0.25);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.dim-btn--all:hover {
+  border-color: var(--accent);
+  background: rgba(245,158,11,0.07);
+}
+
+.dim-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dim-sub {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── Kérdéskártya ─────────────────────────────────────────────────────────── */
+
+.question-card {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+.q-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.scale {
+  display: flex;
+  gap: 10px;
+}
+
+.scale label {
+  flex: 1;
+  background: var(--glass);
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.scale input { display: none; }
 
 .scale input:checked + span {
-    background: var(--accent);       /* kontrasztos háttér */
-    color: #071126;                  /* szöveg jól látható */
-    border-radius: 50%;              /* lekerekített sarkok */
-    outline: 3px solid var(--accent); /* fényes kiemelés */
-    box-shadow: 0 0 8px var(--accent); /* árnyék a hangsúlyhoz */
-    transform: scale(1.05);          /* kis nagyítás */
-    padding: 3px 8px;                    /* eredeti 10px + 5px extra */
-    transition: all 0.2s ease;       /* sima animáció */
+  background: var(--accent);
+  color: #071126;
+  border-radius: 50%;
+  outline: 3px solid var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transform: scale(1.05);
+  padding: 3px 8px;
+  transition: all 0.2s ease;
 }
 
+/* ── Navigáció ────────────────────────────────────────────────────────────── */
 
-.controls{
-    display:flex; 
-    justify-content:space-between; 
-    margin:14px 0
-}
-.btn{
-    background:linear-gradient(180deg,var(--accent), #ffbf5a); 
-    color:#071126; 
-    border:none; 
-    padding:10px 20px; 
-    border-radius:10px; 
-    cursor: pointer;
-    font-size: 16px;
-}
-.btn:disabled{
-    opacity:0.45; 
-    cursor:not-allowed
-}
-.result{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); 
-    padding:18px; 
-    border-radius:12px
-}
-.hidden{
-    display:none
-}
-.result-bars{
-    margin: 40px 0px; 
-    display:flex; 
-    flex-direction:column; 
-    gap:8px
-}
-.bar-wrap{
-    display:flex; 
-    align-items:center; 
-    gap:12px
-}
-.bar{
-    flex:1; 
-    height:14px; 
-    background:rgba(255,255,255,0.06); 
-    border-radius:999px; 
-    overflow:hidden
-}
-.bar .fill{
-    height:100%; 
-    width:0%; 
-    background:linear-gradient(90deg,var(--accent), #ffbf5a)
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
 }
 
-#sunScore,#moonScore{min-width:40px; text-align:right}
-
-.back-link {
-    display: block;
-    text-decoration: none;
+.btn {
+  background: linear-gradient(180deg, var(--accent), #ffbf5a);
+  color: #071126;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
 }
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--secondary {
+  background: rgba(255,255,255,0.07);
+  color: #e6eef8;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.btn--secondary:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── Eredmény ─────────────────────────────────────────────────────────────── */
+
+.result {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 18px;
+  border-radius: 12px;
+}
+
+/* Típusjelölés (összes dimenzió módban) */
+#type-code-wrap {
+  margin: 4px 0 24px;
+}
+
+#type-code {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* Dimenzió eredménykártyák */
+.dim-result-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 12px;
+}
+
+.dim-result-card h3 {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* Barok */
+.result-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar-wrap--dominant .bar-label {
+  color: #e6eef8;
+  font-weight: 600;
+}
+
+/* Per-dimenzió bar színek (subdued = nem domináns, bright = domináns) */
+.dim-result-card--ei .bar .fill                          { background: linear-gradient(90deg, #78450a, #9a5c12); }
+.dim-result-card--ei .bar-wrap--dominant .bar .fill      { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+.dim-result-card--tf .bar .fill                          { background: linear-gradient(90deg, #6b1a1a, #8a2424); }
+.dim-result-card--tf .bar-wrap--dominant .bar .fill      { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.dim-result-card--jp .bar .fill                          { background: linear-gradient(90deg, #0a5a52, #107060); }
+.dim-result-card--jp .bar-wrap--dominant .bar .fill      { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+
+.dim-result-card--sn .bar .fill                          { background: linear-gradient(90deg, #14532d, #1a6b38); }
+.dim-result-card--sn .bar-wrap--dominant .bar .fill      { background: linear-gradient(90deg, #22c55e, #4ade80); }
+
+.dim-result-card--pp .bar .fill                          { background: linear-gradient(90deg, #4a1772, #6025a0); }
+.dim-result-card--pp .bar-wrap--dominant .bar .fill      { background: linear-gradient(90deg, #a855f7, #c084fc); }
+
+.bar-label {
+  min-width: 72px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar .fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: width 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pct {
+  min-width: 38px;
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Leírás */
+.dim-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #b8cce0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 12px;
+}
+
+.load-wrap {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.load-wrap .btn--secondary {
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.result-actions .btn {
+  flex: 1;
+}
+
+/* ── Közös ────────────────────────────────────────────────────────────────── */
+
+.hidden { display: none; }
 
 .back-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
 }
 
-@media (max-width:520px){
-    .scale{flex-direction:column}
+/* ── Reszponzív ───────────────────────────────────────────────────────────── */
 
-    .back-button {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        display: block;
-        width: fit-content;
-        margin: 30px auto 80px;
-    }
+@media (max-width: 520px) {
+  .scale { flex-direction: column; }
+
+  .dim-grid { grid-template-columns: 1fr; }
+
+  .dim-btn--all {
+    grid-column: 1;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .back-button {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    display: block;
+    width: fit-content;
+    margin: 30px auto 80px;
+  }
 }
