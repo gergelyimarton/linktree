@@ -314,12 +314,12 @@ function finish() {
       else                bTotal += val;
     });
 
-    const aMax   = poles.a[lang].length * 5;
-    const bMax   = poles.b[lang].length * 5;
+    const aCount = poles.a[lang].length;
+    const bCount = poles.b[lang].length;
     scores[dimId] = {
       aTotal, bTotal,
-      aPerc: Math.round((aTotal / aMax) * 100),
-      bPerc: Math.round((bTotal / bMax) * 100),
+      aPerc: Math.round(((aTotal - aCount) / (aCount * 4)) * 100),
+      bPerc: Math.round(((bTotal - bCount) / (bCount * 4)) * 100),
     };
   });
 
@@ -346,6 +346,14 @@ function renderResults(scores) {
     typeCodeWrap.classList.remove('hidden');
   } else {
     typeCodeWrap.classList.add('hidden');
+  }
+
+  // Pókháló diagram (3+ dimenzióhoz)
+  if (activeDimIds.length >= 3) {
+    const radarWrap = document.createElement('div');
+    radarWrap.className = 'radar-wrap';
+    radarWrap.appendChild(buildRadarChart(scores, activeDimIds, lang));
+    resultDimsEl.appendChild(radarWrap);
   }
 
   // Dimenzió kártyák
@@ -426,6 +434,85 @@ function buildDimCard(dimId, dim, score, lang) {
   card.appendChild(descEl);
 
   return card;
+}
+
+// ─── Pókháló diagram ──────────────────────────────────────────────────────────
+
+function buildRadarChart(scores, dims, lang) {
+  const SIZE = 400;
+  const CX = 200, CY = 200;
+  const R  = 115;   // chart sugár
+  const LR = 156;   // label sugár
+  const n  = dims.length;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const axisAngle = i => (i / n) * 2 * Math.PI - Math.PI / 2;
+  const polarPt   = (i, frac) => {
+    const a = axisAngle(i);
+    return [CX + frac * R * Math.cos(a), CY + frac * R * Math.sin(a)];
+  };
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${SIZE} ${SIZE}`);
+  svg.setAttribute('class', 'radar-chart');
+
+  // Háttér gyűrűk (25, 50, 75, 100 %)
+  [0.25, 0.5, 0.75, 1].forEach(frac => {
+    const poly = document.createElementNS(NS, 'polygon');
+    poly.setAttribute('points', dims.map((_, i) => polarPt(i, frac).join(',')).join(' '));
+    poly.setAttribute('class', 'radar-ring' + (frac === 0.5 ? ' radar-ring--mid' : ''));
+    svg.appendChild(poly);
+  });
+
+  // Tengelyek
+  dims.forEach((_, i) => {
+    const [x2, y2] = polarPt(i, 1);
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', CX); line.setAttribute('y1', CY);
+    line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+    line.setAttribute('class', 'radar-axis');
+    svg.appendChild(line);
+  });
+
+  // domináns érték (max pólus %-a) és neve tengelyenként
+  const dimVal  = dimId => Math.max(scores[dimId].aPerc, scores[dimId].bPerc) / 100;
+  const dimLabel = dimId => getDominantPoleName(data.dimensions[dimId], scores[dimId], lang);
+
+  // Adatpoligon
+  const dataPoly = document.createElementNS(NS, 'polygon');
+  dataPoly.setAttribute('points',
+    dims.map((dimId, i) => polarPt(i, dimVal(dimId)).join(',')).join(' '));
+  dataPoly.setAttribute('class', 'radar-data');
+  svg.appendChild(dataPoly);
+
+  // Pontok
+  dims.forEach((dimId, i) => {
+    const [x, y] = polarPt(i, dimVal(dimId));
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('class', 'radar-dot');
+    svg.appendChild(c);
+  });
+
+  // Tengelycímkék (domináns pólus neve)
+  dims.forEach((dimId, i) => {
+    const a  = axisAngle(i);
+    const lx = CX + LR * Math.cos(a);
+    const ly = CY + LR * Math.sin(a);
+
+    const text = document.createElementNS(NS, 'text');
+    text.setAttribute('x', lx);
+    text.setAttribute('y', ly);
+    text.setAttribute('class', 'radar-label');
+    text.setAttribute('text-anchor',
+      Math.abs(lx - CX) < 15 ? 'middle' : lx > CX ? 'start' : 'end');
+    text.setAttribute('dominant-baseline',
+      ly < CY - 40 ? 'hanging' : ly > CY + 30 ? 'auto' : 'middle');
+    text.textContent = dimLabel(dimId);
+    svg.appendChild(text);
+  });
+
+  return svg;
 }
 
 /**

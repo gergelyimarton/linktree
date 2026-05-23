@@ -8,12 +8,23 @@
 
 * { box-sizing: border-box; }
 
+/* style.css rögzíti height: 100vh — ez felülírja */
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: linear-gradient(180deg, var(--bg), #061023);
   color: #e6eef8;
   margin: 0;
   padding: 24px;
+  height: auto;
+  min-height: 100vh;
+  display: block;
+}
+
+.all-content {
+  height: auto;
+  min-height: 100vh;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 .container {
@@ -298,6 +309,56 @@ h1 { margin: 0 0 8px; }
   flex: 1;
 }
 
+/* ── Pókháló diagram ──────────────────────────────────────────────────────── */
+
+.radar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.radar-chart {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  overflow: visible;
+}
+
+.radar-ring {
+  fill: none;
+  stroke: rgba(255,255,255,0.07);
+  stroke-width: 1;
+}
+
+.radar-ring--mid {
+  stroke: rgba(255,255,255,0.18);
+  stroke-dasharray: 4 3;
+}
+
+.radar-axis {
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 1;
+}
+
+.radar-data {
+  fill: rgba(245,158,11,0.12);
+  stroke: rgba(245,158,11,0.65);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.radar-dot {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+
+.radar-label {
+  fill: #b8cce0;
+  font-size: 13px;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
 /* ── Közös ────────────────────────────────────────────────────────────────── */
 
 .hidden { display: none; }
@@ -329,5 +390,20 @@ h1 { margin: 0 0 8px; }
     display: block;
     width: fit-content;
     margin: 30px auto 80px;
+  }
+
+  /* Radar: oldalsó label-eknek padding buffer */
+  .radar-wrap {
+    padding: 0 16px;
+    overflow: visible;
+  }
+
+  .radar-label {
+    font-size: 12px;
+  }
+
+  /* Gombok egymás alá mobilon */
+  .result-actions {
+    flex-direction: column;
   }
 }
