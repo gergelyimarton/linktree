@@ -32,9 +32,13 @@ const resultSection   = document.getElementById('result');
 const typeCodeWrap    = document.getElementById('type-code-wrap');
 const typeCodeEl      = document.getElementById('type-code');
 const resultDimsEl    = document.getElementById('result-dims');
-const prevBtn         = document.getElementById('prevBtn');
-const saveBtn         = document.getElementById('saveBtn');
-const nextBtn         = document.getElementById('nextBtn');
+const userNameInput    = document.getElementById('userName');
+const quizProgressEl   = document.getElementById('quiz-progress');
+const quizProgressFill = document.getElementById('quiz-progress-fill');
+const quizProgressText = document.getElementById('quiz-progress-text');
+const prevBtn          = document.getElementById('prevBtn');
+const saveBtn          = document.getElementById('saveBtn');
+const nextBtn          = document.getElementById('nextBtn');
 const retryBtn        = document.getElementById('retryBtn');
 const downloadBtn     = document.getElementById('downloadBtn');
 const loadBtn         = document.getElementById('loadBtn');
@@ -49,6 +53,7 @@ let questions     = [];       // [{ id, text, pole, dimId }]
 let answers       = {};       // id → 1..5
 let idx           = 0;
 let lastScores    = null;     // nyelvváltáshoz tárolt utolsó eredmény
+let userName      = '';       // megadott név a letöltési fájlnévhez
 
 // ─── Segédfüggvények ──────────────────────────────────────────────────────────
 
@@ -89,6 +94,7 @@ function showSelector() {
   quizSection.classList.add('hidden');
   controlsEl.classList.add('hidden');
   resultSection.classList.add('hidden');
+  quizProgressEl.classList.add('hidden');
   document.getElementById('page-title').setAttribute('data-hu', 'Személyiségteszt');
   document.getElementById('page-title').setAttribute('data-en', 'Personality Test');
   document.getElementById('page-title').textContent = getCurrentLang() === 'en' ? 'Personality Test' : 'Személyiségteszt';
@@ -99,6 +105,7 @@ function showQuiz() {
   quizSection.classList.remove('hidden');
   controlsEl.classList.remove('hidden');
   resultSection.classList.add('hidden');
+  quizProgressEl.classList.remove('hidden');
 }
 
 function showResult() {
@@ -106,6 +113,7 @@ function showResult() {
   quizSection.classList.add('hidden');
   controlsEl.classList.add('hidden');
   resultSection.classList.remove('hidden');
+  quizProgressEl.classList.add('hidden');
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
@@ -186,6 +194,7 @@ function startQuiz(dimIds) {
   answers = {};
   idx = 0;
   lastScores = null;
+  userName = userNameInput ? userNameInput.value.trim() : '';
   buildQuestions();
   showQuiz();
   renderQuestion(idx);
@@ -257,6 +266,9 @@ function renderQuestion(i) {
   quizSection.appendChild(node);
   prevBtn.disabled    = (i === 0);
   nextBtn.textContent = (i === questions.length - 1) ? t('finish') : t('next');
+
+  quizProgressFill.style.width = ((i + 1) / questions.length * 100) + '%';
+  quizProgressText.textContent = `${i + 1} / ${questions.length}`;
 }
 
 // ─── Navigáció ────────────────────────────────────────────────────────────────
@@ -537,6 +549,11 @@ const langObserver = new MutationObserver(mutations => {
     // Selector: manuálisan frissítjük a JS-generált gombokat
     applyLangToGrid(lang);
 
+    // Névmező placeholder frissítése
+    if (userNameInput) {
+      userNameInput.placeholder = userNameInput.dataset[`placeholder${lang.charAt(0).toUpperCase() + lang.slice(1)}`] || '';
+    }
+
     // Quiz: újraépítés az új nyelvű kérdésekkel (válaszok megmaradnak)
     if (!quizSection.classList.contains('hidden')) {
       buildQuestions();
@@ -555,11 +572,14 @@ langObserver.observe(document.documentElement, { attributes: true });
 // ─── Mentés / Betöltés ───────────────────────────────────────────────────────
 
 function saveState(done) {
-  const state = { v: 1, dimIds: activeDimIds, answers, idx, done };
+  const state = { v: 1, dimIds: activeDimIds, answers, idx, done, userName };
   const blob = new Blob([JSON.stringify(state)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = done ? 'personality-test-befejezett.json' : 'personality-test-felbe-hagyott.json';
+  const namePart = userName ? `-${userName.replace(/[^a-zA-Z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]/g, '').trim().replace(/ +/g, '-')}` : '';
+  a.download = done
+    ? `personality-test${namePart}-befejezett.json`
+    : `personality-test${namePart}-felbe-hagyott.json`;
   a.click();
   URL.revokeObjectURL(a.href);
 }

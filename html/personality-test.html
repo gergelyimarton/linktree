@@ -27,6 +27,15 @@
 
             <!-- Dimenzió választó -->
             <section id="dim-selector">
+                <div class="name-wrap">
+                    <label class="name-label" for="userName"
+                           data-hu="A neved (opcionális):"
+                           data-en="Your name (optional):">A neved (opcionális):</label>
+                    <input type="text" id="userName" class="name-input"
+                           data-placeholder-hu="pl. Kovács Anna"
+                           data-placeholder-en="e.g. Jane Doe"
+                           placeholder="pl. Kovács Anna" maxlength="60" autocomplete="off">
+                </div>
                 <p class="selector-label"
                    data-hu="Válaszd ki a vizsgált dimenziót:"
                    data-en="Choose the dimension to explore:">
@@ -41,6 +50,14 @@
                             data-hu="Mentés betöltése" data-en="Load save">Mentés betöltése</button>
                 </div>
             </section>
+
+            <!-- Progress bar -->
+            <div id="quiz-progress" class="quiz-progress hidden">
+                <div class="quiz-progress__bar">
+                    <div class="quiz-progress__fill" id="quiz-progress-fill"></div>
+                </div>
+                <span class="quiz-progress__text" id="quiz-progress-text"></span>
+            </div>
 
             <!-- Kvíz -->
             <section id="quiz" class="hidden"></section>
