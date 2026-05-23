@@ -522,7 +522,7 @@ function buildRadarChart(scores, dims, lang) {
 function getDominantPoleName(dim, score, lang) {
   const { aPerc, bPerc } = score;
   if (Math.abs(aPerc - bPerc) <= BALANCED_THRESHOLD) {
-    return dim.poles.a.label[lang] + '/' + dim.poles.b.label[lang];
+    return dim.poles.balanced.label[lang];
   }
   return aPerc >= bPerc ? dim.poles.a.label[lang] : dim.poles.b.label[lang];
 }

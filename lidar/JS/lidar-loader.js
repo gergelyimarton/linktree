@@ -796,19 +796,27 @@
     const loader = document.querySelector('.ld-loader');
     const content = document.querySelector('.ld-main-content');
 
+    function finalize() {
+      cleanup();
+      if (loader) loader.classList.add('hidden');
+      if (content) {
+        content.classList.add('visible');
+        window.dispatchEvent(new CustomEvent('lidarReady'));
+      }
+    }
+
     if (loader) {
       loader.classList.add('fade-out');
 
-      loader.addEventListener('transitionend', () => {
-        cleanup();
-        loader.classList.add('hidden');
+      // transitionend may not fire if transition is skipped (reduced motion, browser quirk, display:none race)
+      const fallbackTimer = setTimeout(finalize, CONFIG.fadeOutDuration + 100);
 
-        if (content) {
-          content.classList.add('visible');
-          // Dispatch event for page-specific initialization
-          window.dispatchEvent(new CustomEvent('lidarReady'));
-        }
+      loader.addEventListener('transitionend', () => {
+        clearTimeout(fallbackTimer);
+        finalize();
       }, { once: true });
+    } else {
+      finalize();
     }
   }
 
@@ -846,15 +854,28 @@
       loader.classList.add('ld-loader--fallback');
     }
 
-    // Simple timeout-based completion for fallback
     trackResources();
 
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        state.resourceProgress = 1;
-        beginFadeOut();
-      }, CONFIG.minDisplayTime);
-    });
+    function triggerFadeOut() {
+      // Guard: if already complete (e.g. called from both load and timeout), skip
+      if (state.isComplete) return;
+      state.resourceProgress = 1;
+      beginFadeOut();
+    }
+
+    function scheduleAfterLoad() {
+      setTimeout(triggerFadeOut, CONFIG.minDisplayTime);
+    }
+
+    // window.load may have already fired on cached/back-nav pages
+    if (document.readyState === 'complete') {
+      scheduleAfterLoad();
+    } else {
+      window.addEventListener('load', scheduleAfterLoad, { once: true });
+    }
+
+    // Hard safety net: if beginFadeOut() was never called after a generous timeout, force it
+    setTimeout(triggerFadeOut, CONFIG.minDisplayTime + 4000);
   }
 
   // ============================================================
@@ -924,12 +945,16 @@
     // Start animation loop
     animationId = requestAnimationFrame(animate);
 
-    // Ensure completion even if resources stall
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        state.resourceProgress = 1;
-      }, 500);
-    });
+    // Ensure completion even if resources stall (window.load may have already fired on cached pages)
+    function ensureProgress() {
+      setTimeout(() => { state.resourceProgress = 1; }, 500);
+    }
+
+    if (document.readyState === 'complete') {
+      ensureProgress();
+    } else {
+      window.addEventListener('load', ensureProgress, { once: true });
+    }
   }
 
   // Run on DOM ready

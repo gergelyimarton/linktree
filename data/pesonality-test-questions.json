@@ -1,12 +1,17 @@
 {
   "dimensions": {
-
     "ei": {
-      "label": { "hu": "Nap – Hold", "en": "Sun – Moon" },
+      "label": {
+        "hu": "Nap – Hold",
+        "en": "Sun – Moon"
+      },
       "poles": {
         "a": {
           "id": "sun",
-          "label": { "hu": "Nap", "en": "Sun" },
+          "label": {
+            "hu": "Nap",
+            "en": "Sun"
+          },
           "hu": [
             "Tétlenség esetén hamar elveszítem a motivációmat – cselekvés közben töltődöm fel igazán.",
             "Inkább gyorsan döntök és menet közben korrigálok, mint hogy sokáig mérlegeljek.",
@@ -58,7 +63,10 @@
         },
         "b": {
           "id": "moon",
-          "label": { "hu": "Hold", "en": "Moon" },
+          "label": {
+            "hu": "Hold",
+            "en": "Moon"
+          },
           "hu": [
             "Szükségem van rendszeres elvonulásra – nélküle szétszórtnak érzem magam, még ha kívülről nem is látszik.",
             "Ha siettetnek egy döntésben, általában megbánom – jó döntést csak akkor hozok, ha időt adok rá.",
@@ -112,17 +120,26 @@
           "description": {
             "hu": "Csillag típus: egyszerre jelen van benned a Nap és a Hold. Képes vagy alkotni, vezetni, de ugyanakkor érzékenyen és spirituálisan reagálni a világra.",
             "en": "Star type: both the Sun and Moon are present in you. You can create, lead, but also respond to the world sensitively and spiritually."
+          },
+          "label": {
+            "hu": "Csillag",
+            "en": "Star"
           }
         }
       }
     },
-
     "tf": {
-      "label": { "hu": "Tűz – Víz", "en": "Fire – Water" },
+      "label": {
+        "hu": "Tűz – Víz",
+        "en": "Fire – Water"
+      },
       "poles": {
         "a": {
           "id": "fire",
-          "label": { "hu": "Tűz", "en": "Fire" },
+          "label": {
+            "hu": "Tűz",
+            "en": "Fire"
+          },
           "hu": [
             "Döntésnél az objektív logika fontosabb számomra, mint az, hogy mindenki jól érzi-e magát tőle.",
             "Az igazságos és a kedves döntés nem mindig esik egybe – ha választani kell, az igazságosat hozom.",
@@ -164,7 +181,10 @@
         },
         "b": {
           "id": "water",
-          "label": { "hu": "Víz", "en": "Water" },
+          "label": {
+            "hu": "Víz",
+            "en": "Water"
+          },
           "hu": [
             "Döntésnél az számít, hogy mindenki jól érzi-e magát – az objektív logika önmagában kevés.",
             "A kedves döntés és az igazságos döntés ritkán ugyanaz – előbbit választom.",
@@ -208,17 +228,26 @@
           "description": {
             "hu": "Mérleg típus: ösztönösen mérsz logikával és értékkel egyszerre. Képes vagy elvszerűen dönteni, és közben figyelni arra, hogyan hat ez az emberekre.",
             "en": "Scales type: you instinctively weigh both logic and values. You can decide on principle while staying attuned to how it affects people."
+          },
+          "label": {
+            "hu": "Mérleg",
+            "en": "Scales"
           }
         }
       }
     },
-
     "jp": {
-      "label": { "hu": "Kő – Szél", "en": "Stone – Wind" },
+      "label": {
+        "hu": "Kő – Szél",
+        "en": "Stone – Wind"
+      },
       "poles": {
         "a": {
           "id": "stone",
-          "label": { "hu": "Kő", "en": "Stone" },
+          "label": {
+            "hu": "Kő",
+            "en": "Stone"
+          },
           "hu": [
             "Szívesebben tudok előre mindent, mint hogy menet közben dőljön el.",
             "Nyitott végű helyzetek tartósan kényelmetlenül érintenek – lezárást keresek.",
@@ -260,7 +289,10 @@
         },
         "b": {
           "id": "wind",
-          "label": { "hu": "Szél", "en": "Wind" },
+          "label": {
+            "hu": "Szél",
+            "en": "Wind"
+          },
           "hu": [
             "A legjobb dolgok sokszor menet közben dőlnek el – a merev tervek korlátozzák a lehetőségeket.",
             "Nyitott végű helyzetek inkább izgatnak, mint nyugtalanítanak – minden még formálható.",
@@ -304,17 +336,26 @@
           "description": {
             "hu": "Rugalmas szervező: képes vagy struktúrát és nyitottságot egyaránt alkalmazni. Tervezel, ha kell – és áramolsz, ha úgy jobb.",
             "en": "Adaptive organizer: you can apply both structure and openness. You plan when needed — and flow when that's better."
+          },
+          "label": {
+            "hu": "Szervező",
+            "en": "Organizer"
           }
         }
       }
     },
-
     "sn": {
-      "label": { "hu": "Föld – Égbolt", "en": "Earth – Sky" },
+      "label": {
+        "hu": "Föld – Égbolt",
+        "en": "Earth – Sky"
+      },
       "poles": {
         "a": {
           "id": "root",
-          "label": { "hu": "Föld", "en": "Earth" },
+          "label": {
+            "hu": "Föld",
+            "en": "Earth"
+          },
           "hu": [
             "Jobban megbízom abban, amit látok, hallok vagy megérintek, mint abban, amit csak elképzelek.",
             "Egy probléma megértéséhez konkrét példákra van szükségem – elvont magyarázatok kevésbé segítenek.",
@@ -356,7 +397,10 @@
         },
         "b": {
           "id": "sky",
-          "label": { "hu": "Égbolt", "en": "Sky" },
+          "label": {
+            "hu": "Égbolt",
+            "en": "Sky"
+          },
           "hu": [
             "Sokszor nem tudom, honnan tudom – csak érzem, mi a helyes irány.",
             "Elvont magyarázatok hamarabb megragadnak, mint konkrét példák – az összefüggés az, ami számít.",
@@ -400,17 +444,26 @@
           "description": {
             "hu": "Hegy típus: a konkrét és az elvont egyaránt tájékoztat. Képes vagy a részletekben és az összefüggésekben is eligazodni.",
             "en": "Mountain type: both the concrete and the abstract inform you. You can navigate both in details and in patterns."
+          },
+          "label": {
+            "hu": "Hegy",
+            "en": "Mountain"
           }
         }
       }
     },
-
     "pp": {
-      "label": { "hu": "Nyíl – Pajzs", "en": "Arrow – Shield" },
+      "label": {
+        "hu": "Nyíl – Pajzs",
+        "en": "Arrow – Shield"
+      },
       "poles": {
         "a": {
           "id": "arrow",
-          "label": { "hu": "Nyíl", "en": "Arrow" },
+          "label": {
+            "hu": "Nyíl",
+            "en": "Arrow"
+          },
           "hu": [
             "Inkább arra fókuszálok, mit akarok elérni, mint arra, mit kell elkerülni.",
             "Kockázatvállalás számomra alapvetően lehetőség – ha nagy a potenciális nyereség, érdemes megpróbálni.",
@@ -452,7 +505,10 @@
         },
         "b": {
           "id": "anchor",
-          "label": { "hu": "Pajzs", "en": "Shield" },
+          "label": {
+            "hu": "Pajzs",
+            "en": "Shield"
+          },
           "hu": [
             "Inkább arra figyelek, mit veszíthetek, mint arra, mit nyerhetek – a veszteség elkerülése az első.",
             "Kockázatvállalás számomra alapvetően fenyegetés – ha nagy a potenciális veszteség, nem éri meg.",
@@ -496,10 +552,13 @@
           "description": {
             "hu": "Iránytű típus: mérlegeled a lehetséges nyereséget és veszteséget egyaránt. Sem nem menekülsz a kockázattól, sem nem rohansz bele vakon.",
             "en": "Compass type: you weigh both potential gains and losses. You neither flee from risk nor rush into it blindly."
+          },
+          "label": {
+            "hu": "Iránytű",
+            "en": "Compass"
           }
         }
       }
     }
-
   }
 }
