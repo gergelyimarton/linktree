@@ -12,7 +12,7 @@
 </head>
 <body class="dark-theme">
 
-    <div class="all-content" id="all-content">
+    <div class="all-content state--selector" id="all-content">
         <main class="container">
 
             <h1 id="page-title"
@@ -36,6 +36,66 @@
                            data-placeholder-en="e.g. Jane Doe"
                            placeholder="pl. Kovács Anna" maxlength="60" autocomplete="off">
                 </div>
+                <details class="dim-info">
+                    <summary class="dim-info__toggle">
+                        <span data-hu="Hogyan működik a teszt?" data-en="How does the test work?">Hogyan működik a teszt?</span>
+                    </summary>
+                    <div class="dim-info__body">
+                        <p class="dim-info__lead"
+                           data-hu="A teszt öt dimenzió mentén vizsgálja a személyiségedet. Mindegyik egy önálló skála – két végpont között, ahol a legtöbb ember valahol a kettő között helyezkedik el."
+                           data-en="The test examines your personality along five dimensions. Each is an independent scale — between two poles, where most people fall somewhere in between.">
+                           A teszt öt dimenzió mentén vizsgálja a személyiségedet. Mindegyik egy önálló skála – két végpont között, ahol a legtöbb ember valahol a kettő között helyezkedik el.
+                        </p>
+                        <ul class="dim-info__list">
+                            <li>
+                                <span class="dim-info__name" data-hu="Nap – Hold" data-en="Sun – Moon">Nap – Hold</span>
+                                <span class="dim-info__desc"
+                                      data-hu="Energiaforrás. Honnan töltődsz fel — cselekvésből és kapcsolatokból, vagy elvonulásból és belső csendből?"
+                                      data-en="Energy source. Where do you recharge — from action and connection, or from solitude and inner quiet?">
+                                      Energiaforrás. Honnan töltődsz fel — cselekvésből és kapcsolatokból, vagy elvonulásból és belső csendből?
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dim-info__name" data-hu="Tűz – Víz" data-en="Fire – Water">Tűz – Víz</span>
+                                <span class="dim-info__desc"
+                                      data-hu="Döntési alap. Mire támaszkodik az ítélőképességed — objektív logikára, vagy a kapcsolati és érzelmi igazságra?"
+                                      data-en="Decision basis. What does your judgment rest on — objective logic, or relational and emotional truth?">
+                                      Döntési alap. Mire támaszkodik az ítélőképességed — objektív logikára, vagy a kapcsolati és érzelmi igazságra?
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dim-info__name" data-hu="Kő – Szél" data-en="Stone – Wind">Kő – Szél</span>
+                                <span class="dim-info__desc"
+                                      data-hu="Struktúraigény. Tervekre és lezárásokra van szükséged, vagy a lehetőségek nyitva tartása energizál?"
+                                      data-en="Structure need. Do you need plans and closure, or does keeping options open energize you?">
+                                      Struktúraigény. Tervekre és lezárásokra van szükséged, vagy a lehetőségek nyitva tartása energizál?
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dim-info__name" data-hu="Föld – Égbolt" data-en="Earth – Sky">Föld – Égbolt</span>
+                                <span class="dim-info__desc"
+                                      data-hu="Észlelési mód. Konkrét tényekre és tapasztalatra támaszkodva dolgozod fel a valóságot, vagy az összefüggéseket és rejtett mintákat keresed?"
+                                      data-en="Perception mode. Do you process reality through concrete facts and experience, or by seeking connections and hidden patterns?">
+                                      Észlelési mód. Konkrét tényekre és tapasztalatra támaszkodva dolgozod fel a valóságot, vagy az összefüggéseket és rejtett mintákat keresed?
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dim-info__name" data-hu="Nyíl – Pajzs" data-en="Arrow – Shield">Nyíl – Pajzs</span>
+                                <span class="dim-info__desc"
+                                      data-hu="Motivációs fókusz. Mi mozgat erősebben — a lehetséges nyereség elérése, vagy a lehetséges veszteség elkerülése?"
+                                      data-en="Motivation focus. What drives you more — pursuing possible gains, or avoiding possible losses?">
+                                      Motivációs fókusz. Mi mozgat erősebben — a lehetséges nyereség elérése, vagy a lehetséges veszteség elkerülése?
+                                </span>
+                            </li>
+                        </ul>
+                        <p class="dim-info__note"
+                           data-hu="Nincs jobb vagy rosszabb végpont. A skálák nem értékelnek — tájékoztatnak."
+                           data-en="There is no better or worse pole. The scales don't judge — they inform.">
+                           Nincs jobb vagy rosszabb végpont. A skálák nem értékelnek — tájékoztatnak.
+                        </p>
+                    </div>
+                </details>
+
                 <p class="selector-label"
                    data-hu="Válaszd ki a vizsgált dimenziót:"
                    data-en="Choose the dimension to explore:">
@@ -50,6 +110,13 @@
                             data-hu="Mentés betöltése" data-en="Load save">Mentés betöltése</button>
                 </div>
             </section>
+
+            <!-- Kvíz fejléc -->
+            <div id="quiz-header" class="quiz-header hidden">
+                <span id="quiz-dim-label" class="quiz-dim-label"></span>
+                <button id="restartBtn" class="btn btn--ghost"
+                        data-hu="Újrakezd" data-en="Restart">Újrakezd</button>
+            </div>
 
             <!-- Progress bar -->
             <div id="quiz-progress" class="quiz-progress hidden">

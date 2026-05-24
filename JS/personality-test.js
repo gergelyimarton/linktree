@@ -36,6 +36,9 @@ const userNameInput    = document.getElementById('userName');
 const quizProgressEl   = document.getElementById('quiz-progress');
 const quizProgressFill = document.getElementById('quiz-progress-fill');
 const quizProgressText = document.getElementById('quiz-progress-text');
+const quizHeaderEl     = document.getElementById('quiz-header');
+const quizDimLabelEl   = document.getElementById('quiz-dim-label');
+const restartBtn       = document.getElementById('restartBtn');
 const prevBtn          = document.getElementById('prevBtn');
 const saveBtn          = document.getElementById('saveBtn');
 const nextBtn          = document.getElementById('nextBtn');
@@ -95,6 +98,8 @@ function showSelector() {
   controlsEl.classList.add('hidden');
   resultSection.classList.add('hidden');
   quizProgressEl.classList.add('hidden');
+  quizHeaderEl.classList.add('hidden');
+  document.getElementById('all-content').classList.add('state--selector');
   document.getElementById('page-title').setAttribute('data-hu', 'Személyiségteszt');
   document.getElementById('page-title').setAttribute('data-en', 'Personality Test');
   document.getElementById('page-title').textContent = getCurrentLang() === 'en' ? 'Personality Test' : 'Személyiségteszt';
@@ -106,6 +111,9 @@ function showQuiz() {
   controlsEl.classList.remove('hidden');
   resultSection.classList.add('hidden');
   quizProgressEl.classList.remove('hidden');
+  quizHeaderEl.classList.remove('hidden');
+  updateQuizHeader();
+  document.getElementById('all-content').classList.remove('state--selector');
 }
 
 function showResult() {
@@ -114,6 +122,16 @@ function showResult() {
   controlsEl.classList.add('hidden');
   resultSection.classList.remove('hidden');
   quizProgressEl.classList.add('hidden');
+  quizHeaderEl.classList.add('hidden');
+  document.getElementById('all-content').classList.remove('state--selector');
+}
+
+function updateQuizHeader() {
+  const lang = getCurrentLang();
+  quizDimLabelEl.textContent = activeDimIds.length === 1
+    ? data.dimensions[activeDimIds[0]].label[lang]
+    : ui.allDimsLabel[lang];
+  restartBtn.textContent = restartBtn.dataset[lang] ?? restartBtn.dataset.hu;
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
@@ -291,6 +309,11 @@ nextBtn.addEventListener('click', () => {
 });
 
 retryBtn.addEventListener('click', () => {
+  showSelector();
+  renderSelector();
+});
+
+restartBtn.addEventListener('click', () => {
   showSelector();
   renderSelector();
 });
@@ -558,6 +581,7 @@ const langObserver = new MutationObserver(mutations => {
     if (!quizSection.classList.contains('hidden')) {
       buildQuestions();
       renderQuestion(idx);
+      updateQuizHeader();
     }
 
     // Eredmény: újrarenderelés az új nyelven

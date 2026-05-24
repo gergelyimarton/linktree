@@ -32,17 +32,22 @@ body {
   margin: 0 auto;
 }
 
-h1 { margin: 0 0 8px; }
+h1 {
+  margin: 0 0 8px;
+  text-align: center;
+}
 
 .intro {
   color: var(--muted);
   margin: 0 0 24px;
+  text-align: center;
 }
 
 /* ── Névbevitel ───────────────────────────────────────────────────────────── */
 
 .name-wrap {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .name-label {
@@ -54,6 +59,7 @@ h1 { margin: 0 0 8px; }
 
 .name-input {
   width: 100%;
+  max-width: 360px;
   background: var(--card);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
@@ -64,6 +70,7 @@ h1 { margin: 0 0 8px; }
   outline: none;
   transition: border-color 0.18s;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .name-input:focus {
@@ -74,12 +81,102 @@ h1 { margin: 0 0 8px; }
   color: rgba(148, 163, 184, 0.45);
 }
 
+/* ── Tájékoztató panel ────────────────────────────────────────────────────── */
+
+.dim-info {
+  margin-bottom: 20px;
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(11,18,32,0.9) 100%);
+  overflow: hidden;
+}
+
+.dim-info__toggle {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #c8d8ea;
+  user-select: none;
+  transition: color 0.18s;
+}
+
+.dim-info__toggle::-webkit-details-marker { display: none; }
+
+.dim-info__toggle::before {
+  content: '▸';
+  font-size: 20px;
+  transition: transform 0.2s;
+  color: var(--accent);
+}
+
+details[open] .dim-info__toggle::before {
+  transform: rotate(90deg);
+}
+
+.dim-info__toggle:hover {
+  color: #e6eef8;
+}
+
+.dim-info__body {
+  padding: 0 16px 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.dim-info__lead {
+  font-size: 13px;
+  color: #b8cce0;
+  line-height: 1.6;
+  margin: 14px 0 12px;
+}
+
+.dim-info__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dim-info__list li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.dim-info__name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.dim-info__desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.dim-info__note {
+  font-size: 12px;
+  color: rgba(148,163,184,0.6);
+  margin: 0;
+  font-style: italic;
+}
+
 /* ── Dimenzió választó ────────────────────────────────────────────────────── */
 
 .selector-label {
   color: var(--muted);
   margin: 0 0 12px;
   font-size: 14px;
+  text-align: center;
 }
 
 .dim-grid {
@@ -110,7 +207,8 @@ h1 { margin: 0 0 8px; }
 
 .dim-btn--all {
   grid-column: 1 / -1;
-  border-color: rgba(245,158,11,0.25);
+  border-color: rgba(245,158,11,0.2);
+  background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(11,18,32,0.9) 100%);
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -172,6 +270,43 @@ h1 { margin: 0 0 8px; }
   transform: scale(1.05);
   padding: 3px 8px;
   transition: all 0.2s ease;
+}
+
+/* ── Kvíz fejléc ──────────────────────────────────────────────────────────── */
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.quiz-dim-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  letter-spacing: 0.02em;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.18s, border-color 0.18s;
+}
+
+.btn--ghost:hover {
+  color: #e6eef8;
+  border-color: rgba(255,255,255,0.25);
 }
 
 /* ── Progress bar ─────────────────────────────────────────────────────────── */
@@ -249,6 +384,14 @@ h1 { margin: 0 0 8px; }
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   padding: 18px;
   border-radius: 12px;
+  text-align: center;
+}
+
+.result .dim-result-card,
+.result .dim-desc,
+.result .result-bars,
+.result .bar-wrap {
+  text-align: left;
 }
 
 /* Típusjelölés (összes dimenzió módban) */
@@ -438,6 +581,16 @@ h1 { margin: 0 0 8px; }
   bottom: 20px;
   left: 20px;
   z-index: 1000;
+}
+
+/* ── Vertikális középre igazítás (csak desktop) ───────────────────────────── */
+
+@media (min-width: 521px) {
+  .all-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* ── Reszponzív ───────────────────────────────────────────────────────────── */
