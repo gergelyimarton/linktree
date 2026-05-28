@@ -295,7 +295,7 @@ details[open] .dim-info__toggle::before {
 .btn--ghost {
   background: transparent;
   color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(245,158,11,0.2);
   padding: 5px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -306,7 +306,7 @@ details[open] .dim-info__toggle::before {
 
 .btn--ghost:hover {
   color: #e6eef8;
-  border-color: rgba(255,255,255,0.25);
+  border-color: rgba(245,158,11,0.4);
 }
 
 /* ── Progress bar ─────────────────────────────────────────────────────────── */
@@ -574,13 +574,173 @@ details[open] .dim-info__toggle::before {
 
 /* ── Közös ────────────────────────────────────────────────────────────────── */
 
+/* ── Light mode ───────────────────────────────────────────────────────────── */
+/*
+ * Paletta: meleg krém alap + amber akcentus + meleg barnás szövegek.
+ * A hideg kék-szürke (slate) szervesen nem illeszkedett az amber-hoz.
+ */
+
+[data-theme="light"] {
+  --bg:   #fef8ee;
+  --card: #fffdf8;
+  --muted: #8c6a3f;
+  --glass: rgba(139,90,43,0.04);
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(180deg, #fef8ee, #f5ead8);
+  color: #2d1a06;
+}
+
+/* ── Névbevitel ── */
+[data-theme="light"] .name-input {
+  background: #fffdf8;
+  border-color: rgba(139,90,43,0.2);
+  color: #2d1a06;
+}
+
+[data-theme="light"] .name-input::placeholder {
+  color: rgba(139,90,43,0.4);
+}
+
+[data-theme="light"] .name-input:focus {
+  border-color: var(--accent);
+}
+
+/* ── Info panel ── */
+[data-theme="light"] .dim-info {
+  border-color: rgba(245,158,11,0.3);
+  background: linear-gradient(135deg, rgba(245,158,11,0.09) 0%, rgba(254,248,238,0.97) 100%);
+}
+
+[data-theme="light"] .dim-info__toggle { color: #3d2008; }
+
+[data-theme="light"] .dim-info__lead,
+[data-theme="light"] .dim-info__desc  { color: #5c3d18; }
+
+[data-theme="light"] .dim-info__name  { color: #a0620a; }
+
+[data-theme="light"] .dim-info__note  { color: rgba(139,90,43,0.55); }
+
+/* ── Dimenzió gombok ── */
+[data-theme="light"] .dim-btn {
+  background: #fffdf8;
+  border-color: rgba(139,90,43,0.15);
+  color: #2d1a06;
+}
+
+[data-theme="light"] .dim-btn:hover {
+  border-color: var(--accent);
+  background: rgba(245,158,11,0.07);
+}
+
+[data-theme="light"] .dim-btn--all {
+  background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(254,248,238,0.97) 100%);
+  border-color: rgba(245,158,11,0.35);
+}
+
+[data-theme="light"] .dim-name { color: #2d1a06; }
+[data-theme="light"] .dim-sub  { color: #8c6a3f; }
+
+[data-theme="light"] .selector-label { color: #8c6a3f; }
+
+/* ── Kérdéskártya ── */
+[data-theme="light"] .question-card {
+  background: #fffdf8;
+  box-shadow: 0 4px 16px rgba(139,90,43,0.1);
+}
+
+[data-theme="light"] .q-title { color: #2d1a06; }
+
+[data-theme="light"] .scale label {
+  background: rgba(139,90,43,0.06);
+  color: #2d1a06;
+}
+
+[data-theme="light"] .scale label:hover {
+  background: rgba(245,158,11,0.1);
+}
+
+/* ── Progress bar ── */
+[data-theme="light"] .quiz-progress__bar  { background: rgba(139,90,43,0.12); }
+[data-theme="light"] .quiz-progress__text { color: #8c6a3f; }
+
+/* ── Kvíz fejléc ── */
+[data-theme="light"] .quiz-dim-label {
+  background: rgba(245,158,11,0.12);
+  border-color: rgba(245,158,11,0.3);
+  color: #92600a;
+}
+
+[data-theme="light"] .btn--secondary {
+  background: rgba(139,90,43,0.07);
+  color: #3d2008;
+  border-color: rgba(139,90,43,0.2);
+}
+
+[data-theme="light"] .btn--secondary:hover {
+  background: rgba(139,90,43,0.12);
+}
+
+[data-theme="light"] .btn--ghost {
+  color: #3d2008;
+  border-color: rgba(245,158,11,0.3);
+}
+
+[data-theme="light"] .btn--ghost:hover {
+  color: #2d1a06;
+  border-color: rgba(245,158,11,0.55);
+}
+
+/* ── Eredmény ── */
+[data-theme="light"] .result {
+  background: linear-gradient(180deg, rgba(139,90,43,0.03), rgba(139,90,43,0.01));
+}
+
+[data-theme="light"] #type-code {
+  background: rgba(245,158,11,0.12);
+  border-color: rgba(245,158,11,0.35);
+  color: #92600a;
+}
+
+[data-theme="light"] .dim-result-card {
+  background: #fffdf8;
+  box-shadow: 0 2px 10px rgba(139,90,43,0.09);
+}
+
+[data-theme="light"] .dim-result-card h3 { color: #8c6a3f; }
+
+[data-theme="light"] .bar-label,
+[data-theme="light"] .pct              { color: #8c6a3f; }
+
+[data-theme="light"] .bar             { background: rgba(139,90,43,0.1); }
+
+[data-theme="light"] .dim-desc {
+  color: #5c3d18;
+  border-top-color: rgba(139,90,43,0.1);
+}
+
+/* ── Radar diagram ── */
+[data-theme="light"] .radar-ring     { stroke: rgba(139,90,43,0.1); }
+[data-theme="light"] .radar-ring--mid{ stroke: rgba(139,90,43,0.22); }
+[data-theme="light"] .radar-axis     { stroke: rgba(139,90,43,0.1); }
+[data-theme="light"] .radar-data     { fill: rgba(245,158,11,0.12); }
+[data-theme="light"] .radar-label    { fill: #5c3d18; }
+
+/* ── Közös ────────────────────────────────────────────────────────────────── */
+
 .hidden { display: none; }
 
 .back-button {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
+  bottom: auto;
   left: 20px;
   z-index: 1000;
+}
+
+.back-button:hover {
+  transform: none;
 }
 
 /* ── Vertikális középre igazítás (csak desktop) ───────────────────────────── */

@@ -357,7 +357,8 @@ ul li::before {
 
 .back-button {
   position: fixed;
-  bottom: 30px;
+  top: 30px;
+  bottom: auto;
   left: 30px;
   padding: 14px 24px;
   background: rgba(255, 255, 255, 0.95);
@@ -479,3 +480,63 @@ ul li::before {
 :root {
   --lang-accent: #2ed573;
 }
+
+/* ── Light mode ───────────────────────────────────────────────────────────── */
+
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #e8f4f8 0%, #d4eaf2 35%, #c8e2ee 65%, #d0e8f0 100%);
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(46,213,115,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(0,184,148,0.08) 0%, transparent 60%);
+}
+
+[data-theme="light"] .settings-panel {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(46,213,115,0.25);
+  color: #1a1a1a;
+}
+
+[data-theme="light"] .setting-group label,
+[data-theme="light"] .setting-group p {
+  color: #374151;
+}
+
+[data-theme="light"] .day {
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+[data-theme="light"] .back-button {
+  background: linear-gradient(135deg, #2ed573, #20bf6b);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(46,213,115,0.3);
+}
+
+[data-theme="light"] .day-btn {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #374151;
+}
+
+[data-theme="light"] .day-btn.recommended {
+  border-color: #7bed9f;
+  background: rgba(46,213,115,0.08);
+}
+
+[data-theme="light"] #splitSelect {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1a1a1a;
+}
+
+[data-theme="light"] .checkbox-label {
+  background: #f1f5f9;
+  color: #374151;
+}
+
+[data-theme="light"] .day h3 { color: #1a1a1a; }
+[data-theme="light"] .day p  { color: #374151; }

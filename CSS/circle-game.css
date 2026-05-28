@@ -336,7 +336,8 @@ footer {
 
 .back-button {
     position: fixed;
-    bottom: 25px;
+    top: 25px;
+    bottom: auto;
     left: 25px;
     padding: 12px 24px;
     background: rgba(8, 10, 15, 0.95);
@@ -387,4 +388,82 @@ footer {
         width: fit-content;
         margin: 30px auto 20px;
     }
+}
+
+/* ── Light mode ───────────────────────────────────────────────────────────── */
+
+[data-theme="light"] {
+    --bg:         var(--paper);
+    --dark-card:  #ffffff;
+    --card-border:#b8cfe8;
+    --text-light: var(--text-dark);
+    --secondary:  #3a5070;
+}
+
+[data-theme="light"] body {
+    background: var(--paper);
+    color: var(--text-dark);
+}
+
+/* Kártyák: sötét háttér → fehér */
+[data-theme="light"] .rule-card,
+[data-theme="light"] .tactic-card,
+[data-theme="light"] .trick-card,
+[data-theme="light"] .defense-card {
+    background: #ffffff;
+    border-color: var(--card-border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+/* var(--paper) volt szövegszín → sötét kell */
+[data-theme="light"] .rule-card h3,
+[data-theme="light"] .tactic-card h3,
+[data-theme="light"] .defense-card h4,
+[data-theme="light"] .section-title,
+[data-theme="light"] .hand-icon + h1,
+[data-theme="light"] h1 {
+    color: #1a1f2a;
+}
+
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] td { color: #2d3748; }
+
+[data-theme="light"] .points-table th {
+    color: #1e6ed1;
+}
+
+[data-theme="light"] .points-table td,
+[data-theme="light"] .points-table .points {
+    color: #1a1f2a;
+}
+
+[data-theme="light"] .points-table th,
+[data-theme="light"] .points-table td {
+    border-bottom-color: #c8d8ec;
+}
+
+[data-theme="light"] .important-box {
+    background: rgba(74,158,255,0.07);
+    border-color: rgba(74,158,255,0.25);
+}
+
+[data-theme="light"] .defense-point .points-value {
+    color: var(--accent);
+}
+
+[data-theme="light"] .defense-point .points-desc { color: #2d3748; }
+
+[data-theme="light"] .subtitle { color: var(--secondary); }
+
+[data-theme="light"] .section-header::before,
+[data-theme="light"] .section-header::after {
+    border-color: rgba(74,158,255,0.25);
+}
+
+[data-theme="light"] .back-button {
+    background: var(--accent);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(74,158,255,0.3);
 }

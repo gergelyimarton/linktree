@@ -1,9 +1,7 @@
-/* Language Switcher Styles */
+/* Language Switcher Styles
+ * Pozicionálás: .ld-switcher-container-en belül (bottom-right),
+ * a theme-switcher.js mellett. Önmaga nem fixed. */
 .language-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
     display: flex;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -59,6 +57,17 @@
 .language-switcher.dark-theme button.active {
     background: var(--lang-accent, #6fa7b8);
     color: #041018;
+}
+
+/* Theme toggle container (bottom-right, beside language switcher) */
+.ld-switcher-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 /* Mobile responsive */

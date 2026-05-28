@@ -652,7 +652,8 @@ a:has(.back-button) {
 
 .back-button {
     position: fixed;
-    bottom: 25px;
+    top: 25px;
+    bottom: auto;
     left: 25px;
     padding: 14px 24px;
     background: linear-gradient(135deg, #d63384, #b02566);
@@ -751,7 +752,8 @@ a:has(.back-button) {
     }
 
     .back-button {
-        bottom: 15px;
+        top: 20px;
+        bottom: auto;
         left: 15px;
         padding: 10px 18px;
         font-size: 0.85em;
@@ -1090,3 +1092,174 @@ a:has(.back-button) {
     }
 }
 
+
+/* ── Dark mode (theme-switcher: dark = no data-theme attribute) ───────────── */
+
+html:not([data-theme="light"]) body {
+    background: linear-gradient(135deg, #1a0830 0%, #220e38 50%, #190622 100%);
+    color: #e0c8e8;
+}
+
+html:not([data-theme="light"]) .floating-hearts { opacity: 0.4; }
+
+html:not([data-theme="light"]) .body-container { color: #e0c8e8; }
+
+html:not([data-theme="light"]) .info-dropdown,
+html:not([data-theme="light"]) .scoring-section,
+html:not([data-theme="light"]) .category-section,
+html:not([data-theme="light"]) .result-card,
+html:not([data-theme="light"]) .score-breakdown {
+    background: rgba(38,10,62,0.88);
+    border-color: rgba(190,70,140,0.22);
+    color: #e0c8e8;
+    box-shadow: 0 8px 24px rgba(160,30,100,0.18);
+}
+
+/* h1 megtartja a pink gradient clip-et; h2/h3 meleg rózsa */
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3 {
+    color: #f080b8;
+}
+
+html:not([data-theme="light"]) p,
+html:not([data-theme="light"]) label,
+html:not([data-theme="light"]) li {
+    color: #c8a8d8;
+}
+
+/* Táblázat */
+html:not([data-theme="light"]) table {
+    background: rgba(62,18,90,0.92);
+    border: 1px solid rgba(180,60,130,0.22);
+    box-shadow: 0 8px 24px rgba(140,20,90,0.25);
+}
+
+html:not([data-theme="light"]) th {
+    background: rgba(150,35,90,0.38);
+    color: #f090c0;
+    border-bottom: 1px solid rgba(190,60,130,0.28);
+}
+
+html:not([data-theme="light"]) td {
+    color: #ddc0e8;
+    border-bottom: 1px solid rgba(180,60,130,0.1);
+}
+
+html:not([data-theme="light"]) tr:nth-child(even) td {
+    background: rgba(200,60,140,0.08);
+}
+
+html:not([data-theme="light"]) tr:hover td {
+    background: rgba(200,60,140,0.14);
+}
+
+html:not([data-theme="light"]) td:first-child {
+    color: #d0a8e0;
+}
+
+/* Összesítő sor utolsó sora – !important felülírás */
+html:not([data-theme="light"]) #summary tbody tr:last-child td {
+    background: rgba(150,35,90,0.45) !important;
+    color: #f090c0 !important;
+}
+
+html:not([data-theme="light"]) #summary tbody tr:last-child {
+    color: #f090c0;
+}
+
+/* Értelmező sor kinyitáskor */
+html:not([data-theme="light"]) .interp-detail td {
+    background: rgba(45,10,70,0.85);
+    color: #c0a0d0;
+    border-top-color: rgba(180,60,130,0.28);
+}
+
+/* Tooltip */
+html:not([data-theme="light"]) .interp-tooltip {
+    background: rgba(42,10,65,0.97);
+    border-color: rgba(180,60,130,0.45);
+    color: #e0c8e8;
+}
+
+/* Disclaimer */
+html:not([data-theme="light"]) .interp-disclaimer {
+    background: rgba(80,45,0,0.4);
+    border-left-color: #c08030;
+    color: #e0c090;
+}
+
+/* Footer */
+html:not([data-theme="light"]) footer {
+    background: rgba(40,10,62,0.65);
+    color: #b888a0;
+}
+
+html:not([data-theme="light"]) .slider-container input[type="range"] {
+    accent-color: #e0609a;
+}
+
+html:not([data-theme="light"]) .score-value {
+    color: #f07aaa;
+}
+
+html:not([data-theme="light"]) summary {
+    color: #d8a8c8;
+}
+
+/* Info dropdown – summary saját háttere felülírja a kártya bg-t */
+html:not([data-theme="light"]) .info-dropdown summary {
+    background: rgba(140,30,80,0.38);
+    color: #f090c0;
+}
+
+html:not([data-theme="light"]) .info-dropdown summary:hover {
+    background: rgba(160,40,95,0.48);
+}
+
+html:not([data-theme="light"]) .info-dropdown .info-title {
+    color: #f090c0;
+}
+
+html:not([data-theme="light"]) .info-dropdown .arrow {
+    border-right-color: #f090c0;
+    border-bottom-color: #f090c0;
+}
+
+/* Dropdown tartalom szövegek – #555 láthatatlan sötéten */
+html:not([data-theme="light"]) .info-dropdown p,
+html:not([data-theme="light"]) .info-dropdown ul,
+html:not([data-theme="light"]) .info-dropdown ol {
+    color: #c8a8d8;
+}
+
+html:not([data-theme="light"]) .info-dropdown strong {
+    color: #f090c0;
+}
+
+html:not([data-theme="light"]) .section-label {
+    color: #a880b8;
+}
+
+html:not([data-theme="light"]) select,
+html:not([data-theme="light"]) input[type="text"],
+html:not([data-theme="light"]) input[type="number"],
+html:not([data-theme="light"]) .custom-name,
+html:not([data-theme="light"]) .custom-score {
+    background: rgba(28,8,50,0.85);
+    border-color: rgba(180,60,130,0.35);
+    color: #e0c8e8;
+}
+
+html:not([data-theme="light"]) select option {
+    background: #240a38;
+    color: #e0c8e8;
+}
+
+html:not([data-theme="light"]) .file-actions,
+html:not([data-theme="light"]) .scoring-criteria,
+html:not([data-theme="light"]) .category-details,
+html:not([data-theme="light"]) .download-section {
+    background: rgba(35,10,58,0.75);
+    border-color: rgba(180,60,130,0.2);
+    color: #c8a8d8;
+}

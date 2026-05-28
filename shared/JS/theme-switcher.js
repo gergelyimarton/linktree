@@ -172,6 +172,20 @@
         display: block !important;
       }
 
+      /* Light mode: világos gomb */
+      [data-theme="light"] .ld-theme-toggle {
+        background: #ffffff;
+        border-color: rgba(0, 0, 0, 0.15);
+        color: #374151;
+        border-radius: 8px;
+      }
+
+      [data-theme="light"] .ld-theme-toggle:hover {
+        background: #f1f5f9;
+        border-color: rgba(0, 0, 0, 0.3);
+        color: #1e293b;
+      }
+
       @media (max-width: 480px) {
         .ld-theme-toggle {
           width: 36px;
