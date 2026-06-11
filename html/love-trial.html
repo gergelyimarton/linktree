@@ -108,6 +108,110 @@
         <h3>Understanding the results</h3>
         <p>The final compatibility ratio is the achieved points divided by the maximum possible points. The higher the percentage, the better the compatibility. The <strong>Interpretation</strong> table helps categorize your result.</p>
       </div>
+
+      <details class="info-dropdown info-dropdown--nested">
+        <summary>
+          <span class="info-title">
+            <span class="lang-hu">Számolási logika</span>
+            <span class="lang-en">Calculation logic</span>
+          </span>
+          <span class="arrow"></span>
+        </summary>
+        <div class="info-content">
+          <div class="lang-hu">
+            <h3>Fő aspektusok</h3>
+            <ul>
+              <li>8 szempont × 5 randi = legfeljebb 40 értékelhető mező</li>
+              <li>Minden kitöltött mező <strong>1–5 pontot</strong> ad</li>
+              <li>Egy sor végén látható összeg az 5 randi pontszámának összege</li>
+            </ul>
+
+            <h3>Fontos aspektusok</h3>
+            <ul>
+              <li>7 értékelhető mező (Humor, Fizikai vonzalom stb.), mindegyik <strong>1–5 pont</strong></li>
+              <li>A 8. sor (Sokszínűség) automatikusan számítódik — lásd alább</li>
+            </ul>
+
+            <h3>Egyéb tulajdonságok → Sokszínűség</h3>
+            <ul>
+              <li>13 tulajdonság értékelhető <strong>1–5 pontig</strong></li>
+              <li>Az összpontszámuk egy <strong>0–5 pontos Sokszínűség értékre</strong> konvertálódik:</li>
+            </ul>
+            <table class="calc-table">
+              <thead><tr><th><span class="lang-hu">Egyéb tulajdonságok összege</span></th><th><span class="lang-hu">Sokszínűség pont</span></th></tr></thead>
+              <tbody>
+                <tr><td>≤ 10 pont</td><td>0</td></tr>
+                <tr><td>11–20 pont</td><td>1</td></tr>
+                <tr><td>21–30 pont</td><td>2</td></tr>
+                <tr><td>31–40 pont</td><td>3</td></tr>
+                <tr><td>41–50 pont</td><td>4</td></tr>
+                <tr><td>&gt; 50 pont</td><td>5</td></tr>
+              </tbody>
+            </table>
+            <p>Ha egyetlen egyéb tulajdonság sincs kitöltve, a Sokszínűség mező <strong>nem kerül értékelésre</strong> és a maximumba sem számít bele.</p>
+
+            <h3>Egyéni tulajdonságok</h3>
+            <ul>
+              <li>Szabadon megadható szempontok, <strong>–5-től +5-ig</strong> pontozva</li>
+              <li>Összegük hozzáadódik az elért pontszámhoz</li>
+              <li>Nem növelik a maximum pontszámot — pozitív értékek esetén az arány 100% fölé is kerülhet</li>
+            </ul>
+
+            <h3>Illeszkedési arány</h3>
+            <ul>
+              <li><strong>Maximum pontszám</strong> = (kitöltött fő + fontos aspektusok száma + 1 ha van egyéb tulajdonság) × 5</li>
+              <li><strong>Elért pontszám</strong> = fő + fontos aspektusok összege + sokszínűség pont + egyéni tulajdonságok összege</li>
+              <li><strong>Illeszkedési arány</strong> = Elért pontszám ÷ Maximum pontszám × 100%</li>
+            </ul>
+          </div>
+          <div class="lang-en">
+            <h3>Main Aspects</h3>
+            <ul>
+              <li>8 criteria × 5 dates = up to 40 evaluable fields</li>
+              <li>Each filled field contributes <strong>1–5 points</strong></li>
+              <li>The total at the end of each row is the sum of all 5 date scores</li>
+            </ul>
+
+            <h3>Important Aspects</h3>
+            <ul>
+              <li>7 evaluable fields (Humor, Physical attraction, etc.), each <strong>1–5 points</strong></li>
+              <li>The 8th row (Diversity) is calculated automatically — see below</li>
+            </ul>
+
+            <h3>Other Properties → Diversity</h3>
+            <ul>
+              <li>13 properties rated <strong>1–5 each</strong></li>
+              <li>Their total converts to a <strong>Diversity score of 0–5</strong>:</li>
+            </ul>
+            <table class="calc-table">
+              <thead><tr><th><span class="lang-en">Other properties total</span></th><th><span class="lang-en">Diversity score</span></th></tr></thead>
+              <tbody>
+                <tr><td>≤ 10 points</td><td>0</td></tr>
+                <tr><td>11–20 points</td><td>1</td></tr>
+                <tr><td>21–30 points</td><td>2</td></tr>
+                <tr><td>31–40 points</td><td>3</td></tr>
+                <tr><td>41–50 points</td><td>4</td></tr>
+                <tr><td>&gt; 50 points</td><td>5</td></tr>
+              </tbody>
+            </table>
+            <p>If no other property is filled, the Diversity field is <strong>not evaluated</strong> and does not count toward the maximum score.</p>
+
+            <h3>Custom Properties</h3>
+            <ul>
+              <li>Freely defined criteria, scored from <strong>–5 to +5</strong></li>
+              <li>Their total is added to the achieved score</li>
+              <li>They do not increase the maximum score — with positive values, the ratio may exceed 100%</li>
+            </ul>
+
+            <h3>Compatibility ratio</h3>
+            <ul>
+              <li><strong>Maximum score</strong> = (number of filled main + important aspects + 1 if any other property is filled) × 5</li>
+              <li><strong>Achieved score</strong> = sum of main + important aspects + diversity score + sum of custom properties</li>
+              <li><strong>Compatibility ratio</strong> = Achieved score ÷ Maximum score × 100%</li>
+            </ul>
+          </div>
+        </div>
+      </details>
     </div>
   </details>
 
@@ -369,10 +473,13 @@
   else if(totalForDiversity <= 50) diversityScore = 4;
   else diversityScore = 5;
 
-  document.getElementById('diversityTotal').textContent = diversityScore;
+  // 🔹 5. Hozzáadjuk a diversityScore-t a totalSum-hoz (csak ha van kitöltött egyéb tulajdonság)
+  const anyOtherPropsFilled = Array.from(document.querySelectorAll('#otherProps tbody tr:not(:last-child) select')).some(sel => sel.value !== '');
 
-  // 🔹 5. Hozzáadjuk a diversityScore-t a totalSum-hoz
-  totalSum += diversityScore;
+  document.getElementById('diversityTotal').textContent = anyOtherPropsFilled ? diversityScore : '–';
+  if (anyOtherPropsFilled) {
+    totalSum += diversityScore;
+  }
 
   // 🔹 6. Custom properties összesítése
   let customSum = 0;
@@ -385,9 +492,10 @@
   // 🔹 7. Hozzáadjuk a custom pontokat a totalSum-hoz
   totalSum += customSum;
 
-  // Ha van kitöltött mező, hozzáadjuk a diversityScore-t is
-  const totalFilled = filled > 0 ? filled + 1 : 0; // +1 a diversityScore-ért, de csak ha van kitöltött mező
-  const maxScore = filled > 0 ? filled * 5 + 5 : 0; // +5 a diversityScore max, de csak ha van kitöltött mező
+  // Ha van kitöltött egyéb tulajdonság, a sokszínűség mező is beleszámít
+  const diversityContributes = anyOtherPropsFilled ? 1 : 0;
+  const totalFilled = filled + diversityContributes > 0 ? filled + diversityContributes : 0;
+  const maxScore = filled + diversityContributes > 0 ? (filled + diversityContributes) * 5 : 0;
   const fitRatio = maxScore > 0 ? ((totalSum / maxScore) * 100).toFixed(2) : '0.00';
 
   document.getElementById('filledCount').textContent = totalFilled + ' db';
