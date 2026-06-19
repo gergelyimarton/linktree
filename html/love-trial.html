@@ -163,7 +163,12 @@
               <li><strong>Elért pontszám</strong> = fő + fontos aspektusok összege + sokszínűség pont + egyéni tulajdonságok összege</li>
               <li><strong>Illeszkedési arány</strong> = Elért pontszám ÷ Maximum pontszám × 100%, <strong>0% és 100% közé korlátozva</strong></li>
             </ul>
-            <p>A Sokszínűség slot maximuma egyenlő az elért Sokszínűség ponttal — így a kitöltése sosem rontja az arányt, legfeljebb semleges marad. Ha az összpontszám ≤ 10 (Sokszínűség = 0), a slot nem számít bele sem a maximumba, sem az elértbe.</p>
+            <p>A Sokszínűség slot viselkedése az egyéb tulajdonságok kitöltöttségétől függ:</p>
+            <ul>
+              <li><strong>Nincs kitöltve egyetlen egyéb tulajdonság sem</strong> → a slot nem számít sehova</li>
+              <li><strong>Ki van töltve, de összeg ≤ 10 (Sokszínűség = 0)</strong> → büntető slot: +5 kerül a maximumba, +0 az elértbe — ez az arány romlásával jár</li>
+              <li><strong>Ki van töltve és Sokszínűség ≥ 1</strong> → a slot maximuma megegyezik az elért értékkel, így a kitöltése mindig kis mértékben javítja az arányt</li>
+            </ul>
             <p>Az egyéni tulajdonságok bónuszként vagy büntetésként módosítják a végeredményt, de az arány soha nem kerülhet 0% alá vagy 100% fölé.</p>
           </div>
           <div class="lang-en">
@@ -211,7 +216,12 @@
               <li><strong>Achieved score</strong> = sum of main + important aspects + diversity score + sum of custom properties</li>
               <li><strong>Compatibility ratio</strong> = Achieved score ÷ Maximum score × 100%, <strong>clamped between 0% and 100%</strong></li>
             </ul>
-            <p>The Diversity slot's maximum equals its achieved value — so filling it never hurts your ratio, it's always neutral at worst. If the total is ≤ 10 (Diversity = 0), the slot contributes nothing to either the maximum or achieved score.</p>
+            <p>The Diversity slot behaves based on how the other properties are filled:</p>
+            <ul>
+              <li><strong>No other property filled</strong> → the slot doesn't count anywhere</li>
+              <li><strong>Filled, but total ≤ 10 (Diversity = 0)</strong> → penalty slot: +5 added to maximum, +0 to achieved — this lowers the ratio, reflecting a lack of diversity</li>
+              <li><strong>Filled and Diversity ≥ 1</strong> → the slot's maximum equals its achieved value, so filling it always slightly improves the ratio</li>
+            </ul>
             <p>Custom properties act as bonuses or penalties on the final result, but the ratio is always kept between 0% and 100%.</p>
           </div>
         </div>
@@ -496,10 +506,13 @@
   // 🔹 7. Hozzáadjuk a custom pontokat a totalSum-hoz
   totalSum += customSum;
 
-  // Ha van kitöltött egyéb tulajdonság, a sokszínűség mező arányosan számít (max = elért pont)
+  // Ha nincs kitöltve egyéb tulajdonság: sokszínűség nem számít sehova
+  // Ha ki van töltve, de összeg ≤ 10 (diversityScore = 0): büntető slot (+5 max, +0 elért)
+  // Ha ki van töltve és diversityScore > 0: arányos slot (+diversityScore max, +diversityScore elért)
   const diversityContributes = anyOtherPropsFilled ? 1 : 0;
   const totalFilled = filled + diversityContributes > 0 ? filled + diversityContributes : 0;
-  const maxScore = filled * 5 + (anyOtherPropsFilled ? diversityScore : 0);
+  const diversityMaxContrib = anyOtherPropsFilled ? (diversityScore === 0 ? 5 : diversityScore) : 0;
+  const maxScore = filled * 5 + diversityMaxContrib;
   const rawRatio = maxScore > 0 ? (totalSum / maxScore) * 100 : 0;
   const fitRatio = Math.min(100, Math.max(0, rawRatio)).toFixed(2);
 
