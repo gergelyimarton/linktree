@@ -154,15 +154,17 @@
             <ul>
               <li>Szabadon megadható szempontok, <strong>–5-től +5-ig</strong> pontozva</li>
               <li>Összegük hozzáadódik az elért pontszámhoz</li>
-              <li>Nem növelik a maximum pontszámot — pozitív értékek esetén az arány 100% fölé is kerülhet</li>
+              <li>Nem növelik az értékelt mezők számát — bónuszként vagy büntetésként jelennek meg, az eredmény azonban mindig 0% és 100% között marad</li>
             </ul>
 
             <h3>Illeszkedési arány</h3>
             <ul>
-              <li><strong>Maximum pontszám</strong> = (kitöltött fő + fontos aspektusok száma + 1 ha van egyéb tulajdonság) × 5</li>
+              <li><strong>Maximum pontszám</strong> = kitöltött fő + fontos aspektusok száma × 5 + Sokszínűség elért pontja (ha van egyéb tulajdonság)</li>
               <li><strong>Elért pontszám</strong> = fő + fontos aspektusok összege + sokszínűség pont + egyéni tulajdonságok összege</li>
-              <li><strong>Illeszkedési arány</strong> = Elért pontszám ÷ Maximum pontszám × 100%</li>
+              <li><strong>Illeszkedési arány</strong> = Elért pontszám ÷ Maximum pontszám × 100%, <strong>0% és 100% közé korlátozva</strong></li>
             </ul>
+            <p>A Sokszínűség slot maximuma egyenlő az elért Sokszínűség ponttal — így a kitöltése sosem rontja az arányt, legfeljebb semleges marad. Ha az összpontszám ≤ 10 (Sokszínűség = 0), a slot nem számít bele sem a maximumba, sem az elértbe.</p>
+            <p>Az egyéni tulajdonságok bónuszként vagy büntetésként módosítják a végeredményt, de az arány soha nem kerülhet 0% alá vagy 100% fölé.</p>
           </div>
           <div class="lang-en">
             <h3>Main Aspects</h3>
@@ -200,15 +202,17 @@
             <ul>
               <li>Freely defined criteria, scored from <strong>–5 to +5</strong></li>
               <li>Their total is added to the achieved score</li>
-              <li>They do not increase the maximum score — with positive values, the ratio may exceed 100%</li>
+              <li>They do not increase the number of evaluated fields — they act as bonuses or penalties, but the result always stays between 0% and 100%</li>
             </ul>
 
             <h3>Compatibility ratio</h3>
             <ul>
-              <li><strong>Maximum score</strong> = (number of filled main + important aspects + 1 if any other property is filled) × 5</li>
+              <li><strong>Maximum score</strong> = filled main + important aspects × 5 + Diversity score achieved (if any other property is filled)</li>
               <li><strong>Achieved score</strong> = sum of main + important aspects + diversity score + sum of custom properties</li>
-              <li><strong>Compatibility ratio</strong> = Achieved score ÷ Maximum score × 100%</li>
+              <li><strong>Compatibility ratio</strong> = Achieved score ÷ Maximum score × 100%, <strong>clamped between 0% and 100%</strong></li>
             </ul>
+            <p>The Diversity slot's maximum equals its achieved value — so filling it never hurts your ratio, it's always neutral at worst. If the total is ≤ 10 (Diversity = 0), the slot contributes nothing to either the maximum or achieved score.</p>
+            <p>Custom properties act as bonuses or penalties on the final result, but the ratio is always kept between 0% and 100%.</p>
           </div>
         </div>
       </details>
@@ -492,30 +496,22 @@
   // 🔹 7. Hozzáadjuk a custom pontokat a totalSum-hoz
   totalSum += customSum;
 
-  // Ha van kitöltött egyéb tulajdonság, a sokszínűség mező is beleszámít
+  // Ha van kitöltött egyéb tulajdonság, a sokszínűség mező arányosan számít (max = elért pont)
   const diversityContributes = anyOtherPropsFilled ? 1 : 0;
   const totalFilled = filled + diversityContributes > 0 ? filled + diversityContributes : 0;
-  const maxScore = filled + diversityContributes > 0 ? (filled + diversityContributes) * 5 : 0;
-  const fitRatio = maxScore > 0 ? ((totalSum / maxScore) * 100).toFixed(2) : '0.00';
+  const maxScore = filled * 5 + (anyOtherPropsFilled ? diversityScore : 0);
+  const rawRatio = maxScore > 0 ? (totalSum / maxScore) * 100 : 0;
+  const fitRatio = Math.min(100, Math.max(0, rawRatio)).toFixed(2);
+
+  const lang = document.documentElement.getAttribute('data-lang') || 'hu';
+  const fitRatioDisplay = lang === 'hu' ? fitRatio.replace('.', ',') : fitRatio;
 
   document.getElementById('filledCount').textContent = totalFilled + ' db';
   document.getElementById('maxScore').textContent = maxScore + ' pont';
-  document.getElementById('achievedScore').textContent = totalSum + ' pont';
-  document.getElementById('fitRatio').textContent = fitRatio + '%';
+  document.getElementById('achievedScore').textContent = Math.max(0, totalSum) + ' pont';
+  document.getElementById('fitRatio').textContent = fitRatioDisplay + '%';
 }
 
-// minden select változáskor frissítünk
-document.querySelectorAll('select').forEach(sel=>{
-  sel.addEventListener('change', updateAll);
-});
-
-// custom score selectek változáskor frissítünk
-document.querySelectorAll('#customProps .custom-score').forEach(sel => {
-  sel.addEventListener('change', updateAll);
-});
-
-// induláskor is frissítjük
-updateAll();
 
 
 
@@ -646,6 +642,7 @@ updateAll();
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'data-lang') {
           updatePlaceholders();
+          updateAll();
         }
       });
     });
