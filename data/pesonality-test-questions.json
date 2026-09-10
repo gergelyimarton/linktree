@@ -44,7 +44,7 @@
             "Deadlines don't stress me out — they sharpen me.",
             "In a group, I'm more drawn to setting the course than to quietly backing others up.",
             "I'd rather jump in and figure things out as I go than spend too long studying a situation first.",
-            "Results matter more to me than the process — if nothing concrete came out of it, the procedure doesn't feel like a win.",
+            "Results matter more to me than the process — if nothing concrete came out of it, the process doesn't feel like a win.",
             "After reaching a goal, I quickly feel empty — the next challenge is what keeps me going.",
             "I bond through doing and building together — shared direction matters as much as emotional closeness.",
             "When things change, my first move is finding the opportunity, not processing how I feel about the situation.",
@@ -220,8 +220,8 @@
             "When rules and fairness conflict, I look for the exception — rigidity hurts people."
           ],
           "description": {
-            "hu": " Érzed azt, amit a másik nem mond ki. Tudod, hogyan hat rá egy döntés – nem elméletben, hanem abban a pillanatban, ahogy a szobában megváltozik a levegő. Ez ritka érzékenység, és valódi erő kapcsolatokban, csapatokban, közösségekben. Veszélyes pontod ott van, ahol a harmónia fenntartása fontosabb lesz az igazság kimondásánál: ha rendszeresen visszatartod, amit valójában gondolsz, előbb-utóbb olyat mondasz, amit nem érzel igazán – vagy hallgatsz, amikor szólnod kellene. A Víz ereje nem abban van, hogy simítja a felszínt. Abban van, hogy alakítja a mélységet.",
-            "en": "You feel what the other person doesn't say. You know how a decision lands — not in theory, but in the moment when the air in the room changes. That's rare sensitivity, and real power in relationships, teams, communities. Your vulnerable point is where maintaining harmony becomes more important than speaking the truth: if you regularly hold back what you actually think, you'll eventually say what isn't what you feel — or leave unsaid what should be said. Water's power isn't in smoothing the surface. It's in shaping the depth."
+            "hu": "Érzed azt, amit a másik nem mond ki. Tudod, hogyan hat rá egy döntés – nem elméletben, hanem abban a pillanatban, ahogy a szobában megváltozik a levegő. Ez ritka érzékenység, és valódi erő kapcsolatokban, csapatokban, közösségekben. Veszélyes pontod ott van, ahol a harmónia fenntartása fontosabb lesz az igazság kimondásánál: ha rendszeresen visszatartod, amit valójában gondolsz, előbb-utóbb olyat mondasz, amit nem érzel igazán – vagy hallgatsz, amikor szólnod kellene. A Víz ereje nem abban van, hogy simítja a felszínt. Abban van, hogy alakítja a mélységet.",
+            "en": "You feel what the other person doesn't say. You know how a decision lands — not in theory, but in the moment when the air in the room changes. That's rare sensitivity, and real power in relationships, teams, communities. Your vulnerable point is where maintaining harmony becomes more important than speaking the truth: if you regularly hold back what you actually think, you'll eventually say something you don't really mean — or leave unsaid what should be said. Water's power isn't in smoothing the surface. It's in shaping the depth."
           }
         },
         "balanced": {
@@ -334,7 +334,7 @@
         },
         "balanced": {
           "description": {
-            "hu": "A struktúra és a nyitottság egyaránt eszköz számodra, nem kényszerpálya. Tudod, mikor kell terv, és mikor kell elengedni – és képes vagy váltani a kettő között anélkül, hogy megakadnál. Sem a kőmerevség, sem a szélkakas-sodródás nem jellemez: a helyzetnek megfelelően mozgolódsz. Ez ritka kombináció.",
+            "hu": "A struktúra és a nyitottság egyaránt eszköz számodra, nem kényszerpálya. Tudod, mikor kell terv, és mikor kell elengedni – és képes vagy váltani a kettő között anélkül, hogy megakadnál. Sem a kőmerevség, sem a szélkakas-sodródás nem jellemez: a helyzetnek megfelelően igazodsz. Ez ritka kombináció.",
             "en": "Structure and openness are both tools for you, not a fixed track. You know when a plan is needed, and when it's time to let go — and you can shift between the two without getting stuck. Neither stone-rigidity nor weathervane-drift defines you: you move as the situation calls for. That's a rare combination."
           },
           "label": {
@@ -351,7 +351,7 @@
       },
       "poles": {
         "a": {
-          "id": "root",
+          "id": "earth",
           "label": {
             "hu": "Föld",
             "en": "Earth"
@@ -391,7 +391,7 @@
             "If I can't show or describe something concretely, it's hard to convey it to others."
           ],
           "description": {
-            "hu": "A valóság kézzel fogható rétegében mozgsz a legjobban. Abban bízol, amit látsz, megérzel és ki tudsz próbálni – nem abban, amit valaki elméletben valószínűnek tart. A részletek, a konkrét tapasztalat, a bevált módszer nem korlátok: az a talaj, amin stabil dolgokat lehet építeni. Veszélyes pontod ott jelenik meg, ahol a »ez nem bizonyított« reflex megakadályozza, hogy egy valóban új ötlet átjusson a szűrőn – mert az új sokszor épp azért új, mert még nem tapasztalható kézzel foghatóan. A Föld ereje abban van, hogy nem épít homokra – de a gyökerek néha elfogják a fényt.",
+            "hu": "A valóság kézzel fogható rétegében mozogsz a legjobban. Abban bízol, amit látsz, megérzel és ki tudsz próbálni – nem abban, amit valaki elméletben valószínűnek tart. A részletek, a konkrét tapasztalat, a bevált módszer nem korlátok: az a talaj, amin stabil dolgokat lehet építeni. Veszélyes pontod ott jelenik meg, ahol a »ez nem bizonyított« reflex megakadályozza, hogy egy valóban új ötlet átjusson a szűrőn – mert az új sokszor épp azért új, mert még nem tapasztalható kézzel foghatóan. A Föld ereje abban van, hogy nem épít homokra – de a gyökerek néha elfogják a fényt.",
             "en": "You move best in the tangible layer of reality. You trust what you can see, touch, and try — not what someone considers theoretically probable. Details, concrete experience, proven methods aren't limitations: they're the ground on which stable things can be built. Your vulnerable point appears where the 'this isn't proven' reflex prevents a genuinely new idea from getting through the filter — because the new is often new precisely because it can't yet be touched. Earth's power is that it doesn't build on sand — but roots sometimes block the light."
           }
         },
@@ -437,7 +437,7 @@
           ],
           "description": {
             "hu": "A látható mögötti összefüggések azok, amelyek igazán érdekelnek. Nem a részlet, hanem a minta – nem az, ami van, hanem az, ami válhat. Az intuíció számodra nem feltételezés: valódi érzékelési csatorna, amelyen keresztül sok minden megérkezik, amit mások elmulasztanak. Gondolkodhatsz szimbólumokban, elvont struktúrákban, jövőbeli lehetőségekben – és ez nem elrugaszkodottság, hanem annak jele, hogy a szemed egy másik réteget lát. Veszélyes pontod ott van, ahol az összefüggések szövete elveszíti a kapcsolatot a konkrét, jelenlegi valósággal – és amit megéreztél, elkezd helyettesíteni mindent, ami ellenőrizhető lenne. Az Égbolt ereje abban van, hogy messzire lát – de tudni, hogy hol a talaj, ugyanolyan fontos.",
-            "en": "The connections behind what's visible are what genuinely interest you. Not the detail, but the pattern — not what is, but what could become. Intuition for you isn't a guess: it's a real perceptual channel through which much arrives that others miss. You can think in symbols, abstract structures, future possibilities — and this isn't detachment, it's that your eye sees another layer. Your vulnerable point is where the web of connections removes contact with the concrete, present reality — and what you sensed starts substituting everything that could be verified. Sky's power is that it sees far — but knowing where the ground is, is also knowledge."
+            "en": "The connections behind what's visible are what genuinely interest you. Not the detail, but the pattern — not what is, but what could become. Intuition for you isn't a guess: it's a real perceptual channel through which much arrives that others miss. You can think in symbols, abstract structures, future possibilities — and this isn't detachment, it's that your eye sees another layer. Your vulnerable point is where the web of connections loses contact with the concrete, present reality — and what you sensed starts substituting everything that could be verified. Sky's power is that it sees far — but knowing where the ground is matters just as much."
           }
         },
         "balanced": {
@@ -504,7 +504,7 @@
           }
         },
         "b": {
-          "id": "anchor",
+          "id": "shield",
           "label": {
             "hu": "Pajzs",
             "en": "Shield"
