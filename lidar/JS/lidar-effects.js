@@ -26,7 +26,7 @@
       enabled: true,
       count: 40,
       speed: 0.0003,
-      size: [1.5, 3],
+      size: [10, 16],
       opacity: [0.25, 0.5]
     },
 
@@ -130,6 +130,7 @@
       particles.push({
         x: Math.random(),
         y: Math.random(),
+        char: Math.random() < 0.5 ? '0' : '1',
         size: CONFIG.particles.size[0] + Math.random() * (CONFIG.particles.size[1] - CONFIG.particles.size[0]),
         opacity: CONFIG.particles.opacity[0] + Math.random() * (CONFIG.particles.opacity[1] - CONFIG.particles.opacity[0]),
         vx: (Math.random() - 0.5) * CONFIG.particles.speed,
@@ -171,10 +172,11 @@
         const x = p.x * window.innerWidth;
         const y = p.y * window.innerHeight;
 
-        particleCtx.beginPath();
-        particleCtx.arc(x, y, p.size, 0, Math.PI * 2);
+        particleCtx.font = `${p.size}px "JetBrains Mono", monospace`;
+        particleCtx.textAlign = 'center';
+        particleCtx.textBaseline = 'middle';
         particleCtx.fillStyle = `rgba(${particleColor}, ${p.opacity})`;
-        particleCtx.fill();
+        particleCtx.fillText(p.char, x, y);
       });
 
       particleAnimationId = requestAnimationFrame(animate);
@@ -269,6 +271,62 @@
   }
 
   // ============================================================
+  // HERO LIVE STATS (real data from the visitor's browser)
+  // ============================================================
+
+  function initHeroStats() {
+    const hero = document.querySelector('.ld-hero');
+    if (!hero) return;
+
+    const coordEl = hero.querySelector('.ld-hero__coords--tl');
+    const depthEl = hero.querySelector('.ld-hero__coords--bl');
+    const resEl = hero.querySelector('.ld-hero__coords--br');
+
+    function pad(n) {
+      return String(Math.max(0, Math.round(n))).padStart(3, '0');
+    }
+
+    function setCoords(x, y) {
+      if (coordEl) coordEl.textContent = `x:${pad(x)} y:${pad(y)}`;
+    }
+
+    // Live cursor position, relative to the hero section
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      setCoords(e.clientX - r.left, e.clientY - r.top);
+    });
+
+    hero.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const r = hero.getBoundingClientRect();
+      setCoords(t.clientX - r.left, t.clientY - r.top);
+    }, { passive: true });
+
+    // Depth: how far the visitor has scrolled into the page
+    function updateDepth() {
+      if (!depthEl) return;
+      const depth = window.scrollY / 100;
+      depthEl.textContent = `depth:${depth.toFixed(2)}m`;
+    }
+
+    // Resolution: actual viewport size
+    function updateRes() {
+      if (!resEl) return;
+      resEl.textContent = `res:${window.innerWidth}x${window.innerHeight}`;
+    }
+
+    // Initial values before any interaction
+    const rect = hero.getBoundingClientRect();
+    setCoords(rect.width / 2, rect.height / 2);
+    updateDepth();
+    updateRes();
+
+    window.addEventListener('scroll', updateDepth, { passive: true });
+    window.addEventListener('resize', updateRes);
+  }
+
+  // ============================================================
   // TYPING EFFECT (Optional, for hero subtitle)
   // ============================================================
 
@@ -330,6 +388,7 @@
       initScrollReveal();
       initPageTransitions();
       initCoordinateLabels();
+      initHeroStats();
       initAmbientParticles();
       initScanner();
       initTypingEffect();

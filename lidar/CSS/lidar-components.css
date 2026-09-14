@@ -390,6 +390,147 @@
 }
 
 /* ============================================================
+   TOOL CARDS (expandable link cards with description panel)
+   ============================================================ */
+
+.ld-tool-card {
+  position: relative;
+  background: var(--ld-panel);
+  border: 1px solid var(--ld-border);
+  border-left: 3px solid var(--ld-scan-dim);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out);
+}
+
+.ld-tool-card--elevated {
+  z-index: 10;
+}
+
+.ld-tool-card:hover {
+  border-color: var(--ld-border-hover);
+  border-left-color: var(--ld-scan);
+}
+
+.ld-tool-card__header {
+  display: flex;
+  align-items: stretch;
+}
+
+.ld-tool-card__link {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  text-decoration: none;
+}
+
+.ld-tool-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ld-surface);
+  border-radius: var(--card-radius);
+  color: var(--ld-scan);
+  flex-shrink: 0;
+}
+
+.ld-tool-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ld-tool-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ld-text-bright);
+  margin-bottom: var(--space-xs);
+}
+
+.ld-tool-card__desc {
+  font-size: var(--text-sm);
+  color: var(--ld-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ld-tool-card__arrow {
+  color: var(--ld-text-dim);
+  margin-left: var(--space-sm);
+  flex-shrink: 0;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.ld-tool-card__link:hover .ld-tool-card__arrow {
+  color: var(--ld-scan);
+  transform: translateX(4px);
+}
+
+.ld-tool-card__toggle {
+  flex-shrink: 0;
+  width: 48px;
+  border: none;
+  border-left: 1px solid var(--ld-border);
+  background: transparent;
+  color: var(--ld-text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.ld-tool-card__toggle:hover,
+.ld-tool-card__toggle[aria-expanded="true"] {
+  color: var(--ld-scan);
+  background: var(--ld-panel-hover);
+}
+
+.ld-tool-card__toggle svg {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ld-tool-card__toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.ld-tool-card__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 0;
+  overflow: hidden;
+  border: 0 solid var(--ld-border-hover);
+  transition:
+    max-height var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.ld-tool-card__panel[data-open] {
+  background: var(--ld-panel);
+  border-width: 0 1px 1px;
+  box-shadow: var(--shadow-glow), 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.ld-tool-card__panel-inner {
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--ld-text);
+}
+
+/* ============================================================
    PROJECT CARDS
    ============================================================ */
 
@@ -659,6 +800,19 @@
     width: 40px;
     height: 40px;
     font-size: var(--text-lg);
+  }
+
+  .ld-tool-card__link {
+    padding: var(--space-md);
+  }
+
+  .ld-tool-card__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ld-tool-card__desc {
+    white-space: normal;
   }
 }
 
