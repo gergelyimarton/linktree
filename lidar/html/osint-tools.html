@@ -718,21 +718,30 @@
         const card = toggle.closest('.ld-tool-card');
         const panel = card.querySelector('.ld-tool-card__panel');
 
+        function closePanel() {
+          panel.style.maxHeight = '0px';
+          panel.removeAttribute('data-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          card.classList.remove('ld-tool-card--elevated');
+          panels.delete(panel);
+        }
+
+        function openPanel() {
+          panel.setAttribute('data-open', '');
+          toggle.setAttribute('aria-expanded', 'true');
+          card.classList.add('ld-tool-card--elevated');
+          setHeight(panel);
+          panels.add(panel);
+        }
+
         toggle.addEventListener('click', () => {
           const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closePanel() : openPanel();
+        });
 
-          if (isOpen) {
-            panel.style.maxHeight = '0px';
-            panel.removeAttribute('data-open');
-            toggle.setAttribute('aria-expanded', 'false');
-            card.classList.remove('ld-tool-card--elevated');
-            panels.delete(panel);
-          } else {
-            panel.setAttribute('data-open', '');
-            toggle.setAttribute('aria-expanded', 'true');
-            card.classList.add('ld-tool-card--elevated');
-            setHeight(panel);
-            panels.add(panel);
+        card.addEventListener('mouseleave', () => {
+          if (toggle.getAttribute('aria-expanded') === 'true') {
+            closePanel();
           }
         });
       });
