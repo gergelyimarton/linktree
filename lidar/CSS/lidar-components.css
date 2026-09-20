@@ -811,6 +811,7 @@
 
   .ld-tool-card__link {
     padding: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .ld-tool-card__icon {
@@ -820,6 +821,14 @@
 
   .ld-tool-card__desc {
     font-size: var(--text-xs);
+  }
+
+  .ld-tool-card__arrow {
+    margin-left: var(--space-xs);
+  }
+
+  .ld-tool-card__toggle {
+    width: 40px;
   }
 }
 
@@ -839,6 +848,24 @@
 
   .ld-tool-card__desc {
     font-size: var(--text-2xs);
+  }
+
+  .ld-tool-card__link {
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .ld-tool-card__icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ld-tool-card__arrow {
+    display: none;
+  }
+
+  .ld-tool-card__toggle {
+    width: 36px;
   }
 
   .ld-section-header__title {
@@ -975,6 +1002,12 @@
   z-index: -1;
   pointer-events: none;
   opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .ld-ambient-canvas {
+    display: none;
+  }
 }
 
 /* Hero scanner line */
