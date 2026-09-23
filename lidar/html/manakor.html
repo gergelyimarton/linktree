@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manakór</title>
+  <meta name="description" content="Manakór — fekete humorú fantasy társasjáték-projekt.">
+  <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="../CSS/lidar-core.css">
+  <link rel="stylesheet" href="../CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Manakór: page-scoped arcane/parchment palette override -->
+  <style>
+    :root {
+      --ld-scan: #e0a860;
+      --ld-scan-dim: rgba(224, 168, 96, 0.14);
+      --ld-scan-glow: rgba(224, 168, 96, 0.10);
+      --ld-scan-bright: #f4cf8e;
+      --ld-border: rgba(224, 168, 96, 0.14);
+      --ld-border-hover: rgba(224, 168, 96, 0.35);
+    }
+    [data-theme="light"] {
+      --ld-void: #f3ede0;
+      --ld-surface: #fffaf0;
+      --ld-panel: #e8dcc3;
+      --ld-panel-hover: #ded0b0;
+      --ld-panel-active: #d4c39c;
+      --ld-scan: #6b4413;
+      --ld-scan-dim: rgba(107, 68, 19, 0.18);
+      --ld-scan-glow: rgba(107, 68, 19, 0.12);
+      --ld-scan-bright: #4a2d0a;
+      --ld-border: rgba(107, 68, 19, 0.25);
+      --ld-border-hover: rgba(107, 68, 19, 0.5);
+    }
+
+    /* No ambient 0/1 particle rain on this page */
+    .ld-ambient-canvas {
+      display: none !important;
+    }
+
+    /* Card subtitles stay hidden until hover, then pop out in full — no visible "…" clipping */
+    .ld-tool-card__desc {
+      display: none;
+    }
+    .ld-tool-card:hover .ld-tool-card__desc {
+      display: block;
+      position: absolute;
+      left: var(--space-lg);
+      right: var(--space-lg);
+      top: 100%;
+      margin-top: 4px;
+      z-index: 20;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      color: var(--ld-text-bright);
+      background: var(--ld-panel);
+      border: 1px solid var(--ld-border-hover);
+      border-radius: var(--card-radius);
+      padding: var(--space-sm) var(--space-md);
+      box-shadow: var(--shadow-card);
+      animation: manakor-desc-pop 0.15s ease-out;
+    }
+    /* Dice cards have their own expand panel — once it's open, hide the hover popup underneath it */
+    .ld-tool-card--elevated .ld-tool-card__desc,
+    .ld-tool-card--elevated:hover .ld-tool-card__desc {
+      display: none !important;
+    }
+    @keyframes manakor-desc-pop {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .manakor-hero {
+      background-image:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(224, 168, 96, 0.10), transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 20 H20 V0 M20 40 H60 M40 0 V20 H60 M0 40 V60 H40 M40 60 V40' stroke='rgba(224,168,96,0.14)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat, repeat;
+      background-size: 100% 100%, 60px 60px;
+    }
+    [data-theme="light"] .manakor-hero {
+      background-image:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(107, 68, 19, 0.08), transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 20 H20 V0 M20 40 H60 M40 0 V20 H60 M0 40 V60 H40 M40 60 V40' stroke='rgba(107,68,19,0.16)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ld-nav">
+    <a href="projects.html" class="ld-back">
+      <span class="ld-back__arrow">←</span>
+      <span data-hu="Vissza" data-en="Back">Vissza</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content visible" id="main-content">
+
+    <!-- HEADER -->
+    <section class="ld-section manakor-hero" style="padding-top: var(--space-4xl); padding-bottom: var(--space-xl);">
+      <div class="ld-container">
+        <h1 class="ld-hero__title" style="text-align: center; margin-bottom: var(--space-sm);" data-reveal>
+          Manakór
+        </h1>
+        <p class="text-mono text-dim" style="text-align: center; margin: 0 auto;" data-reveal>
+          <span data-hu="Egy labirintus, egy zsáknyi mana, és sosem tudod, mikor kellene inkább hazaindulni" data-en="A labyrinth, a pocketful of mana, and you never quite know when to head home">Egy labirintus, egy zsáknyi mana, és sosem tudod, mikor kellene inkább hazaindulni</span>
+        </p>
+        <p class="text-mono" style="text-align: center; margin-top: var(--space-md); color: var(--ld-scan); font-size: var(--text-xs); letter-spacing: var(--tracking-mono); text-transform: uppercase;" data-reveal>
+          <span data-hu="Fejlesztés alatt" data-en="Work in progress">Fejlesztés alatt</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container" style="max-width: 720px;">
+        <p style="color: var(--ld-text); line-height: 1.7; text-align: center;" data-reveal>
+          <span data-hu="A Manakór egy fekete humorú, Monopoly-ihlette társasjáték egy 10×10 mezős, rejtélyes labirintusról. A játékosok vándorok, akik Manát gyűjtenek, miközben alkimistákkal alkudoznak, inkvizítorok elől menekülnek, és időnként egy Szentélyben pihenik ki a bajaikat. A szabály egyszerű, csak nehéz betartani: minél több manával kijutni — mielőtt még egy kör mindent elvinne tőled." data-en="Manakór is a dark-humor, Monopoly-inspired board game set in a mysterious 10×10 labyrinth. Players are wanderers who gather Mana while haggling with alchemists, fleeing inquisitors, and occasionally catching their breath in a Sanctuary. The rule is simple, just hard to follow: escape with as much mana as possible — before one more round takes it all back.">A Manakór egy fekete humorú, Monopoly-ihlette társasjáték egy 10×10 mezős, rejtélyes labirintusról. A játékosok vándorok, akik Manát gyűjtenek, miközben alkimistákkal alkudoznak, inkvizítorok elől menekülnek, és időnként egy Szentélyben pihenik ki a bajaikat. A szabály egyszerű, csak nehéz betartani: minél több manával kijutni — mielőtt még egy kör mindent elvinne tőled.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- QUICK FACTS -->
+    <section class="ld-section" style="padding-top: var(--space-lg);">
+      <div class="ld-container">
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <div class="ld-tool-card">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M15 14a4 4 0 0 1 4 4v3"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Kezdő mana" data-en="Starting mana">Kezdő mana</div>
+                  <div class="ld-tool-card__desc" data-hu="5 manával indul minden vándor" data-en="Every wanderer starts with 5 mana">5 manával indul minden vándor</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ld-tool-card">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Pálya" data-en="Board">Pálya</div>
+                  <div class="ld-tool-card__desc" data-hu="10×10 mezős, rejtélyes labirintus" data-en="10×10 grid, a mysterious labyrinth">10×10 mezős, rejtélyes labirintus</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ld-tool-card">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Karakterek" data-en="Characters">Karakterek</div>
+                  <div class="ld-tool-card__desc" data-hu="5 egyedi képességű karakter" data-en="5 characters with unique abilities">5 egyedi képességű karakter</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ld-tool-card">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 12h6M9 17h3"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Kártyák" data-en="Cards">Kártyák</div>
+                  <div class="ld-tool-card__desc" data-hu="7 tárgytípus, korlátozott készlettel" data-en="7 item types, limited supply">7 tárgytípus, korlátozott készlettel</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DICE -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Kockák" data-en="Dice">Kockák</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <p class="text-mono text-dim" style="text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); font-size: var(--text-sm);" data-reveal>
+          <span data-hu="A Manakórhoz nem elég egyetlen dobókocka: egy klasszikus szerepjátékos (D&D-stílusú) kockakészletre lesz szükséged — d6, d8, d12 és d20 —, amilyet bármelyik társasjáték- vagy szerepjáték-boltban megtalálsz." data-en="Manakór needs more than a single die: you'll want a classic tabletop RPG (D&amp;D-style) dice set — d6, d8, d12, and d20 — the kind sold in any board game or hobby shop.">A Manakórhoz nem elég egyetlen dobókocka: egy klasszikus szerepjátékos (D&D-stílusú) kockakészletre lesz szükséged — d6, d8, d12 és d20 —, amilyet bármelyik társasjáték- vagy szerepjáték-boltban megtalálsz.</span>
+        </p>
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- d6 -->
+          <div class="ld-tool-card" data-id="NAR:D6">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Hat Ösvény Kockája" data-en="Die of Six Paths">Hat Ösvény Kockája</div>
+                  <div class="ld-tool-card__desc">d6</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Hatoldalú kocka" data-en="Six-sided die">Hatoldalú kocka</p>
+                <p style="margin: 0;" data-hu="A labirintus legmegbízhatóbb társa: hat oldal, hat lehetséges ösvény, és sosem lehet tudni, melyik vezet manához, és melyik csalódáshoz." data-en="The labyrinth's most reliable companion: six sides, six possible paths, and you never know which one leads to mana and which to disappointment.">A labirintus legmegbízhatóbb társa: hat oldal, hat lehetséges ösvény, és sosem lehet tudni, melyik vezet manához, és melyik csalódáshoz.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Használat:" data-en="Used at:">Használat:</strong> <span data-hu="Alkimista mező, Bölcs Filozófus aktív képessége, Túlélő Zsivány aktív képessége." data-en="Alchemist square, Wise Philosopher's active ability, Survivor Rogue's active ability.">Alkimista mező, Bölcs Filozófus aktív képessége, Túlélő Zsivány aktív képessége.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- d8 -->
+          <div class="ld-tool-card" data-id="NAR:D8">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Visszhang Kockája" data-en="Die of Echoes">Visszhang Kockája</div>
+                  <div class="ld-tool-card__desc">d8</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Nyolcoldalú kocka" data-en="Eight-sided die">Nyolcoldalú kocka</p>
+                <p style="margin: 0;" data-hu="Nyolc oldal, nyolc visszhang a sötétből — néha csak egy kósza légáramlat, néha valami, amitől libabőrös leszel." data-en="Eight sides, eight echoes from the dark — sometimes just a stray draft, sometimes something that raises the hair on your neck.">Nyolc oldal, nyolc visszhang a sötétből — néha csak egy kósza légáramlat, néha valami, amitől libabőrös leszel.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Használat:" data-en="Used at:">Használat:</strong> <span data-hu="Barlang mező, Romantikus Trubadúr aktív képessége." data-en="Cave square, Romantic Troubadour's active ability.">Barlang mező, Romantikus Trubadúr aktív képessége.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- d12 -->
+          <div class="ld-tool-card" data-id="NAR:D12">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Átjáró Kockája" data-en="Die of the Gate">Átjáró Kockája</div>
+                  <div class="ld-tool-card__desc">d12</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Tizenkétoldalú kocka" data-en="Twelve-sided die">Tizenkétoldalú kocka</p>
+                <p style="margin: 0;" data-hu="Tizenkét oldal, tizenkét lehetséges kimenetel — és egyetlen rossz dobás elég ahhoz, hogy egy nyugodt utazásból kellemetlen találkozás legyen." data-en="Twelve sides, twelve possible outcomes — and a single bad roll is enough to turn a quiet journey into an unpleasant encounter.">Tizenkét oldal, tizenkét lehetséges kimenetel — és egyetlen rossz dobás elég ahhoz, hogy egy nyugodt utazásból kellemetlen találkozás legyen.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Használat:" data-en="Used at:">Használat:</strong> <span data-hu="Portál mező." data-en="Portal square.">Portál mező.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- d20 -->
+          <div class="ld-tool-card" data-id="NAR:D20">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Ítélet Kockája" data-en="Die of Judgment">Ítélet Kockája</div>
+                  <div class="ld-tool-card__desc">d20</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Húszoldalú kocka" data-en="Twenty-sided die">Húszoldalú kocka</p>
+                <p style="margin: 0;" data-hu="A húsz oldal közül csak kettő jelent igazi katasztrófát — de amikor az Inkvizítor rád néz, ez a kettő mindig sokkal nagyobbnak tűnik, mint amekkora valójában." data-en="Only two of the twenty sides spell real disaster — but when the Inquisitor is looking at you, those two always feel far bigger than they really are.">A húsz oldal közül csak kettő jelent igazi katasztrófát — de amikor az Inkvizítor rád néz, ez a kettő mindig sokkal nagyobbnak tűnik, mint amekkora valójában.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Használat:" data-en="Used at:">Használat:</strong> <span data-hu="Inkvizítor mező." data-en="Inquisitor square.">Inkvizítor mező.</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CHARACTERS -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Karakterek" data-en="Characters">Karakterek</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- Bölcs Filozófus -->
+          <div class="ld-tool-card" data-id="NAR:C1">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Bölcs Filozófus" data-en="The Wise Philosopher">Bölcs Filozófus</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Manipulatív · Kontrolláló · Támogató" data-en="Manipulative · Controlling · Supportive">Manipulatív · Kontrolláló · Támogató</p>
+                <p style="margin: 0;" data-hu="Azt mondják, a Bölcs Filozófus még a labirintus születése előtt is itt kóborolt: ismer minden zugot, minden kanyart, és pontosan tudja, mikor érdemes csak úgy „véletlenül” ugyanoda lépni, ahova az imént más lépett." data-en="They say the Wise Philosopher was already wandering these halls before the labyrinth was born: they know every corner, every turn, and exactly when it pays to 'accidentally' land on the same square someone else just left.">Azt mondják, a Bölcs Filozófus még a labirintus születése előtt is itt kóborolt: ismer minden zugot, minden kanyart, és pontosan tudja, mikor érdemes csak úgy „véletlenül” ugyanoda lépni, ahova az imént más lépett.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Passzív:" data-en="Passive:">Passzív:</strong> <span data-hu="Ha egy másik játékos elhalad mellette, ugyanarra a mezőre ugorhat, ahova az elhaladó lépett — de csak akkor, ha az illető egy másik mezőről indult, mint ahol ő áll." data-en="If another player passes by, they may jump to the same square the passing player landed on — but only if that player started from a different square than the one they're on.">Ha egy másik játékos elhalad mellette, ugyanarra a mezőre ugorhat, ahova az elhaladó lépett — de csak akkor, ha az illető egy másik mezőről indult, mint ahol ő áll.</span></p>
+                <p style="margin: var(--space-xs) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Aktív:" data-en="Active:">Aktív:</strong> <span data-hu="Megzavarhat vagy segíthet egy játékost. Dobj d6-ost: páros esetén a célpont kihagy egy kört, páratlan esetén duplán léphet." data-en="Can confuse or help a player. Roll d6: on even, the target skips a turn; on odd, they can move double.">Megzavarhat vagy segíthet egy játékost. Dobj d6-ost: páros esetén a célpont kihagy egy kört, páratlan esetén duplán léphet.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rezidens Kalmár -->
+          <div class="ld-tool-card" data-id="NAR:C2">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Rezidens Kalmár" data-en="The Resident Merchant">Rezidens Kalmár</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Kereskedő · Gazdasági fókuszú · Logisztikai" data-en="Trader · Economy-focused · Logistical">Kereskedő · Gazdasági fókuszú · Logisztikai</p>
+                <p style="margin: 0;" data-hu="A Rezidens Kalmár sosem költözött el a labirintus szívéből — miért is tenné, amikor minden alkimista ismeri a nevét, és minden Vásár tartogat neki egy kis engedményt?" data-en="The Resident Merchant never left the heart of the labyrinth — why would they, when every alchemist knows their name, and every Market keeps a little discount just for them?">A Rezidens Kalmár sosem költözött el a labirintus szívéből — miért is tenné, amikor minden alkimista ismeri a nevét, és minden Vásár tartogat neki egy kis engedményt?</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Passzív:" data-en="Passive:">Passzív:</strong> <span data-hu="Mindig +2 manát kap az Alkimistától (kivéve, ha csak áthalad mellette), és a Vásárban féláron vásárolhat." data-en="Always gets +2 mana from the Alchemist (unless just passing through), and buys at half price at a Market.">Mindig +2 manát kap az Alkimistától (kivéve, ha csak áthalad mellette), és a Vásárban féláron vásárolhat.</span></p>
+                <p style="margin: var(--space-xs) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Aktív:" data-en="Active:">Aktív:</strong> <span data-hu="Visszaléphet a legközelebbi Vásárra, és azonnal vásárolhat." data-en="Can step back to the nearest Market and buy immediately.">Visszaléphet a legközelebbi Vásárra, és azonnal vásárolhat.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paranoiás Remete -->
+          <div class="ld-tool-card" data-id="NAR:C3">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Paranoiás Remete" data-en="The Paranoid Hermit">Paranoiás Remete</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Defenzív · Kontrolláló · Pozíciómanipuláló" data-en="Defensive · Controlling · Position-manipulating">Defenzív · Kontrolláló · Pozíciómanipuláló</p>
+                <p style="margin: 0;" data-hu="A Paranoiás Remete réges-rég megtanulta: aki senkiben sem bízik, azt nehéz átverni — és még nehezebb kirabolni." data-en="The Paranoid Hermit learned long ago: someone who trusts no one is hard to fool — and even harder to rob.">A Paranoiás Remete réges-rég megtanulta: aki senkiben sem bízik, azt nehéz átverni — és még nehezebb kirabolni.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Passzív:" data-en="Passive:">Passzív:</strong> <span data-hu="Nem lehet tőle lopni. Ha az Inkvizítorok elkapják, a Szentélyben csak a manája negyedét veszíti el (páratlan szám esetén felfelé kerekítve)." data-en="Cannot be robbed. If caught by the Inquisitors, only loses a quarter of their mana at the Sanctuary (rounded up on odd numbers).">Nem lehet tőle lopni. Ha az Inkvizítorok elkapják, a Szentélyben csak a manája negyedét veszíti el (páratlan szám esetén felfelé kerekítve).</span></p>
+                <p style="margin: var(--space-xs) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Aktív:" data-en="Active:">Aktív:</strong> <span data-hu="Megcserélheti két másik játékos helyét a pályán (saját magával nem). Kétfős játékban a másik játékost a legközelebbi Szentélyre rántja vissza." data-en="Can swap the positions of two other players on the board (not themselves). In a two-player game, pulls the other player back to the nearest Sanctuary.">Megcserélheti két másik játékos helyét a pályán (saját magával nem). Kétfős játékban a másik játékost a legközelebbi Szentélyre rántja vissza.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Romantikus Trubadúr -->
+          <div class="ld-tool-card" data-id="NAR:C4">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Romantikus Trubadúr" data-en="The Romantic Troubadour">Romantikus Trubadúr</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Manipulatív · Támadó · Büntető" data-en="Manipulative · Aggressive · Punishing">Manipulatív · Támadó · Büntető</p>
+                <p style="margin: 0;" data-hu="A Romantikus Trubadúr mindenkit szeret — épp csak annyira, hogy hajlandó legyen helyettük bajba kerülni, ha cserébe kicsikarhat egy tárgyat és egy jó történetet." data-en="The Romantic Troubadour loves everyone — just enough to take the fall for them, if it means walking away with a good story and one of their items.">A Romantikus Trubadúr mindenkit szeret — épp csak annyira, hogy hajlandó legyen helyettük bajba kerülni, ha cserébe kicsikarhat egy tárgyat és egy jó történetet.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Passzív:" data-en="Passive:">Passzív:</strong> <span data-hu="Egy másik játékost küldhet a Szentélybe maga helyett, de ezért 5 manát fizet — a másik játékos semmit sem veszít." data-en="Can send another player to the Sanctuary instead of themselves, but pays 5 mana for it — the other player loses nothing.">Egy másik játékost küldhet a Szentélybe maga helyett, de ezért 5 manát fizet — a másik játékos semmit sem veszít.</span></p>
+                <p style="margin: var(--space-xs) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Aktív:" data-en="Active:">Aktív:</strong> <span data-hu="Érzelmi zsarolással törölheti egy játékos véletlenszerű tárgyát (1 db). Dobj d8-ast: 1–3 = sikertelen, 4–8 = sikeres." data-en="Can erase a random item (1 pc) of another player through emotional blackmail. Roll d8: 1–3 = fails, 4–8 = succeeds.">Érzelmi zsarolással törölheti egy játékos véletlenszerű tárgyát (1 db). Dobj d8-ast: 1–3 = sikertelen, 4–8 = sikeres.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Túlélő Zsivány -->
+          <div class="ld-tool-card" data-id="NAR:C5">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Túlélő Zsivány" data-en="The Survivor Rogue">Túlélő Zsivány</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Offenzív · Szerencse-optimalizáló · Lopó" data-en="Offensive · Luck-optimizing · Thief">Offenzív · Szerencse-optimalizáló · Lopó</p>
+                <p style="margin: 0;" data-hu="A Túlélő Zsivány már annyiszor nézett szembe egy Inkvizítorral, hogy megtanulta: ha egyszer nem vagy elég szerencsés, próbáld újra — gyorsan, mielőtt bárki észbe kapna." data-en="The Survivor Rogue has faced enough Inquisitors to learn: if luck isn't on your side once, try again — fast, before anyone notices.">A Túlélő Zsivány már annyiszor nézett szembe egy Inkvizítorral, hogy megtanulta: ha egyszer nem vagy elég szerencsés, próbáld újra — gyorsan, mielőtt bárki észbe kapna.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Passzív:" data-en="Passive:">Passzív:</strong> <span data-hu="Az Inkvizítornál duplán dob, és a jobb eredményt választhatja." data-en="Rolls twice at an Inquisitor square and can pick the better result.">Az Inkvizítornál duplán dob, és a jobb eredményt választhatja.</span></p>
+                <p style="margin: var(--space-xs) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Aktív:" data-en="Active:">Aktív:</strong> <span data-hu="Elcsenhet 3 manát vagy egy véletlenszerű tárgyat egy másik játékostól. Dobj d6-ost: 1–2 = semmi, 3–6 = siker." data-en="Can steal 3 mana or a random item from another player. Roll d6: 1–2 = nothing, 3–6 = success.">Elcsenhet 3 manát vagy egy véletlenszerű tárgyat egy másik játékostól. Dobj d6-ost: 1–2 = semmi, 3–6 = siker.</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CARDS / ITEMS -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Tárgyak" data-en="Items">Tárgyak</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- Ismerem az inkvizítort -->
+          <div class="ld-tool-card" data-id="NAR:I1">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Ismerem az inkvizítort”" data-en="“I Know the Inquisitor”">„Ismerem az inkvizítort”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Védelmi · 2 db/fő a pakliban" data-en="Defense · 2 per player in the deck">Védelmi · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="Egy név, egy bólintás, egy kölcsönös hallgatás — ennyi kell ahhoz, hogy egy Inkvizítor hirtelen másfelé nézzen." data-en="A name, a nod, a shared silence — that's all it takes for an Inquisitor to suddenly look the other way.">Egy név, egy bólintás, egy kölcsönös hallgatás — ennyi kell ahhoz, hogy egy Inkvizítor hirtelen másfelé nézzen.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Kivéd egy Inkvizítor mező hatását. A használatához a kártyát már az előző körben aktiválni kell." data-en="Blocks the effect of one Inquisitor square. Must be activated the previous turn to use.">Kivéd egy Inkvizítor mező hatását. A használatához a kártyát már az előző körben aktiválni kell.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Szent Látomás -->
+          <div class="ld-tool-card" data-id="NAR:I2">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Szent Látomás”" data-en="“Holy Vision”">„Szent Látomás”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Pontkártya · 2 db/fő a pakliban · Csak 1 váltható be fejenként" data-en="Score card · 2 per player in the deck · Only 1 redeemable per player">Pontkártya · 2 db/fő a pakliban · Csak 1 váltható be fejenként</p>
+                <p style="margin: 0;" data-hu="Egyetlen pillanat, amikor a labirintus fala megnyílik, és távolabb látsz, mint valaha — aztán vége, és csak annyi marad belőle, amennyit magaddal tudsz hozni." data-en="One single moment when the labyrinth's wall opens up and you see further than ever — then it's gone, and all that remains is what you carried out with you.">Egyetlen pillanat, amikor a labirintus fala megnyílik, és távolabb látsz, mint valaha — aztán vége, és csak annyi marad belőle, amennyit magaddal tudsz hozni.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="A célba éréskor +15 manát ér. Fejenként csak egyetlen példány váltható be." data-en="Worth +15 mana upon reaching the finish. Only one copy can be redeemed per player.">A célba éréskor +15 manát ér. Fejenként csak egyetlen példány váltható be.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Manaszívás -->
+          <div class="ld-tool-card" data-id="NAR:I3">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Manaszívás”" data-en="“Mana Drain”">„Manaszívás”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Interakciós · 2 db/fő a pakliban" data-en="Interaction · 2 per player in the deck">Interakciós · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="Nem kérdezel, nem magyarázkodsz — csak kinyújtod a kezed, és máris kevesebb mana csillog a másik zsebében." data-en="No questions, no explanations — you just reach out, and a little less mana glimmers in the other pocket.">Nem kérdezel, nem magyarázkodsz — csak kinyújtod a kezed, és máris kevesebb mana csillog a másik zsebében.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Elvehetsz 5 manát egy másik játékostól. Egyszerre csak egy ilyen kártya lehet aktív." data-en="You may take 5 mana from another player. Only one such card can be active at a time.">Elvehetsz 5 manát egy másik játékostól. Egyszerre csak egy ilyen kártya lehet aktív.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Átok -->
+          <div class="ld-tool-card" data-id="NAR:I4">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Átok”" data-en="“Curse”">„Átok”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Manipulációs · 2 db/fő a pakliban" data-en="Manipulation · 2 per player in the deck">Manipulációs · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="Néhány szó, egy görbe mosoly, és a kiszemelt áldozat útja hirtelen egyenesen egy Inkvizítor karjaiba vezet — akár tetszik neki, akár nem." data-en="A few words, a crooked smile, and the chosen victim's path suddenly leads straight into an Inquisitor's arms — whether they like it or not.">Néhány szó, egy görbe mosoly, és a kiszemelt áldozat útja hirtelen egyenesen egy Inkvizítor karjaiba vezet — akár tetszik neki, akár nem.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Válassz egy játékost: a következő Inkvizítor mezőn automatikusan a legközelebbi Szentélybe kerül, és 5 manát veszít — még akkor is, ha lenne védőkártyája, mert az ellene nem használható." data-en="Choose a player: on their next Inquisitor square, they automatically go to the nearest Sanctuary and lose 5 mana — even if they have a defense card, since it cannot be used against this.">Válassz egy játékost: a következő Inkvizítor mezőn automatikusan a legközelebbi Szentélybe kerül, és 5 manát veszít — még akkor is, ha lenne védőkártyája, mert az ellene nem használható.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alkumester -->
+          <div class="ld-tool-card" data-id="NAR:I5">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Alkumester”" data-en="“Master Haggler”">„Alkumester”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Kereskedelmi · 2 db/fő a pakliban" data-en="Trade · 2 per player in the deck">Kereskedelmi · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="Minden alkimista tudja: egy jó sztori néha többet ér, mint a legritkább hozzávaló — és ez a kártya pontosan ezt a hitet használja ki." data-en="Every alchemist knows: a good story is sometimes worth more than the rarest ingredient — and this card exploits exactly that belief.">Minden alkimista tudja: egy jó sztori néha többet ér, mint a legritkább hozzávaló — és ez a kártya pontosan ezt a hitet használja ki.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Bármelyik Alkimista mezőn egy tárgyadért cserébe 10 manát kapsz, típustól függetlenül. Egyszerre csak egy ilyen kártya használható." data-en="On any Alchemist square, trade an item for 10 mana, regardless of its type. Only one such card can be used at a time.">Bármelyik Alkimista mezőn egy tárgyadért cserébe 10 manát kapsz, típustól függetlenül. Egyszerre csak egy ilyen kártya használható.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portáljegy -->
+          <div class="ld-tool-card" data-id="NAR:I6">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Portáljegy”" data-en="“Portal Ticket”">„Portáljegy”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Utazás · 2 db/fő a pakliban" data-en="Travel · 2 per player in the deck">Utazás · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="A Portálok nem kérdeznek, nem alkudnak — csak jegyet." data-en="Portals don't ask questions, don't haggle — they just want a ticket.">A Portálok nem kérdeznek, nem alkudnak — csak jegyet.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="A Portál használatához szükséges." data-en="Required to use the Portal.">A Portál használatához szükséges.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Villámfutás -->
+          <div class="ld-tool-card" data-id="NAR:I7">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="„Villámfutás”" data-en="“Lightning Dash”">„Villámfutás”</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Mozgás · 2 db/fő a pakliban" data-en="Movement · 2 per player in the deck">Mozgás · 2 db/fő a pakliban</p>
+                <p style="margin: 0;" data-hu="Egy szívdobbanásnyi idő, és már ott sem vagy, ahol az imént álltál." data-en="One heartbeat, and you're no longer where you just stood.">Egy szívdobbanásnyi idő, és már ott sem vagy, ahol az imént álltál.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Megduplázza a lépésed számát. Lépéssel együtt azonnal felhasználható, aktiválás nélkül — de a dobás előtt be kell jelentened, hogy használod." data-en="Doubles your move count. Usable immediately together with a move, no activation needed — but must be announced before rolling.">Megduplázza a lépésed számát. Lépéssel együtt azonnal felhasználható, aktiválás nélkül — de a dobás előtt be kell jelentened, hogy használod.</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top: var(--space-lg); padding: var(--space-lg); background: var(--ld-panel); border: 1px solid var(--ld-border); border-left: 3px solid var(--ld-scan-dim);" data-reveal>
+          <p class="text-mono" style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin-bottom: var(--space-sm);" data-hu="Kártyaszabályok" data-en="Card rules">Kártyaszabályok</p>
+          <ul style="color: var(--ld-text); line-height: 1.8; margin: 0; padding-left: 1.2em;">
+            <li data-hu="A közös pakliban minden kártyatípusból a játékosok számának kétszerese található (pl. 4 játékosnál 8-8 db minden típusból)." data-en="The shared deck contains twice the number of players' worth of every card type (e.g. with 4 players, 8 copies of each type).">A közös pakliban minden kártyatípusból a játékosok számának kétszerese található (pl. 4 játékosnál 8-8 db minden típusból).</li>
+            <li data-hu="Egyszerre legfeljebb 2 db lehet nálad ugyanabból a kártyatípusból." data-en="You may hold at most 2 copies of the same card type at once.">Egyszerre legfeljebb 2 db lehet nálad ugyanabból a kártyatípusból.</li>
+            <li data-hu="Tárgy vásárlásakor véletlenszerűen kell húzni a pakliból." data-en="When buying an item, it must be drawn randomly from the deck.">Tárgy vásárlásakor véletlenszerűen kell húzni a pakliból.</li>
+            <li data-hu="Egy tárgy 2 manába kerül." data-en="An item costs 2 mana.">Egy tárgy 2 manába kerül.</li>
+            <li data-hu="Aktivált kártyát nem lehet ellopni vagy elveszíteni." data-en="An activated card cannot be stolen or lost.">Aktivált kártyát nem lehet ellopni vagy elveszíteni.</li>
+            <li data-hu="Egy típusú kártyából egyszerre csak egy lehet aktív, de több különböző típusú kártya lehet aktív egy időben." data-en="Only one card of a given type can be active at once, but several different types can be active simultaneously.">Egy típusú kártyából egyszerre csak egy lehet aktív, de több különböző típusú kártya lehet aktív egy időben.</li>
+            <li data-hu="A felhasznált kártyák nem kerülnek vissza a pakliba — véglegesen kikerülnek a játékból." data-en="Used cards do not return to the deck — they're permanently removed from play.">A felhasznált kártyák nem kerülnek vissza a pakliba — véglegesen kikerülnek a játékból.</li>
+            <li data-hu="A készlet véges, és ha egy kártyatípus elfogy, az véglegesen elfogy — nincs újratöltés. Minden hozzá kötődő mezőhatás vagy interakció ilyenkor egyszerűen kimarad: ahol kártyahúzás vagy -használat lenne kötelező, ott azt a lépést kártya nélkül kell kihagyni." data-en="The supply is finite, and once a card type runs out, it's gone for good — no refill. Every square effect or interaction tied to it simply falls away: where drawing or using a card would be required, that step is skipped instead.">A készlet véges, és ha egy kártyatípus elfogy, az véglegesen elfogy — nincs újratöltés. Minden hozzá kötődő mezőhatás vagy interakció ilyenkor egyszerűen kimarad: ahol kártyahúzás vagy -használat lenne kötelező, ott azt a lépést kártya nélkül kell kihagyni.</li>
+            <li data-hu="Ez egyben jó jelzés is: ha egy kártyatípus elfogy, ideje összeszedelőzködni, és elindulni a Kijárat felé." data-en="It also doubles as a signal: once a card type runs out, it's time to pack up and head for the Exit.">Ez egyben jó jelzés is: ha egy kártyatípus elfogy, ideje összeszedelőzködni, és elindulni a Kijárat felé.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BOARD FIELDS -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Mezők" data-en="Board Squares">Mezők</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <p class="text-mono text-dim" style="text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); font-size: var(--text-sm);" data-reveal>
+          <span data-hu="A labirintus nyolcféle mezőből épül fel — van, amelyik segít, van, amelyik büntet, és van, amelyik egyszerűen csak kiszámíthatatlan." data-en="The labyrinth is built from eight kinds of squares — some help, some punish, and some are simply unpredictable.">A labirintus nyolcféle mezőből épül fel — van, amelyik segít, van, amelyik büntet, és van, amelyik egyszerűen csak kiszámíthatatlan.</span>
+        </p>
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <!-- Start / Szentély -->
+          <div class="ld-tool-card" data-id="NAR:F1">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Start / Szentély" data-en="Start / Sanctuary">Start / Szentély</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Biztonságos mező" data-en="Safe square">Biztonságos mező</p>
+                <p style="margin: 0;" data-hu="Ez az a hely, ahol mindenki újrakezdi — néha diadalmasan, néha kissé zúzottan, de mindig ugyanazzal az elhatározással." data-en="This is where everyone starts over — sometimes triumphant, sometimes a little bruised, but always with the same resolve.">Ez az a hely, ahol mindenki újrakezdi — néha diadalmasan, néha kissé zúzottan, de mindig ugyanazzal az elhatározással.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="A játék kezdőpontja, illetve ide tér vissza a játékos, ha a Szentélybe küldik." data-en="The starting point of the game, and where a player returns when sent to the Sanctuary.">A játék kezdőpontja, illetve ide tér vissza a játékos, ha a Szentélybe küldik.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kimerülés -->
+          <div class="ld-tool-card" data-id="NAR:F2">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Kimerülés" data-en="Exhaustion">Kimerülés</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Veszteség mező" data-en="Loss square">Veszteség mező</p>
+                <p style="margin: 0;" data-hu="Túl sokat markoltál, túl gyorsan haladtál — és a labirintus most emlékeztet rá, hogy a mana nem végtelen." data-en="You grabbed too much, moved too fast — and now the labyrinth reminds you that mana isn't infinite.">Túl sokat markoltál, túl gyorsan haladtál — és a labirintus most emlékeztet rá, hogy a mana nem végtelen.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="A manád negyedét elveszíted (páratlan szám esetén felfelé kerekítve)." data-en="You lose a quarter of your mana (round up on odd numbers).">A manád negyedét elveszíted (páratlan szám esetén felfelé kerekítve).</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alkimista -->
+          <div class="ld-tool-card" data-id="NAR:F3">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Alkimista" data-en="Alchemist">Alkimista</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Erőforrás mező" data-en="Resource square">Erőforrás mező</p>
+                <p style="margin: 0;" data-hu="Az Alkimista sosem kérdez túl sokat — csak int, egy fiolával int vissza, és te már gazdagabb is vagy egy kicsit." data-en="The Alchemist never asks too many questions — just nods, hands you a vial, and you leave a little richer.">Az Alkimista sosem kérdez túl sokat — csak int, egy fiolával int vissza, és te már gazdagabb is vagy egy kicsit.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Dobás: d6 — 1–2: +2 mana; 3–4: +3 mana; 5–6: +4 mana. Ha csak elhaladsz mellette, +1 manát kapsz (kivéve griffháti utazás esetén)." data-en="Roll: d6 — 1–2: +2 mana; 3–4: +3 mana; 5–6: +4 mana. If you only pass by it, you get +1 mana (except during a griffin ride).">Dobás: d6 — 1–2: +2 mana; 3–4: +3 mana; 5–6: +4 mana. Ha csak elhaladsz mellette, +1 manát kapsz (kivéve griffháti utazás esetén).</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inkvizítor -->
+          <div class="ld-tool-card" data-id="NAR:F4">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Inkvizítor" data-en="Inquisitor">Inkvizítor</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Kockázatos mező" data-en="Risk square">Kockázatos mező</p>
+                <p style="margin: 0;" data-hu="A csuklyás alak megáll, felnéz rád, és a labirintus egy pillanatra elcsendesedik — minden a dobáson múlik." data-en="The hooded figure stops, looks up at you, and for a moment the labyrinth falls silent — everything hangs on the roll.">A csuklyás alak megáll, felnéz rád, és a labirintus egy pillanatra elcsendesedik — minden a dobáson múlik.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Dobás: d20 — 1–2: 5 manánál többel kiesel a játékból, 5 vagy kevesebbel a Szentélybe kerülsz és mindent elveszítesz. 3–10: a legközelebbi Szentélybe kerülsz, és a manád felét elveszíted (felfelé kerekítve). 11–20: megúsztad. Bizonyos speciális kártyával a hatás semlegesíthető." data-en="Roll: d20 — 1–2: with more than 5 mana you're eliminated, with 5 or fewer you go to the Sanctuary and lose everything. 3–10: you go to the nearest Sanctuary and lose half your mana (round up). 11–20: you got lucky. Certain special cards can neutralize this effect.">Dobás: d20 — 1–2: 5 manánál többel kiesel a játékból, 5 vagy kevesebbel a Szentélybe kerülsz és mindent elveszítesz. 3–10: a legközelebbi Szentélybe kerülsz, és a manád felét elveszíted (felfelé kerekítve). 11–20: megúsztad. Bizonyos speciális kártyával a hatás semlegesíthető.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vásár -->
+          <div class="ld-tool-card" data-id="NAR:F5">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M4.9 4.9l2.8 2.8M2 12h4M4.9 19.1l2.8-2.8M12 18v4M16.3 16.3l2.8 2.8M18 12h4M16.3 7.7l2.8-2.8"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Vásár" data-en="Market">Vásár</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Kötelező mező" data-en="Mandatory square">Kötelező mező</p>
+                <p style="margin: 0;" data-hu="A Vásár zaja betölti a folyosót, és valahogy — akárhogy is próbálod elkerülni — mindig sikerül rábeszélni valamire." data-en="The Market's noise fills the corridor, and somehow — no matter how you try to avoid it — you always end up talked into something.">A Vásár zaja betölti a folyosót, és valahogy — akárhogy is próbálod elkerülni — mindig sikerül rábeszélni valamire.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="2 manáért tárgyat vásárolhatsz. Ha nincs 2 manád, ingyen kapsz egy kártyát. Ezt a mezőt kötelező használni — hacsak a pakli már ki nem ürült, mert akkor egyszerűen nincs mit tenni." data-en="You can buy an item for 2 mana. If you don't have 2 mana, you get a card for free. This square must be used — unless the deck has already run dry, in which case there's simply nothing to do.">2 manáért tárgyat vásárolhatsz. Ha nincs 2 manád, ingyen kapsz egy kártyát. Ezt a mezőt kötelező használni — hacsak a pakli már ki nem ürült, mert akkor egyszerűen nincs mit tenni.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Griffhát -->
+          <div class="ld-tool-card" data-id="NAR:F6">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 13c4-7 8-9 10-9s6 2 10 9c-4 3-8 3.5-10 3.5S6 16 2 13z"/><path d="M12 4v9"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Griffhát" data-en="Griffin Ride">Griffhát</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Utazó mező · Opcionális" data-en="Travel square · Optional">Utazó mező · Opcionális</p>
+                <p style="margin: 0;" data-hu="Egyetlen fütty, egy hatalmas szárnycsapás, és a labirintus hirtelen sokkal kisebbnek tűnik." data-en="One whistle, one great beat of wings, and the labyrinth suddenly feels much smaller.">Egyetlen fütty, egy hatalmas szárnycsapás, és a labirintus hirtelen sokkal kisebbnek tűnik.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="x manáért x×2 mezőt repülhetsz bármerre. Nem kötelező, és a befizetett manát sem kell teljesen kihasználnod (pl. 3 manáért 6 mezőt repülhetsz, de akár kevesebbet is — a maradék a grifflovas hálapénze)." data-en="For x mana you can fly x×2 squares in any direction. Not mandatory, and you don't have to use the full distance you paid for (e.g. pay 3 mana for 6 squares, but fly fewer — the rest is the rider's tip).">x manáért x×2 mezőt repülhetsz bármerre. Nem kötelező, és a befizetett manát sem kell teljesen kihasználnod (pl. 3 manáért 6 mezőt repülhetsz, de akár kevesebbet is — a maradék a grifflovas hálapénze).</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portál -->
+          <div class="ld-tool-card" data-id="NAR:F7">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="12" rx="7" ry="10"/><ellipse cx="12" cy="12" rx="3" ry="6"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Portál" data-en="Portal">Portál</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Utazó mező · Jeggyel" data-en="Travel square · Ticket required">Utazó mező · Jeggyel</p>
+                <p style="margin: 0;" data-hu="A Portál kerete halványan izzik, várva, hogy valaki elég bátor — vagy elég átjegyzett — legyen belépni rajta." data-en="The Portal's frame glows faintly, waiting for someone brave enough — or ticketed enough — to step through.">A Portál kerete halványan izzik, várva, hogy valaki elég bátor — vagy elég átjegyzett — legyen belépni rajta.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Portáljeggyel bármely irányba állomást válthatsz. Dobás: d12 — 6-os dobásnál inkvizítori ellenőrzés jön, ami úgy működik, mint egy Inkvizítor mező. Jegy nélkül a mezőt nem lehet használni." data-en="With a portal ticket you can switch stations in any direction. Roll: d12 — rolling a 6 triggers an Inquisitor check, which works like an Inquisitor square. Without a ticket, this square cannot be used.">Portáljeggyel bármely irányba állomást válthatsz. Dobás: d12 — 6-os dobásnál inkvizítori ellenőrzés jön, ami úgy működik, mint egy Inkvizítor mező. Jegy nélkül a mezőt nem lehet használni.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barlang -->
+          <div class="ld-tool-card" data-id="NAR:F8">
+            <div class="ld-tool-card__header">
+              <div class="ld-tool-card__link">
+                <div class="ld-tool-card__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V10a8 8 0 0 1 16 0v10"/><path d="M4 20h16"/></svg>
+                </div>
+                <div class="ld-tool-card__content">
+                  <div class="ld-tool-card__title" data-hu="Barlang" data-en="Cave">Barlang</div>
+                </div>
+              </div>
+              <button type="button" class="ld-tool-card__toggle" aria-expanded="false" aria-label="Leírás">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="ld-tool-card__panel">
+              <div class="ld-tool-card__panel-inner">
+                <p style="font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: var(--tracking-mono); color: var(--ld-scan); margin: 0 0 var(--space-sm);" data-hu="Vegyes mező" data-en="Mixed square">Vegyes mező</p>
+                <p style="margin: 0;" data-hu="Sötét van, visszhangzik minden lépésed, és sosem tudod biztosan, mi vár a következő kanyarban." data-en="It's dark, every step echoes, and you never quite know what's waiting around the next bend.">Sötét van, visszhangzik minden lépésed, és sosem tudod biztosan, mi vár a következő kanyarban.</p>
+                <p style="margin: var(--space-sm) 0 0;"><strong style="color: var(--ld-scan); font-weight: 600;" data-hu="Hatás:" data-en="Effect:">Hatás:</strong> <span data-hu="Dobás: d8 — 1–3: −4 mana; 4–6: nincs hatás; 7–8: +8 mana." data-en="Roll: d8 — 1–3: −4 mana; 4–6: no effect; 7–8: +8 mana.">Dobás: d8 — 1–3: −4 mana; 4–6: nincs hatás; 7–8: +8 mana.</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GENERAL RULES -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container" style="max-width: 720px;">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Általános szabályok" data-en="General Rules">Általános szabályok</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <p style="color: var(--ld-text); line-height: 1.7;" data-reveal>
+          <span data-hu="A labirintus nem kegyelmez, de nem is túl bonyolult — csak be kell tartani néhány alapszabályt." data-en="The labyrinth shows no mercy, but it isn't complicated either — just follow a few basic rules.">A labirintus nem kegyelmez, de nem is túl bonyolult — csak be kell tartani néhány alapszabályt.</span>
+        </p>
+
+        <ul style="color: var(--ld-text); line-height: 1.9; margin: 0; padding-left: 1.2em;" data-reveal>
+          <li data-hu="A játékosok manát gyűjtenek, különböző mezők hatásait tapasztalják meg, és kockadobásokkal interakcióznak." data-en="Players collect mana, experience the effects of various squares, and interact through dice rolls.">A játékosok manát gyűjtenek, különböző mezők hatásait tapasztalják meg, és kockadobásokkal interakcióznak.</li>
+          <li data-hu="A cél: kijutni a labirintusból. Aki a legtöbb manát gyűjti össze, az nyer." data-en="The goal: escape the labyrinth. Whoever collects the most mana wins.">A cél: kijutni a labirintusból. Aki a legtöbb manát gyűjti össze, az nyer.</li>
+          <li data-hu="Minden játékos 5 manával kezd." data-en="Every player starts with 5 mana.">Minden játékos 5 manával kezd.</li>
+          <li data-hu="Egy kör = kártyahasználat vagy képesség vagy lépés a kockával." data-en="One turn = using a card, or an ability, or a dice move.">Egy kör = kártyahasználat vagy képesség vagy lépés a kockával.</li>
+          <li data-hu="A fel nem használt kártyák a végén +1 manát érnek darabonként." data-en="Unused cards are worth +1 mana each at the end.">A fel nem használt kártyák a végén +1 manát érnek darabonként.</li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- DOWNLOADS -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Letöltés" data-en="Downloads">Letöltés</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
+
+        <div class="ld-grid ld-grid--cards" data-reveal-stagger data-reveal>
+
+          <a href="../../images/Manakor-Palya.pdf" target="_blank" rel="noopener" class="ld-link-card" data-id="MNK:DL1">
+            <div class="ld-link-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            </div>
+            <div class="ld-link-card__content">
+              <div class="ld-link-card__title" data-hu="Pálya letöltése (PDF)" data-en="Download board (PDF)">Pálya letöltése (PDF)</div>
+              <div class="ld-link-card__desc" data-hu="Munkaverzió a pályarajzról" data-en="Work-in-progress board layout">Munkaverzió a pályarajzról</div>
+            </div>
+            <span class="ld-link-card__arrow">→</span>
+          </a>
+
+        </div>
+
+        <p class="text-mono text-dim" style="text-align: center; margin-top: var(--space-lg); font-size: var(--text-xs);" data-reveal>
+          <span data-hu="A projekt még fejlesztés alatt áll — karakterlapok, kártyapakli és véglegesített szabálykönyv hamarosan. A letölthető pályarajz egyelőre a belső munkaváltozat elnevezéseit és méretét használja, a fenti fantasy-elnevezésekkel és a 10×10-es mérettel még nincs egyeztetve." data-en="The project is still in development — character sheets, a card deck, and a finalized rulebook are coming soon. The downloadable board layout still uses the internal working-draft names and size for now, and hasn't yet been aligned with the fantasy names or the 10×10 size above.">A projekt még fejlesztés alatt áll — karakterlapok, kártyapakli és véglegesített szabálykönyv hamarosan. A letölthető pályarajz egyelőre a belső munkaváltozat elnevezéseit és méretét használja, a fenti fantasy-elnevezésekkel és a 10×10-es mérettel még nincs egyeztetve.</span>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">manakor.index · <span id="current-year">2024</span></p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="../JS/lidar-effects.js"></script>
+  <script src="../../shared/JS/language-switcher.js"></script>
+  <script src="../../shared/JS/theme-switcher.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Expandable tool-card descriptions
+    (function() {
+      const panels = new Set();
+
+      function setHeight(panel) {
+        const inner = panel.querySelector('.ld-tool-card__panel-inner');
+        panel.style.maxHeight = inner.offsetHeight + 'px';
+      }
+
+      document.querySelectorAll('.ld-tool-card__toggle').forEach((toggle) => {
+        const card = toggle.closest('.ld-tool-card');
+        const panel = card.querySelector('.ld-tool-card__panel');
+
+        function closePanel() {
+          panel.style.maxHeight = '0px';
+          panel.removeAttribute('data-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          card.classList.remove('ld-tool-card--elevated');
+          panels.delete(panel);
+        }
+
+        function openPanel() {
+          panel.setAttribute('data-open', '');
+          toggle.setAttribute('aria-expanded', 'true');
+          card.classList.add('ld-tool-card--elevated');
+          setHeight(panel);
+          panels.add(panel);
+        }
+
+        toggle.addEventListener('click', () => {
+          const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closePanel() : openPanel();
+        });
+
+        card.addEventListener('mouseleave', () => {
+          if (toggle.getAttribute('aria-expanded') === 'true') {
+            closePanel();
+          }
+        });
+      });
+
+      // Recalculate open panel heights when text changes length (language switch) or on resize
+      function refreshOpenPanels() {
+        panels.forEach(setHeight);
+      }
+      window.addEventListener('languageChanged', () => setTimeout(refreshOpenPanels, 0));
+      window.addEventListener('resize', refreshOpenPanels);
+    })();
+  </script>
+
+</body>
+</html>

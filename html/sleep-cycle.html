@@ -1,390 +1,378 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alvásciklus kalkulátor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-hu="Alvásciklus kalkulátor" data-en="Sleep Cycle Calculator">Alvásciklus kalkulátor</title>
+  <meta name="description" content="Alvásciklus kalkulátor — számold ki, mikor érdemes felkelni, hogy teljes ciklusokat aludj végig.">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../CSS/language-switcher.css">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="../lidar/CSS/lidar-core.css">
+  <link rel="stylesheet" href="../lidar/CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Sleep Cycle: page-scoped night palette override (navy / teal / lavender / moon) -->
   <style>
-    .language-switcher { --lang-accent: #6fa7b8; }
-    /* === Alap színek & font === */
     :root {
-      --bg:       #0b1020;        /* deep navy */
-      --card:     #0f1a2b;        /* darker card */
-      --accent:   #6fa7b8;        /* muted teal */
-      --soft:     #bfa7f0;        /* soft lavender */
-      --moon:     #ffea8a;        /* moon yellow */
-      --muted:    #cfe7ee;        /* cloud white */
-      --glass:    rgba(255,255,255,0.04);
-      --radius:   14px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-                   "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --ld-void: #0b1020;
+      --ld-surface: #0d1526;
+      --ld-panel: #0f1a2b;
+      --ld-panel-hover: #132137;
+      --ld-panel-active: #172842;
+      --ld-scan: #6fa7b8;
+      --ld-scan-dim: rgba(111, 167, 184, 0.14);
+      --ld-scan-glow: rgba(111, 167, 184, 0.10);
+      --ld-scan-bright: #8fc0cf;
+      --ld-data-cyan: #8fc0cf;
+      --ld-text: #cfe7ee;
+      --ld-text-dim: #7d93a8;
+      --ld-text-bright: #ffffff;
+      --ld-border: rgba(191, 167, 240, 0.12);
+      --ld-border-hover: rgba(111, 167, 184, 0.4);
+      --ld-grid: rgba(111, 167, 184, 0.03);
+      --sc-soft: #bfa7f0;
+      --sc-moon: #ffea8a;
     }
-  
-    /* === Reset & alap === */
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      background: linear-gradient(180deg, var(--bg), #061020);
-      color: var(--muted);
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    /* === Központi wrapper === */
-    .wrap {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 28px;
-      background: linear-gradient(180deg, var(--card), rgba(10,16,26,0.8));
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(2,6,12,0.7);
-    }
-  
-    /* === Fejléc === */
-    header {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-    .logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--soft));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #041018;
-      box-shadow: 0 6px 18px rgba(15,25,40,0.6);
-    }
-    h1 {
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: 0.2px;
-    }
-    p.lead {
-      margin: 6px 0 18px;
-      color: rgba(207,231,238,0.9);
-    }
-  
-    /* === Layout grid === */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 18px;
-    }
-  
-    /* === Kártyák & táblázat === */
-    .card {
-      background: var(--glass);
-      padding: 18px;
-      border-radius: var(--radius);
-      backdrop-filter: blur(6px);
-    }
-    table {
-      width: 100%;
-      margin-top: 6px;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      font-size: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-    }
-    th {
-      color: var(--soft);
-      font-weight: 600;
-    }
-    .muted {
-      color: rgba(207,231,238,0.75);
-      font-size: 13px;
-    }
-  
-    /* === Űrlap elemek === */
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    input[type="time"],
-    select,
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.04);
-      background: transparent;
-      color: var(--muted);
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 14px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #041018;
-      background: linear-gradient(90deg, var(--accent), var(--soft));
-    }
-    .result {
-      margin-top: 12px;
-      padding: 12px;
-      font-weight: 600;
-      border-radius: 10px;
-      background: linear-gradient(90deg,
-        rgba(255,255,255,0.02),
-        rgba(255,255,255,0.01));
-    }
-  
-    /* === Színes paletta === */
-    .palette {
-      display: flex;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .sw {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      box-shadow: inset 0 -4px rgba(0,0,0,0.14);
-    }
-  
-    /* === Lábjegyzet & apró megjegyzés === */
-    footer {
-      margin-top: 18px;
-      color: rgba(207,231,238,0.6);
-      font-size: 13px;
-    }
-
-    .back-button{
-        border: none;
-        border-radius: 12px;
-        font-weight: 700;
-        color: #041018;
-        background: linear-gradient(90deg, var(--accent), var(--soft));
-        position: fixed;
-        top: 30px;
-        bottom: auto;
-        left: 30px;
-        padding: 14px 28px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(111, 167, 184, 0.3);
-    }
-
-    .back-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(111, 167, 184, 0.4);
-    }
-
-    small.note {
-      display: block;
-      margin-top: 8px;
-      color: rgba(207,231,238,0.55);
-    }
-  
-    /* === Dekoratív hold === */
-    .moon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--moon), #ffd967);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #041018;
-      font-weight: 700;
-      box-shadow: 0 6px 18px rgba(255,230,138,0.08);
-    }
-  
-    /* === Reszponzív === */
-    @media (max-width: 880px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 550px) {
-      body {
-        justify-content: flex-start;
-      }
-
-      .back-button {
-        position: relative;
-        top: auto;
-        left: auto;
-        display: block;
-        width: fit-content;
-        margin: 40px auto 60px;
-        padding: 15px 30px;
-        text-decoration: none;
-      }
-
-      a:has(.back-button) {
-        text-decoration: none;
-        display: block;
-        margin-top: 20px;
-      }
-    }
-    /* === Light mode === */
     [data-theme="light"] {
-      --bg:    #eef4fb;
-      --card:  #ffffff;
-      --muted: #1e293b;
-      --glass: rgba(0,0,0,0.04);
+      --ld-void: #eef4fb;
+      --ld-surface: #f4f8fd;
+      --ld-panel: #ffffff;
+      --ld-panel-hover: #f4f8fd;
+      --ld-panel-active: #e6eef8;
+      --ld-scan: #3f7d90;
+      --ld-scan-dim: rgba(63, 125, 144, 0.14);
+      --ld-scan-glow: rgba(63, 125, 144, 0.08);
+      --ld-scan-bright: #2f6475;
+      --ld-data-cyan: #3f7d90;
+      --ld-text: #1e293b;
+      --ld-text-dim: #64748b;
+      --ld-text-bright: #0f172a;
+      --ld-border: rgba(91, 61, 158, 0.16);
+      --ld-border-hover: rgba(63, 125, 144, 0.45);
+      --sc-soft: #5b3d9e;
+      --sc-moon: #b7791f;
     }
-    [data-theme="light"] html,
+
+    /* Keep the original night-sky gradient behind everything */
+    body {
+      background: linear-gradient(180deg, var(--ld-void), #061020) fixed;
+    }
     [data-theme="light"] body {
-      background: linear-gradient(180deg, #eef4fb, #dde8f5);
-      color: #1e293b;
+      background: linear-gradient(180deg, #eef4fb, #dde8f5) fixed;
     }
-    [data-theme="light"] .wrap {
-      background: linear-gradient(180deg, #ffffff, #f4f8fd);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+
+    /* No ambient 0/1 particle rain on this page */
+    .ld-ambient-canvas {
+      display: none !important;
     }
-    [data-theme="light"] h1 { color: #0f172a; }
-    [data-theme="light"] p.lead { color: #374151; }
-    [data-theme="light"] .card {
-      background: #f1f7fd;
-      border: 1px solid rgba(111,167,184,0.2);
+
+    .sc-hero {
+      background-image:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(191, 167, 240, 0.10), transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Ccircle cx='12' cy='18' r='1' fill='rgba(255,234,138,0.35)'/%3E%3Ccircle cx='62' cy='44' r='0.8' fill='rgba(207,231,238,0.3)'/%3E%3Ccircle cx='34' cy='76' r='1.1' fill='rgba(191,167,240,0.3)'/%3E%3C/svg%3E");
+      background-repeat: no-repeat, repeat;
+      background-size: 100% 100%, 90px 90px;
     }
-    [data-theme="light"] th { color: #5b3d9e; }
-    [data-theme="light"] td { color: #1e293b; }
-    [data-theme="light"] th, [data-theme="light"] td {
-      border-bottom-color: rgba(0,0,0,0.07);
+
+    .sc-moon {
+      display: block;
+      width: fit-content;
+      margin: 0 auto var(--space-md);
+      font-size: var(--text-2xl);
+      line-height: 1;
+      color: var(--sc-moon);
+      text-shadow: 0 0 24px rgba(255, 234, 138, 0.35);
     }
-    [data-theme="light"] .muted { color: #475569; }
-    [data-theme="light"] small.note { color: #64748b; }
-    [data-theme="light"] footer { color: #64748b; }
-    [data-theme="light"] input[type="time"],
-    [data-theme="light"] select,
-    [data-theme="light"] input[type="number"] {
-      background: #ffffff;
-      border-color: rgba(0,0,0,0.15);
-      color: #1e293b;
+
+    /* Layout */
+    .sc-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: var(--card-gap);
+      align-items: start;
     }
-    [data-theme="light"] .result {
-      background: rgba(0,0,0,0.03);
-      border: 1px solid rgba(0,0,0,0.06);
+
+    .sc-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--card-gap);
+    }
+
+    .sc-card h3 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-xs);
+      padding-right: var(--space-3xl);
+    }
+
+    .sc-muted {
+      font-size: var(--text-sm);
+      color: var(--ld-text-dim);
+    }
+
+    /* Cycle table */
+    .sc-table {
+      width: 100%;
+      margin-top: var(--space-md);
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+
+    .sc-table th,
+    .sc-table td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--ld-border);
+    }
+
+    .sc-table th {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      font-weight: 400;
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+      color: var(--sc-soft);
+    }
+
+    .sc-table td:first-child {
+      font-family: var(--font-mono);
+      color: var(--ld-scan);
+    }
+
+    .sc-tip {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      border-left: 2px solid var(--sc-soft);
+      background: rgba(191, 167, 240, 0.06);
+      font-size: var(--text-sm);
+    }
+
+    .sc-tip strong {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      font-weight: 400;
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+      color: var(--sc-soft);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Result readout */
+    .sc-result {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background: var(--ld-surface);
+      border: 1px solid var(--ld-border);
+      border-left: 2px solid var(--ld-scan);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+    }
+
+    .sc-result strong {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--sc-moon);
+    }
+
+    /* Form controls */
+    .sc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .sc-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+      color: var(--ld-text-dim);
+      margin-top: var(--space-sm);
+    }
+
+    .sc-input {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--ld-text);
+      background: var(--ld-surface);
+      border: 1px solid var(--ld-border);
+      border-radius: var(--card-radius);
+      color-scheme: dark;
+      transition: border-color var(--duration-fast) var(--ease-out);
+    }
+
+    [data-theme="light"] .sc-input {
+      color-scheme: light;
+    }
+
+    .sc-input:hover,
+    .sc-input:focus {
+      border-color: var(--ld-scan);
+      outline: none;
+    }
+
+    .sc-controls .ld-btn {
+      margin-top: var(--space-sm);
+    }
+
+    @media (max-width: 880px) {
+      .sc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Match the dropdown height; 16px keeps iOS Safari from zooming in */
+      .sc-input {
+        min-height: 48px;
+        font-size: var(--text-base);
+      }
     }
   </style>
-  
 </head>
-<body class="dark-theme">
-  <div class="wrap">
-    <header>
-      <!-- <div class="logo">Zzz</div> -->
-      <div>
-        <h1><span class="lang-hu">Alvásciklus kalkulátor</span><span class="lang-en">Sleep Cycle Calculator</span></h1>
-        <p class="lead"><span class="lang-hu">Ha teljes ciklusokat szeretnél végigaludni, számold ki, mikor érdemes felkelni.</span><span class="lang-en">If you want to complete full cycles, calculate when you should wake up.</span></p>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ld-nav">
+    <a href="../lidar/html/projects.html" class="ld-back">
+      <span class="ld-back__arrow">←</span>
+      <span data-hu="Vissza" data-en="Back">Vissza</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content visible" id="main-content">
+
+    <!-- HEADER -->
+    <section class="ld-section sc-hero" style="padding-top: var(--space-4xl); padding-bottom: var(--space-2xl);">
+      <div class="ld-container">
+        <span class="sc-moon" aria-hidden="true" data-reveal>☾</span>
+        <h1 class="ld-hero__title" style="text-align: center; margin-bottom: var(--space-sm);" data-reveal data-hu="Alvásciklus kalkulátor" data-en="Sleep Cycle Calculator">Alvásciklus kalkulátor</h1>
+        <p class="text-mono text-dim" style="text-align: center; margin: 0 auto;" data-reveal>
+          <span data-hu="Ha teljes ciklusokat szeretnél végigaludni, számold ki, mikor érdemes felkelni." data-en="If you want to complete full cycles, calculate when you should wake up.">Ha teljes ciklusokat szeretnél végigaludni, számold ki, mikor érdemes felkelni.</span>
+        </p>
       </div>
-      <div style="margin-left:auto;text-align:right">
-        <div class="moon">☾</div>
-      </div>
-    </header>
+    </section>
 
-    <div class="grid" style="margin-top:18px">
-      <main>
-        <section class="card">
-          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Ciklusok (1 ciklus ≈ 90 perc ± 20 perc)</span><span class="lang-en">Cycles (1 cycle ≈ 90 min ± 20 min)</span></h3>
-          <div class="muted"><span class="lang-hu">Válassz ciklusszámot, és add meg, mikor szeretnél lefeküdni.</span><span class="lang-en">Choose the number of cycles and enter when you want to go to bed.</span></div>
+    <!-- CALCULATOR -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
 
-          <table aria-label="ciklusok">
-            <thead>
-              <tr><th><span class="lang-hu">Ciklus</span><span class="lang-en">Cycle</span></th><th><span class="lang-hu">Idő (perc)</span><span class="lang-en">Time (min)</span></th><th><span class="lang-hu">Idő (óra)</span><span class="lang-en">Time (hours)</span></th></tr>
-            </thead>
-            <tbody>
-              <tr><td>1</td><td>90</td><td><span class="lang-hu">1 óra 30 perc</span><span class="lang-en">1h 30m</span></td></tr>
-              <tr><td>2</td><td>180</td><td><span class="lang-hu">3 óra 0 perc</span><span class="lang-en">3h 0m</span></td></tr>
-              <tr><td>3</td><td>270</td><td><span class="lang-hu">4 óra 30 perc</span><span class="lang-en">4h 30m</span></td></tr>
-              <tr><td>4</td><td>360</td><td><span class="lang-hu">6 óra 0 perc</span><span class="lang-en">6h 0m</span></td></tr>
-              <tr><td>5</td><td>450</td><td><span class="lang-hu">7 óra 30 perc</span><span class="lang-en">7h 30m</span></td></tr>
-              <tr><td>6</td><td>540</td><td><span class="lang-hu">9 óra 0 perc</span><span class="lang-en">9h 0m</span></td></tr>
-            </tbody>
-          </table>
+        <div class="sc-grid">
 
-          <div style="margin-top:12px">
-            <label class="muted"><span class="lang-hu">Extra tipp:</span><span class="lang-en">Extra tip:</span></label>
-            <small class="note"><span class="lang-hu">Számolj az elalvási idővel (~7 perc), a kalkulátor hozzáadja ezt is!</span><span class="lang-en">Account for falling asleep time (~7 min), the calculator adds this too!</span></small>
-          </div>
-        </section>
+          <div class="sc-stack" data-reveal>
+            <section class="ld-card sc-card" data-id="SLP:01">
+              <h3 data-hu="Ciklusok (1 ciklus ≈ 90 perc ± 20 perc)" data-en="Cycles (1 cycle ≈ 90 min ± 20 min)">Ciklusok (1 ciklus ≈ 90 perc ± 20 perc)</h3>
+              <p class="sc-muted" data-hu="Válassz ciklusszámot, és add meg, mikor szeretnél lefeküdni." data-en="Choose the number of cycles and enter when you want to go to bed.">Válassz ciklusszámot, és add meg, mikor szeretnél lefeküdni.</p>
 
-        <section class="card" style="margin-top:14px">
-          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Számítási példák</span><span class="lang-en">Calculation examples</span></h3>
-          <div class="muted"><span class="lang-hu">Ha este 23:00-kor fekszel és 5 ciklust célzol:</span><span class="lang-en">If you go to bed at 23:00 and aim for 5 cycles:</span></div>
-          <div class="result" id="example"><span class="lang-hu">23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás = <strong>06:45</strong></span><span class="lang-en">23:00 + 5 cycles (7h 30m) + 15 min falling asleep = <strong>06:45</strong></span></div>
-        </section>
-      </main>
+              <table class="sc-table" aria-label="ciklusok">
+                <thead>
+                  <tr>
+                    <th data-hu="Ciklus" data-en="Cycle">Ciklus</th>
+                    <th data-hu="Idő (perc)" data-en="Time (min)">Idő (perc)</th>
+                    <th data-hu="Idő (óra)" data-en="Time (hours)">Idő (óra)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>90</td><td data-hu="1 óra 30 perc" data-en="1h 30m">1 óra 30 perc</td></tr>
+                  <tr><td>2</td><td>180</td><td data-hu="3 óra 0 perc" data-en="3h 0m">3 óra 0 perc</td></tr>
+                  <tr><td>3</td><td>270</td><td data-hu="4 óra 30 perc" data-en="4h 30m">4 óra 30 perc</td></tr>
+                  <tr><td>4</td><td>360</td><td data-hu="6 óra 0 perc" data-en="6h 0m">6 óra 0 perc</td></tr>
+                  <tr><td>5</td><td>450</td><td data-hu="7 óra 30 perc" data-en="7h 30m">7 óra 30 perc</td></tr>
+                  <tr><td>6</td><td>540</td><td data-hu="9 óra 0 perc" data-en="9h 0m">9 óra 0 perc</td></tr>
+                </tbody>
+              </table>
 
-      <aside>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0"><span class="lang-hu">Kalkulátor</span><span class="lang-en">Calculator</span></h3>
-          <div class="controls">
-            <label class="muted"><span class="lang-hu">Lefekvés ideje</span><span class="lang-en">Bedtime</span></label>
-            <input type="time" id="bedtime" value="22:00">
+              <div class="sc-tip">
+                <strong data-hu="Extra tipp" data-en="Extra tip">Extra tipp</strong>
+                <span data-hu="Számolj az elalvási idővel (~7 perc), a kalkulátor hozzáadja ezt is!" data-en="Account for falling asleep time (~7 min), the calculator adds this too!">Számolj az elalvási idővel (~7 perc), a kalkulátor hozzáadja ezt is!</span>
+              </div>
+            </section>
 
-            <label class="muted"><span class="lang-hu">Ciklusok száma</span><span class="lang-en">Number of cycles</span></label>
-            <select id="cycles">
-                <option value="1" data-hu="1 ciklus (1:30)" data-en="1 cycle (1:30)">1 ciklus (1:30)</option>
-                <option value="2" data-hu="2 ciklus (3:00)" data-en="2 cycles (3:00)">2 ciklus (3:00)</option>
-                <option value="3" data-hu="3 ciklus (4:30)" data-en="3 cycles (4:30)">3 ciklus (4:30)</option>
-                <option value="4" data-hu="4 ciklus (6:00)" data-en="4 cycles (6:00)">4 ciklus (6:00)</option>
-                <option value="5" data-hu="5 ciklus (7:30)" data-en="5 cycles (7:30)">5 ciklus (7:30)</option>
-                <option value="6" selected data-hu="6 ciklus (9:00)" data-en="6 cycles (9:00)">6 ciklus (9:00)</option>
-                <option value="7" data-hu="7 ciklus (10:30)" data-en="7 cycles (10:30)">7 ciklus (10:30)</option>
-                <option value="8" data-hu="8 ciklus (12:00)" data-en="8 cycles (12:00)">8 ciklus (12:00)</option>
-                <option value="9" data-hu="9 ciklus (13:30)" data-en="9 cycles (13:30)">9 ciklus (13:30)</option>
-                <option value="10" data-hu="10 ciklus (15:00)" data-en="10 cycles (15:00)">10 ciklus (15:00)</option>
-              </select>
-
-
-            <label class="muted"><span class="lang-hu">Elalvási idő (perc)</span><span class="lang-en">Fall asleep time (min)</span></label>
-            <input type="number" id="fall" min="3" max="30" value="10">
-
-            <button class="btn" id="calc"><span class="lang-hu">Számolás</span><span class="lang-en">Calculate</span></button>
-
-            <div class="result" id="output">—</div>
+            <section class="ld-card sc-card" data-id="SLP:02">
+              <h3 data-hu="Számítási példák" data-en="Calculation examples">Számítási példák</h3>
+              <p class="sc-muted" data-hu="Ha este 23:00-kor fekszel és 5 ciklust célzol:" data-en="If you go to bed at 23:00 and aim for 5 cycles:">Ha este 23:00-kor fekszel és 5 ciklust célzol:</p>
+              <div class="sc-result">
+                <span data-hu="23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás =" data-en="23:00 + 5 cycles (7h 30m) + 15 min falling asleep =">23:00 + 5 ciklus (7 óra 30 perc) + 15 perc elalvás =</span>
+                <strong>06:45</strong>
+              </div>
+            </section>
           </div>
 
-          <!-- <div style="margin-top:12px">
-            <label class="muted">Színpaletta</label>
-            <div class="palette">
-              <div class="sw" style="background:var(--bg)"></div>
-              <div class="sw" style="background:var(--card)"></div>
-              <div class="sw" style="background:var(--accent)"></div>
-              <div class="sw" style="background:var(--soft)"></div>
-              <div class="sw" style="background:var(--moon)"></div>
+          <aside class="sc-stack" data-reveal>
+            <div class="ld-card sc-card" data-id="SLP:CALC">
+              <h3 data-hu="Kalkulátor" data-en="Calculator">Kalkulátor</h3>
+              <div class="sc-controls">
+                <label class="sc-label" for="bedtime" data-hu="Lefekvés ideje" data-en="Bedtime">Lefekvés ideje</label>
+                <input class="sc-input" type="time" id="bedtime" value="22:00">
+
+                <label class="sc-label" for="cycles" data-hu="Ciklusok száma" data-en="Number of cycles">Ciklusok száma</label>
+                <select id="cycles" data-ld-select>
+                  <option value="1" data-hu="1 ciklus (1:30)" data-en="1 cycle (1:30)">1 ciklus (1:30)</option>
+                  <option value="2" data-hu="2 ciklus (3:00)" data-en="2 cycles (3:00)">2 ciklus (3:00)</option>
+                  <option value="3" data-hu="3 ciklus (4:30)" data-en="3 cycles (4:30)">3 ciklus (4:30)</option>
+                  <option value="4" data-hu="4 ciklus (6:00)" data-en="4 cycles (6:00)">4 ciklus (6:00)</option>
+                  <option value="5" data-hu="5 ciklus (7:30)" data-en="5 cycles (7:30)">5 ciklus (7:30)</option>
+                  <option value="6" selected data-hu="6 ciklus (9:00)" data-en="6 cycles (9:00)">6 ciklus (9:00)</option>
+                  <option value="7" data-hu="7 ciklus (10:30)" data-en="7 cycles (10:30)">7 ciklus (10:30)</option>
+                  <option value="8" data-hu="8 ciklus (12:00)" data-en="8 cycles (12:00)">8 ciklus (12:00)</option>
+                  <option value="9" data-hu="9 ciklus (13:30)" data-en="9 cycles (13:30)">9 ciklus (13:30)</option>
+                  <option value="10" data-hu="10 ciklus (15:00)" data-en="10 cycles (15:00)">10 ciklus (15:00)</option>
+                </select>
+
+                <label class="sc-label" for="fall" data-hu="Elalvási idő (perc)" data-en="Fall asleep time (min)">Elalvási idő (perc)</label>
+                <input class="sc-input" type="number" id="fall" min="3" max="30" value="10">
+
+                <button class="ld-btn ld-btn--primary" id="calc" type="button" data-hu="Számolás" data-en="Calculate">Számolás</button>
+
+                <div class="sc-result" id="output">—</div>
+              </div>
             </div>
-            <small class="note">Deep navy / muted teal / soft lavender / moon yellow / cloud white</small>
-          </div> -->
-        </div>
 
-        <div class="card" style="margin-top:12px">
-          <h4 style="margin:0 0 8px 0"><span class="lang-hu">Gyors funkciók</span><span class="lang-en">Quick functions</span></h4>
-          <small class="note"><span class="lang-hu">Most azonnal aludni megyek!</span><span class="lang-en">I'm going to sleep right now!</span></small>
-          <br>
-          <button class="btn" id="wakeNow"><span class="lang-hu">Számolás</span><span class="lang-en">Calculate</span></button>
+            <div class="ld-card sc-card" data-id="SLP:NOW">
+              <h3 data-hu="Gyors funkciók" data-en="Quick functions">Gyors funkciók</h3>
+              <p class="sc-muted" style="margin-bottom: var(--space-md);" data-hu="Most azonnal aludni megyek!" data-en="I'm going to sleep right now!">Most azonnal aludni megyek!</p>
+              <button class="ld-btn" id="wakeNow" type="button" style="width: 100%;" data-hu="Számolás" data-en="Calculate">Számolás</button>
+            </div>
+          </aside>
 
         </div>
-      </aside>
-    </div>
 
-    <footer>
-      <div><span class="lang-hu">Egyszerű segédlet — a számítások tájékoztató jellegűek.</span><span class="lang-en">Simple tool — calculations are for informational purposes.</span></div>
+        <p class="text-mono text-dim" style="text-align: center; margin: var(--space-2xl) auto 0; font-size: var(--text-2xs);" data-hu="Egyszerű segédlet — a számítások tájékoztató jellegűek." data-en="Simple tool — calculations are for informational purposes.">Egyszerű segédlet — a számítások tájékoztató jellegűek.</p>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">sleep-cycle.index · <span id="current-year">2024</span></p>
     </footer>
-  </div>
 
-  <button class="back-button" data-hu="Vissza" data-en="Go back" onclick="location.href='../lidar/html/projects.html'">Vissza</button>
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="../lidar/JS/lidar-effects.js"></script>
+  <script src="../lidar/JS/lidar-select.js"></script>
+  <script src="../shared/JS/language-switcher.js"></script>
+  <script src="../shared/JS/theme-switcher.js"></script>
   <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
     function addMinutesToTime(timeStr, minutes){
       // timeStr: HH:MM
       const [h,m] = timeStr.split(":").map(Number);
@@ -418,33 +406,10 @@
       compute();
     });
 
-    // fill example on load
-    document.addEventListener('DOMContentLoaded', ()=>{
-      compute();
-      updateSelectOptions();
-    });
-
-    // Update select option texts based on language
-    function updateSelectOptions() {
-      const lang = document.documentElement.getAttribute('data-lang') || 'hu';
-      document.querySelectorAll('#cycles option').forEach(opt => {
-        const text = opt.getAttribute(`data-${lang}`);
-        if (text) opt.textContent = text;
-      });
-    }
-
-    // Watch for language changes to update select options and recompute
-    const langObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-lang') {
-          updateSelectOptions();
-          compute();
-        }
-      });
-    });
-    langObserver.observe(document.documentElement, { attributes: true });
+    // Recompute the readout in the active language
+    window.addEventListener('languageChanged', compute);
+    compute();
   </script>
-  <script src="../JS/language-switcher.js"></script>
-  <script src="../shared/JS/theme-switcher.js"></script>
+
 </body>
 </html>

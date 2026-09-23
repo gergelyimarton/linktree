@@ -1035,3 +1035,179 @@ body.page-exit {
   transform: translateY(-10px);
   transition: opacity 300ms ease-in, transform 300ms ease-in;
 }
+
+/* ============================================================
+   SELECT (themed dropdown — enhanced by lidar-select.js)
+   ============================================================ */
+
+.ld-select {
+  position: relative;
+  width: 100%;
+}
+
+.ld-select__native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ld-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  text-align: left;
+  color: var(--ld-text);
+  background: var(--ld-surface);
+  border: 1px solid var(--ld-border);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.ld-select__trigger:hover,
+.ld-select.is-open .ld-select__trigger {
+  border-color: var(--ld-scan);
+}
+
+.ld-select__trigger:focus-visible {
+  outline: none;
+  border-color: var(--ld-scan);
+  box-shadow: 0 0 0 1px var(--ld-scan), var(--shadow-glow);
+}
+
+.ld-select__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ld-select__chevron {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--ld-scan);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ld-select.is-open .ld-select__chevron {
+  transform: rotate(180deg);
+}
+
+.ld-select__list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  padding: var(--space-xs);
+  /* Panel colour over a solid void layer, so translucent panels stay opaque */
+  background: linear-gradient(var(--ld-panel), var(--ld-panel)), var(--ld-void);
+  border: 1px solid var(--ld-border-hover);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-glow), 0 12px 24px rgba(0, 0, 0, 0.35);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ld-border-hover) transparent;
+}
+
+.ld-select.is-open .ld-select__list {
+  display: block;
+  animation: ldSelectIn var(--duration-fast) var(--ease-out);
+}
+
+.ld-select--up .ld-select__list {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
+.ld-select__list:focus {
+  outline: none;
+}
+
+.ld-select__option {
+  position: relative;
+  padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-xl);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ld-text);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.ld-select__option.is-active {
+  color: var(--ld-text-bright);
+  background: var(--ld-scan-dim);
+}
+
+.ld-select__option[aria-selected="true"] {
+  color: var(--ld-scan);
+}
+
+.ld-select__option[aria-selected="true"]::before {
+  content: '';
+  position: absolute;
+  left: var(--space-md);
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  background: var(--ld-scan);
+}
+
+/* Lift the card holding an open dropdown above its neighbours */
+.ld-select-host--open {
+  position: relative;
+  z-index: 20;
+}
+
+@keyframes ldSelectIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ld-select--up.is-open .ld-select__list {
+  animation-name: ldSelectInUp;
+}
+
+@keyframes ldSelectInUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  /* 16px keeps iOS Safari from zooming in on tap; roomier touch targets */
+  .ld-select__trigger {
+    min-height: 48px;
+    font-size: var(--text-base);
+  }
+
+  .ld-select__option {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: var(--text-base);
+  }
+
+  .ld-select__list {
+    max-height: min(320px, 50vh);
+  }
+}

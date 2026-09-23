@@ -3,70 +3,401 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heti Edzésterv</title>
+  <title data-hu="Heti Edzésterv" data-en="Weekly Workout Plan">Heti Edzésterv</title>
+  <meta name="description" content="Heti edzésterv generátor — válaszd ki az edzésnapokat és a felosztást, a gyakorlatokat a generátor sorsolja.">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/language-switcher.css">
-  <link rel="stylesheet" href="../CSS/workout-generator.css">
+
+  <!-- LiDAR Design System -->
+  <link rel="stylesheet" href="../lidar/CSS/lidar-core.css">
+  <link rel="stylesheet" href="../lidar/CSS/lidar-components.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Workout Generator: page-scoped teal / green palette override -->
+  <style>
+    :root {
+      --ld-void: #0f2027;
+      --ld-surface: rgba(6, 16, 20, 0.55);
+      --ld-panel: rgba(9, 22, 28, 0.72);
+      --ld-panel-hover: rgba(12, 30, 37, 0.82);
+      --ld-panel-active: rgba(15, 36, 44, 0.9);
+      --ld-scan: #2ed573;
+      --ld-scan-dim: rgba(46, 213, 115, 0.14);
+      --ld-scan-glow: rgba(46, 213, 115, 0.12);
+      --ld-scan-bright: #7bed9f;
+      --ld-data-cyan: #7bed9f;
+      --ld-text: #d6e6ea;
+      --ld-text-dim: #7d9aa3;
+      --ld-text-bright: #ffffff;
+      --ld-border: rgba(123, 237, 159, 0.14);
+      --ld-border-hover: rgba(46, 213, 115, 0.4);
+      --ld-grid: rgba(46, 213, 115, 0.03);
+    }
+    [data-theme="light"] {
+      --ld-void: #e8f4f8;
+      --ld-surface: #f4fafc;
+      --ld-panel: rgba(255, 255, 255, 0.9);
+      --ld-panel-hover: #ffffff;
+      --ld-panel-active: #f0f8f4;
+      --ld-scan: #1a9d52;
+      --ld-scan-dim: rgba(26, 157, 82, 0.14);
+      --ld-scan-glow: rgba(26, 157, 82, 0.10);
+      --ld-scan-bright: #148043;
+      --ld-data-cyan: #1a9d52;
+      --ld-text: #1f2d33;
+      --ld-text-dim: #4f6770;
+      --ld-text-bright: #0f1a1e;
+      --ld-border: rgba(26, 157, 82, 0.2);
+      --ld-border-hover: rgba(26, 157, 82, 0.45);
+    }
+
+    /* Keep the original deep-teal gradient with its green glows */
+    body {
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(46, 213, 115, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 184, 148, 0.12) 0%, transparent 60%),
+        linear-gradient(135deg, #0f2027 0%, #203a43 35%, #2c5364 65%, #1a3a4a 100%);
+      background-attachment: fixed;
+    }
+    [data-theme="light"] body {
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(46, 213, 115, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 184, 148, 0.08) 0%, transparent 60%),
+        linear-gradient(135deg, #e8f4f8 0%, #d4eaf2 35%, #c8e2ee 65%, #d0e8f0 100%);
+      background-attachment: fixed;
+    }
+    [data-theme="light"] .ld-btn--primary,
+    [data-theme="light"] .day-btn.selected {
+      color: #ffffff;
+    }
+
+    /* No ambient 0/1 particle rain on this page */
+    .ld-ambient-canvas {
+      display: none !important;
+    }
+
+    /* Settings */
+    .wg-settings {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .setting-group + .setting-group {
+      margin-top: var(--space-lg);
+    }
+
+    .setting-group > label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+      color: var(--ld-text-dim);
+      margin-bottom: var(--space-sm);
+    }
+
+    .day-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .day-btn {
+      width: 44px;
+      height: 44px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--ld-text);
+      background: var(--ld-surface);
+      border: 1px solid var(--ld-border);
+      border-radius: var(--card-radius);
+      cursor: pointer;
+      transition:
+        border-color var(--duration-fast) var(--ease-out),
+        color var(--duration-fast) var(--ease-out),
+        background-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+    }
+
+    .day-btn.recommended {
+      border-color: var(--ld-border-hover);
+      background: var(--ld-scan-dim);
+    }
+
+    .day-btn:hover {
+      border-color: var(--ld-scan);
+      color: var(--ld-scan);
+    }
+
+    .day-btn.selected {
+      background: var(--ld-scan);
+      border-color: var(--ld-scan);
+      color: var(--ld-void);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .muscle-group-selector {
+      display: none;
+    }
+
+    .muscle-group-selector.visible {
+      display: block;
+    }
+
+    .muscle-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--ld-text-dim);
+      background: var(--ld-surface);
+      border: 1px solid var(--ld-border);
+      border-radius: var(--card-radius);
+      cursor: pointer;
+      transition:
+        border-color var(--duration-fast) var(--ease-out),
+        color var(--duration-fast) var(--ease-out);
+    }
+
+    .checkbox-label:hover {
+      border-color: var(--ld-border-hover);
+    }
+
+    .checkbox-label:has(input:checked) {
+      color: var(--ld-scan);
+      border-color: var(--ld-scan);
+    }
+
+    .checkbox-label input {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--ld-scan);
+      cursor: pointer;
+    }
+
+    /* Plan */
+    #plan {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--card-gap);
+    }
+
+    .day {
+      position: relative;
+      background: var(--ld-panel);
+      border: 1px solid var(--ld-border);
+      border-top: 2px solid var(--ld-scan-dim);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      backdrop-filter: blur(8px);
+      transition:
+        border-color var(--duration-base) var(--ease-out),
+        transform var(--duration-base) var(--ease-out),
+        box-shadow var(--duration-base) var(--ease-out);
+    }
+
+    .day:hover {
+      border-color: var(--ld-border-hover);
+      border-top-color: var(--ld-scan);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .day.generating {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .day.fade-in {
+      animation: ldFadeIn var(--duration-slow) var(--ease-out) forwards;
+    }
+
+    .day h2 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-sm);
+    }
+
+    .muscle {
+      display: inline-block;
+      margin: var(--space-md) 0 var(--space-sm);
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+      color: var(--ld-scan);
+      border: 1px solid var(--ld-scan-dim);
+      background: var(--ld-scan-dim);
+    }
+
+    .day ul {
+      list-style: none;
+    }
+
+    .day li {
+      position: relative;
+      padding-left: var(--space-lg);
+      margin-bottom: var(--space-xs);
+      font-size: var(--text-sm);
+      color: var(--ld-text);
+    }
+
+    .day li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      background: var(--ld-scan);
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+    }
+
+    @media (max-width: 480px) {
+      #plan {
+        grid-template-columns: 1fr;
+      }
+
+      .button-container .ld-btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-<body class="dark-theme">
-    <h1 data-hu="Heti Edzésterv" data-en="Weekly Workout Plan">Heti Edzésterv</h1>
+<body>
 
-    <div class="settings-panel">
-      <div class="setting-group">
-        <label data-hu="Edzésnapok hetente" data-en="Training Days per Week">Edzésnapok hetente</label>
-        <div class="day-selector">
-          <button class="day-btn" data-days="1">1</button>
-          <button class="day-btn" data-days="2">2</button>
-          <button class="day-btn recommended" data-days="3">3</button>
-          <button class="day-btn recommended selected" data-days="4">4</button>
-          <button class="day-btn recommended" data-days="5">5</button>
-          <button class="day-btn" data-days="6">6</button>
-          <button class="day-btn" data-days="7">7</button>
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ld-nav">
+    <a href="../lidar/html/projects.html" class="ld-back">
+      <span class="ld-back__arrow">←</span>
+      <span data-hu="Vissza" data-en="Back">Vissza</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ld-main-content visible" id="main-content">
+
+    <!-- HEADER -->
+    <section class="ld-section" style="padding-top: var(--space-4xl); padding-bottom: var(--space-2xl);">
+      <div class="ld-container">
+        <h1 class="ld-hero__title" style="text-align: center; margin-bottom: var(--space-sm);" data-reveal data-hu="Heti Edzésterv" data-en="Weekly Workout Plan">Heti Edzésterv</h1>
+        <p class="text-mono text-dim" style="text-align: center; margin: 0 auto;" data-reveal>
+          <span data-hu="Válaszd ki az edzésnapokat és a felosztást — a gyakorlatokat a generátor sorsolja" data-en="Pick your training days and split — the generator draws the exercises">Válaszd ki az edzésnapokat és a felosztást — a gyakorlatokat a generátor sorsolja</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="ld-section" style="padding-top: 0; padding-bottom: var(--space-2xl);">
+      <div class="ld-container">
+
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Beállítások" data-en="Settings">Beállítások</h2>
+          <div class="ld-section-header__line"></div>
         </div>
-      </div>
 
-      <div class="setting-group">
-        <label data-hu="Edzéselosztás" data-en="Workout Split">Edzéselosztás</label>
-        <select id="splitSelect" onchange="onSplitChange()">
-          <option value="push-pull-legs" data-hu="Toló / Húzó / Láb" data-en="Push / Pull / Legs">Toló / Húzó / Láb</option>
-          <option value="upper-lower" data-hu="Felső / Alsó test" data-en="Upper / Lower">Felső / Alsó test</option>
-          <option value="full-body" data-hu="Teljes test" data-en="Full Body">Teljes test</option>
-          <option value="bro-split" data-hu="Bro Split (1 izom/nap)" data-en="Bro Split (1 muscle/day)">Bro Split (1 izom/nap)</option>
-          <option value="custom" data-hu="Egyéni" data-en="Custom">Egyéni</option>
-        </select>
-      </div>
+        <div class="ld-card wg-settings" data-id="CFG:01" data-reveal>
+          <div class="setting-group">
+            <label data-hu="Edzésnapok hetente" data-en="Training Days per Week">Edzésnapok hetente</label>
+            <div class="day-selector">
+              <button type="button" class="day-btn" data-days="1">1</button>
+              <button type="button" class="day-btn" data-days="2">2</button>
+              <button type="button" class="day-btn recommended" data-days="3">3</button>
+              <button type="button" class="day-btn recommended selected" data-days="4">4</button>
+              <button type="button" class="day-btn recommended" data-days="5">5</button>
+              <button type="button" class="day-btn" data-days="6">6</button>
+              <button type="button" class="day-btn" data-days="7">7</button>
+            </div>
+          </div>
 
-      <div class="setting-group muscle-group-selector" id="muscleGroupSelector">
-        <label data-hu="Izomcsoportok" data-en="Muscle Groups">Izomcsoportok</label>
-        <div class="muscle-checkboxes">
-          <label class="checkbox-label"><input type="checkbox" value="Chest" checked> <span data-hu="Mell" data-en="Chest">Mell</span></label>
-          <label class="checkbox-label"><input type="checkbox" value="Back" checked> <span data-hu="Hát" data-en="Back">Hát</span></label>
-          <label class="checkbox-label"><input type="checkbox" value="Legs" checked> <span data-hu="Láb" data-en="Legs">Láb</span></label>
-          <label class="checkbox-label"><input type="checkbox" value="Arms" checked> <span data-hu="Kar" data-en="Arms">Kar</span></label>
-          <label class="checkbox-label"><input type="checkbox" value="Abs" checked> <span data-hu="Has" data-en="Abs">Has</span></label>
-          <label class="checkbox-label"><input type="checkbox" value="Extras"> <span data-hu="Extra" data-en="Extras">Extra</span></label>
+          <div class="setting-group">
+            <label for="splitSelect" data-hu="Edzéselosztás" data-en="Workout Split">Edzéselosztás</label>
+            <select id="splitSelect" data-ld-select onchange="onSplitChange()">
+              <option value="push-pull-legs" data-hu="Toló / Húzó / Láb" data-en="Push / Pull / Legs">Toló / Húzó / Láb</option>
+              <option value="upper-lower" data-hu="Felső / Alsó test" data-en="Upper / Lower">Felső / Alsó test</option>
+              <option value="full-body" data-hu="Teljes test" data-en="Full Body">Teljes test</option>
+              <option value="bro-split" data-hu="Bro Split (1 izom/nap)" data-en="Bro Split (1 muscle/day)">Bro Split (1 izom/nap)</option>
+              <option value="custom" data-hu="Egyéni" data-en="Custom">Egyéni</option>
+            </select>
+          </div>
+
+          <div class="setting-group muscle-group-selector" id="muscleGroupSelector">
+            <label data-hu="Izomcsoportok" data-en="Muscle Groups">Izomcsoportok</label>
+            <div class="muscle-checkboxes">
+              <label class="checkbox-label"><input type="checkbox" value="Chest" checked> <span data-hu="Mell" data-en="Chest">Mell</span></label>
+              <label class="checkbox-label"><input type="checkbox" value="Back" checked> <span data-hu="Hát" data-en="Back">Hát</span></label>
+              <label class="checkbox-label"><input type="checkbox" value="Legs" checked> <span data-hu="Láb" data-en="Legs">Láb</span></label>
+              <label class="checkbox-label"><input type="checkbox" value="Arms" checked> <span data-hu="Kar" data-en="Arms">Kar</span></label>
+              <label class="checkbox-label"><input type="checkbox" value="Abs" checked> <span data-hu="Has" data-en="Abs">Has</span></label>
+              <label class="checkbox-label"><input type="checkbox" value="Extras"> <span data-hu="Extra" data-en="Extras">Extra</span></label>
+            </div>
+          </div>
         </div>
+
       </div>
-    </div>
+    </section>
 
-    <div id="plan"></div>
+    <!-- PLAN -->
+    <section class="ld-section" style="padding-top: 0;">
+      <div class="ld-container">
 
-    <div class="button-container">
-      <button onclick="generatePlan()" class="btn" data-hu="Terv Generálása" data-en="Generate Plan">Terv Generálása</button>
-      <button onclick="downloadTXT()" class="btn" data-hu="Letöltés TXT-ként" data-en="Download as TXT">Letöltés TXT-ként</button>
-    </div>
+        <div class="ld-section-header" data-reveal>
+          <div class="ld-section-header__line"></div>
+          <h2 class="ld-section-header__title" data-hu="Edzésterv" data-en="Plan">Edzésterv</h2>
+          <div class="ld-section-header__line"></div>
+        </div>
 
-    <button class="back-button" data-hu="Vissza" data-en="Go back" onclick="location.href='../lidar/html/projects.html'">Vissza</button>
+        <div id="plan"></div>
 
+        <div class="button-container">
+          <button type="button" onclick="generatePlan()" class="ld-btn ld-btn--primary" data-hu="Terv Generálása" data-en="Generate Plan">Terv Generálása</button>
+          <button type="button" onclick="downloadTXT()" class="ld-btn" data-hu="Letöltés TXT-ként" data-en="Download as TXT">Letöltés TXT-ként</button>
+        </div>
 
+      </div>
+    </section>
 
-    <!-- html2pdf könyvtár betöltése -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- FOOTER -->
+    <footer class="ld-footer">
+      <p class="ld-footer__text">workout-generator.index · <span id="current-year">2024</span></p>
+    </footer>
 
-    <script src="../JS/language-switcher.js"></script>
-    <script src="../shared/JS/theme-switcher.js"></script>
-    <script>
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="../lidar/JS/lidar-effects.js"></script>
+  <script src="../lidar/JS/lidar-select.js"></script>
+  <script src="../shared/JS/language-switcher.js"></script>
+  <script src="../shared/JS/theme-switcher.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
        // Translation mappings for dynamic content
        const translations = {
          dayPrefix: { hu: 'Nap', en: 'Day' },
@@ -465,5 +796,6 @@
         // Betöltéskor generálás
         generatePlan();
     </script>
+
 </body>
 </html>
