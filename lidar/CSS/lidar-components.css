@@ -870,6 +870,17 @@
 
   .ld-section-header__title {
     font-size: var(--text-2xs);
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  /* Wrap card text instead of truncating on narrow screens */
+  .ld-link-card__desc,
+  .ld-tool-card__title,
+  .ld-tool-card__desc {
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 
