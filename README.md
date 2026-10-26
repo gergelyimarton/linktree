@@ -30,6 +30,7 @@ A personal portfolio and link aggregation website for Marton Gergelyi — a Hung
 - AI Workout Generator
 - Love Trial (date rating)
 - Sleep Cycle Calculator
+- Reaction-Diffusion Studio (WebGL2 Gray-Scott patterns, preset transitions, client-side MP4 rendering via WebCodecs)
 
 ### Responsive Design
 - Desktop-first with three breakpoints (940px, 768px, 550px)
